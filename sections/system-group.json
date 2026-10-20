@@ -20,7 +20,9 @@
         },
         "tax_rkEdFK": {
           "type": "tax",
-          "settings": {}
+          "settings": {
+            "url": ""
+          }
         },
         "agree_y3A6EM": {
           "type": "agree",
@@ -74,9 +76,11 @@
         "show_shipping_estimator": true,
         "show_cart_discount": true,
         "discount_error_message": "Enter a valid discount code",
+        "show_cart_complementary": true,
         "heading": "Customers also bought",
         "product_list": [],
-        "replaces_products_selected": true
+        "replaces_products_selected": true,
+        "limit": 5
       }
     },
     "toolbar-mobile": {
@@ -243,17 +247,77 @@
             "open_in_new_tab": false,
             "full_width": false,
             "btn_style": "hdt-btn-accent",
+            "color_btn": "#ffffff",
+            "color_hover_btn": "#ffffff",
+            "background_btn": "#222222",
+            "background_hover_btn": "#333333",
+            "border_w_btn": "",
+            "border_btn": "#222222",
+            "border_hover_btn": "#333333",
             "size": "custom custom-inline",
+            "text_size": "hdt-text-base",
             "font_weight": "semibold",
             "font_size_btn": 18,
             "padding_btn": 50,
             "min_width_btn": 100,
             "min_width_dt_btn": 100,
             "min_height_btn": 30,
+            "rounded": "",
             "icon": "none",
             "icon_position": "after",
             "icon_height": 14,
             "icon_spacing": 5
+          },
+          "blocks": {}
+        },
+        "hdt-product-carousel": {
+          "type": "_product-carousel",
+          "static": true,
+          "settings": {
+            "collection": "",
+            "products_count": 8,
+            "product_list": [],
+            "pr_border": "none",
+            "product_des": "1",
+            "image_ratio": "adapt_image",
+            "image_size": true,
+            "show_vendor": false,
+            "hdt_slide_center": false,
+            "hdt_opacity_out_container": false,
+            "col_dk": "4",
+            "col_tb": "3",
+            "col_mb": "2",
+            "space_items": "x",
+            "pagination": true,
+            "paginate_pos": "center",
+            "dis_pagination": 30,
+            "btn_label": "",
+            "btn_style": "",
+            "icon": "none",
+            "size": "m",
+            "btn_fw": "medium",
+            "font_size_btn": 14,
+            "padding_btn": 30,
+            "min_width_btn": 100,
+            "min_width_dt_btn": 100,
+            "min_height_btn": 40,
+            "loop": false,
+            "autoplay": 0,
+            "pauseOnHover": false,
+            "navUI": false,
+            "nav_position": "default",
+            "nav_visible": "always",
+            "nav_style": "default",
+            "nav_shape": "default",
+            "nav_size": "small",
+            "nav_hide_mobile": false,
+            "dotUI": false,
+            "pag_style": "default",
+            "pag_rounded": true,
+            "pag_space": 10,
+            "pag_mgt": 10,
+            "only_show_mobile": false,
+            "pag_hide_mobile": false
           },
           "blocks": {}
         }
@@ -269,12 +333,12 @@
         "spacer_CNjkFU",
         "button_bTit9U"
       ],
+      "disabled": true,
       "name": "t:sections.exit_popup.name",
       "settings": {
         "color_scheme": "scheme-77e4ef58-56a9-4631-876a-12098ba7d57d",
         "heading": "Recommended Products",
         "color_scheme_pr": "",
-        "image": "shopify://shop_images/Rectangle_3.jpg",
         "collections": "",
         "product_list": [
           "mookis-yoga-mat-bag",
@@ -282,6 +346,7 @@
           "beach-babe-malibu-bikini",
           "copy-of-light-pink-yoga-pant"
         ],
+        "hdt_show_pr_carousel": false,
         "limit": 8,
         "image_ratio": "adapt_image",
         "after": "move_cursor",
@@ -298,6 +363,7 @@
     },
     "cookies_8EMjkp": {
       "type": "cookies",
+      "disabled": true,
       "name": "t:sections.cookies.name",
       "settings": {
         "colors_by_section": false,
@@ -438,11 +504,11 @@
         "spacer_kbECBj",
         "text_kmfX9D"
       ],
+      "disabled": true,
       "name": "t:sections.newsletter_popup.name",
       "settings": {
         "colors_by_section": false,
         "color_scheme": "",
-        "image": "shopify://shop_images/04_1296x_1ee4b6db-25d2-45f5-ad8c-fd28f404f0e6.jpg",
         "direction": "ver",
         "after": "scroll",
         "time_delay": 2,
