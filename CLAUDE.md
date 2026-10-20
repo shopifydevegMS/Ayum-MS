@@ -20,7 +20,7 @@ Uses the Shopify CLI (install separately):
 - **RTL**: direction is decided in `theme.liquid` from `settings.right_to_left` — by default RTL turns on automatically for RTL locales such as `ar`. `is_rtl` is passed into `css-variables`, and `<html>` gets `dir` and a `dir--rtl` class. Store content is written in Arabic (the Figma design is RTL) and there is an Arabic locale ([locales/ar.json](locales/ar.json)), so check every layout change in both `ar` and `en.default`.
 - **JavaScript**: native ES modules wired by an import map in [snippets/scripts.liquid](snippets/scripts.liquid) (`@theme/libs`, `@theme/global`, `@theme/utilities`, `@theme/events`, etc.). Most vendor files are minified (`*.min.js`) with no source in the repo, so don't edit them; put changes in readable files like `assets/custom.js`, `utilities.js`, `events.js`. Cross-component communication goes through `ThemeEvents` from `@theme/events` (cart update, dialog open/close, currency update, …).
 - **Sections and theme blocks**: sections in `sections/` mostly render theme blocks from `blocks/` via `{% content_for 'blocks' %}` or static `{% content_for 'block', type: ..., id: ... %}`. Block files starting with `_` are private (only usable inside the sections/blocks that reference them); files without the prefix (`text`, `heading`, `button`, `group`, …) are general-purpose blocks.
-- **CSS**: global styles are in `base.css` and `theme.css` (don't hand-edit either); all project CSS changes go in `assets/main.css` (see below), which loads last in `snippets/css-variables.liquid` so it wins over theme CSS; each section loads its own stylesheet (e.g. `{{ 'featured-collection-2.css' | asset_url | stylesheet_tag }}`). The theme's own classes and assets use the `hdt-` prefix.
+- **CSS**: global styles are in `base.css` and `theme.css` (don't hand-edit either); all project CSS changes go in `assets/dev1.css` (see below), which loads last in `snippets/css-variables.liquid` so it wins over theme CSS; each section loads its own stylesheet (e.g. `{{ 'featured-collection-2.css' | asset_url | stylesheet_tag }}`). The theme's own classes and assets use the `hdt-` prefix.
 - **Snippets**: shared partials, including many product-card variants (`card-product1`–`12`) chosen by theme settings.
 - **Templates and config**: `templates/*.json` (with alternates such as `collection.left-sidebar.json`) plus `sections/*-group.json` and `config/settings_data.json` hold merchant content and settings. They are often overwritten by Shopify editor syncs, so prefer changing Liquid/schema over hand-editing these, and expect merge conflicts if you do.
 - **Locales**: storefront strings live in `locales/*.json` (`en.default.json` is the source); schema labels use `t:` keys from `*.schema.json`. When you add a translation key, add it to `en.default.json` and to `ar.json`.
@@ -58,14 +58,16 @@ The collection-page Figma frames (`1:787` desktop, `1:1081` mobile, `1:1287` mob
 
 Never hardcode colors. Use the color schemes in Theme settings → Colors, through the section's `color_scheme` setting and the variables they produce (`rgb(var(--color-foreground))`, `var(--hdt-btn-bg)`, …). If no scheme matches the Figma colors, add a new scheme. A per-section color setting is a last resort for colors no scheme field can express. Full rules are in §2.8a of the `generate-section` skill.
 
-## Our CSS: `cca-` prefix, all in `assets/main.css`
+## Our CSS: `cca-` prefix, all in `assets/dev1.css`
 
-Every CSS change for this project is additive and lives in one file, so deleting `assets/main.css` removes it all.
+Every CSS change for this project is additive and lives in one file, so deleting `assets/dev1.css` removes it all.
+
+On branch `dev1`, `assets/dev1.css` replaces `main.css` for all of these rules. `main.css` stays loaded (just before `dev1.css`) for other branches, but don't add CSS to it here.
 
 - Every new CSS class starts with `cca-` (e.g. `cca-pagination`), and every new CSS variable with `--cca-`.
-- All new CSS goes in `assets/main.css`. Don't create per-section stylesheets, and don't edit the theme's CSS files.
-- Every rule in `main.css` is anchored on a `cca-` class (e.g. `.cca-collection .hdt-card-product`). To restyle a theme element, add a `cca-` class to its markup and keep its `hdt-` classes.
-- Group `main.css` by feature, with a comment header per section.
-- Only values that need Liquid (settings, `section.id`) go in an inline `{% style %}` in the section, and only as `--cca-` variables that `main.css` uses.
+- All new CSS goes in `assets/dev1.css`. Don't create per-section stylesheets, and don't edit the theme's CSS files.
+- Every rule in `dev1.css` is anchored on a `cca-` class (e.g. `.cca-collection .hdt-card-product`). To restyle a theme element, add a `cca-` class to its markup and keep its `hdt-` classes.
+- Group `dev1.css` by feature, with a comment header per section.
+- Only values that need Liquid (settings, `section.id`) go in an inline `{% style %}` in the section, and only as `--cca-` variables that `dev1.css` uses.
 
 Full rules are in §2.3a of the `generate-section` skill.
