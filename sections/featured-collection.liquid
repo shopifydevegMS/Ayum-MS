@@ -20,7 +20,7 @@
 {% style %}
   {% render 'spacing-vars', box: section %}
 {% endstyle %}
-<div id="section-{{ section.id }}" class="{{ parent }}{% if section.settings.custom_class != blank %} {{ section.settings.custom_class | strip | escape }}{% endif %} {% if section.settings.hdt_background_parallax %} hdt-animate--parallax-bg {% endif %}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};"{%- endif %}>
+<div id="section-{{ section.id }}" class="{{ parent }}{% if section.settings.design == 'design_1' %} cca-bundles{% endif %} {% if section.settings.hdt_background_parallax %} hdt-animate--parallax-bg {% endif %}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};"{%- endif %}>
   <div class="{{ child }}">
     {%- if section.settings.section_background != blank -%}
       {% liquid
@@ -54,6 +54,16 @@
     ]
   },
   "settings": [
+    {
+      "type": "select",
+      "id": "design",
+      "label": "Design",
+      "default": "default",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "design_1", "label": "Design 1 - cca" }
+      ]
+    },
     {
       "type": "header",
       "content": "t:sections.all.section_layout.label"
@@ -142,12 +152,6 @@
       "label": "Padding (Mobile)",
       "placeholder": ",,50px,",
       "visible_if": "{{ section.settings.pd != blank }}"
-    },
-    {
-      "type": "text",
-      "id": "custom_class",
-      "label": "Custom CSS class",
-      "info": "Optional. Extra class for this section, e.g. cca-…"
     }
   ],
   "presets": [

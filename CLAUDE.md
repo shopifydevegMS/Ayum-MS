@@ -31,7 +31,7 @@ For every section task, use the **earliest** option that safely satisfies the de
 
 1. Use the existing project section, block, snippet, setting, class, or component **as-is**.
 2. Use the existing structure with **scoped CSS only**.
-3. Use an **instance-specific custom class setting**.
+3. Use an **instance-specific design option** (a new " - cca" option in the section's design select, or a new `design` select with `default` / `design_1`). Don't add "Custom CSS class" text settings to sections. See §6 of the skill.
 4. Add a **new schema setting beside** existing settings.
 5. Add a **new schema option beside** existing options.
 6. **Extend** the closest existing block or snippet safely.

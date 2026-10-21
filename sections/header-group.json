@@ -67,8 +67,7 @@
         "colors_by_section": true,
         "color_scheme": "scheme-offer-bar",
         "background_opacity": 1,
-        "full_width": true,
-        "custom_class": ""
+        "full_width": true
       }
     },
     "header_menu_bottom_ayum": {
@@ -133,8 +132,7 @@
         "sticky_type": "on_scroll_up",
         "sticky_glass": false,
         "cca_search_placeholder": "دوّر على منتجك… (سكيتلز، جيلي كولا، فراولة)",
-        "cca_highlight_item": "كل المنتجات",
-        "custom_class": ""
+        "cca_highlight_item": "كل المنتجات"
       }
     }
   },

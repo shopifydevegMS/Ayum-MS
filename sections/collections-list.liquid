@@ -69,7 +69,7 @@
     }
   {% endif %}
 {%- endstyle -%}
-<div id="{{ section.id }}" class="{{ parent }}{% if section.settings.custom_class != blank %} {{ section.settings.custom_class | strip | escape }}{% endif %} {% if section.settings.hdt_background_parallax %} hdt-animate--parallax-bg {% endif %}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};"{%- endif %}>
+<div id="{{ section.id }}" class="{{ parent }}{% if section.settings.collection_des == '16' %} cca-categories{% endif %} {% if section.settings.hdt_background_parallax %} hdt-animate--parallax-bg {% endif %}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};"{%- endif %}>
   <div class="{{ child }}">     
     {%- if section.settings.section_background != blank -%}
       {% liquid
@@ -234,6 +234,10 @@
         {
           "value": "15",
           "label": "15"
+        },
+        {
+          "value": "16",
+          "label": "16 - cca"
         }
       ],
       "default": "1"
@@ -926,12 +930,6 @@
       "label": "Padding (Mobile)",
       "placeholder": ",,50px,",
       "visible_if": "{{ section.settings.pd != blank }}"
-    },
-    {
-      "type": "text",
-      "id": "custom_class",
-      "label": "Custom CSS class",
-      "info": "Optional. Extra class for this section, e.g. cca-…"
     }
   ],
   "blocks": [

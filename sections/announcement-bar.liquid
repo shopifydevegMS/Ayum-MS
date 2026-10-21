@@ -137,7 +137,7 @@
 {%- endcapture -%}
 {%- assign cca_default_label = 'sections.announcements.copy_code' | t -%}
 {%- assign cca_default_copied = 'sections.announcements.copied' | t -%}
-<div class="hdt-announcement-bar cca-announcement-bar{% if section.settings.custom_class != blank %} {{ section.settings.custom_class | strip | escape }}{% endif %} hdt-s-gradient hdt-type-close-{{ section.settings.close_btn  }}{% if section.settings.show_line_separator and section.blocks.size > 0 %} hdt-announcement-bar--bottom-border{% endif %}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};"{%- endif %}>
+<div class="hdt-announcement-bar cca-announcement-bar hdt-s-gradient hdt-type-close-{{ section.settings.close_btn  }}{% if section.settings.show_line_separator and section.blocks.size > 0 %} hdt-announcement-bar--bottom-border{% endif %}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};"{%- endif %}>
   <div class="hdt-container{% if section.settings.full_width %}-full hdt-px-15{% endif %}">
     {%- if section.blocks.size > 0 -%}
       <div class="hdt-announcement-bar__grid">
@@ -444,12 +444,6 @@
       "id": "full_width",
       "label": "t:sections.all.full_width.label",
       "default": false
-    },
-    {
-      "type": "text",
-      "id": "custom_class",
-      "label": "Custom CSS class",
-      "info": "Optional. Extra class for this section, e.g. cca-…"
     },
   ],
   "blocks": [

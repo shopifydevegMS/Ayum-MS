@@ -12,7 +12,7 @@
   {% render 'spacing-vars', box: section %}
 {%- endstyle -%}
 
-<div class="hdt-s-inner hdt-section-spacing hdt-section-spacing-{{ section.id }} hdt-s-gradient{% if section.settings.custom_class != blank %} {{ section.settings.custom_class | strip | escape }}{% endif %}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};" {%- endif %} {%- unless section.index == 1 %} hdt-reveal="fade-in"{%- endunless -%}>
+<div class="hdt-s-inner hdt-section-spacing hdt-section-spacing-{{ section.id }} hdt-s-gradient{% if section.settings.design == 'design_1' %} cca-hero-slider{% endif %}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};" {%- endif %} {%- unless section.index == 1 %} hdt-reveal="fade-in"{%- endunless -%}>
   <hdt-slideshow {% if section.settings.is_fade %}isfade {% endif %}id="Slider-{{ section.id }}" autoheight class="hdt-slider hdt-relative hdt-container{% if section.settings.full_width %}-full{% endif %} hdt-slideshow hdt-slides-1 hdt-relative hdt-slider-center-{{ section.settings.carousel_center }}" config='{"loop": {{ section.settings.loop }}, "navUI": {{ section.settings.navUI }}, "dotUI": {{ section.settings.dotUI }}, "autoPlay": {{ section.settings.autoplay | times: 1000 }}, "pauseOnHover": {{ section.settings.pauseOnHover }}, "autoHeight": true, "slidesToScroll": 1 }'>
     <div class="hdt-slider__viewport md:hdt-height--{{ section.settings.image_height }} hdt-height--{{ section.settings.image_height_mb }}{% unless section.settings.full_width %} {{ section.settings.rounded }}{% endunless %}">
       <div class="hdt-slider__container">
@@ -22,15 +22,15 @@
     {%- if section.settings.navUI -%}
       <div class="hdt-navigation hdt-position-default hdt-visible-{{ section.settings.nav_visible }} hdt-style-{{ section.settings.nav_style }} hdt-shape-{{ section.settings.nav_shape }} hdt-size-{{ section.settings.nav_size }} hdt-hide-mobile-{{ section.settings.nav_hide_mobile }}">
         <button aria-controls="Slider-{{ section.id }}" class="hdt-slider__button hdt-slider__button--prev" type="button" disabled name="previous" aria-label="previous">
-          <svg xmlns="http://www.w3.org/2000/svg" width="7" height="11" viewBox="0 0 7 11" fill="none"><path d="M5.5 11L0 5.5L5.5 0L6.47625 0.97625L1.9525 5.5L6.47625 10.0238L5.5 11Z" fill="currentColor"/></svg>
+          {% if section.settings.design == 'design_1' %}<svg xmlns="http://www.w3.org/2000/svg" width="7" height="10" viewBox="0 0 6.2 10.01" fill="none" aria-hidden="true"><path d="M4.68 0H3.288L0 4.848V5.16L3.288 10.008H4.68L6.192 8.76L3.72 4.992L6.192 1.248L4.68 0Z" fill="currentColor"/></svg>{% else %}<svg xmlns="http://www.w3.org/2000/svg" width="7" height="11" viewBox="0 0 7 11" fill="none"><path d="M5.5 11L0 5.5L5.5 0L6.47625 0.97625L1.9525 5.5L6.47625 10.0238L5.5 11Z" fill="currentColor"/></svg>{% endif %}
         </button>
         <button aria-controls="Slider-{{ section.id }}" class="hdt-slider__button hdt-slider__button--next" type="button" disabled name="next" aria-label="next">
-          <svg xmlns="http://www.w3.org/2000/svg" width="7" height="11" viewBox="0 0 7 11" fill="none"><path d="M1.5 11L7 5.5L1.5 0L0.52375 0.97625L5.0475 5.5L0.52375 10.0238L1.5 11Z" fill="currentColor"/></svg>
+          {% if section.settings.design == 'design_1' %}<svg xmlns="http://www.w3.org/2000/svg" width="7" height="10" viewBox="0 0 6.2 10.01" fill="none" aria-hidden="true"><path d="M1.512 0H2.904L6.192 4.848V5.16L2.904 10.008H1.512L0 8.76L2.472 4.992L0 1.248L1.512 0Z" fill="currentColor"/></svg>{% else %}<svg xmlns="http://www.w3.org/2000/svg" width="7" height="11" viewBox="0 0 7 11" fill="none"><path d="M1.5 11L7 5.5L1.5 0L0.52375 0.97625L5.0475 5.5L0.52375 10.0238L1.5 11Z" fill="currentColor"/></svg>{% endif %}
         </button>
       </div>
     {%- endif -%}
     {%- if section.settings.dotUI -%}
-      <div hdt-slider-dots aria-controls="Slider-{{ section.id }}" class="hdt-slider__dots hdt-pagination hdt-position-{{ section.settings.pag_position }} hdt-style-{{ section.settings.pag_style }} hdt-radius-{{ section.settings.pag_rounded }} hdt-hide-mobile-{{ section.settings.pag_hide_mobile }}" style="--space-between: {{ section.settings.pag_space }}px; --margin-top: {{ section.settings.pag_mgt }}px;" hdt-reveal="slide-in" timeline></div>
+      <div hdt-slider-dots aria-controls="Slider-{{ section.id }}" class="hdt-slider__dots hdt-pagination hdt-position-{{ section.settings.pag_position }} hdt-style-{{ section.settings.pag_style }} hdt-radius-{{ section.settings.pag_rounded }} hdt-hide-mobile-{{ section.settings.pag_hide_mobile }}{% if section.settings.pag_mgt_mb != blank %} cca-pag-mb{% endif %}" style="--space-between: {{ section.settings.pag_space }}px; --margin-top: {{ section.settings.pag_mgt }}px;{% if section.settings.pag_mgt_mb != blank %} --margin-top-mb: {{ section.settings.pag_mgt_mb }}px;{% endif %}" hdt-reveal="slide-in" timeline></div>
     {%- endif -%}
   </hdt-slideshow>
 </div>
@@ -47,6 +47,16 @@
     ]
   },
   "settings": [
+    {
+      "type": "select",
+      "id": "design",
+      "label": "Design",
+      "default": "default",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "design_1", "label": "Design 1 - cca" }
+      ]
+    },
     {
       "type": "header",
       "content": "t:sections.slideshow.settings.image_height.label"
@@ -339,6 +349,13 @@
       "visible_if": "{{ section.settings.dotUI }}"
     },
     {
+      "type": "number",
+      "id": "pag_mgt_mb",
+      "label": "Space between pagination and content (mobile)",
+      "info": "In px. Leave blank to use half of the desktop value.",
+      "visible_if": "{{ section.settings.dotUI }}"
+    },
+    {
       "type": "checkbox",
       "id": "pag_hide_mobile",
       "label": "t:blocks.carousel.settings.pagination.pag_hide_mobile",
@@ -409,12 +426,6 @@
       "label": "Padding (Mobile)",
       "placeholder": ",,50px,",
       "visible_if": "{{ section.settings.pd != blank }}"
-    },
-    {
-      "type": "text",
-      "id": "custom_class",
-      "label": "Custom CSS class",
-      "info": "Optional. Extra class for this section, e.g. cca-…"
     }
   ],
   "presets": [

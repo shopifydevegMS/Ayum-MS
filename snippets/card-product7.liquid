@@ -97,8 +97,9 @@
           render 'vendor' with card_product.vendor, class: 'hdt-inline-block hdt-text-base hdt-font-normal'
         endif -%}
         <a data-pr-url href="{{ product_url }}" class="hdt-card-product__title hdt-text-{{ settings.pr_title_size }} hdt-font-{{ settings.pr_title_weight }} hdt-line-clamp" data-instant>{{ card_product.title | escape }}</a>
-        {%- if show_subtitle and card_product.metafields.descriptors.subtitle.value != blank -%}
-          <p class="cca-card-subtitle">{{ card_product.metafields.descriptors.subtitle.value | escape }}</p>
+        {%- if show_subtitle -%}
+          {%- assign cca_subtitle = card_product.metafields.descriptors.subtitle.value | default: card_product.metafields.custom.subtitle.value -%}
+          <p class="cca-card-subtitle">{{ cca_subtitle | escape }}</p>
         {%- endif -%}
         {%- liquid
           render 'card-price', section_id: section_id, product: card_product, show_volume_note: true

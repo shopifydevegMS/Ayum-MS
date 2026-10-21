@@ -112,7 +112,7 @@ All AYUM CSS changes are **additive and live in one file**, so the user can see 
 - **Every new CSS class Claude adds starts with `cca-`**, e.g. `cca-pagination`, `cca-collection-strip`, `cca-filter-sheet__header` (BEM-style `__element` / `--modifier` after the prefix is fine). New CSS custom properties use `--cca-` (e.g. `--cca-card-gap`). Before using a name, grep the repo to confirm it's unused.
 - **All new CSS goes in `assets/dev1.css`.** Don't create per-section stylesheets for AYUM work, and don't edit the theme's own stylesheets (`base.css`, `theme.css`, `product-card.css`, the per-section `*.css` files, etc.).
 - **Every rule in `dev1.css` must be anchored on a `cca-` class**, e.g. `.cca-pagination { … }` or `.cca-collection .hdt-card-product { … }`. That way it only affects markup Claude marked, and never restyles native theme output on its own. A bare `.hdt-…` selector without a `cca-` ancestor is not allowed.
-- **Restyling an existing theme element:** add a `cca-` class to its markup (or to a wrapper; or use the instance `custom_class` with a `cca-` value) and target it from `dev1.css`. Keep the native `hdt-` classes; only add new ones.
+- **Restyling an existing theme element:** add a `cca-` class to its markup (or to a wrapper, switched on by the section's AYUM design option, §6) and target it from `dev1.css`. Keep the native `hdt-` classes; only add new ones.
 - **Group `dev1.css` by feature** with a comment header per section/component (e.g. `/* ==== cca-pagination — collection page ==== */`), so a single feature's CSS can also be removed on its own.
 - **Exception: values that need Liquid** (per-instance settings, `section.id`, colors from a setting) can't go in a static `.css` file. Put those in an inline `{% style %}` block in the section, and emit **only `--cca-` custom properties** there, scoped to `#shopify-section-{{ section.id }}`. `dev1.css` then uses those variables. Spacing via `{% render 'spacing-vars', box: section %}` stays as the theme does it.
 - `dev1.css` loads on every page (last in `snippets/css-variables.liquid`), so keep it lean: no duplicated rules, no unused rules left behind after a change.
@@ -326,7 +326,7 @@ Prefer the **earliest** option that safely satisfies the design:
 In the previous project Claude repeatedly **duplicated an existing section just to edit it**, instead of walking the ladder above. That is prohibited here.
 
 - **Walk the ladder in order, one step at a time.** Start at step 1 and move to the next step only after proving, in the pre-implementation report, why the current step cannot satisfy the design. Skipping steps is a failure, even if the result looks correct.
-- **Duplicating a section (step 9) is never the way to change an existing section.** To change how an existing section looks or behaves, use steps 1–8: scoped CSS, the instance `custom_class`, additive settings/options that default to blank/false, or a minimal edit to the original.
+- **Duplicating a section (step 9) is never the way to change an existing section.** To change how an existing section looks or behaves, use steps 1–8: scoped CSS, an AYUM design option (§6), additive settings/options that default to blank/false, or a minimal edit to the original.
 - Before duplicating **anything** (block, snippet, or section — steps 7 and 9) or creating a new section (step 10): state which earlier steps were tried, why each one is insufficient, and **ask the user for approval** before creating the file.
 - "It's easier", "it's safer to keep the original untouched", or "the design looks different" are **not** valid reasons to duplicate.
 
@@ -369,41 +369,32 @@ An isolated new section is acceptable when the design requires structural markup
 
 ---
 
-## 6. Custom class setting rule (permanent)
+## 6. Design option rule — no custom class setting (permanent — user rule)
 
-**Every reusable section must have an instance-specific custom class setting** unless:
+**Turn an AYUM design on through the section's design select, not a "Custom CSS class" text setting.** (The user replaced the earlier custom-class rule: merchants should pick a design, not type a class.)
 
-- the section already has an equivalent setting, or
-- the section is internal and cannot have schema, or
-- adding it would break a strict framework contract, or
-- there is a clearly documented technical reason not to add it.
-
-When no equivalent exists, add a text setting like:
+- **The section already has a design select** (e.g. `collection_des` in `collections-list`, `tabs_des` in `tabs-collection`): add **one new option beside the existing ones**. Numeric selects take the next free number with a ` - cca` label suffix (`{ "value": "16", "label": "16 - cca" }`); named selects take `{ "value": "design_1", "label": "Design 1 - cca" }`. Never change or remove existing options or the default.
+- **The section has no design select** (e.g. `slideshow`, `featured-collection`): add one as the first setting:
 
 ```json
 {
-  "type": "text",
-  "id": "custom_class",
-  "label": "Custom CSS class"
+  "type": "select",
+  "id": "design",
+  "label": "Design",
+  "default": "default",
+  "options": [
+    { "value": "default", "label": "Default" },
+    { "value": "design_1", "label": "Design 1 - cca" }
+  ]
 }
 ```
 
-Apply the value safely to the **outermost stable section wrapper**. Requirements:
-
-- preserve all existing wrapper classes
-- do not replace native section identifiers
-- do not use the merchant-entered class as an HTML `id`
-- escape/sanitize the value appropriately for a class attribute
-- do not render malformed whitespace
-- do not render an unnecessary empty class fragment (guard with `{% if section.settings.custom_class != blank %}`)
-- do not rename an existing equivalent setting
-- reuse the existing setting if the project already provides one
-
-The purpose is to let each section **instance** be targeted without editing Liquid again.
-
-**AYUM requirement:** inspect the current repository for an equivalent `custom_class` setting before adding one. Reuse an existing equivalent; do not copy previous-project-specific class names, stylesheet names, or section-instance values.
-
-**In addition to the merchant custom class, implementation-specific CSS must still use a stable, unique project scope class (or `#shopify-section-{{ section.id }}`) where required.** Do not rely only on a merchant-entered class for internal implementation styling when that would make the section fragile — a merchant can clear or retype it.
+- In the Liquid, the AYUM option adds the stable scope class to the **outermost section wrapper**, keeping all native classes: `{% if section.settings.design == 'design_1' %} cca-hero-slider{% endif %}` (or `collection_des == '16'`, `tabs_des == 'design_1'`). All AYUM CSS for that section is anchored on that class, so every other instance (default option) is untouched.
+- A new option value may have no native CSS of its own (e.g. `hdt-collection-style16`). Reproduce the native layout it is based on inside the `cca-` scope in `dev1.css` (e.g. design 16 reproduces design 8's static title bar), instead of editing native snippets.
+- Markup that must differ for the AYUM design (e.g. the hero's Figma arrow SVG) is wrapped in the same condition, with the native markup in `{% else %}`.
+- Set the option in the instance's template JSON (§7a) — never a class string.
+- **Blocks** (heading / text / button) still use their optional `custom_class` text setting: one block type plays several roles in a design (badge, description, mobile description), which a single design option can't express. Ask the user before converting a block to design options.
+- Single-instance sections that always carry their `cca-` class (announcement bar, header) need neither.
 
 Hard-won lesson (verified in this repo): **never put a layout-affecting box property on the height-observed sticky-header element.** A `border-bottom` on `<hdt-sticky-header>` fed the theme's `ResizeObserver` → `--header-height` feedback loop and inflated the header toward viewport height. Use `box-shadow: inset …` for hairlines on observed elements.
 

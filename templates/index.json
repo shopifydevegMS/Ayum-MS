@@ -445,7 +445,8 @@
         "mg_mb": ",,30px,",
         "pd": "",
         "pd_mb": "",
-        "custom_class": "cca-hero-slider"
+        "pag_mgt_mb": 22,
+        "design": "design_1"
       }
     },
     "collections_list_ayum_categories": {
@@ -587,7 +588,7 @@
       ],
       "settings": {
         "collection_list": [],
-        "collection_des": "8",
+        "collection_des": "16",
         "content_size": "lg",
         "content_weight": "semibold",
         "content_position": "center",
@@ -630,8 +631,7 @@
         "mg": ",,0,",
         "mg_mb": ",,0,",
         "pd": "48px,,48px,",
-        "pd_mb": "24px,,24px,",
-        "custom_class": "cca-categories"
+        "pd_mb": "24px,,24px,"
       }
     },
     "tabs_collection_ayum_best": {
@@ -875,7 +875,7 @@
       ],
       "settings": {
         "enable_tabs_on_heading": false,
-        "tabs_des": "base",
+        "tabs_des": "design_1",
         "tabs_list_pos": "center",
         "tab_item_size": "base",
         "tab_item_border": "solid",
@@ -890,8 +890,7 @@
         "mg": ",,0,",
         "mg_mb": ",,0,",
         "pd": "48px,,48px,",
-        "pd_mb": "24px,,24px,",
-        "custom_class": "cca-best-sellers"
+        "pd_mb": "24px,,24px,"
       }
     },
     "featured_collection_ayum_bundles": {
@@ -1015,7 +1014,7 @@
         "mg_mb": ",,0,",
         "pd": "48px,,48px,",
         "pd_mb": "24px,,24px,",
-        "custom_class": "cca-bundles"
+        "design": "design_1"
       }
     }
   },

@@ -151,7 +151,7 @@
   endif
 -%}
 
-<hdt-sticky-header sticky-type="{{ section.settings.sticky_type }}" prefix="header" class="cca-header{% if section.settings.custom_class != blank %} {{ section.settings.custom_class | strip | escape }}{% endif %} hdt-header hdt-main-header hdt-header-{{ section.settings.header_layout }} hdt-header-tranparent-{{ section.settings.header_transparent }} hdt-header-fullwidth-{{ section.settings.header_fullwidth }}{% if section.settings.sticky_glass %} hdt-header-sticky--glass{% endif %}" color-scheme="{{ section.settings.header_colors }}">
+<hdt-sticky-header sticky-type="{{ section.settings.sticky_type }}" prefix="header" class="cca-header hdt-header hdt-main-header hdt-header-{{ section.settings.header_layout }} hdt-header-tranparent-{{ section.settings.header_transparent }} hdt-header-fullwidth-{{ section.settings.header_fullwidth }}{% if section.settings.sticky_glass %} hdt-header-sticky--glass{% endif %}" color-scheme="{{ section.settings.header_colors }}">
   <div class="hdt-container{% if section.settings.header_fullwidth %}-full hdt-px-15{% endif %}">
     <div data-header-height class="hdt-flex hdt-align-center hdt-spacing-15 md:hdt-px-15 hdt-px-10 {% if section.settings.header_border_bottom %}hdt-border-b{% endif %}">
       {%- if section.settings.header_layout == "logo_left" -%}
@@ -1157,12 +1157,6 @@
       "id": "cca_highlight_item",
       "label": "Highlighted menu item",
       "info": "Type a main menu item's title, handle, or URL (e.g. /collections/all) to highlight it in the desktop menu."
-    },
-    {
-      "type": "text",
-      "id": "custom_class",
-      "label": "Custom CSS class",
-      "info": "Optional. Extra class for this header, e.g. cca-…"
     }
   ],
   "blocks": [
