@@ -443,7 +443,7 @@
 
 /* Figma card height: 192px mobile, 223px desktop. min-height, so a longer review grows instead of being cut off */
 .cca-customer-reviews .hdt-testimonial-item .testimonial-inner {
-  max-height: 192px;
+  min-height: 192px; /* Figma 192px; a longer review grows instead of overflowing */
 }
 
 .cca-customer-reviews .hdt-testimonial-item .hdt-quote-wrap {
@@ -499,7 +499,7 @@
   color: rgb(var(--color-background2));
   font-size: 12px;
   font-weight: var(--font-bold);
-  line-height: normal;
+  line-height: 1.15; /* "normal" is ~1.5 for Almarai Bold and added ~5px to the card */
 }
 
 /* Badge (block setting "Badge") */
