@@ -67,6 +67,10 @@ Full rules are in §7a of the `generate-section` skill.
 
 The collection-page Figma frames (`1:787` desktop, `1:1081` mobile, `1:1287` mobile filter sheet) use fixed positions and sizes. Take colors, typography, radii and aspect ratios from Figma, but build the layout with flex/grid, `gap`, `%`/`fr` widths, `aspect-ratio` and `clamp()`. Never copy x/y offsets or fixed frame widths and heights into the CSS. Full rules are in §3.1 of the `generate-section` skill.
 
+## Carousels: cards run through the gutter (mandatory)
+
+Every section with a carousel (product / collection / card `<hdt-slider>` track) gets the edge fix: the track's `.hdt-slider__viewport` is `overflow: visible` and the section's `.hdt-container` is `overflow-x: clip`, so cards are clipped at the container's outer edge instead of disappearing behind its padding while dragging. Add the section's `cca-` class to the shared "cca carousel edges" rule in `assets/dev1.css`. Never use one-sided negative margins, `100vw`, or removed container padding for this. Not for the hero/slideshow or product galleries. Full rules are in §12a of the `generate-section` skill.
+
 ## Colors come from the theme's color schemes
 
 Never hardcode colors. Use the color schemes in Theme settings → Colors, through the section's `color_scheme` setting and the variables they produce (`rgb(var(--color-foreground))`, `var(--hdt-btn-bg)`, …). If no scheme matches the Figma colors, add a new scheme. A per-section color setting is a last resort for colors no scheme field can express. Full rules are in §2.8a of the `generate-section` skill.

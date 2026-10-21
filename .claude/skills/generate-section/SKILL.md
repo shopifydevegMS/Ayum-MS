@@ -562,6 +562,27 @@ Preserve: drag · swipe · keyboard behavior where supported · navigation · pa
 - Slide counts come from `col_dk` / `col_tb` / `col_mb` at the 768/1150 breakpoints — do not invent per-viewport widths.
 - Sliders re-init on `shopify:section:load`; keep initialization idempotent and never double-initialize.
 
+### 12a. Carousel edges: cards run through the gutter (permanent — user rule, verified fix)
+
+**Every AYUM section that uses a carousel (`<hdt-slider>` product / collection / card track) gets this fix.** Hero/slideshow, product media galleries, thumbnails and quick view are excluded — they don't sit inside a padded container.
+
+- **Root cause (measured in the live preview with real drags):** the native `.hdt-slider__viewport` has `overflow: hidden` and sits *inside* the `.hdt-container` side padding, so while dragging, cards are cut 16px (mobile) / 20px (desktop) before the container edge and seem to slide behind an invisible gutter.
+- **Fix:** the viewport stops clipping and the container clips at its **outer** edge — the screen edge on phones/tablets, the 1320px container edge on wide screens. Add the section's scope class to the shared rule in `assets/dev1.css` ("cca carousel edges") instead of writing a new copy:
+
+```css
+.cca-<section>.cca-<section> .hdt-container {
+  overflow-x: clip;            /* clip at the container's outer edge; no scroll box, no page overflow */
+}
+.cca-<section>.cca-<section> .hdt-slider__products .hdt-slider__viewport {  /* or that section's track, e.g. .hdt-collections-list */
+  overflow: visible;           /* the viewport no longer cuts cards at the content edge */
+}
+```
+
+- Target only the carousel track's viewport (not tab sliders or other small sliders in the same section).
+- **Never** "fix" it with a one-sided negative margin on the viewport (`margin-inline-end: calc(-1 * gutter)`): that changes the slider's measured width, clips only one side, and breaks symmetric end alignment. Never use `100vw` widths, and never remove the container padding (that moves headings and the resting card position).
+- The viewport keeps its size, so slide positions, snapping, drag, arrows, dots and the progress bar are unchanged — no JavaScript.
+- Verify in the live preview: at rest the first card sits at the content edge; mid-drag cards reach the container's outer edge on both sides; after dragging to the end, the last card snaps to the opposite content edge; `document.documentElement.scrollWidth` equals the viewport width. Check 1440 / 1150 / 768 / 375 / 320 and RTL + LTR.
+
 ---
 
 ## 13. Product card rules

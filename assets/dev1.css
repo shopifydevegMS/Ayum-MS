@@ -635,7 +635,6 @@
   .cca-categories.cca-categories .hdt-slider__viewport {
     --slide-spacing: 1.2rem;
     --slide-size: calc(clamp(14rem, 40vw, 18rem) + var(--slide-spacing));
-    margin-inline-end: calc(-1 * var(--cca-cat-gutter));
   }
 }
 
@@ -883,7 +882,6 @@
   .cca-best-sellers.cca-best-sellers .hdt-slider__products .hdt-slider__viewport {
     --slide-spacing: 0.8rem;
     --slide-size: calc(clamp(14.4rem, 42.13vw, 20rem) + var(--slide-spacing));
-    margin-inline-end: calc(-1 * var(--cca-best-gutter));
   }
 }
 
@@ -1063,7 +1061,6 @@
   .cca-bundles.cca-bundles .hdt-slider__products .hdt-slider__viewport {
     --slide-spacing: 0.4rem;
     --slide-size: calc(clamp(28rem, 89.2vw, 40rem) + var(--slide-spacing));
-    margin-inline-end: calc(-1 * var(--cca-best-gutter));
   }
 
   .cca-bundles.cca-bundles .hdt-pr-style7 .hdt-card-product__wrapper {
@@ -1153,4 +1150,22 @@
   .hdt-slider .cca-pag-mb.cca-pag-mb {
     margin-top: var(--margin-top-mb);
   }
+}
+
+/* ==== cca carousel edges — Categories, Best sellers, Bundles ==== */
+/* Root cause (measured in the live preview): the native .hdt-slider__viewport has
+   overflow: hidden and sits INSIDE the container's side padding, so moving cards were
+   cut 16px (mobile) / 20px (desktop) before the container edge and seemed to slide
+   behind an invisible gutter. Fix: the viewport no longer clips; the container clips
+   at its OUTER edge instead (screen edge on phones/tablets, the 1320px container edge
+   on wide screens). The viewport keeps its size, so slide positions, snapping, arrows
+   and dots are unchanged; overflow-x: clip creates no scroll box and no page overflow. */
+.cca-categories.cca-categories .hdt-container,
+:is(.cca-best-sellers, .cca-bundles):is(.cca-best-sellers, .cca-bundles) .hdt-container {
+  overflow-x: clip;
+}
+
+.cca-categories.cca-categories .hdt-collections-list .hdt-slider__viewport,
+:is(.cca-best-sellers, .cca-bundles):is(.cca-best-sellers, .cca-bundles) .hdt-slider__products .hdt-slider__viewport {
+  overflow: visible;
 }
