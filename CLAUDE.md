@@ -22,7 +22,7 @@ Uses the Shopify CLI (install separately):
 - **Sections and theme blocks**: sections in `sections/` mostly render theme blocks from `blocks/` via `{% content_for 'blocks' %}` or static `{% content_for 'block', type: ..., id: ... %}`. Block files starting with `_` are private (only usable inside the sections/blocks that reference them); files without the prefix (`text`, `heading`, `button`, `group`, …) are general-purpose blocks.
 - **CSS**: global styles are in `base.css` and `theme.css` (don't hand-edit either); all project CSS changes go in `assets/dev2.css` (see below), which loads last in `snippets/css-variables.liquid` so it wins over theme CSS; each section loads its own stylesheet (e.g. `{{ 'featured-collection-2.css' | asset_url | stylesheet_tag }}`). The theme's own classes and assets use the `hdt-` prefix.
 - **Snippets**: shared partials, including many product-card variants (`card-product1`–`12`) chosen by theme settings.
-- **Templates and config**: `templates/*.json` (with alternates such as `collection.left-sidebar.json`) plus `sections/*-group.json` and `config/settings_data.json` hold merchant content and settings. They are often overwritten by Shopify editor syncs, so prefer changing Liquid/schema over hand-editing these, and expect merge conflicts if you do.
+- **Templates and config**: `templates/*.json` (with alternates such as `collection.left-sidebar.json`) plus `sections/*-group.json` and `config/settings_data.json` hold merchant content and settings. They are often overwritten by Shopify editor syncs, so put behavior in Liquid/schema, not in these files, and expect merge conflicts. The one required edit is filling the section instance with the Figma content (see "Fill the template with the Figma content" below; for homepage sections that means `templates/index.json`).
 - **Locales**: storefront strings live in `locales/*.json` (`en.default.json` is the source); schema labels use `t:` keys from `*.schema.json`. When you add a translation key, add it to `en.default.json` and to `ar.json`.
 
 ## Building or changing sections: existing-first ladder (mandatory)
@@ -31,7 +31,7 @@ For every section task, use the **earliest** option that safely satisfies the de
 
 1. Use the existing project section, block, snippet, setting, class, or component **as-is**.
 2. Use the existing structure with **scoped CSS only**.
-3. Use an **instance-specific custom class setting**.
+3. Use an **instance-specific design option** (a new " - cca" option in the section's design select, or a new `design` select with `default` / `design_1`). Don't add "Custom CSS class" text settings to sections. See §6 of the skill.
 4. Add a **new schema setting beside** existing settings.
 5. Add a **new schema option beside** existing options.
 6. **Extend** the closest existing block or snippet safely.
@@ -50,9 +50,26 @@ Rules:
 
 The full workflow (Figma inspection, reporting, CSS/RTL/JS rules, validation) is in the `generate-section` skill: [.claude/skills/generate-section/SKILL.md](.claude/skills/generate-section/SKILL.md).
 
+## Fill the template with the Figma content (mandatory)
+
+A section task isn't done when the code works. The section instance on the page must also look like Figma. After the Liquid/CSS/JS changes, edit that instance in the page's template JSON (`templates/index.json` for the homepage, `sections/header-group.json` / `footer-group.json` for header and footer sections, and so on):
+
+- Set its settings and block content to match Figma: text copied exactly from the Figma node, codes, links, layout and size settings, and the matching `color_scheme`.
+- If the section isn't on the page yet, add it in the right place in `order`.
+- Hide demo blocks Figma doesn't show with `"disabled": true` instead of deleting them.
+- Edit only that one instance. Keep every other section, block, setting and order entry exactly as it is, and keep the file's CRLF line endings.
+- Don't invent content. If Figma has an image or text you don't have, leave the setting for the merchant and list it in the report. Never put a Figma asset URL in the JSON.
+- Tell the user to commit the JSON soon, because a save in the Theme Editor overwrites it.
+
+Full rules are in §7a of the `generate-section` skill.
+
 ## Collection page design has no Auto Layout
 
 The collection-page Figma frames (`1:787` desktop, `1:1081` mobile, `1:1287` mobile filter sheet) use fixed positions and sizes. Take colors, typography, radii and aspect ratios from Figma, but build the layout with flex/grid, `gap`, `%`/`fr` widths, `aspect-ratio` and `clamp()`. Never copy x/y offsets or fixed frame widths and heights into the CSS. Full rules are in §3.1 of the `generate-section` skill.
+
+## Carousels: cards run through the gutter (mandatory)
+
+Every section with a carousel (product / collection / card `<hdt-slider>` track) gets the edge fix: the track's `.hdt-slider__viewport` is `overflow: visible` and the section's `.hdt-container` is `overflow-x: clip`, so cards are clipped at the container's outer edge instead of disappearing behind its padding while dragging. Add the section's `cca-` class to the shared "cca carousel edges" rule in `assets/dev2.css`. Never use one-sided negative margins, `100vw`, or removed container padding for this. Not for the hero/slideshow or product galleries. Full rules are in §12a of the `generate-section` skill.
 
 ## Colors come from the theme's color schemes
 
@@ -60,7 +77,9 @@ Never hardcode colors. Use the color schemes in Theme settings → Colors, throu
 
 ## Our CSS: `cca-` prefix, all in `assets/dev2.css`
 
-On the `dev2` branch, every CSS change is additive and lives in one file, `assets/dev2.css`, so deleting it removes them all. It follows the same rules as `assets/main.css` on other branches and loads right after it. Don't add dev2 work to `main.css`.
+Every CSS change for this project is additive and lives in one file, so deleting `assets/dev2.css` removes it all.
+
+On branch `dev2`, `assets/dev2.css` replaces `main.css` for all of these rules. `main.css` stays loaded (just before `dev2.css`) for other branches, but don't add CSS to it here.
 
 - Every new CSS class starts with `cca-` (e.g. `cca-pagination`), and every new CSS variable with `--cca-`.
 - All new CSS goes in `assets/dev2.css`. Don't create per-section stylesheets, and don't edit the theme's CSS files.

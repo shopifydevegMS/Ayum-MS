@@ -102,7 +102,7 @@ Re-verify anything marked *Needs verification* before relying on it.
 - Global CSS loads **once**, at the end of `css-variables.liquid`: `base.css` + `theme.css` (preload), then `product-card.css`, `collection-products.css`. Do not re-load these anywhere. `base.css` is a Tailwind-preflight + `hdt-` utility library — **do not hand-edit**.
 - Per-section CSS is lazy-loaded as the **first line(s)** of the section file: `{{ 'NAME.css' | asset_url | stylesheet_tag }}`. The theme uses external `asset_url` stylesheets exclusively — there are **zero** `{% stylesheet %}` embedded blocks. (This is how the *theme's own* sections load CSS. AYUM changes don't follow it; they go in `dev2.css`, see §2.3a.)
 - Instance-scoped CSS goes in an inline `{% style %}` block scoped by `#shopify-section-{{ section.id }}` (or `.hdt-section-spacing-{{ section.id }}` via `{% render 'spacing-vars', box: section %}`).
-- AYUM's global custom override file on the `dev2` branch is **`assets/dev2.css`**. It follows every rule that `assets/main.css` follows on other branches; don't add dev2 work to `main.css`. It is loaded **once**, globally, as the last stylesheet in `snippets/css-variables.liquid` (after `base.css`, `theme.css`, `product-card.css`, `collection-products.css`, `main.css`), so its rules win over theme CSS at equal specificity. Do not load it anywhere else. Never create a second global override file. Use a global override file only for cross-page, custom-class-scoped overrides — not for section-local styling.
+- AYUM's global custom override file is **`assets/dev2.css`** (created by the user in place of the previous project's `custom-general.css`). It is loaded **once**, globally, as the last stylesheet in `snippets/css-variables.liquid` (after `base.css`, `theme.css`, `product-card.css`, `collection-products.css`, `main.css`). On branch `dev2` it replaces `main.css` for every rule here; `main.css` stays loaded for other branches but gets no CSS on this branch, so its rules win over theme CSS at equal specificity. Do not load it anywhere else. Never create a second global override file. Use a global override file only for cross-page, custom-class-scoped overrides — not for section-local styling.
 - Do not create custom-class-gated or per-section stylesheets for AYUM work; instance-specific CSS goes in `dev2.css` under the instance's `cca-` class (§2.3a). Do not reuse a previous-project-specific stylesheet or class name.
 
 ### 2.3a `cca-` prefix + `assets/dev2.css` (permanent — user rule)
@@ -112,7 +112,7 @@ All AYUM CSS changes are **additive and live in one file**, so the user can see 
 - **Every new CSS class Claude adds starts with `cca-`**, e.g. `cca-pagination`, `cca-collection-strip`, `cca-filter-sheet__header` (BEM-style `__element` / `--modifier` after the prefix is fine). New CSS custom properties use `--cca-` (e.g. `--cca-card-gap`). Before using a name, grep the repo to confirm it's unused.
 - **All new CSS goes in `assets/dev2.css`.** Don't create per-section stylesheets for AYUM work, and don't edit the theme's own stylesheets (`base.css`, `theme.css`, `product-card.css`, the per-section `*.css` files, etc.).
 - **Every rule in `dev2.css` must be anchored on a `cca-` class**, e.g. `.cca-pagination { … }` or `.cca-collection .hdt-card-product { … }`. That way it only affects markup Claude marked, and never restyles native theme output on its own. A bare `.hdt-…` selector without a `cca-` ancestor is not allowed.
-- **Restyling an existing theme element:** add a `cca-` class to its markup (or to a wrapper; or use the instance `custom_class` with a `cca-` value) and target it from `dev2.css`. Keep the native `hdt-` classes; only add new ones.
+- **Restyling an existing theme element:** add a `cca-` class to its markup (or to a wrapper, switched on by the section's AYUM design option, §6) and target it from `dev2.css`. Keep the native `hdt-` classes; only add new ones.
 - **Group `dev2.css` by feature** with a comment header per section/component (e.g. `/* ==== cca-pagination — collection page ==== */`), so a single feature's CSS can also be removed on its own.
 - **Exception: values that need Liquid** (per-instance settings, `section.id`, colors from a setting) can't go in a static `.css` file. Put those in an inline `{% style %}` block in the section, and emit **only `--cca-` custom properties** there, scoped to `#shopify-section-{{ section.id }}`. `dev2.css` then uses those variables. Spacing via `{% render 'spacing-vars', box: section %}` stays as the theme does it.
 - `dev2.css` loads on every page (last in `snippets/css-variables.liquid`), so keep it lean: no duplicated rules, no unused rules left behind after a change.
@@ -157,6 +157,7 @@ Do not treat tablet as an enlarged mobile or a shrunk desktop automatically. Bec
 - Legitimate exception pattern (proven in a previous project; no AYUM precedent yet): set `direction: ltr` on a **geometry-only** container (a grid track or an animation track) to get predictable physical placement, then restore `direction: rtl` on each text-bearing child. Document it when you do.
 - In JS, read `document.documentElement.getAttribute('dir')` or `isRTL` from `@theme/global` — never re-detect direction.
 - **Locale-driven direction rule (permanent — learned from bugfixes in a previous project on this same theme):** this theme resolves `dir` from the *storefront locale*, and `en.default` is the default locale — so the page is LTR for visitors on the English locale even when content is authored in Arabic. **AYUM content is authored in Arabic (confirmed by the user), so this rule applies to every AYUM section.** Therefore, for any section whose content is authored in Arabic: (1) never rely on the page `dir`, a single wrapper rule, or per-leaf selector lists for text direction; declare `direction: rtl` (with `unicode-bidi: isolate`) **once at each text-content boundary** — the card/column/content wrapper — so every descendant inherits it. **Direction and alignment are separate decisions: never bundle a `text-align` into the direction rule.** Alignment follows the *design* — centered elements (section headers, badges) stay `text-align: center` and must not receive `start`/`end`; only content the design edge-aligns gets `text-align: start`/`end` (which then resolves against the declared direction). Verified failure: pairing `text-align: start` with the direction declaration on centered header blocks shoved the whole header to the right. (2) Keep geometry tracks (grids, flex rows, slider viewport/container) separate: pin a track's direction explicitly only when a physical order must hold in every locale, and never override the `<hdt-slider>` container/track direction — its JS follows the page `dir`. (3) Validate the section in **both** the `ar` and `en.default` locales before claiming RTL correctness.
+- **Kalles alignment settings are logical, not physical (verified bug, hero slider).** `text_alignment` "left"/"right" render as `hdt-text-left` = `text-align: start` and `hdt-text-right` = `text-align: end` (same for `md:` / `lg:`). Inside Arabic content that is RTL (by page `dir` or a pinned `direction: rtl`), "right" therefore aligns to the LEFT edge: wrapped lines hug the left and the text looks LTR. For right-aligned Arabic copy choose **"left"** (= start). Content-position selects (`center-start`, …) are logical the same way.
 - **Validate both RTL and LTR.**
 
 ### 2.7 Typography and brand
@@ -178,7 +179,7 @@ All section colors must come from the **theme color schemes** in Theme settings 
 - **Currently the store has one scheme only: `scheme-1`.** Re-check `config/settings_data.json` → `current.color_schemes` before each task; the merchant may add more.
 - **Order of choice:**
   1. Use an existing scheme's variables (e.g. `rgb(var(--color-foreground))`, `var(--hdt-btn-bg)`), via the section's `color_scheme` setting.
-  2. If the Figma colors for a section don't match any existing scheme, **add a new color scheme** (allowed by the user). Report the scheme's hex values, taken from Figma node data, and where it will be used. Then add it **additively** as a new `scheme-N` key in `config/settings_data.json` → `current.color_schemes`, filling every field. Never change or delete existing schemes, and leave the rest of the file byte-for-byte unchanged. This file is also rewritten by Theme Editor syncs, so tell the user to commit/push it promptly. If the editor changed it in the meantime, ask the user to create the scheme in Theme settings → Colors instead.
+  2. If the Figma colors for a section don't match any existing scheme, **add a new color scheme** (allowed by the user). Report the scheme's hex values, taken from Figma node data, and where it will be used. Then add it **additively** as a new key in `config/settings_data.json` → `current.color_schemes`, filling every field. **Give it a unique descriptive ID (e.g. `scheme-offer-bar`), never the next `scheme-N`.** Before choosing an ID, grep `config/settings_schema.json`, `templates/`, and `sections/*.json` for it: setting defaults and saved instances may already point at a scheme that doesn't exist yet (verified: `color_scheme_search` defaults to `scheme-2`, and `search.wishlist.json` selects `scheme-2`), and those would silently switch to the new colors. Never change or delete existing schemes, and leave the rest of the file byte-for-byte unchanged. This file is also rewritten by Theme Editor syncs, so tell the user to commit/push it promptly. If the editor changed it in the meantime, ask the user to create the scheme in Theme settings → Colors instead.
   3. **Add a per-section color setting only when no scheme field can express the color** (e.g. a one-off decorative accent). Give it the Figma hex as its default, and state why a scheme couldn't do it.
 - **Don't add color settings "just in case".** If a scheme covers it, no color setting.
 - Never edit an existing scheme's values to fit one section, because that changes every section using it.
@@ -325,7 +326,7 @@ Prefer the **earliest** option that safely satisfies the design:
 In the previous project Claude repeatedly **duplicated an existing section just to edit it**, instead of walking the ladder above. That is prohibited here.
 
 - **Walk the ladder in order, one step at a time.** Start at step 1 and move to the next step only after proving, in the pre-implementation report, why the current step cannot satisfy the design. Skipping steps is a failure, even if the result looks correct.
-- **Duplicating a section (step 9) is never the way to change an existing section.** To change how an existing section looks or behaves, use steps 1–8: scoped CSS, the instance `custom_class`, additive settings/options that default to blank/false, or a minimal edit to the original.
+- **Duplicating a section (step 9) is never the way to change an existing section.** To change how an existing section looks or behaves, use steps 1–8: scoped CSS, an AYUM design option (§6), additive settings/options that default to blank/false, or a minimal edit to the original.
 - Before duplicating **anything** (block, snippet, or section — steps 7 and 9) or creating a new section (step 10): state which earlier steps were tried, why each one is insufficient, and **ask the user for approval** before creating the file.
 - "It's easier", "it's safer to keep the original untouched", or "the design looks different" are **not** valid reasons to duplicate.
 
@@ -368,41 +369,32 @@ An isolated new section is acceptable when the design requires structural markup
 
 ---
 
-## 6. Custom class setting rule (permanent)
+## 6. Design option rule — no custom class setting (permanent — user rule)
 
-**Every reusable section must have an instance-specific custom class setting** unless:
+**Turn an AYUM design on through the section's design select, not a "Custom CSS class" text setting.** (The user replaced the earlier custom-class rule: merchants should pick a design, not type a class.)
 
-- the section already has an equivalent setting, or
-- the section is internal and cannot have schema, or
-- adding it would break a strict framework contract, or
-- there is a clearly documented technical reason not to add it.
-
-When no equivalent exists, add a text setting like:
+- **The section already has a design select** (e.g. `collection_des` in `collections-list`, `tabs_des` in `tabs-collection`): add **one new option beside the existing ones**. Numeric selects take the next free number with a ` - cca` label suffix (`{ "value": "16", "label": "16 - cca" }`); named selects take `{ "value": "design_1", "label": "Design 1 - cca" }`. Never change or remove existing options or the default.
+- **The section has no design select** (e.g. `slideshow`, `featured-collection`): add one as the first setting:
 
 ```json
 {
-  "type": "text",
-  "id": "custom_class",
-  "label": "Custom CSS class"
+  "type": "select",
+  "id": "design",
+  "label": "Design",
+  "default": "default",
+  "options": [
+    { "value": "default", "label": "Default" },
+    { "value": "design_1", "label": "Design 1 - cca" }
+  ]
 }
 ```
 
-Apply the value safely to the **outermost stable section wrapper**. Requirements:
-
-- preserve all existing wrapper classes
-- do not replace native section identifiers
-- do not use the merchant-entered class as an HTML `id`
-- escape/sanitize the value appropriately for a class attribute
-- do not render malformed whitespace
-- do not render an unnecessary empty class fragment (guard with `{% if section.settings.custom_class != blank %}`)
-- do not rename an existing equivalent setting
-- reuse the existing setting if the project already provides one
-
-The purpose is to let each section **instance** be targeted without editing Liquid again.
-
-**AYUM requirement:** inspect the current repository for an equivalent `custom_class` setting before adding one. Reuse an existing equivalent; do not copy previous-project-specific class names, stylesheet names, or section-instance values.
-
-**In addition to the merchant custom class, implementation-specific CSS must still use a stable, unique project scope class (or `#shopify-section-{{ section.id }}`) where required.** Do not rely only on a merchant-entered class for internal implementation styling when that would make the section fragile — a merchant can clear or retype it.
+- In the Liquid, the AYUM option adds the stable scope class to the **outermost section wrapper**, keeping all native classes: `{% if section.settings.design == 'design_1' %} cca-hero-slider{% endif %}` (or `collection_des == '16'`, `tabs_des == 'design_1'`). All AYUM CSS for that section is anchored on that class, so every other instance (default option) is untouched.
+- A new option value may have no native CSS of its own (e.g. `hdt-collection-style16`). Reproduce the native layout it is based on inside the `cca-` scope in `dev2.css` (e.g. design 16 reproduces design 8's static title bar), instead of editing native snippets.
+- Markup that must differ for the AYUM design (e.g. the hero's Figma arrow SVG) is wrapped in the same condition, with the native markup in `{% else %}`.
+- Set the option in the instance's template JSON (§7a) — never a class string.
+- **Blocks** (heading / text / button) still use their optional `custom_class` text setting: one block type plays several roles in a design (badge, description, mobile description), which a single design option can't express. Ask the user before converting a block to design options.
+- Single-instance sections that always carry their `cca-` class (announcement bar, header) need neither.
 
 Hard-won lesson (verified in this repo): **never put a layout-affecting box property on the height-observed sticky-header element.** A `border-bottom` on `<hdt-sticky-header>` fed the theme's `ResizeObserver` → `--header-height` feedback loop and inflated the header toward viewport height. Use `box-shadow: inset …` for hairlines on observed elements.
 
@@ -431,9 +423,28 @@ And:
 - Never rewrite template JSON in a way that discards merchant content.
 - Never remove unrelated JSON section entries or reorder unrelated sections.
 
-Editor JSON (`templates/*.json`, `sections/*-group.json`, `config/settings_data.json`) is **data, not source** — it carries an auto-generated banner and is rewritten by the Theme Editor. Change behavior in `.liquid` + `{% schema %}` defaults/presets. Touch template JSON only to wire or seed a section instance, and keep it strictly valid. **Never hand-edit `config/settings_data.json`** (only exception: adding a new color scheme, §2.8a).
+Editor JSON (`templates/*.json`, `sections/*-group.json`, `config/settings_data.json`) is **data, not source** — it carries an auto-generated banner and is rewritten by the Theme Editor. Change behavior in `.liquid` + `{% schema %}` defaults/presets. Touch template JSON only to wire and fill a section instance (§7a), and keep it strictly valid. **Never hand-edit `config/settings_data.json`** (only exception: adding a new color scheme, §2.8a).
 
 When inserting a section into a template's `order`, preserve every other key, setting, block, and order entry **byte-for-byte**, and state in the report where the new entry landed and what shifted.
+
+### 7a. Fill the template with the Figma content (mandatory — user rule)
+
+A section task is **not finished** when the code works. The live section instance must also look like the Figma design out of the box. After the Liquid/CSS/JS work, edit the target instance in the template JSON that renders it: `templates/index.json` for homepage sections, `sections/header-group.json` / `sections/footer-group.json` for header/footer sections, the matching `templates/<page>.json` elsewhere.
+
+What to set on that instance:
+
+- **Content:** headings, text, labels, codes and links, copied **exactly** from the Figma node text (keep the Arabic as written; it's verified copy).
+- **Settings:** layout, sizes, spacing, visibility and the `color_scheme` that matches Figma (adding a scheme per §2.8a if needed). Choose values that reproduce the Figma node; where a setting can't, note it in the report.
+- **Blocks:** one block per Figma item, in Figma order. Demo blocks Figma doesn't show are hidden with `"disabled": true`, **not deleted**, so the merchant can bring them back. New blocks get new unique IDs and go into `block_order`.
+- **Placement:** if the section isn't on the page yet, add it to `sections` and `order` at its Figma position (homepage order follows the numbered Figma sections).
+
+Rules:
+
+- Edit only the target instance. Every other section, block, setting and `order` entry stays byte-for-byte unchanged.
+- Keep the file's encoding and **CRLF** line endings. Use the Edit tool or a script that preserves `\r\n`. **Never use `sed -i` in `sections/`, `templates/` or `config/` while `shopify theme dev` may be running:** it writes a temporary `sed*` file there, `theme dev` tries to upload it, and the preview breaks with "Failed to Upload Theme Files" until `theme dev` is restarted (verified failure).
+- Don't invent content. Images, products, collections or text you don't have stay blank for the merchant; list each one in the report under "Manual Theme Editor steps". Never put a `figma.com` / `api/mcp/asset` URL in the JSON (§3); an image setting is filled only when the image already exists in Shopify Files (`shopify://shop_images/...`).
+- Validate: parse the JSON (strip the leading `/* … */` banner first), and if `shopify theme dev` is running, fetch `http://127.0.0.1:9292/` and confirm the section renders with the new content.
+- This JSON is overwritten whenever someone saves in the Theme Editor, so tell the user to commit it promptly.
 
 ---
 
@@ -550,6 +561,27 @@ Preserve: drag · swipe · keyboard behavior where supported · navigation · pa
 - Reuse the native arrow/dot **elements** (semantics, `aria-*`, `disabled` at the ends, keyboard, RTL chevron flip) and change only their appearance.
 - Slide counts come from `col_dk` / `col_tb` / `col_mb` at the 768/1150 breakpoints — do not invent per-viewport widths.
 - Sliders re-init on `shopify:section:load`; keep initialization idempotent and never double-initialize.
+
+### 12a. Carousel edges: cards run through the gutter (permanent — user rule, verified fix)
+
+**Every AYUM section that uses a carousel (`<hdt-slider>` product / collection / card track) gets this fix.** Hero/slideshow, product media galleries, thumbnails and quick view are excluded — they don't sit inside a padded container.
+
+- **Root cause (measured in the live preview with real drags):** the native `.hdt-slider__viewport` has `overflow: hidden` and sits *inside* the `.hdt-container` side padding, so while dragging, cards are cut 16px (mobile) / 20px (desktop) before the container edge and seem to slide behind an invisible gutter.
+- **Fix:** the viewport stops clipping and the container clips at its **outer** edge — the screen edge on phones/tablets, the 1320px container edge on wide screens. Add the section's scope class to the shared rule in `assets/dev2.css` ("cca carousel edges") instead of writing a new copy:
+
+```css
+.cca-<section>.cca-<section> .hdt-container {
+  overflow-x: clip;            /* clip at the container's outer edge; no scroll box, no page overflow */
+}
+.cca-<section>.cca-<section> .hdt-slider__products .hdt-slider__viewport {  /* or that section's track, e.g. .hdt-collections-list */
+  overflow: visible;           /* the viewport no longer cuts cards at the content edge */
+}
+```
+
+- Target only the carousel track's viewport (not tab sliders or other small sliders in the same section).
+- **Never** "fix" it with a one-sided negative margin on the viewport (`margin-inline-end: calc(-1 * gutter)`): that changes the slider's measured width, clips only one side, and breaks symmetric end alignment. Never use `100vw` widths, and never remove the container padding (that moves headings and the resting card position).
+- The viewport keeps its size, so slide positions, snapping, drag, arrows, dots and the progress bar are unchanged — no JavaScript.
+- Verify in the live preview: at rest the first card sits at the content edge; mid-drag cards reach the container's outer edge on both sides; after dragging to the end, the last card snaps to the opposite content edge; `document.documentElement.scrollWidth` equals the viewport width. Check 1440 / 1150 / 768 / 375 / 320 and RTL + LTR.
 
 ---
 
@@ -712,6 +744,7 @@ Before claiming completion, verify:
 - no unnecessary new library was introduced
 - no `figma.com` / `api/mcp/asset` URL appears in any production file
 - `assets/base.css`, `assets/theme.css`, `assets/*.min.js`, and `config/settings_data.json` are unchanged (except an approved additive color scheme, §2.8a)
+- the target instance in the template JSON is filled with the Figma content and settings (§7a), and nothing else in that file changed
 - the diff is limited to the intended files
 
 Practical checks that work here: JSON parse of every edited `{% schema %}` and template JSON; brace/tag balance; `git diff --stat` to confirm scope; grep for physical `left`/`right` in new CSS; grep for `var(--color-` not wrapped in `rgb(`; grep for new `@media` values outside 768/1150; grep `assets/dev2.css` to confirm every rule is anchored on a `cca-` class; grep the diff to confirm no CSS was added outside `dev2.css` (except `--cca-` variables in inline `{% style %}`).
@@ -947,6 +980,7 @@ Project-specific additions, each learned from a real failure or constraint in th
 - [ ] Colors come from color schemes (§2.8a); no hardcoded colors, no unneeded color settings.
 - [ ] Used tokens, logical properties, `ThemeEvents`, shared snippets — no hardcoded colors/fonts/spacing, no invented events, no DOM-parsed money, no Figma URLs.
 - [ ] Blank/empty states, mobile media fallback, and preset all handled.
+- [ ] Filled the section instance in its template JSON (`templates/index.json`, `sections/header-group.json`, …) so it matches Figma (§7a); demo blocks disabled, not deleted; CRLF kept.
 - [ ] Ran the validation checks in §21 and recorded each as Passed / Failed / Not run / Not available / Requires manual verification.
 - [ ] Wrote the final report in the §22 format, honestly distinguishing inspected vs validated vs not testable.
 - [ ] **Did not start the next section.**
