@@ -1,0 +1,152 @@
+/* ==== cca-about-brand — homepage "About the brand" (image_text, Design 1 - cca) ==== */
+/* Figma: desktop 2001:230, mobile 2001:749. Colors come from scheme-about-brand. */
+
+/* Container: Figma side padding (16px mobile, 20px from 768) → 1280px content, 612px columns at 1440 */
+.cca-about-brand .hdt-container {
+  padding-inline: 16px;
+}
+
+@media (min-width: 768px) {
+  .cca-about-brand .hdt-container {
+    padding-inline: 20px;
+  }
+}
+
+/* Layout: image first on mobile; image physically left, content right on ≥768 in every locale.
+   direction: ltr is geometry only — the content column restores rtl for its Arabic text. */
+.cca-about-brand .hdt-row-grid {
+  direction: ltr;
+  align-items: center;
+  row-gap: 14px;
+}
+
+@media (min-width: 768px) {
+  .cca-about-brand .hdt-row-grid {
+    column-gap: clamp(24px, 3.9vw, 56px);
+  }
+}
+
+/* Image: fixed crop from Figma (343×220 mobile, 612×380 desktop), rounded corners */
+.cca-about-brand .hdt-image-wrap {
+  --ratio-percent: 64.14%;
+  border-radius: 16px;
+}
+
+@media (min-width: 1150px) {
+  .cca-about-brand .hdt-image-wrap {
+    --ratio-percent: 62.09%;
+    border-radius: 20px;
+  }
+}
+
+/* Content column: Arabic text boundary + vertical rhythm (alignment comes from the block's own settings) */
+.cca-about-brand .hdt-image_text_column {
+  direction: rtl;
+  unicode-bidi: isolate;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  line-height: normal;
+}
+
+.cca-about-brand .hdt-image_text_column :where(h1, h2, h3, h4, h5, h6, p) {
+  margin: 0;
+}
+
+/* Mobile: the label sits 8px above the heading (Figma groups them) */
+@media (max-width: 767px) {
+  .cca-about-brand .hdt-image_text_column > :first-child {
+    margin-block-end: -6px;
+  }
+}
+
+@media (min-width: 768px) {
+  .cca-about-brand .hdt-image_text_column {
+    gap: 20px;
+  }
+}
+
+@media (min-width: 1150px) {
+  .cca-about-brand .hdt-image_text_column {
+    gap: 24px;
+  }
+}
+
+/* Typography: the "Bold" weight maps to Almarai ExtraBold (800) in this design */
+.cca-about-brand :is(.hdt-font-bold, .hdt-font-bold *) {
+  font-weight: var(--font-extrabold);
+}
+
+.cca-about-brand .hdt-image_text_column > .hdt-h_custom {
+  line-height: 1.45;
+}
+
+.cca-about-brand .hdt-text-secondary {
+  line-height: 1.85;
+}
+
+@media (min-width: 1150px) {
+  .cca-about-brand .hdt-text-secondary {
+    line-height: 1.9;
+  }
+}
+
+/* Figma's desktop line break in the description; narrower columns wrap naturally */
+@media (max-width: 1149px) {
+  .cca-about-brand .hdt-text-secondary br {
+    display: none;
+  }
+}
+
+/* Statistics: three equal columns on mobile (more wrap to a new row), natural widths on ≥768 */
+.cca-about-brand .hdt-layout-flex--row {
+  flex-wrap: wrap;
+  gap: 12px 10px;
+}
+
+@media (max-width: 767px) {
+  /* Figma's 11px label; the text block's mobile size setting only allows even values */
+  .cca-about-brand .hdt-layout-flex--row .hdt-text-custom {
+    font-size: 11px;
+  }
+
+  .cca-about-brand .hdt-layout-flex--row > .hdt-group-block {
+    flex: 1 1 calc((100% - 20px) / 3);
+    min-width: 0;
+  }
+
+  .cca-about-brand .hdt-layout-flex--row .hdt-layout-flex--column {
+    align-items: center;
+  }
+}
+
+@media (min-width: 768px) {
+  .cca-about-brand .hdt-layout-flex--row {
+    gap: 12px 24px;
+  }
+
+  .cca-about-brand .hdt-layout-flex--row > .hdt-group-block {
+    flex: 0 0 auto;
+  }
+}
+
+@media (min-width: 1150px) {
+  .cca-about-brand .hdt-layout-flex--row {
+    column-gap: 32px;
+    padding-block-end: 9px;
+  }
+}
+
+/* Numbers like "+400" stay in visual order inside the RTL column */
+.cca-about-brand .hdt-layout-flex--row .hdt-h_custom {
+  direction: ltr;
+  unicode-bidi: isolate;
+  line-height: normal;
+}
+
+/* Stat labels use the scheme's muted color (Figma Neutral/Muted, the sale-price field) */
+.cca-about-brand .hdt-layout-flex--row .hdt-text-custom {
+  --text-color: rgb(var(--color-pr-sale-price));
+  color: rgb(var(--color-pr-sale-price));
+  line-height: normal;
+}

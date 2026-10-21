@@ -367,9 +367,301 @@
         "pd": "",
         "pd_mb": ""
       }
+    },
+    "image_text_about_brand": {
+      "type": "image_text",
+      "name": "About the brand",
+      "blocks": {
+        "image-text-heading": {
+          "type": "section-heading",
+          "static": true,
+          "settings": {}
+        },
+        "about_media_Ab12Cd": {
+          "type": "_image-text-column",
+          "settings": {
+            "image_position": ""
+          },
+          "blocks": {
+            "about_image_Ef34Gh": {
+              "type": "image",
+              "settings": {
+                "image_ratio": "landscape",
+                "img_effect": "none",
+                "b_effect": "none",
+                "custom_width": "full",
+                "image_w": 50,
+                "image_w_mb": 50
+              }
+            }
+          },
+          "block_order": [
+            "about_image_Ef34Gh"
+          ]
+        },
+        "about_content_Ij56Kl": {
+          "type": "_image-text-col",
+          "settings": {
+            "alignment": "left",
+            "alignment_mb": "center",
+            "colors_by_block": false,
+            "color_scheme": "scheme-about-brand",
+            "align_center": true,
+            "padding_h": 0,
+            "padding_v": 0,
+            "padding_h_mb": 0,
+            "padding_v_mb": 0
+          },
+          "blocks": {
+            "about_label_Mn78Op": {
+              "type": "text",
+              "settings": {
+                "text": "<p>قصتنا</p>",
+                "hidden_br_mobile": false,
+                "hidden_on_mobile": false,
+                "ffamily": "",
+                "text_size": "custom",
+                "line_height": "",
+                "font_weight": "bold",
+                "text_color": "hdt-text-primary",
+                "font_size_text_lg": 17,
+                "font_size_text": 12,
+                "letter_spacing_text": 0
+              }
+            },
+            "about_heading_Qr90St": {
+              "type": "heading",
+              "settings": {
+                "heading": "<h2>أول مصنع تجفيف بالتجميد في الكويت</h2>",
+                "hidden_br_mobile": false,
+                "hidden_on_mobile": false,
+                "line_height": "",
+                "font_weight": "bold",
+                "heading_size": "h_custom",
+                "text_color": "hdt-s-text",
+                "font_size_heading_lg": 34,
+                "font_size_heading": 24,
+                "letter_spacing_heading": 0
+              }
+            },
+            "about_text_Uv12Wx": {
+              "type": "text",
+              "settings": {
+                "text": "<p>معظم المنتجات المشابهة في السوق مستوردة. إحنا الوحيدين اللي ننتجها محلياً — <br/>من الفاكهة الطازجة للحلويات المفضلة عندك، نشيل الماء بالكامل تقريباً بدون حرارة، فيفضل الطعم والقيمة الغذائية والقوام يتحول لقرمشة.</p>",
+                "hidden_br_mobile": false,
+                "hidden_on_mobile": false,
+                "ffamily": "",
+                "text_size": "custom",
+                "line_height": "",
+                "font_weight": "normal",
+                "text_color": "hdt-text-secondary",
+                "font_size_text_lg": 18,
+                "font_size_text": 14,
+                "letter_spacing_text": 0
+              }
+            },
+            "about_stats_Yz34Ab": {
+              "type": "group",
+              "settings": {
+                "content_direction": "row",
+                "vertical_on_mobile": false,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "flex-start",
+                "gap": 32,
+                "width": "fill",
+                "width_mobile": "fill",
+                "colors_by_block": false,
+                "group_rounded": "",
+                "padding_top": 0,
+                "padding_bottom": 0,
+                "padding_left": 0,
+                "padding_right": 0,
+                "padding_rate_mobile": 0
+              },
+              "blocks": {
+                "about_stat1_Cd56Ef": {
+                  "type": "group",
+                  "settings": {
+                    "content_direction": "column",
+                    "horizontal_alignment_flex_direction_column": "flex-start",
+                    "vertical_alignment_flex_direction_column": "flex-start",
+                    "gap": 2,
+                    "width": "fit-content",
+                    "width_mobile": "fill",
+                    "colors_by_block": false,
+                    "group_rounded": "",
+                    "padding_top": 0,
+                    "padding_bottom": 0,
+                    "padding_left": 0,
+                    "padding_right": 0,
+                    "padding_rate_mobile": 0
+                  },
+                  "blocks": {
+                    "about_stat1_num_Gh78Ij": {
+                      "type": "heading",
+                      "settings": {
+                        "heading": "<p>100%</p>",
+                        "line_height": "",
+                        "font_weight": "bold",
+                        "heading_size": "h_custom",
+                        "text_color": "hdt-text-primary",
+                        "font_size_heading_lg": 26,
+                        "font_size_heading": 23,
+                        "letter_spacing_heading": 0
+                      }
+                    },
+                    "about_stat1_lbl_Kl90Mn": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>تصنيع كويتي</p>",
+                        "text_size": "custom",
+                        "font_weight": "normal",
+                        "text_color": "hdt-s-text",
+                        "font_size_text_lg": 18,
+                        "font_size_text": 12,
+                        "letter_spacing_text": 0
+                      }
+                    }
+                  },
+                  "block_order": [
+                    "about_stat1_num_Gh78Ij",
+                    "about_stat1_lbl_Kl90Mn"
+                  ]
+                },
+                "about_stat2_Op12Qr": {
+                  "type": "group",
+                  "settings": {
+                    "content_direction": "column",
+                    "horizontal_alignment_flex_direction_column": "flex-start",
+                    "vertical_alignment_flex_direction_column": "flex-start",
+                    "gap": 2,
+                    "width": "fit-content",
+                    "width_mobile": "fill",
+                    "colors_by_block": false,
+                    "group_rounded": "",
+                    "padding_top": 0,
+                    "padding_bottom": 0,
+                    "padding_left": 0,
+                    "padding_right": 0,
+                    "padding_rate_mobile": 0
+                  },
+                  "blocks": {
+                    "about_stat2_num_St34Uv": {
+                      "type": "heading",
+                      "settings": {
+                        "heading": "<p>5</p>",
+                        "line_height": "",
+                        "font_weight": "bold",
+                        "heading_size": "h_custom",
+                        "text_color": "hdt-text-primary",
+                        "font_size_heading_lg": 26,
+                        "font_size_heading": 23,
+                        "letter_spacing_heading": 0
+                      }
+                    },
+                    "about_stat2_lbl_Wx56Yz": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>خطوط منتجات</p>",
+                        "text_size": "custom",
+                        "font_weight": "normal",
+                        "text_color": "hdt-s-text",
+                        "font_size_text_lg": 18,
+                        "font_size_text": 12,
+                        "letter_spacing_text": 0
+                      }
+                    }
+                  },
+                  "block_order": [
+                    "about_stat2_num_St34Uv",
+                    "about_stat2_lbl_Wx56Yz"
+                  ]
+                },
+                "about_stat3_Ab78Cd": {
+                  "type": "group",
+                  "settings": {
+                    "content_direction": "column",
+                    "horizontal_alignment_flex_direction_column": "flex-start",
+                    "vertical_alignment_flex_direction_column": "flex-start",
+                    "gap": 2,
+                    "width": "fit-content",
+                    "width_mobile": "fill",
+                    "colors_by_block": false,
+                    "group_rounded": "",
+                    "padding_top": 0,
+                    "padding_bottom": 0,
+                    "padding_left": 0,
+                    "padding_right": 0,
+                    "padding_rate_mobile": 0
+                  },
+                  "blocks": {
+                    "about_stat3_num_Ef90Gh": {
+                      "type": "heading",
+                      "settings": {
+                        "heading": "<p>+400</p>",
+                        "line_height": "",
+                        "font_weight": "bold",
+                        "heading_size": "h_custom",
+                        "text_color": "hdt-text-primary",
+                        "font_size_heading_lg": 26,
+                        "font_size_heading": 23,
+                        "letter_spacing_heading": 0
+                      }
+                    },
+                    "about_stat3_lbl_Ij12Kl": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>تقييم من عملائنا</p>",
+                        "text_size": "custom",
+                        "font_weight": "normal",
+                        "text_color": "hdt-s-text",
+                        "font_size_text_lg": 18,
+                        "font_size_text": 12,
+                        "letter_spacing_text": 0
+                      }
+                    }
+                  },
+                  "block_order": [
+                    "about_stat3_num_Ef90Gh",
+                    "about_stat3_lbl_Ij12Kl"
+                  ]
+                }
+              },
+              "block_order": [
+                "about_stat1_Cd56Ef",
+                "about_stat2_Op12Qr",
+                "about_stat3_Ab78Cd"
+              ]
+            }
+          },
+          "block_order": [
+            "about_label_Mn78Op",
+            "about_heading_Qr90St",
+            "about_text_Uv12Wx",
+            "about_stats_Yz34Ab"
+          ]
+        }
+      },
+      "block_order": [
+        "about_media_Ab12Cd",
+        "about_content_Ij56Kl"
+      ],
+      "settings": {
+        "design": "design_1",
+        "colors_by_section": true,
+        "color_scheme": "scheme-about-brand",
+        "background_opacity": 1,
+        "section_layout": "wrapper_container",
+        "hdt_background_parallax": false,
+        "mg": "",
+        "mg_mb": "",
+        "pd": "48px,,48px,",
+        "pd_mb": "24px,,18px,"
+      }
     }
   },
   "order": [
-    "lookbook_carousel_VeWgrg"
+    "lookbook_carousel_VeWgrg",
+    "image_text_about_brand"
   ]
 }

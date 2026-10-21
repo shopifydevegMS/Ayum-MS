@@ -246,6 +246,12 @@
           },
           {
             "type": "color",
+            "id": "pr_rating",
+            "label": "Rating stars",
+            "default": "#F2B640"
+          },
+          {
+            "type": "color",
             "id": "sale_price",
             "label": "t:settings_schema.colors.settings.product.sale_price",
             "default": "#DB1215"
