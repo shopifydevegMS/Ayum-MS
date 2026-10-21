@@ -81,7 +81,7 @@
 {%- endstyle -%}
 
 
-<div id="{{ section.id }}" class="{{ parent }} {% if section.settings.hdt_background_parallax %} hdt-animate--parallax-bg {% endif %} {% if section.settings.enable_tabs_on_heading %} hdt-tabs-on-heading {% endif %}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};"{%- endif %}>
+<div id="{{ section.id }}" class="{{ parent }}{% if section.settings.custom_class != blank %} {{ section.settings.custom_class | strip | escape }}{% endif %} {% if section.settings.hdt_background_parallax %} hdt-animate--parallax-bg {% endif %} {% if section.settings.enable_tabs_on_heading %} hdt-tabs-on-heading {% endif %}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};"{%- endif %}>
   <div class="{{ child }}">
     {%- if section.settings.section_background != blank -%}
       {% liquid
@@ -380,6 +380,12 @@
       "placeholder": ",,50px,",
       "visible_if": "{{ section.settings.pd != blank }}"
     },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom CSS class",
+      "info": "Optional. Extra class for this section, e.g. cca-…"
+    }
   ],
   "blocks": [
     {

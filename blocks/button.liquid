@@ -20,7 +20,7 @@
 {%- endif -%}
 {%- endcapture -%}
 {%- capture class -%}
-  hdt-button-block hdt-btn hdt-relative hdt-oh hdt-font-{{ block.settings.font_weight }} hdt-btn--size-{{ block.settings.size }} {{ block.settings.text_size }} {{ block.settings.btn_style }}{% if block.settings.boder_hover %} hdt-btn-boder-hover{% endif %}{% if block.settings.full_width %} hdt-btn-full-width{% endif %} {{ block.settings.rounded }}{% if block.settings.icon != "none" %} hdt-btn--with-icon hdt-btn--pos-icon-{{ block.settings.icon_position }}{% endif %}
+  hdt-button-block hdt-btn hdt-relative hdt-oh hdt-font-{{ block.settings.font_weight }} hdt-btn--size-{{ block.settings.size }} {{ block.settings.text_size }} {{ block.settings.btn_style }}{% if block.settings.boder_hover %} hdt-btn-boder-hover{% endif %}{% if block.settings.full_width %} hdt-btn-full-width{% endif %} {{ block.settings.rounded }}{% if block.settings.icon != "none" %} hdt-btn--with-icon hdt-btn--pos-icon-{{ block.settings.icon_position }}{% endif %}{% if block.settings.custom_class != blank %} {{ block.settings.custom_class | strip | escape }}{% endif %}
 {%- endcapture -%}
 <a {{ effect }} id="block-{{ block.id }}" {% if block.settings.link == blank %}role="link" aria-disabled="true"{% else %}href="{{ block.settings.link }}"{% endif %} class="{{ class }}" style="{{ style }}" {% if block.settings.open_in_new_tab %} target="_blank" rel="noopener noreferrer"{% endif -%} {{ block.shopify_attributes }}>  
   {%- liquid
@@ -643,6 +643,12 @@
       "label": "t:blocks.icon.settings.icon_spacing.label",
       "default": 5,
       "visible_if": "{{ block.settings.icon != 'none' }}"
+    },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom CSS class",
+      "info": "Optional. Extra class for this button, e.g. cca-…"
     }
   ],
   "presets": [

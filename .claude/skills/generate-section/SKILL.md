@@ -157,6 +157,7 @@ Do not treat tablet as an enlarged mobile or a shrunk desktop automatically. Bec
 - Legitimate exception pattern (proven in a previous project; no AYUM precedent yet): set `direction: ltr` on a **geometry-only** container (a grid track or an animation track) to get predictable physical placement, then restore `direction: rtl` on each text-bearing child. Document it when you do.
 - In JS, read `document.documentElement.getAttribute('dir')` or `isRTL` from `@theme/global` — never re-detect direction.
 - **Locale-driven direction rule (permanent — learned from bugfixes in a previous project on this same theme):** this theme resolves `dir` from the *storefront locale*, and `en.default` is the default locale — so the page is LTR for visitors on the English locale even when content is authored in Arabic. **AYUM content is authored in Arabic (confirmed by the user), so this rule applies to every AYUM section.** Therefore, for any section whose content is authored in Arabic: (1) never rely on the page `dir`, a single wrapper rule, or per-leaf selector lists for text direction; declare `direction: rtl` (with `unicode-bidi: isolate`) **once at each text-content boundary** — the card/column/content wrapper — so every descendant inherits it. **Direction and alignment are separate decisions: never bundle a `text-align` into the direction rule.** Alignment follows the *design* — centered elements (section headers, badges) stay `text-align: center` and must not receive `start`/`end`; only content the design edge-aligns gets `text-align: start`/`end` (which then resolves against the declared direction). Verified failure: pairing `text-align: start` with the direction declaration on centered header blocks shoved the whole header to the right. (2) Keep geometry tracks (grids, flex rows, slider viewport/container) separate: pin a track's direction explicitly only when a physical order must hold in every locale, and never override the `<hdt-slider>` container/track direction — its JS follows the page `dir`. (3) Validate the section in **both** the `ar` and `en.default` locales before claiming RTL correctness.
+- **Kalles alignment settings are logical, not physical (verified bug, hero slider).** `text_alignment` "left"/"right" render as `hdt-text-left` = `text-align: start` and `hdt-text-right` = `text-align: end` (same for `md:` / `lg:`). Inside Arabic content that is RTL (by page `dir` or a pinned `direction: rtl`), "right" therefore aligns to the LEFT edge: wrapped lines hug the left and the text looks LTR. For right-aligned Arabic copy choose **"left"** (= start). Content-position selects (`center-start`, …) are logical the same way.
 - **Validate both RTL and LTR.**
 
 ### 2.7 Typography and brand
@@ -178,7 +179,7 @@ All section colors must come from the **theme color schemes** in Theme settings 
 - **Currently the store has one scheme only: `scheme-1`.** Re-check `config/settings_data.json` → `current.color_schemes` before each task; the merchant may add more.
 - **Order of choice:**
   1. Use an existing scheme's variables (e.g. `rgb(var(--color-foreground))`, `var(--hdt-btn-bg)`), via the section's `color_scheme` setting.
-  2. If the Figma colors for a section don't match any existing scheme, **add a new color scheme** (allowed by the user). Report the scheme's hex values, taken from Figma node data, and where it will be used. Then add it **additively** as a new `scheme-N` key in `config/settings_data.json` → `current.color_schemes`, filling every field. Never change or delete existing schemes, and leave the rest of the file byte-for-byte unchanged. This file is also rewritten by Theme Editor syncs, so tell the user to commit/push it promptly. If the editor changed it in the meantime, ask the user to create the scheme in Theme settings → Colors instead.
+  2. If the Figma colors for a section don't match any existing scheme, **add a new color scheme** (allowed by the user). Report the scheme's hex values, taken from Figma node data, and where it will be used. Then add it **additively** as a new key in `config/settings_data.json` → `current.color_schemes`, filling every field. **Give it a unique descriptive ID (e.g. `scheme-offer-bar`), never the next `scheme-N`.** Before choosing an ID, grep `config/settings_schema.json`, `templates/`, and `sections/*.json` for it: setting defaults and saved instances may already point at a scheme that doesn't exist yet (verified: `color_scheme_search` defaults to `scheme-2`, and `search.wishlist.json` selects `scheme-2`), and those would silently switch to the new colors. Never change or delete existing schemes, and leave the rest of the file byte-for-byte unchanged. This file is also rewritten by Theme Editor syncs, so tell the user to commit/push it promptly. If the editor changed it in the meantime, ask the user to create the scheme in Theme settings → Colors instead.
   3. **Add a per-section color setting only when no scheme field can express the color** (e.g. a one-off decorative accent). Give it the Figma hex as its default, and state why a scheme couldn't do it.
 - **Don't add color settings "just in case".** If a scheme covers it, no color setting.
 - Never edit an existing scheme's values to fit one section, because that changes every section using it.
@@ -431,9 +432,28 @@ And:
 - Never rewrite template JSON in a way that discards merchant content.
 - Never remove unrelated JSON section entries or reorder unrelated sections.
 
-Editor JSON (`templates/*.json`, `sections/*-group.json`, `config/settings_data.json`) is **data, not source** — it carries an auto-generated banner and is rewritten by the Theme Editor. Change behavior in `.liquid` + `{% schema %}` defaults/presets. Touch template JSON only to wire or seed a section instance, and keep it strictly valid. **Never hand-edit `config/settings_data.json`** (only exception: adding a new color scheme, §2.8a).
+Editor JSON (`templates/*.json`, `sections/*-group.json`, `config/settings_data.json`) is **data, not source** — it carries an auto-generated banner and is rewritten by the Theme Editor. Change behavior in `.liquid` + `{% schema %}` defaults/presets. Touch template JSON only to wire and fill a section instance (§7a), and keep it strictly valid. **Never hand-edit `config/settings_data.json`** (only exception: adding a new color scheme, §2.8a).
 
 When inserting a section into a template's `order`, preserve every other key, setting, block, and order entry **byte-for-byte**, and state in the report where the new entry landed and what shifted.
+
+### 7a. Fill the template with the Figma content (mandatory — user rule)
+
+A section task is **not finished** when the code works. The live section instance must also look like the Figma design out of the box. After the Liquid/CSS/JS work, edit the target instance in the template JSON that renders it: `templates/index.json` for homepage sections, `sections/header-group.json` / `sections/footer-group.json` for header/footer sections, the matching `templates/<page>.json` elsewhere.
+
+What to set on that instance:
+
+- **Content:** headings, text, labels, codes and links, copied **exactly** from the Figma node text (keep the Arabic as written; it's verified copy).
+- **Settings:** layout, sizes, spacing, visibility and the `color_scheme` that matches Figma (adding a scheme per §2.8a if needed). Choose values that reproduce the Figma node; where a setting can't, note it in the report.
+- **Blocks:** one block per Figma item, in Figma order. Demo blocks Figma doesn't show are hidden with `"disabled": true`, **not deleted**, so the merchant can bring them back. New blocks get new unique IDs and go into `block_order`.
+- **Placement:** if the section isn't on the page yet, add it to `sections` and `order` at its Figma position (homepage order follows the numbered Figma sections).
+
+Rules:
+
+- Edit only the target instance. Every other section, block, setting and `order` entry stays byte-for-byte unchanged.
+- Keep the file's encoding and **CRLF** line endings. Use the Edit tool or a script that preserves `\r\n`. **Never use `sed -i` in `sections/`, `templates/` or `config/` while `shopify theme dev` may be running:** it writes a temporary `sed*` file there, `theme dev` tries to upload it, and the preview breaks with "Failed to Upload Theme Files" until `theme dev` is restarted (verified failure).
+- Don't invent content. Images, products, collections or text you don't have stay blank for the merchant; list each one in the report under "Manual Theme Editor steps".
+- Validate: parse the JSON (strip the leading `/* … */` banner first), and if `shopify theme dev` is running, fetch `http://127.0.0.1:9292/` and confirm the section renders with the new content.
+- This JSON is overwritten whenever someone saves in the Theme Editor, so tell the user to commit it promptly.
 
 ---
 
@@ -712,6 +732,7 @@ Before claiming completion, verify:
 - no unnecessary new library was introduced
 - no `figma.com` / `api/mcp/asset` URL appears in any production file
 - `assets/base.css`, `assets/theme.css`, `assets/*.min.js`, and `config/settings_data.json` are unchanged (except an approved additive color scheme, §2.8a)
+- the target instance in the template JSON is filled with the Figma content and settings (§7a), and nothing else in that file changed
 - the diff is limited to the intended files
 
 Practical checks that work here: JSON parse of every edited `{% schema %}` and template JSON; brace/tag balance; `git diff --stat` to confirm scope; grep for physical `left`/`right` in new CSS; grep for `var(--color-` not wrapped in `rgb(`; grep for new `@media` values outside 768/1150; grep `assets/dev1.css` to confirm every rule is anchored on a `cca-` class; grep the diff to confirm no CSS was added outside `dev1.css` (except `--cca-` variables in inline `{% style %}`).
@@ -947,6 +968,7 @@ Project-specific additions, each learned from a real failure or constraint in th
 - [ ] Colors come from color schemes (§2.8a); no hardcoded colors, no unneeded color settings.
 - [ ] Used tokens, logical properties, `ThemeEvents`, shared snippets — no hardcoded colors/fonts/spacing, no invented events, no DOM-parsed money, no Figma URLs.
 - [ ] Blank/empty states, mobile media fallback, and preset all handled.
+- [ ] Filled the section instance in its template JSON (`templates/index.json`, `sections/header-group.json`, …) so it matches Figma (§7a); demo blocks disabled, not deleted; CRLF kept.
 - [ ] Ran the validation checks in §21 and recorded each as Passed / Failed / Not run / Not available / Requires manual verification.
 - [ ] Wrote the final report in the §22 format, honestly distinguishing inspected vs validated vs not testable.
 - [ ] **Did not start the next section.**

@@ -12,7 +12,7 @@
   {% render 'spacing-vars', box: section %}
 {%- endstyle -%}
 
-<div class="hdt-s-inner hdt-section-spacing hdt-section-spacing-{{ section.id }} hdt-s-gradient" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};" {%- endif %} {%- unless section.index == 1 %} hdt-reveal="fade-in"{%- endunless -%}>
+<div class="hdt-s-inner hdt-section-spacing hdt-section-spacing-{{ section.id }} hdt-s-gradient{% if section.settings.custom_class != blank %} {{ section.settings.custom_class | strip | escape }}{% endif %}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};" {%- endif %} {%- unless section.index == 1 %} hdt-reveal="fade-in"{%- endunless -%}>
   <hdt-slideshow {% if section.settings.is_fade %}isfade {% endif %}id="Slider-{{ section.id }}" autoheight class="hdt-slider hdt-relative hdt-container{% if section.settings.full_width %}-full{% endif %} hdt-slideshow hdt-slides-1 hdt-relative hdt-slider-center-{{ section.settings.carousel_center }}" config='{"loop": {{ section.settings.loop }}, "navUI": {{ section.settings.navUI }}, "dotUI": {{ section.settings.dotUI }}, "autoPlay": {{ section.settings.autoplay | times: 1000 }}, "pauseOnHover": {{ section.settings.pauseOnHover }}, "autoHeight": true, "slidesToScroll": 1 }'>
     <div class="hdt-slider__viewport md:hdt-height--{{ section.settings.image_height }} hdt-height--{{ section.settings.image_height_mb }}{% unless section.settings.full_width %} {{ section.settings.rounded }}{% endunless %}">
       <div class="hdt-slider__container">
@@ -409,6 +409,12 @@
       "label": "Padding (Mobile)",
       "placeholder": ",,50px,",
       "visible_if": "{{ section.settings.pd != blank }}"
+    },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom CSS class",
+      "info": "Optional. Extra class for this section, e.g. cca-…"
     }
   ],
   "presets": [

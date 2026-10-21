@@ -12,7 +12,7 @@
   {%- if block.settings.ffamily != '' -%}--ff:var({{ block.settings.ffamily }}); {%- endif -%}
 {%- endcapture -%}
 
-<div {{ effect }} id="block-{{ block.id }}" class="hdt-text-warry hdt-rte {{ block.settings.text_color }}{% if block.settings.hidden_br_mobile %} hdt-br-hidden{% endif %}{% if block.settings.hidden_on_mobile %} hdt-hide-mobile{% endif %} hdt-text-{{ block.settings.text_size }} hdt-font-{{ block.settings.font_weight }} {{ block.settings.line_height }}" {{ block.shopify_attributes }} {%- if css != blank %} style="{{ css }}"{% endif %}>
+<div {{ effect }} id="block-{{ block.id }}" class="hdt-text-warry hdt-rte {{ block.settings.text_color }}{% if block.settings.hidden_br_mobile %} hdt-br-hidden{% endif %}{% if block.settings.hidden_on_mobile %} hdt-hide-mobile{% endif %} hdt-text-{{ block.settings.text_size }} hdt-font-{{ block.settings.font_weight }} {{ block.settings.line_height }}{% if block.settings.custom_class != blank %} {{ block.settings.custom_class | strip | escape }}{% endif %}" {{ block.shopify_attributes }} {%- if css != blank %} style="{{ css }}"{% endif %}>
   {%- assign now_y = 'now' | date: '%Y' -%}
   {%- capture cap_date -%}
     <hdt-countdown config='{"month":"{{ block.settings.countdown | date: '%m' | plus: 0 }}", "date":"{{ block.settings.countdown | date: '%d, %Y %H:%M:%S' }}", "hideTimerOnComplete": true, "hasZero": true }'>
@@ -255,6 +255,12 @@
       "default": 0,
       "visible_if": "{{ block.settings.text_size == 'custom' }}"
     },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom CSS class",
+      "info": "Optional. Extra class for this text, e.g. cca-…"
+    }
   ],
   "presets": [
     {

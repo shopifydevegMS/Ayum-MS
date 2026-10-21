@@ -18,16 +18,18 @@
           "type": "announcement",
           "settings": {
             "link": "",
-            "text": "Today deal sale off <strong>70%</strong>. End in[countdown].  <a href=\"/collections/all\" title=\"All products\">Hurry Up [icon_arrow]</a>",
+            "text": "خصم 10% على أول طلب — كود AYUM10",
             "adding_border": false,
             "countdown": "2025-12-30 15:00:00",
             "txt_day": "days",
             "text_highlight": "",
-            "hdt_font_size": 16
+            "hdt_font_size": 16,
+            "discount_code": "AYUM10"
           }
         },
         "announcement_fekMnb": {
           "type": "announcement",
+          "disabled": true,
           "settings": {
             "link": "",
             "text": "Welcome to our store",
@@ -45,9 +47,9 @@
       ],
       "settings": {
         "show_line_separator": false,
-        "close_btn": "1",
-        "height": 45,
-        "fontsize": 12,
+        "close_btn": "0",
+        "height": 40,
+        "fontsize": 14,
         "design": "slider",
         "hdt_using_image_icon": false,
         "space_item": 30,
@@ -58,13 +60,61 @@
         "au_time": 5,
         "pause_when_hover": true,
         "colors_by_section": true,
-        "color_scheme": "scheme-6707cc8e-6558-49d9-8759-f7d934d9fe4f",
+        "color_scheme": "scheme-offer-bar",
         "background_opacity": 1,
         "full_width": true
+      }
+    },
+    "header_menu_bottom_ayum": {
+      "type": "header-menu-bottom-blocks",
+      "blocks": {
+        "menu_mobile": {
+          "type": "_menu_mobile",
+          "static": true,
+          "settings": {}
+        }
+      },
+      "block_order": [],
+      "settings": {
+        "header_layout": "logo_left",
+        "header_fullwidth": false,
+        "header_border_bottom": false,
+        "logo_width": 88,
+        "header_height": 101,
+        "header_colors": "scheme-header",
+        "header_bottom_height": 68,
+        "header_bottom_colors": "scheme-header",
+        "main_menu": "main-menu",
+        "lazy_mn": true,
+        "menu_position": "center",
+        "menu_size": "base",
+        "menu_weight": "bold",
+        "text_transform": false,
+        "dropdown_arrow": false,
+        "spacing_nav": 32,
+        "open_event": "hover",
+        "header_categories": false,
+        "header_border": "top_bottom",
+        "h_icon": "line",
+        "hover_icon": "2",
+        "search_type": "big_form",
+        "enabled_user": false,
+        "enabled_wishlist": false,
+        "enabled_cart": true,
+        "cart_des": "1",
+        "header_height_mb": 60,
+        "logo_width_mb": 62,
+        "header_transparent": false,
+        "sticky_type": "on_scroll_up",
+        "sticky_glass": false,
+        "cca_search_placeholder": "دوّر على منتجك… (سكيتلز، جيلي كولا، فراولة)",
+        "cca_highlight_item": "كل المنتجات",
+        "custom_class": ""
       }
     }
   },
   "order": [
-    "announcement_bar_QKnWCh"
+    "announcement_bar_QKnWCh",
+    "header_menu_bottom_ayum"
   ]
 }

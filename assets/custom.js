@@ -4677,3 +4677,71 @@ class AccordionGroup extends HTMLElement {
   }
 }
 customElements.define('hdt-accordion-group', AccordionGroup);
+
+// AYUM — copy discount code button (announcement bar)
+// Markup: <cca-copy-code data-code="…" data-copied="…"><button>…<span data-cca-label>…</span></button><span role="status"></span></cca-copy-code>
+class CcaCopyCode extends HTMLElement {
+  #abortController = null;
+  #resetTimer = null;
+
+  connectedCallback() {
+    if (this.#abortController) return;
+    this.#abortController = new AbortController();
+    this.button = this.querySelector('button');
+    this.label = this.querySelector('[data-cca-label]');
+    this.status = this.querySelector('[role="status"]');
+    this.defaultLabel = this.label ? this.label.textContent : '';
+    this.button?.addEventListener('click', (event) => this.copy(event), { signal: this.#abortController.signal });
+  }
+
+  disconnectedCallback() {
+    this.#abortController?.abort();
+    this.#abortController = null;
+    clearTimeout(this.#resetTimer);
+  }
+
+  async copy(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    const code = (this.dataset.code || '').trim();
+    if (!code) return;
+
+    let copied = false;
+    try {
+      await navigator.clipboard.writeText(code);
+      copied = true;
+    } catch (err) {
+      copied = this.#fallbackCopy(code);
+    }
+    if (!copied) return;
+
+    const copiedText = this.dataset.copied || '';
+    if (this.label && copiedText) this.label.textContent = copiedText;
+    if (this.status) this.status.textContent = `${copiedText} ${code}`.trim();
+    this.classList.add('is-copied');
+
+    clearTimeout(this.#resetTimer);
+    this.#resetTimer = setTimeout(() => {
+      if (this.label) this.label.textContent = this.defaultLabel;
+      if (this.status) this.status.textContent = '';
+      this.classList.remove('is-copied');
+    }, 2000);
+  }
+
+  // For browsers or iframes (theme editor) where the Clipboard API is blocked
+  #fallbackCopy(text) {
+    const field = document.createElement('textarea');
+    field.value = text;
+    field.setAttribute('readonly', '');
+    field.style.position = 'fixed';
+    field.style.opacity = '0';
+    document.body.appendChild(field);
+    field.select();
+    let ok = false;
+    try { ok = document.execCommand('copy'); } catch (err) { ok = false; }
+    field.remove();
+    this.button?.focus();
+    return ok;
+  }
+}
+if (!customElements.get('cca-copy-code')) customElements.define('cca-copy-code', CcaCopyCode);

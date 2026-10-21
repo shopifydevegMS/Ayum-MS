@@ -8,6 +8,9 @@
   - class: {String} a list class.
   - image_ratio: {String} Size of the product image card. Values are "square" and "portrait". Default is "square" (optional)
   - show_vendor: {Boolean} Show the product vendor. Default: false
+  - show_type: {Boolean} Show the product type (AYUM). Default: false
+  - show_subtitle: {Boolean} Show the descriptors.subtitle metafield (AYUM). Default: false
+  - atc_label: {String} Add to cart label override (AYUM). Default: translation
   - show_rating: {Boolean} Show the product rating. Default: false
   - color_list: {Array}
   - size_list: {Array}
@@ -81,19 +84,29 @@
         {% render 'scrolling_badge', product: card_product %}
       </div>
       <div class="hdt-card-product__info hdt-card-align-{{ settings.pr_card_alignment }} hdt-relative ">
-        {%- if settings.show_rating %}{% render 'hdt-pr-card-rating', product: card_product %}{% endif -%}
+        {%- if show_type -%}
+          <div class="cca-card-meta">
+            {%- if card_product.type != blank %}<span class="cca-card-type">{{ card_product.type | escape }}</span>{% endif -%}
+            {%- if settings.show_rating %}{% render 'hdt-pr-card-rating', product: card_product %}{% endif -%}
+          </div>
+        {%- else -%}
+          {%- if settings.show_rating %}{% render 'hdt-pr-card-rating', product: card_product %}{% endif -%}
+        {%- endif -%}
         {%- liquid
         if card_product.vendor.size > 0 and show_vendor
           render 'vendor' with card_product.vendor, class: 'hdt-inline-block hdt-text-base hdt-font-normal'
         endif -%}
         <a data-pr-url href="{{ product_url }}" class="hdt-card-product__title hdt-text-{{ settings.pr_title_size }} hdt-font-{{ settings.pr_title_weight }} hdt-line-clamp" data-instant>{{ card_product.title | escape }}</a>
+        {%- if show_subtitle and card_product.metafields.descriptors.subtitle.value != blank -%}
+          <p class="cca-card-subtitle">{{ card_product.metafields.descriptors.subtitle.value | escape }}</p>
+        {%- endif -%}
         {%- liquid
           render 'card-price', section_id: section_id, product: card_product, show_volume_note: true
           render 'color-list', section_id: section_id, product: card_product, product_url: product_url, placement: 'top'
         -%}
         {%- if settings.show_ultra_btn %}
           <div class="hdt-product-btns hdt-pr-btns-group1">
-            {% render 'btn-ultra', class: 'hdt-pr_btn', product: card_product, product_url: product_url, section_id: section_id, disable_sr_only: true, show_qty: settings.show_qty, attr: attr %}
+            {% render 'btn-ultra', class: 'hdt-pr_btn', product: card_product, product_url: product_url, section_id: section_id, disable_sr_only: true, show_qty: settings.show_qty, attr: attr, atc_label: atc_label %}
           </div>
         {% endif -%}
       </div>

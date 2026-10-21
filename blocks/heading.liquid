@@ -4,7 +4,7 @@
     assign effect = 'reval'
   endif   
 %}
-<div {{ effect }} id="block-{{ block.id }}" class="hdt-text-warry hdt-rte {{ block.settings.text_color }}{% if block.settings.hidden_br_mobile %} hdt-br-hidden{% endif %}{% if block.settings.hidden_on_mobile %} hdt-hide-mobile{% endif %} hdt-{{ block.settings.heading_size }} {{ block.settings.line_height }} hdt-font-{{ block.settings.font_weight }}" {{ block.shopify_attributes }}>{{ block.settings.heading }}</div>
+<div {{ effect }} id="block-{{ block.id }}" class="hdt-text-warry hdt-rte {{ block.settings.text_color }}{% if block.settings.hidden_br_mobile %} hdt-br-hidden{% endif %}{% if block.settings.hidden_on_mobile %} hdt-hide-mobile{% endif %} hdt-{{ block.settings.heading_size }} {{ block.settings.line_height }} hdt-font-{{ block.settings.font_weight }}{% if block.settings.custom_class != blank %} {{ block.settings.custom_class | strip | escape }}{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.heading }}</div>
 {%- if block.settings.heading_size == "h_custom" -%}
   {%- style -%}
     #block-{{ block.id }} {
@@ -192,6 +192,12 @@
       "label": "t:settings_schema.typography.settings.letter_spacing",
       "default": 0,
       "visible_if": "{{ block.settings.heading_size == 'h_custom' }}"
+    },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom CSS class",
+      "info": "Optional. Extra class for this heading, e.g. cca-…"
     }
   ],
   "presets": [

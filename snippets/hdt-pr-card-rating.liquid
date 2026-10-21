@@ -1,0 +1,26 @@
+{%- comment -%}
+  AYUM: product card rating (was an empty hook).
+  Reads Shopify's standard review metafields, which Judge.me (and other review apps)
+  keep in sync: reviews.rating and reviews.rating_count. Renders nothing for a
+  product without reviews, so no placeholder stars are ever shown.
+  Accepts:
+  - product: {Object} Product Liquid object (required)
+  Usage:
+  {%- render 'hdt-pr-card-rating', product: card_product -%}
+{%- endcomment -%}
+{%- liquid
+  assign cca_rating = product.metafields.reviews.rating.value
+  assign cca_count = product.metafields.reviews.rating_count.value | default: 0 | plus: 0
+-%}
+{%- if cca_rating != blank and cca_count > 0 -%}
+  {%- liquid
+    assign cca_value = cca_rating.rating | plus: 0
+    assign cca_max = cca_rating.scale_max | default: 5 | plus: 0
+    assign cca_pct = cca_value | times: 100.0 | divided_by: cca_max | round: 1
+    assign cca_label = 'accessibility.star_reviews_info' | t: rating_value: cca_value, rating_max: cca_max
+  -%}
+  <div class="cca-rating" role="img" aria-label="{{ cca_label | escape }}">
+    <span class="cca-rating__stars" style="--cca-rating-pct: {{ cca_pct }}%;" aria-hidden="true"></span>
+    <span class="cca-rating__value" aria-hidden="true">{{ cca_value | round: 1 }}</span>
+  </div>
+{%- endif -%}

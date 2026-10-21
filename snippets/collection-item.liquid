@@ -5,7 +5,7 @@
   assign count_label = section.settings.count_label
   assign collection_link = block.settings.collection_link | default: collection.url
 -%}
-<div class="hdt-collection-item hdt-collection-style{{ collection_des }} {{ class }}{% if section.settings.layout_mode == 'packery' %} lg:hdt-custom-col-{{ block.settings.col_dk }} md:hdt-custom-col-{{ block.settings.col_tb }} hdt-custom-col-{{ block.settings.col_mb }}{% endif %}" {{ block.shopify_attributes }} item-selector>
+<div class="hdt-collection-item hdt-collection-style{{ collection_des }} {{ class }}{% if section.settings.layout_mode == 'packery' %} lg:hdt-custom-col-{{ block.settings.col_dk }} md:hdt-custom-col-{{ block.settings.col_tb }} hdt-custom-col-{{ block.settings.col_mb }}{% endif %}" {{ block.shopify_attributes }}{% if block.settings.color_scheme != blank %} color-scheme="{{ block.settings.color_scheme }}"{% endif %} item-selector>
   <div class="hdt-collection-inner hdt-relative hdt-oh hdt-grid" timeline hdt-reveal="slide-in">
     <div class="hdt-collection-img hdt-relative hdt-eff-{{ section.settings.b_effect }} hdt-eff-img-{{ section.settings.img_effect }}" style="--aspect-ratioapt: {{ image.aspect_ratio | default: 1.2 }};">
       {% if collection_des == "9" %}

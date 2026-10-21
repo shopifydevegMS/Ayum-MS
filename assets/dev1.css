@@ -1,0 +1,1106 @@
+/* ==========================================================================
+   AYUM project CSS (branch dev1)
+   Every rule is anchored on a cca- class. Delete this file to remove all of it.
+   ========================================================================== */
+
+/* ==== cca-announcement-bar — offer bar + copy code (header group, all pages) ==== */
+/* Figma: desktop 2001:4, mobile 2001:582 */
+
+.cca-announcement-bar .hdt-announcement-bar__wrap,
+.cca-announcement-bar hdt-marquee {
+  padding-block: 0.9rem;
+}
+
+/* Message + button row. Only added to blocks that have a discount code. */
+.cca-announcement-bar .cca-announcement-bar__content {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem 1rem;
+  max-width: 100%;
+  /* Content is authored in Arabic: keep RTL order in every locale */
+  direction: rtl;
+  unicode-bidi: isolate;
+  font-size: min(1em, 1.2rem);
+  font-weight: 700;
+  line-height: normal;
+}
+
+.cca-announcement-bar .cca-announcement-bar__content .hdt-announcement-bar__text {
+  min-width: 0;
+}
+
+/* The marquee scrolls horizontally, so never wrap inside it */
+.cca-announcement-bar hdt-marquee .cca-announcement-bar__content {
+  flex-wrap: nowrap;
+}
+
+.cca-copy-code {
+  display: inline-flex;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2; /* above the block's full-size link overlay */
+}
+
+.cca-copy-code .cca-copy-code__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.2rem;
+  border: 0;
+  border-radius: 1.4rem;
+  background-color: rgb(var(--hdt-btn-bg));
+  color: rgb(var(--hdt-btn-color));
+  font-family: inherit;
+  font-size: 1.1rem;
+  font-weight: 800;
+  line-height: normal;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.cca-copy-code .cca-copy-code__btn:focus-visible {
+  outline: 0.2rem solid currentColor;
+  outline-offset: 0.2rem;
+}
+
+@media (hover: hover) {
+  .cca-copy-code .cca-copy-code__btn:hover {
+    background-color: rgb(var(--hdt-btn-hover-bg));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cca-copy-code .cca-copy-code__btn {
+    transition: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .cca-announcement-bar .hdt-announcement-bar__wrap,
+  .cca-announcement-bar hdt-marquee {
+    padding-block: 1.2rem;
+  }
+
+  .cca-announcement-bar .cca-announcement-bar__content {
+    column-gap: 1.4rem;
+    font-size: inherit;
+  }
+
+  .cca-copy-code .cca-copy-code__btn {
+    padding: 0.6rem 1.6rem;
+    border-radius: 1.6rem;
+    font-size: 1.2rem;
+  }
+}
+
+/* ==== cca-header — header + desktop category nav (header-menu-bottom-blocks) ==== */
+/* Figma: desktop header 2001:8, mobile header 2001:586, desktop category nav 2001:21.
+   Colors come from the "scheme-header" color scheme. Never put borders/padding on
+   <hdt-sticky-header> itself: its height is measured into --header-height. */
+
+/* Search (big form): surface pill with icon at the inline end */
+.cca-header .hdt-header-search_form {
+  max-width: 52rem;
+}
+
+.cca-header .hdt-header-search_form .hdt-search_form .hdt-search_inner {
+  gap: 1rem;
+  padding: 0 1.4rem;
+  border: 0;
+  border-radius: 2.2rem;
+  background-color: rgb(var(--color-input-primary));
+}
+
+.cca-header .hdt-header-search_form .hdt-search_form .hdt-search_input {
+  height: auto;
+  min-height: 0;
+  padding: 0.55rem 0;
+  border: 0;
+  background-color: transparent;
+  color: rgb(var(--color-foreground));
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.8;
+}
+
+.cca-header .hdt-header-search_form .hdt-search_form .hdt-search_input::placeholder {
+  color: rgb(var(--color-foreground) / 0.35);
+  opacity: 1;
+}
+
+/* Icon-only submit: the text stays as the accessible name */
+.cca-header .hdt-header-search_form .hdt-search_form .hdt-search_submit {
+  flex-shrink: 0;
+  width: auto;
+  min-width: 0;
+  height: auto;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  color: rgb(var(--color-foreground) / 0.35);
+  font-size: 0;
+}
+
+.cca-header .hdt-header-search_form .hdt-search_form.hdt-search_big_form .hdt-search_submit svg {
+  display: block;
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+/* Figma has no product-type dropdown. It's the global "Search by product type"
+   setting; hidden it stays on "*" (all), so search results are unchanged. */
+.cca-header .hdt-search__categories {
+  display: none;
+}
+
+/* The full search form replaces the search icon */
+.cca-header .hdt-site-nav_search {
+  display: none;
+}
+
+/* Cart */
+.cca-header .hdt-site-nav_cart > a {
+  justify-content: center;
+  inline-size: 4.4rem;
+  block-size: 4.4rem;
+  color: rgb(var(--color-foreground) / 0.75);
+}
+
+.cca-header .hdt-site-nav_cart svg {
+  width: 2.1rem;
+  height: 2.1rem;
+}
+
+.cca-header .hdt-site-top_nav .hdt-site-nav_icon a .hdt-count-box {
+  height: 1.6rem;
+  min-width: 1.6rem;
+  line-height: 1.6rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+/* Burger: three 2.5px bars, 5px apart (native button and drawer) */
+.cca-header .hdt-push-menu-btn {
+  justify-content: flex-start;
+  min-inline-size: 4.4rem;
+  min-block-size: 4.4rem;
+  color: rgb(var(--color-foreground) / 0.75);
+}
+
+.cca-header .hdt-push-menu-btn svg {
+  display: none;
+}
+
+.cca-header .hdt-push-menu-btn::before {
+  content: "";
+  display: block;
+  inline-size: 2.4rem;
+  block-size: 2.5px;
+  margin-block-end: 15px;
+  border-radius: 2px;
+  background-color: currentColor;
+  box-shadow: 0 7.5px 0 currentColor, 0 15px 0 currentColor;
+}
+
+/* Mobile + tablet: row 1 = burger / logo / cart, row 2 = full-width search */
+@media (max-width: 1149px) {
+  .cca-header {
+    box-shadow: inset 0 -1px 0 rgb(var(--color-line-border));
+  }
+
+  .cca-header [data-header-height] {
+    flex-wrap: wrap;
+    row-gap: 1.2rem;
+    padding-block: 1.2rem;
+    padding-inline: 0.1rem; /* + 1.5rem container padding = 16px */
+  }
+
+  .cca-header .hdt-header-col-search {
+    display: block;
+    order: 1;
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .cca-header .hdt-logo {
+    justify-content: center;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1150px) {
+  .cca-header [data-header-height] {
+    padding-inline: 0.5rem; /* + 1.5rem container padding = 20px */
+  }
+
+  .cca-header .hdt-header-search_form .hdt-search_form .hdt-search_inner {
+    padding: 0 1.6rem;
+    border-radius: 2.4rem;
+  }
+
+  .cca-header .hdt-header-search_form .hdt-search_form .hdt-search_input {
+    padding-block: 1.2rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 2.49rem;
+  }
+
+  .cca-header .hdt-header-search_form .hdt-search_form.hdt-search_big_form .hdt-search_submit svg {
+    width: 2.3rem;
+    height: 2.3rem;
+  }
+
+  .cca-header .hdt-site-nav_cart > a {
+    inline-size: 6rem;
+    block-size: 6rem;
+  }
+
+  .cca-header .hdt-site-nav_cart svg {
+    width: 2.86rem;
+    height: 2.86rem;
+  }
+
+  .cca-header .hdt-site-top_nav .hdt-site-nav_icon a .hdt-count-box {
+    height: 2.05rem;
+    min-width: 2.05rem;
+    line-height: 2.05rem;
+    font-size: 1.36rem;
+    font-weight: 700;
+  }
+
+  /* Category nav row */
+  .cca-header #hdt-nav-ul {
+    column-gap: clamp(1.6rem, 2.22vw, 3.2rem);
+  }
+
+  .cca-header #hdt-nav-ul > li > .hdt-menu-link,
+  .cca-header #hdt-nav-ul > li details > summary {
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: normal;
+    white-space: nowrap;
+  }
+
+  .cca-header #hdt-nav-ul > li > .cca-menu-link--highlight,
+  .cca-header #hdt-nav-ul > li details > summary.cca-menu-link--highlight {
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: rgb(var(--color-accent));
+  }
+}
+
+/* ==== cca-hero-slider — homepage hero (native slideshow, instance class) ==== */
+/* Figma: desktop 2001:33, mobile 2001:612. Colors: "scheme-hero" color scheme.
+   Scoped to the section's custom class, so other slideshow instances are unchanged. */
+
+.cca-hero-slider {
+  --cca-hero-inline: clamp(2rem, 8.33vw, 12rem); /* 120px copy inset at 1440 */
+}
+
+/* Mobile copy area: 18px top, 32px sides */
+.cca-hero-slider .hdt-slide_inner {
+  --media-overlap-content-w: 100%;
+  --media-overlap-content-gap-r: 1.8rem;
+  --media-overlap-content-gap-c: 3.2rem;
+}
+
+/* Arabic copy: pin RTL on the slide's content grid (not the slider track) so the
+   copy stays on the right, away from the product art, in every locale. */
+.cca-hero-slider .hdt-slideshow_item .hdt-grid {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.cca-hero-slider .hdt-content-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.cca-hero-slider .hdt-content-inner :is(p, h1, h2, h3) {
+  margin: 0;
+}
+
+/* Badge */
+.cca-hero-slider .cca-hero-badge {
+  display: inline-flex;
+  padding: 0.5rem 1.2rem;
+  border-radius: 1.3rem;
+  background-color: rgb(var(--hdt-btn-bg));
+  color: rgb(var(--hdt-btn-color));
+  font-size: 1.2rem;
+  font-weight: 800;
+  line-height: normal;
+}
+
+/* Heading: size comes from the block's custom size (25 / 46px) */
+.cca-hero-slider .cca-hero-heading {
+  color: rgb(var(--color-foreground));
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+.cca-hero-slider .cca-hero-heading :is(h1, h2, h3, p) {
+  color: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+/* Italic text in the heading is the highlight (pink on desktop only) */
+.cca-hero-slider .cca-hero-heading em {
+  font-style: normal;
+}
+
+/* Description */
+.cca-hero-slider .cca-hero-desc {
+  color: rgb(var(--color-foreground2));
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+/* Buttons */
+.cca-hero-slider .hdt-button-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.2rem;
+}
+
+.cca-hero-slider .cca-hero-btn {
+  --hdt-btn-padding-y: 0.7rem;
+  --hdt-btn-padding-x: 3.35rem;
+  --hdt-btn-line-height: normal;
+  --hdt-btn-border-radius: 2.6rem;
+  min-width: 0;
+  min-height: 0;
+  border-radius: 2.6rem;
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.cca-hero-slider .cca-hero-btn--secondary {
+  display: none;
+}
+
+/* Subtle bottom shade on the mobile banner */
+@media (max-width: 767px) {
+  .cca-hero-slider .hdt-slide_inner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background-image: linear-gradient(180deg, transparent 87.4%, rgb(var(--color-overlay) / 0.2) 98.5%);
+  }
+}
+
+/* Arrows (native buttons): 52px white circles, 32px from the edges */
+.cca-hero-slider .hdt-slider .hdt-navigation.hdt-position-default {
+  width: calc(100% - 6.4rem);
+  --nav-size: 5.2rem;
+  --nav-size-icon: 1.2rem;
+  --nav-rounded: 50%;
+  --nav-bg: rgb(var(--color-background));
+  --nav-border: transparent;
+  --nav-color: rgb(var(--color-foreground) / 0.75);
+  --nav-bg-hv: rgb(var(--color-background));
+  --nav-border-hv: transparent;
+  --nav-color-hv: rgb(var(--color-accent));
+}
+
+.cca-hero-slider .hdt-slider .hdt-navigation.hdt-position-default button {
+  box-shadow: 0 0.2rem 0.8rem rgb(var(--color-overlay) / 0.14);
+}
+
+/* Dots (native pagination): mobile = centered, 21px from the bottom */
+.cca-hero-slider .hdt-slider .hdt-pagination {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 2.1rem;
+  z-index: 3;
+  margin: 0;
+  gap: 0.6rem;
+  --pag-w: 0.8rem;
+  --pag-h: 0.8rem;
+  --pag-w-active: 2.2rem;
+  --pag-h-active: 0.8rem;
+  --pag-bg: rgb(var(--color-background));
+  --pag-border: rgb(var(--color-line-border));
+  --pag-bg-active: rgb(var(--color-accent));
+}
+
+.cca-hero-slider .hdt-slider .hdt-pagination button {
+  border-width: 1px;
+  opacity: 1;
+}
+
+.cca-hero-slider .hdt-slider .hdt-pagination button.hdt-slider__dot--selected {
+  border-color: rgb(var(--color-accent));
+}
+
+/* Desktop + tablet */
+@media (min-width: 768px) {
+  .cca-hero-slider .hdt-slide_inner {
+    --media-overlap-content-gap-r: 3rem;
+    --media-overlap-content-gap-c: var(--cca-hero-inline);
+  }
+
+  .cca-hero-slider .hdt-content {
+    max-width: 52rem;
+  }
+
+  .cca-hero-slider .hdt-content-inner {
+    align-items: flex-start;
+    gap: clamp(1rem, 1.25vw, 1.8rem);
+  }
+
+  .cca-hero-slider .cca-hero-badge {
+    padding: 0.6rem 1.4rem;
+    border-radius: 1.4rem;
+    font-size: 1.3rem;
+  }
+
+  .cca-hero-slider .cca-hero-heading {
+    color: rgb(var(--color-foreground) / 0.75);
+    line-height: 1.4;
+  }
+
+  .cca-hero-slider .cca-hero-heading em {
+    color: rgb(var(--color-accent));
+  }
+
+  .cca-hero-slider .cca-hero-desc {
+    font-size: clamp(1.4rem, 1.18vw, 1.7rem);
+    line-height: 1.75;
+  }
+
+  .cca-hero-slider .cca-hero-desc--mobile {
+    display: none;
+  }
+
+  .cca-hero-slider .hdt-button-group {
+    justify-content: flex-start;
+  }
+
+  .cca-hero-slider .cca-hero-btn {
+    --hdt-btn-padding-y: 1.4rem;
+    --hdt-btn-padding-x: 3.4rem;
+  }
+
+  .cca-hero-slider .cca-hero-btn--secondary {
+    display: inline-flex;
+    --hdt-btn-padding-x: 2.6rem;
+    border-width: 1.5px;
+    font-weight: 700;
+  }
+
+  /* Dots under the copy, at its right edge */
+  .cca-hero-slider .hdt-slider .hdt-pagination {
+    direction: rtl;
+    justify-content: flex-start;
+    bottom: 3.5rem;
+    padding-inline: calc(var(--cca-hero-inline) + 0.6rem);
+    gap: 0.925rem;
+    --pag-w: 1.156rem;
+    --pag-h: 1.156rem;
+    --pag-w-active: 3.24rem;
+    --pag-h-active: 1.156rem;
+    --pag-bg: rgb(var(--color-line-border));
+  }
+
+  .cca-hero-slider .hdt-slider .hdt-pagination button {
+    border-width: 0;
+  }
+}
+
+/* ==== cca-categories — homepage "Shop by category" (collections-list, instance class) ==== */
+/* Figma: desktop 2001:55, mobile 2001:626. Section colors: "scheme-surface" (60% background
+   opacity via the native setting); each card's strip: its block's "scheme-brand-*" scheme. */
+
+.cca-categories {
+  --cca-cat-gutter: 1.6rem;
+  border-block: 1px solid rgb(var(--color-accent) / 0.15);
+}
+
+.cca-categories .hdt-container {
+  padding-inline: var(--cca-cat-gutter);
+}
+
+/* Heading (native section-heading block, custom size 21 / 36px) */
+.cca-categories .hdt-heading-block {
+  font-weight: 800;
+  line-height: normal;
+}
+
+/* Cards: image + full-width colored strip (native collection design 8) */
+.cca-categories .hdt-collections-list {
+  --radius-collection-card: 1.4rem;
+  --ratio-percent: 73.33%; /* 150 x 110 */
+}
+
+.cca-categories .hdt-collection-item {
+  --color-title: rgb(var(--hdt-btn-color));
+  --color-bg-title: rgb(var(--hdt-btn-bg));
+  --color-hv-title: rgb(var(--hdt-btn-color));
+  --color-hv-bg-title: rgb(var(--hdt-btn-bg));
+}
+
+.cca-categories .hdt-collection-inner {
+  overflow: hidden;
+  border-radius: var(--radius-collection-card);
+}
+
+/* Square image corners so the strip sits flush under the image */
+.cca-categories .hdt-collection-inner .hdt-collection-img,
+.cca-categories .hdt-collection-inner .hdt-collection-img :is(img, svg) {
+  border-radius: 0;
+}
+
+.cca-categories .hdt-collection-wrapper {
+  padding: 1.1rem 1rem;
+}
+
+.cca-categories .hdt-collection-title {
+  min-height: 0;
+  font-size: 1.3rem;
+  font-weight: 800;
+  line-height: normal;
+}
+
+.cca-categories .hdt-collection-title-text {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+/* Dots: hidden when everything fits (a single page has nothing to swipe to) */
+.cca-categories .hdt-slider .hdt-pagination {
+  --pag-w: 1.2rem;
+  --pag-h: 1.2rem;
+  --pag-w-active: 4rem;
+  --pag-h-active: 1.2rem;
+  --pag-bg: rgb(var(--color-line-border));
+  --pag-border: transparent;
+  --pag-bg-active: rgb(var(--color-accent));
+}
+
+.cca-categories .hdt-slider .hdt-pagination button {
+  border-width: 0;
+  opacity: 1;
+}
+
+.cca-categories .hdt-slider .hdt-pagination:not(:has(> :nth-child(2))) {
+  display: none;
+}
+
+/* Mobile: swipe track of ~150px cards, 12px apart, bleeding off the end edge */
+@media (max-width: 767px) {
+  .cca-categories hdt-slider {
+    margin-block-start: 0.8rem; /* + 16px heading margin = 24px */
+  }
+
+  .cca-categories .hdt-slider__viewport {
+    --slide-spacing: 1.2rem;
+    --slide-size: calc(clamp(14rem, 40vw, 18rem) + var(--slide-spacing));
+    margin-inline-end: calc(-1 * var(--cca-cat-gutter));
+  }
+}
+
+@media (min-width: 1150px) {
+  .cca-categories {
+    --cca-cat-gutter: 2rem;
+  }
+
+  .cca-categories .hdt-collections-list {
+    --radius-collection-card: 1.6rem;
+    --ratio-percent: 72.13%; /* 305 x 220 */
+  }
+
+  .cca-categories .hdt-collection-wrapper {
+    padding-block: 1.6rem;
+  }
+
+  .cca-categories .hdt-collection-title {
+    font-size: 1.7rem;
+  }
+}
+
+/* ==== cca-best-sellers — homepage "Best sellers" (tabs-collection, instance class) ==== */
+/* Figma: desktop 2001:80, mobile 2001:647. Colors: "scheme-products" color scheme.
+   Native tabs + product carousel (card design 7). Card / progress rules marked
+   :is(.cca-best-sellers, .cca-bundles) are shared with the Bundles section. Section stylesheets load after this
+   file, so every override here is more specific than the native rule it replaces. */
+
+:is(.cca-best-sellers, .cca-bundles) {
+  --cca-best-gutter: 1.6rem;
+}
+
+:is(.cca-best-sellers, .cca-bundles) .hdt-container {
+  padding-inline: var(--cca-best-gutter);
+}
+
+/* Heading (native section-heading block, custom size 21 / 36px) */
+:is(.cca-best-sellers, .cca-bundles) .hdt-heading-block {
+  font-weight: 800;
+  line-height: normal;
+}
+
+/* Tabs: pills (native <hdt-tab> switching) */
+.cca-best-sellers .hdt-tabs-list button.hdt-tabs-item-title {
+  height: auto;
+  padding: 0.8rem 1.6rem;
+  border: 0;
+  border-radius: 2rem;
+  background-color: rgb(var(--color-background2));
+  color: rgb(var(--hdt-btn-outline-color));
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: normal;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.cca-best-sellers .hdt-tabs-list button.hdt-tabs-item-title[aria-current="true"] {
+  background-color: rgb(var(--hdt-btn-bg));
+  color: rgb(var(--hdt-btn-color));
+}
+
+.cca-best-sellers .hdt-tabs-list .hdt-tabs-item-title .hdt-collection-title-text {
+  color: inherit;
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+/* The tab block also prints its title in ::before; show it only when the
+   title field is empty (then it carries the collection title fallback). */
+.cca-best-sellers .hdt-tabs-list .hdt-collection-title-text:not(:empty)::before {
+  display: none;
+}
+
+/* Product card (design 7) */
+:is(.cca-best-sellers, .cca-bundles) .hdt-pr-style7 {
+  --atc-cl: rgb(var(--hdt-btn-color));
+  --atc-bg-cl: rgb(var(--hdt-btn-bg));
+  --atc-cl-hover: rgb(var(--hdt-btn-hover-color));
+  --atc-bg-cl-hover: rgb(var(--hdt-btn-hover-bg));
+}
+
+:is(.cca-best-sellers, .cca-bundles) .hdt-pr-style7 .hdt-card-product__wrapper {
+  gap: 0.6rem;
+  padding: 1rem;
+  border: 1px solid rgb(var(--color-line-border));
+  border-radius: 1.6rem;
+  background-color: rgb(var(--color-background));
+}
+
+:is(.cca-best-sellers, .cca-bundles) .hdt-pr-style7 :is(.hdt-card-product__media, .hdt-card-product__media-wrapp) {
+  border-radius: 1rem;
+}
+
+:is(.cca-best-sellers, .cca-bundles) .hdt-pr-style7 .hdt-card-product__info {
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+:is(.cca-best-sellers, .cca-bundles) .hdt-pr-style7 .hdt-card-product__info > * {
+  margin: 0;
+}
+
+/* Badges: white pill, pink text, top inline-start corner of the image */
+:is(.cca-best-sellers, .cca-bundles) .hdt-pr-style7 .hdt-badge__wrapp {
+  top: 0.7rem;
+  left: auto;
+  right: auto;
+  inset-inline-start: 0.7rem;
+  align-items: flex-start;
+}
+
+:is(.cca-best-sellers, .cca-bundles) .hdt-pr-style7 .hdt-badge {
+  min-width: 0;
+  min-height: 0;
+  padding: 0.4rem 1rem;
+  border-radius: 1rem;
+  background-color: rgb(var(--color-background));
+  color: rgb(var(--color-pr-price));
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: normal;
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+/* Meta row: product type (start) + rating (end) */
+.cca-best-sellers .cca-card-meta {
+  display: flex;
+  align-self: stretch;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  min-height: 1.2rem;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+.cca-best-sellers .cca-card-meta:empty {
+  display: none;
+}
+
+.cca-best-sellers .cca-card-meta .cca-card-type {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cca-best-sellers .cca-card-meta .cca-rating {
+  flex-shrink: 0;
+}
+
+@media (max-width: 767px) {
+  .cca-best-sellers .cca-rating__stars {
+    font-size: 1.1rem;
+    letter-spacing: 0.1rem;
+  }
+}
+
+.cca-best-sellers .cca-card-type {
+  color: rgb(var(--color-foreground2));
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: normal;
+  text-align: start;
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+/* Title: always reserves 2 lines (clamped at 2) so prices and buttons line up */
+:is(.cca-best-sellers, .cca-bundles) .hdt-pr-style7 .hdt-card-product__title {
+  --line-clamp-count: 2;
+  min-height: 2.6em; /* 2 lines x 1.3 line-height */
+  font-size: 1.3rem;
+  font-weight: 800;
+  line-height: 1.3;
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+:is(.cca-best-sellers, .cca-bundles) .hdt-pr-style7 .hdt-price-wrapp {
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: normal;
+}
+
+/* Native add to cart, restyled: full-width pill, label only */
+:is(.cca-best-sellers, .cca-bundles) .hdt-pr-style7 .hdt-pr-btns-group1 {
+  margin-block-start: 0;
+}
+
+:is(.cca-best-sellers, .cca-bundles) .hdt-pr-style7 .hdt-pr-btns-group1 .hdt-card-product__btn-ultra {
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  padding: 1rem 1.2rem;
+  border: 0;
+  border-radius: 2.4rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+  line-height: normal;
+}
+
+:is(.cca-best-sellers, .cca-bundles) .hdt-pr-style7 .hdt-pr-btns-group1 .hdt-card-product__btn-ultra .hdt-pr-card-icon {
+  display: none;
+}
+
+/* Progress bar (native "full" pagination): segments of a 3px track */
+:is(.cca-best-sellers, .cca-bundles) .hdt-slider .hdt-pagination.hdt-style-full {
+  width: min(51rem, 100%);
+  margin-inline: auto;
+  gap: 0;
+  overflow: hidden;
+  border-radius: 2px;
+  --pag-h: 3px;
+  --pag-h-active: 3px;
+  --pag-bg: rgb(var(--color-background2));
+  --pag-bg-active: rgb(var(--color-accent));
+}
+
+:is(.cca-best-sellers, .cca-bundles) .hdt-slider .hdt-pagination.hdt-style-full button {
+  border: 0;
+  border-radius: 0;
+  opacity: 1;
+}
+
+:is(.cca-best-sellers, .cca-bundles) .hdt-slider .hdt-pagination:not(:has(> :nth-child(2))) {
+  display: none;
+}
+
+/* Mobile + tablet spacing: heading 16 / tabs */
+@media (max-width: 1149px) {
+  .cca-best-sellers .hdt-tabs-head-bottom {
+    margin-block-start: 0.8rem; /* + 8px heading margin = 16px */
+  }
+}
+
+/* Mobile: swipe track, ~2 cards (158px) + peek, 8px apart */
+@media (max-width: 767px) {
+  .cca-best-sellers .hdt-slider__products .hdt-slider__viewport {
+    --slide-spacing: 0.8rem;
+    --slide-size: calc(clamp(14.4rem, 42.13vw, 20rem) + var(--slide-spacing));
+    margin-inline-end: calc(-1 * var(--cca-best-gutter));
+  }
+}
+
+/* Tablet + desktop card */
+@media (min-width: 768px) {
+  .cca-best-sellers .hdt-tabs-list button.hdt-tabs-item-title {
+    padding: 0.9rem 2rem;
+    border-radius: 2.2rem;
+    font-size: 1.4rem;
+  }
+
+  :is(.cca-best-sellers, .cca-bundles) .hdt-pr-style7 .hdt-card-product__wrapper {
+    gap: 1rem;
+    padding: 1.4rem;
+  }
+
+  :is(.cca-best-sellers, .cca-bundles) .hdt-pr-style7 .hdt-card-product__info {
+    gap: 1rem;
+  }
+
+  :is(.cca-best-sellers, .cca-bundles) .hdt-pr-style7 .hdt-badge__wrapp {
+    top: 1.1rem;
+    inset-inline-start: 1.1rem;
+  }
+
+  :is(.cca-best-sellers, .cca-bundles) .hdt-pr-style7 .hdt-badge {
+    padding: 0.5rem 1.2rem;
+    border-radius: 1.2rem;
+    font-size: 1.1rem;
+  }
+
+  .cca-best-sellers .cca-card-type,
+  .cca-best-sellers .cca-rating {
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+
+  :is(.cca-best-sellers, .cca-bundles) .hdt-pr-style7 .hdt-card-product__title {
+    font-size: clamp(1.6rem, 1.53vw, 2.2rem);
+  }
+
+  :is(.cca-best-sellers, .cca-bundles) .hdt-pr-style7 .hdt-price-wrapp {
+    font-size: clamp(1.6rem, 1.39vw, 2rem);
+  }
+
+  :is(.cca-best-sellers, .cca-bundles) .hdt-pr-style7 .hdt-pr-btns-group1 .hdt-card-product__btn-ultra {
+    padding-block: 1.2rem;
+    font-size: clamp(1.4rem, 1.18vw, 1.7rem);
+  }
+}
+
+@media (min-width: 1150px) {
+  :is(.cca-best-sellers, .cca-bundles) {
+    --cca-best-gutter: 2rem;
+  }
+
+  .cca-best-sellers .hdt-product-carousel {
+    margin-block-start: 0.8rem; /* + 24px tabs spacing = 32px */
+  }
+}
+
+/* ==== cca-rating — product card rating (snippets/hdt-pr-card-rating, all product cards) ==== */
+/* Data: Shopify review metafields (reviews.rating / rating_count), synced by Judge.me.
+   Star color: the color scheme's "Rating stars" (--color-pr-rating). */
+
+.cca-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: rgb(var(--color-foreground2));
+  font-size: 1.1rem;
+  line-height: 1;
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.cca-rating__stars {
+  position: relative;
+  display: inline-block;
+  color: rgb(var(--color-line-border));
+  font-size: 1.3rem;
+  letter-spacing: 0.2rem;
+  white-space: nowrap;
+}
+
+.cca-rating__stars::before {
+  content: "★★★★★";
+}
+
+/* Filled stars, clipped to the real rating */
+.cca-rating__stars::after {
+  content: "★★★★★";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: var(--cca-rating-pct, 0%);
+  overflow: hidden;
+  color: rgb(var(--color-pr-rating));
+}
+
+/* ==== cca-bundles — homepage "Bundles & party favors" (featured-collection, instance class) ==== */
+/* Figma: desktop 2001:156, mobile 2001:721. Colors: "scheme-surface" (60% background).
+   Card base (design 7) is shared with cca-best-sellers above; here only the differences:
+   white card, subtitle, current + compare-at price, and the horizontal mobile card. */
+
+.cca-bundles .hdt-subheading-block {
+  color: rgb(var(--color-pr-sale-price));
+  font-weight: 700;
+  line-height: 1.556; /* 24.9px at 16px */
+}
+
+.cca-bundles .hdt-pr-style7 .hdt-card-product__wrapper,
+.cca-bundles .hdt-pr-style7 .hdt-badge {
+  background-color: rgb(var(--color-background2));
+}
+
+/* Subtitle: the product's "Product subtitle" metafield (descriptors.subtitle) */
+.cca-bundles .cca-card-subtitle {
+  color: rgb(var(--color-pr-sale-price));
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: normal;
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+/* Bundle titles are one line in Figma: no 2-line reservation here */
+.cca-bundles .hdt-pr-style7 .hdt-card-product__title {
+  min-height: 0;
+}
+
+/* Prices: current (start) + compare-at (end), native card-price markup */
+.cca-bundles .hdt-pr-style7 .hdt-price__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.cca-bundles .hdt-pr-style7 .hdt-price__list .hdt-price {
+  order: -1;
+  color: rgb(var(--color-pr-price));
+  font-size: 2.2rem;
+  font-weight: 800;
+}
+
+.cca-bundles .hdt-pr-style7 .hdt-price__list .hdt-compare-at-price {
+  color: rgb(var(--color-pr-sale-price));
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-decoration: line-through;
+}
+
+/* Progress track: brand primary at 12% */
+.cca-bundles .hdt-slider .hdt-pagination.hdt-style-full {
+  --pag-bg: rgb(var(--color-accent) / 0.12);
+}
+
+/* Mobile: horizontal card — image at the inline start, details beside it */
+@media (max-width: 767px) {
+  .cca-bundles .hdt-slider__products {
+    --ratio-percent: 118.18%; /* 110 x 130 image */
+  }
+
+  .cca-bundles .hdt-slider__products .hdt-slider__viewport {
+    --slide-spacing: 0.4rem;
+    --slide-size: calc(clamp(28rem, 89.2vw, 40rem) + var(--slide-spacing));
+    margin-inline-end: calc(-1 * var(--cca-best-gutter));
+  }
+
+  .cca-bundles .hdt-pr-style7 .hdt-card-product__wrapper {
+    flex-direction: row;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1.2rem;
+  }
+
+  .cca-bundles .hdt-pr-style7 .hdt-card-product__media {
+    flex: 0 0 11rem;
+    inline-size: 11rem;
+  }
+
+  .cca-bundles .hdt-pr-style7 .hdt-card-product__info {
+    flex: 1 1 0;
+    min-width: 0;
+    align-items: flex-start;
+    text-align: start;
+  }
+
+  .cca-bundles .hdt-pr-style7 .hdt-card-product__title {
+    font-size: 1.5rem;
+  }
+
+  .cca-bundles .hdt-pr-style7 .hdt-price-wrapp {
+    justify-content: flex-start;
+  }
+
+  /* One row when it fits; wraps (never overflows) on narrow cards */
+  .cca-bundles .hdt-pr-style7 .hdt-price__list {
+    row-gap: 0.2rem;
+    white-space: nowrap;
+  }
+
+  .cca-bundles .hdt-pr-style7 .hdt-price__list .hdt-price {
+    font-size: clamp(1.7rem, 5.87vw, 2.2rem);
+  }
+
+  .cca-bundles .hdt-pr-style7 .hdt-price__list .hdt-compare-at-price {
+    font-size: clamp(1.1rem, 3.47vw, 1.3rem);
+  }
+
+  .cca-bundles .hdt-pr-style7 .hdt-badge__wrapp {
+    top: 0.7rem;
+    inset-inline-start: 0.6rem;
+  }
+
+  .cca-bundles .hdt-pr-style7 .hdt-badge {
+    padding: 0.3rem 1rem;
+    font-weight: 700;
+  }
+
+  .cca-bundles .hdt-pr-style7 .hdt-pr-btns-group1 .hdt-card-product__btn-ultra {
+    padding-block: 0.9rem;
+    border-radius: 1.8rem;
+  }
+}
+
+/* Tablet + desktop: vertical card (shared), bundle-sized text */
+@media (min-width: 768px) {
+  .cca-bundles .hdt-pr-style7 .hdt-price-wrapp {
+    justify-content: center;
+  }
+
+  .cca-bundles .hdt-pr-style7 .hdt-price__list {
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .cca-bundles .cca-card-subtitle {
+    font-size: clamp(1.4rem, 1.25vw, 1.8rem);
+  }
+
+  .cca-bundles .hdt-pr-style7 .hdt-price__list .hdt-price {
+    font-size: clamp(1.8rem, 1.6vw, 2.3rem);
+  }
+
+  .cca-bundles .hdt-pr-style7 .hdt-price__list .hdt-compare-at-price {
+    font-size: 1.4rem;
+  }
+}

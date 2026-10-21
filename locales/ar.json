@@ -290,7 +290,7 @@
             "sku": "رمز التخزين التعريفي:",
             "barcode": "الباركود:",
             "on_sale": "تخفيض",
-            "save_percent": "-{{ percent }}%",
+            "save_percent": "وفّر {{ percent }}%",
             "on_sale_single": "تخفيض",
             "save_percent_single": "{{ percent }}% خصم",
             "save_percent_single_price": "خصم {{ percent }}%",
@@ -558,7 +558,9 @@
             "carousel": "دائري",
             "announcement": "إعلان",
             "announcement_bar": "شريط الإعلانات",
-            "close": "إغلاق"
+            "close": "إغلاق",
+            "copy_code": "انسخ الكود",
+            "copied": "تم النسخ"
         },
         "header": {
             "menu": "القائمة",

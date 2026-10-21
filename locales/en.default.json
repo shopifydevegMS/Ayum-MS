@@ -519,7 +519,9 @@
       "carousel": "Carousel",
       "announcement": "Announcement",
       "announcement_bar": "Announcement bar",
-      "close": "close"
+      "close": "close",
+      "copy_code": "Copy code",
+      "copied": "Copied"
     },
     "header": {
       "menu": "Menu",

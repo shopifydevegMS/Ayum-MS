@@ -126,7 +126,18 @@
 {%- endif -%}
 <svg class="hdt-hidden"><symbol id="icon-{{ section.id }}" viewBox="0 0 14 10" fill="none" width="14"><path fill-rule="evenodd" clip-rule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor"></path></symbol></svg>
 {%- capture cap_arrow %}{% render 'icons', icon: 'arrow_right', class: 'hdt-inline-block hdt-s-text' %}{% endcapture -%}
-<div class="hdt-announcement-bar hdt-s-gradient hdt-type-close-{{ section.settings.close_btn  }}{% if section.settings.show_line_separator and section.blocks.size > 0 %} hdt-announcement-bar--bottom-border{% endif %}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};"{%- endif %}>
+{%- comment -%} AYUM: copy-code button template, filled per block that has a discount code {%- endcomment -%}
+{%- capture cca_copy_tpl -%}
+  <cca-copy-code class="cca-copy-code" data-code="__CCA_CODE__" data-copied="__CCA_COPIED__">
+    <button type="button" class="cca-copy-code__btn" aria-label="__CCA_LABEL__: __CCA_CODE__">
+      <span class="cca-copy-code__label" data-cca-label>__CCA_LABEL__</span>
+    </button>
+    <span class="sr-only" role="status" aria-live="polite"></span>
+  </cca-copy-code>
+{%- endcapture -%}
+{%- assign cca_default_label = 'sections.announcements.copy_code' | t -%}
+{%- assign cca_default_copied = 'sections.announcements.copied' | t -%}
+<div class="hdt-announcement-bar cca-announcement-bar{% if section.settings.custom_class != blank %} {{ section.settings.custom_class | strip | escape }}{% endif %} hdt-s-gradient hdt-type-close-{{ section.settings.close_btn  }}{% if section.settings.show_line_separator and section.blocks.size > 0 %} hdt-announcement-bar--bottom-border{% endif %}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};"{%- endif %}>
   <div class="hdt-container{% if section.settings.full_width %}-full hdt-px-15{% endif %}">
     {%- if section.blocks.size > 0 -%}
       <div class="hdt-announcement-bar__grid">
@@ -146,10 +157,21 @@
                   {%- capture text_highlight -%}
                     <span  style="font-size: clamp({{ block.settings.hdt_font_size | divided_by: 2 | at_least: 12 }}px, {{ block.settings.hdt_font_size | divided_by: 10.0 }}vw, {{ block.settings.hdt_font_size | plus: 0.0 }}px);">{{ block.settings.text_highlight }}</span>
                   {%- endcapture -%}
+                  {%- liquid
+                    assign cca_copy = ''
+                    assign cca_code = block.settings.discount_code | strip
+                    if cca_code != blank
+                      assign cca_code_esc = cca_code | escape
+                      assign cca_label = block.settings.copy_label | strip | default: cca_default_label | escape
+                      assign cca_copied = block.settings.copied_label | strip | default: cca_default_copied | escape
+                      assign cca_copy = cca_copy_tpl | replace: '__CCA_CODE__', cca_code_esc | replace: '__CCA_LABEL__', cca_label | replace: '__CCA_COPIED__', cca_copied
+                    endif
+                  -%}
                   <div class="hdt-slider__slide">
-                    <div class="hdt-announcement-bar__slider-content hdt-relative">
+                    <div class="hdt-announcement-bar__slider-content hdt-relative{% if cca_copy != blank %} cca-announcement-bar__content{% endif %}">
                       {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" class="hdt-absolute hdt-top-0 hdt-right-0 hdt-bottom-0 hdt-left-0 hdt-left-0"></a>{%- endif -%}
                       <div class="hdt-announcement-bar__text hdt-inline-block{% if block.settings.adding_border %} hdt-rte{% else %} hdt-tag-list{% endif %}">{{ block.settings.text | replace: '[countdown]', cap_date | replace: '[icon_arrow]', cap_arrow | replace: '[text_highlight]', text_highlight }}</div>
+                      {{- cca_copy -}}
                     </div>
                   </div>
                 {%- endif -%}
@@ -172,6 +194,16 @@
                     {%- capture text_highlight -%}
                       <span  style="font-size: clamp({{ block.settings.hdt_font_size | divided_by: 2 | at_least: 12 }}px, {{ block.settings.hdt_font_size | divided_by: 10.0 }}vw, {{ block.settings.hdt_font_size | plus: 0.0 }}px);">{{ block.settings.text_highlight }}</span>
                     {%- endcapture -%}
+                    {%- liquid
+                      assign cca_copy = ''
+                      assign cca_code = block.settings.discount_code | strip
+                      if cca_code != blank
+                        assign cca_code_esc = cca_code | escape
+                        assign cca_label = block.settings.copy_label | strip | default: cca_default_label | escape
+                        assign cca_copied = block.settings.copied_label | strip | default: cca_default_copied | escape
+                        assign cca_copy = cca_copy_tpl | replace: '__CCA_CODE__', cca_code_esc | replace: '__CCA_LABEL__', cca_label | replace: '__CCA_COPIED__', cca_copied
+                      endif
+                    -%}
                       {% if section.settings.hdt_using_image_icon %}
                         {% if section.settings.hdt_image_icon != blank %}
                           <div class="">
@@ -183,9 +215,10 @@
                           </div>
                         {% endif %}
                       {% endif %}
-                      <div class="hdt-marquee__item hdt-inline-block">
+                      <div class="hdt-marquee__item hdt-inline-block{% if cca_copy != blank %} cca-announcement-bar__content{% endif %}">
                         {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" class="hdt-absolute hdt-top-0 hdt-right-0 hdt-bottom-0 hdt-left-0 hdt-left-0"></a>{%- endif -%}
                         <div class="hdt-announcement-bar__text hdt-inline-block{% if block.settings.adding_border %} hdt-rte{% else %} hdt-tag-list{% endif %}">{{ block.settings.text | replace: '[countdown]', cap_date | replace: '[icon_arrow]', cap_arrow | replace: '[text_highlight]', text_highlight }}</div>
+                        {{- cca_copy -}}
                       </div>
                     {%- endif -%}
                     {%- assign total_size = total_size | plus: block.settings.text.size -%}
@@ -412,6 +445,12 @@
       "label": "t:sections.all.full_width.label",
       "default": false
     },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom CSS class",
+      "info": "Optional. Extra class for this section, e.g. cca-…"
+    },
   ],
   "blocks": [
     {
@@ -466,6 +505,28 @@
           "step": 1,
           "unit": "px",
           "visible_if": "{{ block.settings.text contains '[text_highlight]' }}"
+        },
+        {
+          "type": "header",
+          "content": "Copy code button"
+        },
+        {
+          "type": "text",
+          "id": "discount_code",
+          "label": "Discount code",
+          "info": "Shows a copy button. This exact code is copied, so also write it in the text above."
+        },
+        {
+          "type": "text",
+          "id": "copy_label",
+          "label": "Button label",
+          "info": "Leave blank to use the default: \"انسخ الكود\" (Arabic) / \"Copy code\" (English)."
+        },
+        {
+          "type": "text",
+          "id": "copied_label",
+          "label": "Copied message",
+          "info": "Shown briefly after copying. Leave blank to use the default: \"تم النسخ\" / \"Copied\"."
         },
       ]
     }

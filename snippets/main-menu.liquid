@@ -22,12 +22,23 @@
   if link.links != blank
     assign li_class = "hdt-has-children"
   endif
+
+  # AYUM: optional highlighted item (header setting cca_highlight_item: title, handle or URL)
+  assign cca_hl_class = ''
+  assign cca_hl = section.settings.cca_highlight_item | strip
+  if cca_hl != blank
+    assign cca_hl_title = arr_title[0] | strip
+    assign cca_hl_handle = cca_hl | handleize
+    if cca_hl == cca_hl_title or cca_hl == link.url or cca_hl_handle == link.handle
+      assign cca_hl_class = ' cca-menu-link--highlight'
+    endif
+  endif
 %}
 <li class="hdt-menu-item hdt-flex hdt-justify-center hdt-flex-col {{ li_class }}" data-index="{{ index }}" {{ block.shopify_attributes }} style="order: {{ index }};">
   {%- if li_class != blank -%}
     <hdt-header-menu class="hdt-contents" opened-able-click event="{{ section.settings.open_event }}" position="{{ mega_position }}" {{ block.shopify_attributes }}>
       <details position="{{ mega_position }}">
-        <summary data-url="{{ link.url }}" class="hdt-menu-link hdt-flex hdt-align-center hdt-justify-between hdt-relative hdt-text-{{ section.settings.menu_size }} hdt-font-{{ section.settings.menu_weight }}{% if link.current and section.settings.active_link %} hdt-menu-link--active{% endif %}">
+        <summary data-url="{{ link.url }}" class="hdt-menu-link hdt-flex hdt-align-center hdt-justify-between hdt-relative hdt-text-{{ section.settings.menu_size }} hdt-font-{{ section.settings.menu_weight }}{{ cca_hl_class }}{% if link.current and section.settings.active_link %} hdt-menu-link--active{% endif %}">
           <span class="hdt-menu-link-text hdt-block{% if arr_label.size > 0 %} hdt-relative hdt-title_size-{{ arr_title[0].size | at_most: 20 }} hdt-has-{{ arr_label.size | at_most: 2 }}label{% endif %}">
             <span class="hdt-block hdt-line-clamp">{{ arr_title[0] }}</span>
             {%- if arr_label.size > 0 -%}
@@ -47,7 +58,7 @@
       </details>
     </hdt-header-menu>
   {%- else -%}
-    <a id="hdt-menu-{{ link.handle }}" href="{{ link.url }}" class="hdt-menu-link hdt-flex hdt-align-center hdt-justify-between hdt-relative hdt-text-{{ section.settings.menu_size }} hdt-font-{{ section.settings.menu_weight }}{% if link.current and section.settings.active_link %} hdt-menu-link--active{% endif %}" {% if link.current %} aria-current="page" {% endif %}>
+    <a id="hdt-menu-{{ link.handle }}" href="{{ link.url }}" class="hdt-menu-link hdt-flex hdt-align-center hdt-justify-between hdt-relative hdt-text-{{ section.settings.menu_size }} hdt-font-{{ section.settings.menu_weight }}{{ cca_hl_class }}{% if link.current and section.settings.active_link %} hdt-menu-link--active{% endif %}" {% if link.current %} aria-current="page" {% endif %}>
       <span class="hdt-menu-link-text hdt-block{% if arr_label.size > 0 %} hdt-relative hdt-title_size-{{ arr_title[0].size | at_most: 20 }} hdt-has-{{ arr_label.size | at_most: 2 }}label{% endif %}">
         <span class="hdt-block hdt-line-clamp">{{ arr_title[0] }}</span>
         {%- if arr_label.size > 0 -%}

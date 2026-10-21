@@ -131,7 +131,7 @@
                         endif
                       endcapture
                       for product in block.settings.product_list
-                        render 'card-product7', card_product: product, section_id: section.id, class: "hdt-slider__slide hdt-pr-style7", sizes: sizes, image_ratio: block.settings.image_ratio, color_list: color_list, size_list: size_list, btn_wishlist_code: btn_wishlist_code, show_vendor: block.settings.show_vendor
+                        render 'card-product7', card_product: product, section_id: section.id, class: "hdt-slider__slide hdt-pr-style7", sizes: sizes, image_ratio: block.settings.image_ratio, color_list: color_list, size_list: size_list, btn_wishlist_code: btn_wishlist_code, show_vendor: block.settings.show_vendor, show_type: block.settings.show_type, show_subtitle: block.settings.show_subtitle, atc_label: block.settings.atc_label
                       endfor
                     when '8'
                       capture btn_wishlist_code
@@ -312,7 +312,7 @@
                         unless settings.remove_collection_url
                           assign product_url = product.url | within: block.settings.collection
                         endunless
-                        render 'card-product7', card_product: product, section_id: section.id, class: "hdt-slider__slide hdt-pr-style7", sizes: sizes, image_ratio: block.settings.image_ratio, color_list: color_list, size_list: size_list, product_url: product_url, btn_wishlist_code: btn_wishlist_code, show_vendor: block.settings.show_vendor
+                        render 'card-product7', card_product: product, section_id: section.id, class: "hdt-slider__slide hdt-pr-style7", sizes: sizes, image_ratio: block.settings.image_ratio, color_list: color_list, size_list: size_list, product_url: product_url, btn_wishlist_code: btn_wishlist_code, show_vendor: block.settings.show_vendor, show_type: block.settings.show_type, show_subtitle: block.settings.show_subtitle, atc_label: block.settings.atc_label
                       endfor
                     when '8'
                       capture btn_wishlist_code
@@ -569,6 +569,26 @@
       "id": "show_vendor",
       "label": "t:sections.collection_products.settings.show_vendor",
       "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_type",
+      "label": "Show product type",
+      "info": "Card design 7 only. Shows the product's type above its title.",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_subtitle",
+      "label": "Show product subtitle",
+      "info": "Card design 7 only. Uses the product's \"Product subtitle\" metafield (descriptors.subtitle).",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "atc_label",
+      "label": "Add to cart label",
+      "info": "Card design 7 only. Leave blank to use the default translation."
     },
     {
       "type": "checkbox",
