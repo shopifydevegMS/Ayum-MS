@@ -15,49 +15,116 @@
         "slide_ayum_1": {
           "type": "_slide-item",
           "settings": {
+            "image": "shopify://shop_images/4fc1c5eb759581913a157bfb4508823618695502_1.png",
+            "image_mb": "shopify://shop_images/5142c0d2f2073a9055cd8ca683e8f25f0c6f50ea_92b573a9-06ff-4619-b35c-b9a73552d4e7.png",
             "url": "",
             "banner_target": false,
             "color_scheme": "scheme-hero",
             "content_position_type": "container",
+            "position_x": 50,
+            "position_y": 50,
             "content_position": "center-start",
             "alignment": "left",
+            "position_x_mb": 50,
+            "position_y_mb": 50,
             "content_position_mb": "start-center",
             "alignment_mb": "center",
-            "overlay_content": false
+            "overlay_content": false,
+            "overlay_color": "#000000",
+            "overlay_opacity": 0,
+            "background_content": false,
+            "background_content_color": "#ffffff",
+            "bg_opacity": 0,
+            "box_square": false,
+            "content_rounded": false,
+            "use_border_content": false,
+            "border_color": "#ffffff",
+            "background_border": "#ffffff",
+            "border_opacity": 0,
+            "border_style": "none",
+            "border_pd_dk": 0,
+            "padding_vertical": 30,
+            "padding_horizontal": 30,
+            "min_width_content": 350,
+            "border_pd": 0
           },
           "blocks": {
             "hero_badge_1": {
               "type": "text",
               "settings": {
                 "text": "<p>الأكثر مبيعاً</p>",
+                "hidden_br_mobile": false,
+                "hidden_on_mobile": false,
+                "ffamily": "",
+                "text_size": "base",
+                "line_height": "",
+                "font_weight": "normal",
+                "text_color": "hdt-s-text",
+                "countdown": "2025-12-30 15:00:00",
+                "txt_day": "days",
+                "font_size_text_lg": 16,
+                "font_size_text": 14,
+                "letter_spacing_text": 0,
                 "custom_class": "cca-hero-badge"
-              }
+              },
+              "blocks": {}
             },
             "hero_heading_1": {
               "type": "heading",
               "settings": {
                 "heading": "<h1><em>سكيتلز مجفف بالتجميد</em> يكبر ويقرمش ويذوب في الفم</h1>",
-                "heading_size": "h_custom",
+                "hidden_br_mobile": false,
+                "hidden_on_mobile": false,
+                "line_height": "",
                 "font_weight": "bold",
+                "heading_size": "h_custom",
+                "text_color": "hdt-s-text",
                 "font_size_heading_lg": 46,
                 "font_size_heading": 25,
+                "letter_spacing_heading": 0,
                 "custom_class": "cca-hero-heading"
-              }
+              },
+              "blocks": {}
             },
             "hero_desc_1": {
               "type": "text",
               "settings": {
                 "text": "<p>نفس نكهات سكيتلز الأصلية، بقوام مقرمش خفيف يذوب في الفم. متوفر بنكهات مختلفة ، ويتصنّع عندنا في الكويت.</p>",
+                "hidden_br_mobile": false,
                 "hidden_on_mobile": true,
+                "ffamily": "",
+                "text_size": "base",
+                "line_height": "",
+                "font_weight": "normal",
+                "text_color": "hdt-s-text",
+                "countdown": "2025-12-30 15:00:00",
+                "txt_day": "days",
+                "font_size_text_lg": 16,
+                "font_size_text": 14,
+                "letter_spacing_text": 0,
                 "custom_class": "cca-hero-desc"
-              }
+              },
+              "blocks": {}
             },
             "hero_desc_mb_1": {
               "type": "text",
               "settings": {
                 "text": "<p>نفس نكهات سكيتلز الأصلية، بقوام مقرمش خفيف. متوفر بنكهات مختلفة · صنع في الكويت.</p>",
+                "hidden_br_mobile": false,
+                "hidden_on_mobile": false,
+                "ffamily": "",
+                "text_size": "base",
+                "line_height": "",
+                "font_weight": "normal",
+                "text_color": "hdt-s-text",
+                "countdown": "2025-12-30 15:00:00",
+                "txt_day": "days",
+                "font_size_text_lg": 16,
+                "font_size_text": 14,
+                "letter_spacing_text": 0,
                 "custom_class": "cca-hero-desc cca-hero-desc--mobile"
-              }
+              },
+              "blocks": {}
             },
             "hero_buttons_1": {
               "type": "_button_group",
@@ -69,18 +136,65 @@
                   "type": "button",
                   "settings": {
                     "label": "تسوّق الآن",
-                    "link": "",
+                    "link": "shopify://collections",
+                    "open_in_new_tab": false,
+                    "full_width": false,
+                    "btn_style": "",
+                    "color_btn": "#ffffff",
+                    "color_hover_btn": "#ffffff",
+                    "background_btn": "#222222",
+                    "background_hover_btn": "#333333",
+                    "border_w_btn": "",
+                    "border_btn": "#222222",
+                    "border_hover_btn": "#333333",
+                    "size": "m",
+                    "text_size": "hdt-text-base",
+                    "font_weight": "normal",
+                    "font_size_btn": 14,
+                    "padding_btn": 30,
+                    "min_width_btn": 100,
+                    "min_width_dt_btn": 100,
+                    "min_height_btn": 40,
+                    "rounded": "",
+                    "icon": "none",
+                    "icon_position": "after",
+                    "icon_height": 14,
+                    "icon_spacing": 5,
                     "custom_class": "cca-hero-btn"
-                  }
+                  },
+                  "blocks": {}
                 },
                 "hero_btn_secondary_1": {
                   "type": "button",
                   "settings": {
                     "label": "شوف كل النكهات",
-                    "link": "",
+                    "link": "shopify://collections/all",
+                    "open_in_new_tab": false,
+                    "full_width": false,
                     "btn_style": "hdt-btn-outline",
+                    "color_btn": "#ffffff",
+                    "color_hover_btn": "#ffffff",
+                    "background_btn": "#222222",
+                    "background_hover_btn": "#333333",
+                    "border_w_btn": "",
+                    "border_btn": "#222222",
+                    "border_hover_btn": "#333333",
+                    "size": "m",
+                    "text_size": "hdt-text-base",
+                    "font_weight": "normal",
+                    "font_size_btn": 14,
+                    "padding_btn": 30,
+                    "min_width_btn": 100,
+                    "min_width_dt_btn": 100,
+                    "min_height_btn": 40,
+                    "rounded": "",
+                    "icon": "none",
+                    "icon_position": "after",
+                    "icon_height": 14,
+                    "icon_spacing": 5,
                     "custom_class": "cca-hero-btn cca-hero-btn--secondary"
-                  }
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
@@ -96,14 +210,216 @@
             "hero_desc_mb_1",
             "hero_buttons_1"
           ]
+        },
+        "slide_item_JmED9Q": {
+          "type": "_slide-item",
+          "settings": {
+            "image": "shopify://shop_images/4fc1c5eb759581913a157bfb4508823618695502_1.png",
+            "image_mb": "shopify://shop_images/5142c0d2f2073a9055cd8ca683e8f25f0c6f50ea_92b573a9-06ff-4619-b35c-b9a73552d4e7.png",
+            "url": "",
+            "banner_target": false,
+            "color_scheme": "scheme-hero",
+            "content_position_type": "container",
+            "position_x": 50,
+            "position_y": 50,
+            "content_position": "center-start",
+            "alignment": "left",
+            "position_x_mb": 50,
+            "position_y_mb": 50,
+            "content_position_mb": "start-center",
+            "alignment_mb": "center",
+            "overlay_content": false,
+            "overlay_color": "#000000",
+            "overlay_opacity": 0,
+            "background_content": false,
+            "background_content_color": "#ffffff",
+            "bg_opacity": 0,
+            "box_square": false,
+            "content_rounded": false,
+            "use_border_content": false,
+            "border_color": "#ffffff",
+            "background_border": "#ffffff",
+            "border_opacity": 0,
+            "border_style": "none",
+            "border_pd_dk": 0,
+            "padding_vertical": 30,
+            "padding_horizontal": 30,
+            "min_width_content": 350,
+            "border_pd": 0
+          },
+          "blocks": {
+            "text_KhaTpz": {
+              "type": "text",
+              "settings": {
+                "text": "<p>الأكثر مبيعاً</p>",
+                "hidden_br_mobile": false,
+                "hidden_on_mobile": false,
+                "ffamily": "",
+                "text_size": "base",
+                "line_height": "",
+                "font_weight": "normal",
+                "text_color": "hdt-s-text",
+                "countdown": "2025-12-30 15:00:00",
+                "txt_day": "days",
+                "font_size_text_lg": 16,
+                "font_size_text": 14,
+                "letter_spacing_text": 0,
+                "custom_class": "cca-hero-badge"
+              },
+              "blocks": {}
+            },
+            "heading_Dmy7Xp": {
+              "type": "heading",
+              "settings": {
+                "heading": "<h1><em>سكيتلز مجفف بالتجميد</em> يكبر ويقرمش ويذوب في الفم</h1>",
+                "hidden_br_mobile": false,
+                "hidden_on_mobile": false,
+                "line_height": "",
+                "font_weight": "bold",
+                "heading_size": "h_custom",
+                "text_color": "hdt-s-text",
+                "font_size_heading_lg": 46,
+                "font_size_heading": 25,
+                "letter_spacing_heading": 0,
+                "custom_class": "cca-hero-heading"
+              },
+              "blocks": {}
+            },
+            "text_Fc3UJP": {
+              "type": "text",
+              "settings": {
+                "text": "<p>نفس نكهات سكيتلز الأصلية، بقوام مقرمش خفيف يذوب في الفم. متوفر بنكهات مختلفة ، ويتصنّع عندنا في الكويت.</p>",
+                "hidden_br_mobile": false,
+                "hidden_on_mobile": true,
+                "ffamily": "",
+                "text_size": "base",
+                "line_height": "",
+                "font_weight": "normal",
+                "text_color": "hdt-s-text",
+                "countdown": "2025-12-30 15:00:00",
+                "txt_day": "days",
+                "font_size_text_lg": 16,
+                "font_size_text": 14,
+                "letter_spacing_text": 0,
+                "custom_class": "cca-hero-desc"
+              },
+              "blocks": {}
+            },
+            "text_TwKnAC": {
+              "type": "text",
+              "settings": {
+                "text": "<p>نفس نكهات سكيتلز الأصلية، بقوام مقرمش خفيف. متوفر بنكهات مختلفة · صنع في الكويت.</p>",
+                "hidden_br_mobile": false,
+                "hidden_on_mobile": false,
+                "ffamily": "",
+                "text_size": "base",
+                "line_height": "",
+                "font_weight": "normal",
+                "text_color": "hdt-s-text",
+                "countdown": "2025-12-30 15:00:00",
+                "txt_day": "days",
+                "font_size_text_lg": 16,
+                "font_size_text": 14,
+                "letter_spacing_text": 0,
+                "custom_class": "cca-hero-desc cca-hero-desc--mobile"
+              },
+              "blocks": {}
+            },
+            "button_group_LhT7fX": {
+              "type": "_button_group",
+              "settings": {
+                "vertical_btns": false
+              },
+              "blocks": {
+                "button_7TnWq9": {
+                  "type": "button",
+                  "settings": {
+                    "label": "تسوّق الآن",
+                    "link": "shopify://collections",
+                    "open_in_new_tab": false,
+                    "full_width": false,
+                    "btn_style": "",
+                    "color_btn": "#ffffff",
+                    "color_hover_btn": "#ffffff",
+                    "background_btn": "#222222",
+                    "background_hover_btn": "#333333",
+                    "border_w_btn": "",
+                    "border_btn": "#222222",
+                    "border_hover_btn": "#333333",
+                    "size": "m",
+                    "text_size": "hdt-text-base",
+                    "font_weight": "normal",
+                    "font_size_btn": 14,
+                    "padding_btn": 30,
+                    "min_width_btn": 100,
+                    "min_width_dt_btn": 100,
+                    "min_height_btn": 40,
+                    "rounded": "",
+                    "icon": "none",
+                    "icon_position": "after",
+                    "icon_height": 14,
+                    "icon_spacing": 5,
+                    "custom_class": "cca-hero-btn"
+                  },
+                  "blocks": {}
+                },
+                "button_yM3NKE": {
+                  "type": "button",
+                  "settings": {
+                    "label": "شوف كل النكهات",
+                    "link": "shopify://collections/all",
+                    "open_in_new_tab": false,
+                    "full_width": false,
+                    "btn_style": "hdt-btn-outline",
+                    "color_btn": "#ffffff",
+                    "color_hover_btn": "#ffffff",
+                    "background_btn": "#222222",
+                    "background_hover_btn": "#333333",
+                    "border_w_btn": "",
+                    "border_btn": "#222222",
+                    "border_hover_btn": "#333333",
+                    "size": "m",
+                    "text_size": "hdt-text-base",
+                    "font_weight": "normal",
+                    "font_size_btn": 14,
+                    "padding_btn": 30,
+                    "min_width_btn": 100,
+                    "min_width_dt_btn": 100,
+                    "min_height_btn": 40,
+                    "rounded": "",
+                    "icon": "none",
+                    "icon_position": "after",
+                    "icon_height": 14,
+                    "icon_spacing": 5,
+                    "custom_class": "cca-hero-btn cca-hero-btn--secondary"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "button_7TnWq9",
+                "button_yM3NKE"
+              ]
+            }
+          },
+          "block_order": [
+            "text_KhaTpz",
+            "heading_Dmy7Xp",
+            "text_Fc3UJP",
+            "text_TwKnAC",
+            "button_group_LhT7fX"
+          ]
         }
       },
       "block_order": [
-        "slide_ayum_1"
+        "slide_ayum_1",
+        "slide_item_JmED9Q"
       ],
       "settings": {
         "image_height": "adapt_image",
+        "fixed_height": 860,
         "image_height_mb": "adapt_image",
+        "fixed_height_mb": 300,
         "is_fade": false,
         "loop": true,
         "autoplay": 6,
@@ -125,7 +441,7 @@
         "color_scheme": "scheme-hero",
         "background_opacity": 0,
         "full_width": true,
-        "mg": ",,50px,",
+        "mg": "",
         "mg_mb": ",,30px,",
         "pd": "",
         "pd_mb": "",
@@ -135,6 +451,102 @@
     "collections_list_ayum_categories": {
       "type": "collections-list",
       "blocks": {
+        "cat_occasions": {
+          "type": "_collection_item",
+          "settings": {
+            "collection": "توزيعات-ومناسبات",
+            "hdt_collection_list_svg": "",
+            "svg_width": 60,
+            "svg_width_mb": 40,
+            "title": "توزيعات ومناسبات",
+            "collection_link": "",
+            "col_dk": "6",
+            "col_tb": "6",
+            "col_mb": "6",
+            "color_scheme": "scheme-brand-orange"
+          },
+          "blocks": {}
+        },
+        "cat_vegetables": {
+          "type": "_collection_item",
+          "settings": {
+            "collection": "خضار-مجفف",
+            "hdt_collection_list_svg": "",
+            "svg_width": 60,
+            "svg_width_mb": 40,
+            "title": "خضار مجفف",
+            "collection_link": "",
+            "col_dk": "6",
+            "col_tb": "6",
+            "col_mb": "6",
+            "color_scheme": "scheme-brand-green"
+          },
+          "blocks": {}
+        },
+        "cat_fruits": {
+          "type": "_collection_item",
+          "settings": {
+            "collection": "فواكه-مجففة",
+            "hdt_collection_list_svg": "",
+            "svg_width": 60,
+            "svg_width_mb": 40,
+            "title": "فواكه مجففة",
+            "collection_link": "",
+            "col_dk": "6",
+            "col_tb": "6",
+            "col_mb": "6",
+            "color_scheme": "scheme-brand-pink"
+          },
+          "blocks": {}
+        },
+        "cat_sweets": {
+          "type": "_collection_item",
+          "settings": {
+            "collection": "حلويات-مجففة",
+            "hdt_collection_list_svg": "",
+            "svg_width": 60,
+            "svg_width_mb": 40,
+            "title": "حلويات مجففة",
+            "collection_link": "",
+            "col_dk": "6",
+            "col_tb": "6",
+            "col_mb": "6",
+            "color_scheme": "scheme-brand-cyan"
+          },
+          "blocks": {}
+        },
+        "collection_item_h73rFy": {
+          "type": "_collection_item",
+          "settings": {
+            "collection": "حلويات-مجففة",
+            "hdt_collection_list_svg": "",
+            "svg_width": 60,
+            "svg_width_mb": 40,
+            "title": "حلويات مجففة",
+            "collection_link": "",
+            "col_dk": "6",
+            "col_tb": "6",
+            "col_mb": "6",
+            "color_scheme": "scheme-brand-cyan"
+          },
+          "blocks": {}
+        },
+        "collection_item_RAEjrQ": {
+          "type": "_collection_item",
+          "settings": {
+            "collection": "حلويات-مجففة",
+            "hdt_collection_list_svg": "",
+            "svg_width": 60,
+            "svg_width_mb": 40,
+            "title": "حلويات مجففة",
+            "collection_link": "",
+            "col_dk": "6",
+            "col_tb": "6",
+            "col_mb": "6",
+            "color_scheme": "scheme-brand-cyan"
+          },
+          "blocks": {}
+        },
         "section-heading-collections-list": {
           "type": "section-heading",
           "static": true,
@@ -150,59 +562,38 @@
               "type": "_heading_section",
               "settings": {
                 "heading": "تسوّق حسب الفئة",
+                "line_height": "",
                 "heading_size": "h_custom",
+                "text_color": "hdt-s-text",
                 "font_size_heading_lg": 36,
                 "font_size_heading": 21,
-                "text_color": "hdt-s-text"
-              }
+                "letter_spacing_heading": 0
+              },
+              "blocks": {}
             }
           },
           "block_order": [
             "cat_heading"
           ]
-        },
-        "cat_occasions": {
-          "type": "_collection_item",
-          "settings": {
-            "title": "توزيعات ومناسبات",
-            "color_scheme": "scheme-brand-orange"
-          }
-        },
-        "cat_vegetables": {
-          "type": "_collection_item",
-          "settings": {
-            "title": "خضار مجفف",
-            "color_scheme": "scheme-brand-green"
-          }
-        },
-        "cat_fruits": {
-          "type": "_collection_item",
-          "settings": {
-            "title": "فواكه مجففة",
-            "color_scheme": "scheme-brand-pink"
-          }
-        },
-        "cat_sweets": {
-          "type": "_collection_item",
-          "settings": {
-            "title": "حلويات مجففة",
-            "color_scheme": "scheme-brand-cyan"
-          }
         }
       },
       "block_order": [
         "cat_occasions",
         "cat_vegetables",
         "cat_fruits",
-        "cat_sweets"
+        "cat_sweets",
+        "collection_item_h73rFy",
+        "collection_item_RAEjrQ"
       ],
       "settings": {
+        "collection_list": [],
         "collection_des": "8",
         "content_size": "lg",
         "content_weight": "semibold",
         "content_position": "center",
         "content_space": 0,
         "show_count": false,
+        "count_label": "Products",
         "image_rounded": false,
         "enable_border": false,
         "image_padding": 0,
@@ -219,6 +610,12 @@
         "autoplay": 0,
         "pauseOnHover": false,
         "navUI": false,
+        "nav_position": "default",
+        "nav_visible": "always",
+        "nav_style": "default",
+        "nav_shape": "default",
+        "nav_size": "small",
+        "nav_hide_mobile": false,
         "dotUI": true,
         "pag_style": "default",
         "pag_rounded": true,
@@ -240,6 +637,207 @@
     "tabs_collection_ayum_best": {
       "type": "tabs-collection",
       "blocks": {
+        "tab_best": {
+          "type": "_tab-collection",
+          "settings": {
+            "title": "الأكثر مبيعاً",
+            "collection": "",
+            "hdt_show_icon_image": false,
+            "hdt_icon_spacing": 8
+          },
+          "blocks": {
+            "tab_best_carousel": {
+              "type": "_product-carousel",
+              "settings": {
+                "collection": "الأكثر-مبيعا",
+                "products_count": 8,
+                "product_list": [],
+                "pr_border": "none",
+                "product_des": "7",
+                "image_ratio": "square",
+                "image_size": true,
+                "show_vendor": false,
+                "show_type": true,
+                "show_subtitle": false,
+                "atc_label": "",
+                "hdt_slide_center": false,
+                "hdt_opacity_out_container": false,
+                "col_dk": "4",
+                "col_tb": "3",
+                "col_mb": "2",
+                "space_items": "20",
+                "pagination": false,
+                "paginate_pos": "center",
+                "dis_pagination": 30,
+                "btn_label": "",
+                "btn_style": "",
+                "icon": "none",
+                "size": "m",
+                "btn_fw": "medium",
+                "font_size_btn": 14,
+                "padding_btn": 30,
+                "min_width_btn": 100,
+                "min_width_dt_btn": 100,
+                "min_height_btn": 40,
+                "loop": false,
+                "autoplay": 0,
+                "pauseOnHover": false,
+                "navUI": false,
+                "nav_position": "default",
+                "nav_visible": "always",
+                "nav_style": "default",
+                "nav_shape": "default",
+                "nav_size": "small",
+                "nav_hide_mobile": false,
+                "dotUI": true,
+                "pag_style": "full",
+                "pag_rounded": true,
+                "pag_space": 0,
+                "pag_mgt": 32,
+                "only_show_mobile": false,
+                "pag_hide_mobile": true
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "tab_best_carousel"
+          ]
+        },
+        "tab_new": {
+          "type": "_tab-collection",
+          "settings": {
+            "title": "وصل حديثاً",
+            "collection": "",
+            "hdt_show_icon_image": false,
+            "hdt_icon_spacing": 8
+          },
+          "blocks": {
+            "tab_new_carousel": {
+              "type": "_product-carousel",
+              "settings": {
+                "collection": "خضار-مجفف",
+                "products_count": 8,
+                "product_list": [],
+                "pr_border": "none",
+                "product_des": "7",
+                "image_ratio": "square",
+                "image_size": true,
+                "show_vendor": false,
+                "show_type": true,
+                "show_subtitle": false,
+                "atc_label": "",
+                "hdt_slide_center": false,
+                "hdt_opacity_out_container": false,
+                "col_dk": "4",
+                "col_tb": "3",
+                "col_mb": "2",
+                "space_items": "20",
+                "pagination": false,
+                "paginate_pos": "center",
+                "dis_pagination": 30,
+                "btn_label": "",
+                "btn_style": "",
+                "icon": "none",
+                "size": "m",
+                "btn_fw": "medium",
+                "font_size_btn": 14,
+                "padding_btn": 30,
+                "min_width_btn": 100,
+                "min_width_dt_btn": 100,
+                "min_height_btn": 40,
+                "loop": false,
+                "autoplay": 0,
+                "pauseOnHover": false,
+                "navUI": false,
+                "nav_position": "default",
+                "nav_visible": "always",
+                "nav_style": "default",
+                "nav_shape": "default",
+                "nav_size": "small",
+                "nav_hide_mobile": false,
+                "dotUI": true,
+                "pag_style": "full",
+                "pag_rounded": true,
+                "pag_space": 0,
+                "pag_mgt": 32,
+                "only_show_mobile": false,
+                "pag_hide_mobile": true
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "tab_new_carousel"
+          ]
+        },
+        "tab_offers": {
+          "type": "_tab-collection",
+          "settings": {
+            "title": "العروض",
+            "collection": "",
+            "hdt_show_icon_image": false,
+            "hdt_icon_spacing": 8
+          },
+          "blocks": {
+            "tab_offers_carousel": {
+              "type": "_product-carousel",
+              "settings": {
+                "collection": "جميع-المنتجات",
+                "products_count": 8,
+                "product_list": [],
+                "pr_border": "none",
+                "product_des": "7",
+                "image_ratio": "square",
+                "image_size": true,
+                "show_vendor": false,
+                "show_type": true,
+                "show_subtitle": false,
+                "atc_label": "",
+                "hdt_slide_center": false,
+                "hdt_opacity_out_container": false,
+                "col_dk": "4",
+                "col_tb": "3",
+                "col_mb": "2",
+                "space_items": "20",
+                "pagination": false,
+                "paginate_pos": "center",
+                "dis_pagination": 30,
+                "btn_label": "",
+                "btn_style": "",
+                "icon": "none",
+                "size": "m",
+                "btn_fw": "medium",
+                "font_size_btn": 14,
+                "padding_btn": 30,
+                "min_width_btn": 100,
+                "min_width_dt_btn": 100,
+                "min_height_btn": 40,
+                "loop": false,
+                "autoplay": 0,
+                "pauseOnHover": false,
+                "navUI": false,
+                "nav_position": "default",
+                "nav_visible": "always",
+                "nav_style": "default",
+                "nav_shape": "default",
+                "nav_size": "small",
+                "nav_hide_mobile": false,
+                "dotUI": true,
+                "pag_style": "full",
+                "pag_rounded": true,
+                "pag_space": 0,
+                "pag_mgt": 32,
+                "only_show_mobile": false,
+                "pag_hide_mobile": true
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "tab_offers_carousel"
+          ]
+        },
         "tabs-collection-heading": {
           "type": "section-heading",
           "static": true,
@@ -255,141 +853,18 @@
               "type": "_heading_section",
               "settings": {
                 "heading": "الأكثر مبيعاً",
+                "line_height": "",
                 "heading_size": "h_custom",
+                "text_color": "hdt-s-text",
                 "font_size_heading_lg": 36,
                 "font_size_heading": 21,
-                "text_color": "hdt-s-text"
-              }
+                "letter_spacing_heading": 0
+              },
+              "blocks": {}
             }
           },
           "block_order": [
             "best_heading"
-          ]
-        },
-        "tab_best": {
-          "type": "_tab-collection",
-          "settings": {
-            "title": "الأكثر مبيعاً"
-          },
-          "blocks": {
-            "tab_best_carousel": {
-              "type": "_product-carousel",
-              "settings": {
-                "collection": "{{ closest.collection }}",
-                "products_count": 8,
-                "pr_border": "none",
-                "product_des": "7",
-                "image_ratio": "square",
-                "image_size": true,
-                "show_vendor": false,
-                "show_type": true,
-                "hdt_slide_center": false,
-                "hdt_opacity_out_container": false,
-                "col_dk": "4",
-                "col_tb": "3",
-                "col_mb": "2",
-                "space_items": "20",
-                "pagination": false,
-                "loop": false,
-                "autoplay": 0,
-                "pauseOnHover": false,
-                "navUI": false,
-                "dotUI": true,
-                "pag_style": "full",
-                "pag_rounded": true,
-                "pag_space": 0,
-                "pag_mgt": 32,
-                "only_show_mobile": false,
-                "pag_hide_mobile": true
-              }
-            }
-          },
-          "block_order": [
-            "tab_best_carousel"
-          ]
-        },
-        "tab_new": {
-          "type": "_tab-collection",
-          "settings": {
-            "title": "وصل حديثاً"
-          },
-          "blocks": {
-            "tab_new_carousel": {
-              "type": "_product-carousel",
-              "settings": {
-                "collection": "{{ closest.collection }}",
-                "products_count": 8,
-                "pr_border": "none",
-                "product_des": "7",
-                "image_ratio": "square",
-                "image_size": true,
-                "show_vendor": false,
-                "show_type": true,
-                "hdt_slide_center": false,
-                "hdt_opacity_out_container": false,
-                "col_dk": "4",
-                "col_tb": "3",
-                "col_mb": "2",
-                "space_items": "20",
-                "pagination": false,
-                "loop": false,
-                "autoplay": 0,
-                "pauseOnHover": false,
-                "navUI": false,
-                "dotUI": true,
-                "pag_style": "full",
-                "pag_rounded": true,
-                "pag_space": 0,
-                "pag_mgt": 32,
-                "only_show_mobile": false,
-                "pag_hide_mobile": true
-              }
-            }
-          },
-          "block_order": [
-            "tab_new_carousel"
-          ]
-        },
-        "tab_offers": {
-          "type": "_tab-collection",
-          "settings": {
-            "title": "العروض"
-          },
-          "blocks": {
-            "tab_offers_carousel": {
-              "type": "_product-carousel",
-              "settings": {
-                "collection": "{{ closest.collection }}",
-                "products_count": 8,
-                "pr_border": "none",
-                "product_des": "7",
-                "image_ratio": "square",
-                "image_size": true,
-                "show_vendor": false,
-                "show_type": true,
-                "hdt_slide_center": false,
-                "hdt_opacity_out_container": false,
-                "col_dk": "4",
-                "col_tb": "3",
-                "col_mb": "2",
-                "space_items": "20",
-                "pagination": false,
-                "loop": false,
-                "autoplay": 0,
-                "pauseOnHover": false,
-                "navUI": false,
-                "dotUI": true,
-                "pag_style": "full",
-                "pag_rounded": true,
-                "pag_space": 0,
-                "pag_mgt": 32,
-                "only_show_mobile": false,
-                "pag_hide_mobile": true
-              }
-            }
-          },
-          "block_order": [
-            "tab_offers_carousel"
           ]
         }
       },
@@ -422,48 +897,19 @@
     "featured_collection_ayum_bundles": {
       "type": "featured-collection",
       "blocks": {
-        "pr-heading": {
-          "type": "section-heading",
-          "static": true,
-          "settings": {
-            "design_heading": "1",
-            "horizontal": false,
-            "alignment": "center",
-            "heading_gap": 16,
-            "margin_bottom": 32
-          },
-          "blocks": {
-            "bundles_heading": {
-              "type": "_heading_section",
-              "settings": {
-                "heading": "باكتات وتوزيعات",
-                "heading_size": "h_custom",
-                "font_size_heading_lg": 36,
-                "font_size_heading": 21,
-                "text_color": "hdt-s-text"
-              }
-            },
-            "bundles_subheading": {
-              "type": "_sub_heading_section",
-              "settings": {
-                "text": "<p>جرّب أكثر من منتج بسعر أوفر — والأفضل للمناسبات</p>",
-                "hidden_on_mobile": true,
-                "text_size": "custom",
-                "font_size_text_lg": 16,
-                "font_size_text": 14,
-                "text_color": "hdt-s-text"
-              }
-            }
-          },
-          "block_order": [
-            "bundles_heading",
-            "bundles_subheading"
-          ]
-        },
         "bundles_carousel": {
           "type": "_product-carousel",
           "settings": {
+            "collection": "جميع-المنتجات",
             "products_count": 8,
+            "product_list": [
+              "c45برواني-بيكان-جوكليت-ss-copy",
+              "آيس-كريم-ساندويتش-مجفف",
+              "مارشميلو-مجفف",
+              "ميكس-حلويات-مجففة",
+              "ميني-بوكس-المناسبات-المميز-بحلا-الرمان-c20",
+              "ميني-بوكس-المناسبات-المميز-بحلا-الرمان-c20-sm"
+            ],
             "pr_border": "none",
             "product_des": "7",
             "image_ratio": "square",
@@ -479,10 +925,28 @@
             "col_mb": "1",
             "space_items": "20",
             "pagination": false,
+            "paginate_pos": "center",
+            "dis_pagination": 30,
+            "btn_label": "",
+            "btn_style": "",
+            "icon": "none",
+            "size": "m",
+            "btn_fw": "medium",
+            "font_size_btn": 14,
+            "padding_btn": 30,
+            "min_width_btn": 100,
+            "min_width_dt_btn": 100,
+            "min_height_btn": 40,
             "loop": false,
             "autoplay": 0,
             "pauseOnHover": false,
             "navUI": false,
+            "nav_position": "default",
+            "nav_visible": "always",
+            "nav_style": "default",
+            "nav_shape": "default",
+            "nav_size": "small",
+            "nav_hide_mobile": false,
             "dotUI": true,
             "pag_style": "full",
             "pag_rounded": true,
@@ -490,7 +954,52 @@
             "pag_mgt": 32,
             "only_show_mobile": false,
             "pag_hide_mobile": true
-          }
+          },
+          "blocks": {}
+        },
+        "pr-heading": {
+          "type": "section-heading",
+          "static": true,
+          "settings": {
+            "design_heading": "1",
+            "horizontal": false,
+            "alignment": "center",
+            "heading_gap": 16,
+            "margin_bottom": 32
+          },
+          "blocks": {
+            "bundles_heading": {
+              "type": "_heading_section",
+              "settings": {
+                "heading": "باكتات وتوزيعات",
+                "line_height": "",
+                "heading_size": "h_custom",
+                "text_color": "hdt-s-text",
+                "font_size_heading_lg": 36,
+                "font_size_heading": 21,
+                "letter_spacing_heading": 0
+              },
+              "blocks": {}
+            },
+            "bundles_subheading": {
+              "type": "_sub_heading_section",
+              "settings": {
+                "text": "<p>جرّب أكثر من منتج بسعر أوفر — والأفضل للمناسبات</p>",
+                "hidden_br_mobile": false,
+                "hidden_on_mobile": true,
+                "text_size": "custom",
+                "text_color": "hdt-s-text",
+                "font_size_text_lg": 16,
+                "font_size_text": 14,
+                "letter_spacing_text": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "bundles_heading",
+            "bundles_subheading"
+          ]
         }
       },
       "block_order": [
@@ -508,372 +1017,12 @@
         "pd_mb": "24px,,24px,",
         "custom_class": "cca-bundles"
       }
-    },
-    "lookbook_carousel_VeWgrg": {
-      "type": "lookbook-carousel",
-      "blocks": {
-        "lookbook_LWng87": {
-          "type": "_lookbook",
-          "settings": {
-            "img_effect": "zoom",
-            "b_effect": "none"
-          },
-          "blocks": {
-            "pin_product_i3PHkj": {
-              "type": "_pin-product",
-              "settings": {
-                "pin_bg": "#222222",
-                "pin_text": "#ffffff",
-                "left": 31,
-                "top": 36,
-                "pin_size": "medium",
-                "pin_type": "showtext",
-                "text": "1",
-                "product": "analogue-resin-strap-1",
-                "product_des": "1",
-                "image_ratio": "adapt_image",
-                "image_size": true,
-                "show_vendor": false,
-                "placement": "top"
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "pin_product_i3PHkj"
-          ]
-        },
-        "lookbook_mYkjki": {
-          "type": "_lookbook",
-          "settings": {
-            "img_effect": "zoom",
-            "b_effect": "none"
-          },
-          "blocks": {
-            "pin_product_8CGBBg": {
-              "type": "_pin-product",
-              "settings": {
-                "pin_bg": "#222222",
-                "pin_text": "#ffffff",
-                "left": 43,
-                "top": 62,
-                "pin_size": "medium",
-                "pin_type": "showtext",
-                "text": "1",
-                "product": "wide-fit-dusty",
-                "product_des": "1",
-                "image_ratio": "adapt_image",
-                "image_size": true,
-                "show_vendor": false,
-                "placement": "top"
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "pin_product_8CGBBg"
-          ]
-        },
-        "lookbook_VqJTGD": {
-          "type": "_lookbook",
-          "settings": {
-            "img_effect": "zoom",
-            "b_effect": "none"
-          },
-          "blocks": {
-            "pin_product_LDLBTY": {
-              "type": "_pin-product",
-              "settings": {
-                "pin_bg": "#222222",
-                "pin_text": "#ffffff",
-                "left": 55,
-                "top": 30,
-                "pin_size": "medium",
-                "pin_type": "showtext",
-                "text": "1",
-                "product": "essential-cotton-blend-shirt",
-                "product_des": "1",
-                "image_ratio": "adapt_image",
-                "image_size": true,
-                "show_vendor": false,
-                "placement": "top"
-              },
-              "blocks": {}
-            },
-            "pin_product_qB9d4b": {
-              "type": "_pin-product",
-              "settings": {
-                "pin_bg": "#222222",
-                "pin_text": "#ffffff",
-                "left": 45,
-                "top": 96,
-                "pin_size": "medium",
-                "pin_type": "showtext",
-                "text": "2",
-                "product": "barre-gripper-socks",
-                "product_des": "1",
-                "image_ratio": "adapt_image",
-                "image_size": true,
-                "show_vendor": false,
-                "placement": "top"
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "pin_product_LDLBTY",
-            "pin_product_qB9d4b"
-          ]
-        },
-        "lookbook_NQi7Xf": {
-          "type": "_lookbook",
-          "settings": {
-            "img_effect": "zoom",
-            "b_effect": "none"
-          },
-          "blocks": {
-            "pin_product_xJHkTr": {
-              "type": "_pin-product",
-              "settings": {
-                "pin_bg": "#222222",
-                "pin_text": "#ffffff",
-                "left": 79,
-                "top": 34,
-                "pin_size": "medium",
-                "pin_type": "showtext",
-                "text": "1",
-                "product": "long-oversize-sweatshirt",
-                "product_des": "1",
-                "image_ratio": "adapt_image",
-                "image_size": true,
-                "show_vendor": false,
-                "placement": "top"
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "pin_product_xJHkTr"
-          ]
-        },
-        "lookbook_zNfrP4": {
-          "type": "_lookbook",
-          "settings": {
-            "img_effect": "zoom",
-            "b_effect": "none"
-          },
-          "blocks": {
-            "pin_product_j9TLaD": {
-              "type": "_pin-product",
-              "settings": {
-                "pin_bg": "#222222",
-                "pin_text": "#ffffff",
-                "left": 49,
-                "top": 52,
-                "pin_size": "medium",
-                "pin_type": "showtext",
-                "text": "1",
-                "product": "copy-of-black-workout-set",
-                "product_des": "1",
-                "image_ratio": "adapt_image",
-                "image_size": true,
-                "show_vendor": false,
-                "placement": "top"
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "pin_product_j9TLaD"
-          ]
-        },
-        "lookbook_DaNAAh": {
-          "type": "_lookbook",
-          "settings": {
-            "img_effect": "zoom",
-            "b_effect": "none"
-          },
-          "blocks": {
-            "pin_product_kqzhBq": {
-              "type": "_pin-product",
-              "settings": {
-                "pin_bg": "#222222",
-                "pin_text": "#ffffff",
-                "left": 55,
-                "top": 50,
-                "pin_size": "medium",
-                "pin_type": "showtext",
-                "text": "1",
-                "product": "high-waist-skinny-jean",
-                "product_des": "1",
-                "image_ratio": "adapt_image",
-                "image_size": true,
-                "show_vendor": false,
-                "placement": "top"
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "pin_product_kqzhBq"
-          ]
-        },
-        "lookbook_AzchnW": {
-          "type": "_lookbook",
-          "settings": {
-            "img_effect": "zoom",
-            "b_effect": "none"
-          },
-          "blocks": {
-            "pin_product_Fw6AVx": {
-              "type": "_pin-product",
-              "settings": {
-                "pin_bg": "#222222",
-                "pin_text": "#ffffff",
-                "left": 50,
-                "top": 50,
-                "pin_size": "medium",
-                "pin_type": "showtext",
-                "text": "1",
-                "product": "boxy-sweatshirt-stripe",
-                "product_des": "1",
-                "image_ratio": "adapt_image",
-                "image_size": true,
-                "show_vendor": false,
-                "placement": "top"
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "pin_product_Fw6AVx"
-          ]
-        },
-        "lookbook_MwHq4E": {
-          "type": "_lookbook",
-          "settings": {
-            "img_effect": "zoom",
-            "b_effect": "none"
-          },
-          "blocks": {
-            "pin_product_D3BDae": {
-              "type": "_pin-product",
-              "settings": {
-                "pin_bg": "#222222",
-                "pin_text": "#ffffff",
-                "left": 25,
-                "top": 75,
-                "pin_size": "medium",
-                "pin_type": "showtext",
-                "text": "1",
-                "product": "flowy-washed-shorts",
-                "product_des": "1",
-                "image_ratio": "adapt_image",
-                "image_size": true,
-                "show_vendor": false,
-                "placement": "top"
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "pin_product_D3BDae"
-          ]
-        },
-        "lookbook-heading": {
-          "type": "section-heading",
-          "static": true,
-          "settings": {
-            "design_heading": "2",
-            "horizontal": false,
-            "alignment": "center",
-            "heading_gap": 18,
-            "margin_bottom": 15
-          },
-          "blocks": {
-            "heading_section_34iCHk": {
-              "type": "_heading_section",
-              "settings": {
-                "heading": "@ FOLLOW US ON INSTAGRAM",
-                "line_height": "",
-                "heading_size": "h5",
-                "text_color": "hdt-s-text",
-                "font_size_heading_lg": 50,
-                "font_size_heading": 24,
-                "letter_spacing_heading": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "heading_section_34iCHk"
-          ]
-        },
-        "lookbook-content": {
-          "type": "_lookbook-content",
-          "static": true,
-          "settings": {
-            "lookbook_content_center": true,
-            "content_padding_block": 50,
-            "content_padding_inline": 50,
-            "content_top": 50,
-            "content_left": 50,
-            "color_background": "#000000"
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "lookbook_LWng87",
-        "lookbook_mYkjki",
-        "lookbook_VqJTGD",
-        "lookbook_NQi7Xf",
-        "lookbook_zNfrP4",
-        "lookbook_DaNAAh",
-        "lookbook_AzchnW",
-        "lookbook_MwHq4E"
-      ],
-      "disabled": true,
-      "settings": {
-        "col_dk": "6",
-        "col_tb": "4",
-        "col_mb": "2",
-        "space_items": "0",
-        "image_ratio": "square",
-        "image_size": true,
-        "loop": false,
-        "autoplay": 0,
-        "pauseOnHover": false,
-        "navUI": true,
-        "nav_position": "default",
-        "nav_visible": "hover",
-        "nav_style": "default",
-        "nav_shape": "rounded",
-        "nav_size": "small",
-        "nav_hide_mobile": false,
-        "dotUI": false,
-        "pag_style": "default",
-        "pag_rounded": false,
-        "pag_space": 10,
-        "pag_mgt": 10,
-        "pag_hide_mobile": false,
-        "colors_by_section": false,
-        "color_scheme": "",
-        "background_opacity": 0,
-        "section_layout": "full_width",
-        "hdt_background_parallax": false,
-        "mg": "",
-        "mg_mb": "",
-        "pd": "",
-        "pd_mb": ""
-      }
     }
   },
   "order": [
     "slideshow_ayum_hero",
     "collections_list_ayum_categories",
     "tabs_collection_ayum_best",
-    "featured_collection_ayum_bundles",
-    "lookbook_carousel_VeWgrg"
+    "featured_collection_ayum_bundles"
   ]
 }

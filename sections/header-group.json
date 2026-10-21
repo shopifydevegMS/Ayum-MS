@@ -24,7 +24,9 @@
             "txt_day": "days",
             "text_highlight": "",
             "hdt_font_size": 16,
-            "discount_code": "AYUM10"
+            "discount_code": "AYUM10",
+            "copy_label": "",
+            "copied_label": ""
           }
         },
         "announcement_fekMnb": {
@@ -37,7 +39,10 @@
             "countdown": "2024-12-30 15:00:00",
             "txt_day": "days",
             "text_highlight": "",
-            "hdt_font_size": 16
+            "hdt_font_size": 16,
+            "discount_code": "",
+            "copy_label": "",
+            "copied_label": ""
           }
         }
       },
@@ -62,7 +67,8 @@
         "colors_by_section": true,
         "color_scheme": "scheme-offer-bar",
         "background_opacity": 1,
-        "full_width": true
+        "full_width": true,
+        "custom_class": ""
       }
     },
     "header_menu_bottom_ayum": {
@@ -71,20 +77,31 @@
         "menu_mobile": {
           "type": "_menu_mobile",
           "static": true,
-          "settings": {}
+          "settings": {
+            "main_menu_mobile": "",
+            "menu_categories": "",
+            "only_click_icon": false,
+            "header_mobile_colors": "",
+            "note_mobile": "<span class=\"hdt-inline-flex hdt-text-base\" style=\"margin-bottom: 10px\">Need help ? </span><span class=\"hdt-flex hdt-flex-col hdt-text-base\" style=\"line-height: 24px;\"><span>Email: <b>info@fashionshop.com</b></span><span>Phone: <b>(212) 555-1234</b></span></span>"
+          },
+          "blocks": {}
         }
       },
-      "block_order": [],
       "settings": {
         "header_layout": "logo_left",
         "header_fullwidth": false,
         "header_border_bottom": false,
+        "logo": "shopify://shop_images/eceabd1521dfb2efee60fa3f11dabcb90c7ae385_1.png",
         "logo_width": 88,
         "header_height": 101,
         "header_colors": "scheme-header",
+        "content_left_box": "welcome_text",
+        "search_form_radius": 0,
+        "other_main_header_content": "Welcome to our store!",
+        "hdt_liquid_html": "<hdt-font-1>Share information about your brand with your customers.</hdt-font-1> <hdt-font-2>Describe a product, make announcements, or welcome customers to your store.</hdt-font-2>",
         "header_bottom_height": 68,
         "header_bottom_colors": "scheme-header",
-        "main_menu": "main-menu",
+        "main_menu": "link-list-4",
         "lazy_mn": true,
         "menu_position": "center",
         "menu_size": "base",
@@ -93,7 +110,10 @@
         "dropdown_arrow": false,
         "spacing_nav": 32,
         "open_event": "hover",
+        "header_menu_colors": "",
         "header_categories": false,
+        "title_categories": "All Categories",
+        "menu_categories": "",
         "header_border": "top_bottom",
         "h_icon": "line",
         "hover_icon": "2",
@@ -102,9 +122,14 @@
         "enabled_wishlist": false,
         "enabled_cart": true,
         "cart_des": "1",
+        "hdt-text-menu--right": "",
         "header_height_mb": 60,
         "logo_width_mb": 62,
         "header_transparent": false,
+        "header_transparent_colors": "",
+        "background_opacity_transparent": 0,
+        "header_space_top": 0,
+        "header_space_top_mobile": 0,
         "sticky_type": "on_scroll_up",
         "sticky_glass": false,
         "cca_search_placeholder": "دوّر على منتجك… (سكيتلز، جيلي كولا، فراولة)",
