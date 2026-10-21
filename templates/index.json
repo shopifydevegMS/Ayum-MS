@@ -659,10 +659,143 @@
         "pd": "48px,,48px,",
         "pd_mb": "24px,,24px,"
       }
+    },
+    "testimonials_reviews": {
+      "type": "testimonial_section",
+      "name": "Customer reviews",
+      "blocks": {
+        "our-team": {
+          "type": "section-heading",
+          "static": true,
+          "settings": {
+            "design_heading": "1",
+            "horizontal": false,
+            "alignment": "center",
+            "heading_gap": 16,
+            "margin_bottom": 32
+          },
+          "blocks": {
+            "rv_stars_Ra12Bc": {
+              "type": "_sub_heading_section",
+              "settings": {
+                "text": "<p>★★★★★</p>",
+                "hidden_br_mobile": false,
+                "hidden_on_mobile": false,
+                "text_size": "custom",
+                "text_color": "hdt-text-primary",
+                "font_size_text_lg": 32,
+                "font_size_text": 24,
+                "letter_spacing_text": 0
+              }
+            },
+            "rv_heading_Rb34De": {
+              "type": "_heading_section",
+              "settings": {
+                "heading": "4.8 من 5 · أكثر من 400 تقييم",
+                "line_height": "",
+                "heading_size": "h_custom",
+                "text_color": "hdt-s-text",
+                "font_size_heading_lg": 36,
+                "font_size_heading": 21,
+                "letter_spacing_heading": 0
+              }
+            },
+            "rv_subheading_Rc56Fg": {
+              "type": "_sub_heading_section",
+              "settings": {
+                "text": "<p>كل تقييم من عملية شراء موثّقة</p>",
+                "hidden_br_mobile": false,
+                "hidden_on_mobile": false,
+                "text_size": "custom",
+                "text_color": "hdt-text-secondary",
+                "font_size_text_lg": 16,
+                "font_size_text": 14,
+                "letter_spacing_text": 0
+              }
+            }
+          },
+          "block_order": [
+            "rv_stars_Ra12Bc",
+            "rv_heading_Rb34De",
+            "rv_subheading_Rc56Fg"
+          ]
+        },
+        "rv_review1_Rd78Hi": {
+          "type": "_testimonial_item",
+          "settings": {
+            "heading": "",
+            "content": "<p>الفراولة طعمها أقوى من الطازجة، وبنتي تاخذها بالمدرسة.</p>",
+            "title": "سارة · السالمية",
+            "pos": "جيلي بيتزا مجفف",
+            "rating": 5,
+            "badge": "شراء موثّق"
+          }
+        },
+        "rv_review2_Re90Jk": {
+          "type": "_testimonial_item",
+          "settings": {
+            "heading": "",
+            "content": "<p>صوّرت الفيديو وهي تتكسر ونشرته، جاني 30 سؤال بيوم واحد.</p>",
+            "title": "أحمد · حولي",
+            "pos": "توزيعات مناسبات",
+            "rating": 5,
+            "badge": "شراء موثّق"
+          }
+        },
+        "rv_review3_Rf12Lm": {
+          "type": "_testimonial_item",
+          "settings": {
+            "heading": "",
+            "content": "<p>طلبت السكيتلز للتوزيعات وكل البنات سألوا وين شريتها.</p>",
+            "title": "نورة · الجهراء",
+            "pos": "سكيتلز مجفف بالتجميد",
+            "rating": 5,
+            "badge": "شراء موثّق"
+          }
+        }
+      },
+      "block_order": [
+        "rv_review1_Rd78Hi",
+        "rv_review2_Re90Jk",
+        "rv_review3_Rf12Lm"
+      ],
+      "settings": {
+        "ter_des": "9",
+        "content_align": "left",
+        "col_dk": "3",
+        "col_tb": "2",
+        "col_mb": "1",
+        "space_horizontal": "20",
+        "space_vertical": "20",
+        "space_horizontal_mb": "4",
+        "space_vertical_mb": "4",
+        "layout": "carousel",
+        "loop": false,
+        "autoplay": 0,
+        "pauseOnHover": false,
+        "navUI": false,
+        "dotUI": true,
+        "pag_style": "full",
+        "pag_rounded": true,
+        "pag_space": 0,
+        "pag_mgt": 32,
+        "only_show_mobile": false,
+        "pag_hide_mobile": true,
+        "colors_by_section": true,
+        "color_scheme": "scheme-reviews",
+        "background_opacity": 0.4,
+        "section_layout": "wrapper_container",
+        "hdt_background_parallax": false,
+        "mg": "",
+        "mg_mb": "",
+        "pd": "48px,,48px,",
+        "pd_mb": "24px,,24px,"
+      }
     }
   },
   "order": [
     "image_text_about_brand",
-    "icon_box_freeze_dry"
+    "icon_box_freeze_dry",
+    "testimonials_reviews"
   ]
 }

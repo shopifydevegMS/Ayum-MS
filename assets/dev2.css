@@ -359,3 +359,210 @@
     min-height: calc(2em * 1.8);
   }
 }
+
+/* ==== cca carousel edges — shared (every AYUM <hdt-slider> card carousel joins this rule) ==== */
+/* The viewport stops clipping inside the container padding; the container clips at its outer edge. */
+.cca-customer-reviews.cca-customer-reviews .hdt-container {
+  overflow-x: clip;
+}
+
+.cca-customer-reviews.cca-customer-reviews .hdt-prent .hdt-slider__viewport {
+  overflow: visible;
+}
+
+/* ==== cca-customer-reviews — homepage "Customer reviews" (testimonial_section, Design 9 - cca) ==== */
+/* Figma: desktop 2001:316, mobile 2001:826. Colors: scheme-reviews —
+   background (yellow, 40% via the section opacity), text (ink), text2 (muted), accent (orange cards,
+   top stars, active progress), pr_rating (card stars), background2 (white card text + badge),
+   line_border (badge border), sale_price (badge green), button (progress track tint).
+   testimonials.css loads after this file, so card rules carry one extra class to win ties. */
+
+/* Container: Figma side padding (16px mobile, 20px from 768) */
+.cca-customer-reviews .hdt-container {
+  padding-inline: 16px;
+}
+
+@media (min-width: 768px) {
+  .cca-customer-reviews .hdt-container {
+    padding-inline: 20px;
+  }
+}
+
+/* Heading area: Arabic text boundary, centered */
+.cca-customer-reviews .hdt-section-heading_block {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.cca-customer-reviews .hdt-section-heading_block .hdt-heading-block {
+  justify-content: center;
+  margin: 0;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+}
+
+.cca-customer-reviews .hdt-section-heading_block :where(p) {
+  margin: 0;
+}
+
+@media (max-width: 767px) {
+  .cca-customer-reviews .hdt-section-heading_block {
+    /* Figma mobile: 14px to the cards. !important is required: the theme sets this
+       margin from the block's "Margin bottom" setting with an #id selector. */
+    margin-bottom: 14px !important;
+  }
+}
+
+.cca-customer-reviews .hdt-section-heading_block .hdt-subheading-block.hdt-text-primary {
+  font-weight: var(--font-normal);
+  line-height: normal; /* the decorative top stars */
+}
+
+.cca-customer-reviews .hdt-section-heading_block .hdt-subheading-block.hdt-text-secondary {
+  font-size: 13px; /* Figma 13px; the block's mobile size only allows even values */
+  font-weight: var(--font-normal);
+  line-height: 1.8;
+}
+
+@media (min-width: 768px) {
+  .cca-customer-reviews .hdt-section-heading_block .hdt-subheading-block.hdt-text-secondary {
+    font-size: var(--text-custom);
+    font-weight: var(--font-bold);
+    line-height: 1.556;
+  }
+}
+
+/* Review cards: equal height per row, reviewer info pinned to the bottom */
+.cca-customer-reviews .hdt-testimonial-item,
+.cca-customer-reviews .hdt-testimonial-item .testimonial-inner,
+.cca-customer-reviews .hdt-testimonial-item .hdt-quote-wrap {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* Figma card height: 192px mobile, 223px desktop. min-height, so a longer review grows instead of being cut off */
+.cca-customer-reviews .hdt-testimonial-item .testimonial-inner {
+  max-height: 192px;
+}
+
+.cca-customer-reviews .hdt-testimonial-item .hdt-quote-wrap {
+  direction: rtl;
+  unicode-bidi: isolate;
+  padding: 18px;
+  border-radius: 16px;
+  background: rgb(var(--color-accent));
+  color: rgb(var(--color-background2));
+  text-align: start;
+}
+
+.cca-customer-reviews .hdt-testimonial-item .hdt-quote-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  align-items: flex-start;
+  gap: 12px;
+  background: none;
+}
+
+.cca-customer-reviews .hdt-testimonial-item .hdt-rating-wapper {
+  min-height: 0;
+  margin: 0;
+  line-height: 0;
+}
+
+.cca-customer-reviews .hdt-testimonial-item .hdt-rating-wapper svg {
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  fill: rgb(var(--color-pr-rating));
+}
+
+.cca-customer-reviews .hdt-testimonial-item .hdt-quote-content p {
+  margin: 0;
+  color: rgb(var(--color-background2));
+  font-size: 15px;
+  font-weight: var(--font-normal);
+  line-height: 1.85;
+}
+
+.cca-customer-reviews .hdt-testimonial-item .hdt-quote-author {
+  margin-block-start: auto;
+  color: rgb(var(--color-background2));
+  font-size: 13px;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+}
+
+.cca-customer-reviews .hdt-testimonial-item .hdt-quote-position {
+  margin-block-start: -10px; /* 2px under the name (the card gap is 12px) */
+  color: rgb(var(--color-background2));
+  font-size: 12px;
+  font-weight: var(--font-bold);
+  line-height: normal;
+}
+
+/* Badge (block setting "Badge") */
+.cca-customer-reviews .cca-review-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border: 1px solid rgb(var(--color-line-border));
+  border-radius: 20px;
+  background: rgb(var(--color-background2));
+  color: rgb(var(--color-pr-sale-price));
+  font-size: 11px;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+}
+
+.cca-customer-reviews .cca-review-badge::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+@media (min-width: 768px) {
+  .cca-customer-reviews .hdt-testimonial-item .testimonial-inner {
+    min-height: 223px;
+  }
+
+  .cca-customer-reviews .hdt-testimonial-item .hdt-quote-wrap {
+    padding: 24px;
+  }
+
+  .cca-customer-reviews .hdt-testimonial-item .hdt-rating-wapper svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .cca-customer-reviews .hdt-testimonial-item .hdt-quote-content p {
+    font-size: 16px;
+    line-height: 1.8;
+  }
+
+  .cca-customer-reviews .hdt-testimonial-item .hdt-quote-author {
+    font-size: 17px;
+  }
+
+  .cca-customer-reviews .hdt-testimonial-item .hdt-quote-position {
+    margin-block-start: -8px; /* 4px under the name */
+    font-size: 13px;
+  }
+}
+
+/* Progress (native "full" pagination): 510px track, tinted base, orange active segment */
+.cca-customer-reviews .hdt-pagination {
+  --pag-bg: rgb(var(--hdt-btn-bg) / 0.12);
+  --pag-bg-active: rgb(var(--color-accent));
+  width: min(510px, 100%);
+  margin-inline: auto;
+}
+
+.cca-customer-reviews .hdt-pagination button {
+  opacity: 1;
+}
