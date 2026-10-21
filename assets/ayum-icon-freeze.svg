@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30" height="30" viewBox="0 0 30 30" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <g id="branch">
+    <path d="M15 15.75V4.25"/>
+    <path d="M12.75 6.5L15 4.25L17.25 6.5"/>
+  </g>
+  <use href="#branch" xlink:href="#branch" transform="rotate(60 15 15)"/>
+  <use href="#branch" xlink:href="#branch" transform="rotate(120 15 15)"/>
+  <use href="#branch" xlink:href="#branch" transform="rotate(180 15 15)"/>
+  <use href="#branch" xlink:href="#branch" transform="rotate(240 15 15)"/>
+  <use href="#branch" xlink:href="#branch" transform="rotate(300 15 15)"/>
+</svg>

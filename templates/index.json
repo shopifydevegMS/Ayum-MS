@@ -368,9 +368,301 @@
         "pd": "48px,,48px,",
         "pd_mb": "24px,,18px,"
       }
+    },
+    "icon_box_freeze_dry": {
+      "type": "icon-box",
+      "name": "How we freeze-dry",
+      "blocks": {
+        "icon-box": {
+          "type": "section-heading",
+          "static": true,
+          "settings": {
+            "design_heading": "1",
+            "horizontal": false,
+            "alignment": "center",
+            "heading_gap": 16,
+            "margin_bottom": 32
+          },
+          "blocks": {
+            "fd_heading_Hd12Ab": {
+              "type": "_heading_section",
+              "settings": {
+                "heading": "كيف نجفّف؟",
+                "line_height": "",
+                "heading_size": "h_custom",
+                "text_color": "hdt-s-text",
+                "font_size_heading_lg": 36,
+                "font_size_heading": 21,
+                "letter_spacing_heading": 0
+              }
+            },
+            "fd_subheading_Sb34Cd": {
+              "type": "_sub_heading_section",
+              "settings": {
+                "text": "<p>3 خطوات تخلي الطعم أقوى والقرمشة أخف</p>",
+                "hidden_br_mobile": false,
+                "hidden_on_mobile": false,
+                "text_size": "custom",
+                "text_color": "hdt-text-secondary",
+                "font_size_text_lg": 16,
+                "font_size_text": 14,
+                "letter_spacing_text": 0
+              }
+            },
+            "fd_chips_Ch56Ef": {
+              "type": "group",
+              "settings": {
+                "content_direction": "row",
+                "vertical_on_mobile": false,
+                "horizontal_alignment": "center",
+                "vertical_alignment": "center",
+                "gap": 10,
+                "width": "fill",
+                "width_mobile": "fill",
+                "colors_by_block": false,
+                "group_rounded": "",
+                "padding_top": 0,
+                "padding_bottom": 0,
+                "padding_left": 0,
+                "padding_right": 0,
+                "padding_rate_mobile": 0
+              },
+              "blocks": {
+                "fd_chip1_Gr78Gh": {
+                  "type": "group",
+                  "settings": {
+                    "content_direction": "row",
+                    "horizontal_alignment": "center",
+                    "vertical_alignment": "center",
+                    "gap": 0,
+                    "width": "fit-content",
+                    "width_mobile": "fit-content",
+                    "colors_by_block": true,
+                    "color_scheme": "scheme-brand-green",
+                    "group_rounded": "hdt-radius-full",
+                    "padding_top": 8,
+                    "padding_bottom": 8,
+                    "padding_left": 16,
+                    "padding_right": 16,
+                    "padding_rate_mobile": 0
+                  },
+                  "blocks": {
+                    "fd_chip1_txt_Tx90Ij": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>تصنيع كويتي 100%</p>",
+                        "text_size": "custom",
+                        "font_weight": "bold",
+                        "text_color": "hdt-s-text",
+                        "font_size_text_lg": 13,
+                        "font_size_text": 12,
+                        "letter_spacing_text": 0
+                      }
+                    }
+                  },
+                  "block_order": [
+                    "fd_chip1_txt_Tx90Ij"
+                  ]
+                },
+                "fd_chip2_Or12Kl": {
+                  "type": "group",
+                  "settings": {
+                    "content_direction": "row",
+                    "horizontal_alignment": "center",
+                    "vertical_alignment": "center",
+                    "gap": 0,
+                    "width": "fit-content",
+                    "width_mobile": "fit-content",
+                    "colors_by_block": true,
+                    "color_scheme": "scheme-brand-orange",
+                    "group_rounded": "hdt-radius-full",
+                    "padding_top": 8,
+                    "padding_bottom": 8,
+                    "padding_left": 16,
+                    "padding_right": 16,
+                    "padding_rate_mobile": 0
+                  },
+                  "blocks": {
+                    "fd_chip2_txt_Tx34Mn": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>مناسب لكل الأعمار</p>",
+                        "text_size": "custom",
+                        "font_weight": "bold",
+                        "text_color": "hdt-s-text",
+                        "font_size_text_lg": 13,
+                        "font_size_text": 12,
+                        "letter_spacing_text": 0
+                      }
+                    }
+                  },
+                  "block_order": [
+                    "fd_chip2_txt_Tx34Mn"
+                  ]
+                },
+                "fd_chip3_Pk56Op": {
+                  "type": "group",
+                  "settings": {
+                    "content_direction": "row",
+                    "horizontal_alignment": "center",
+                    "vertical_alignment": "center",
+                    "gap": 0,
+                    "width": "fit-content",
+                    "width_mobile": "fit-content",
+                    "colors_by_block": true,
+                    "color_scheme": "scheme-brand-pink",
+                    "group_rounded": "hdt-radius-full",
+                    "padding_top": 8,
+                    "padding_bottom": 8,
+                    "padding_left": 16,
+                    "padding_right": 16,
+                    "padding_rate_mobile": 0
+                  },
+                  "blocks": {
+                    "fd_chip3_txt_Tx78Qr": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>بدون ألوان صناعية</p>",
+                        "text_size": "custom",
+                        "font_weight": "bold",
+                        "text_color": "hdt-s-text",
+                        "font_size_text_lg": 13,
+                        "font_size_text": 12,
+                        "letter_spacing_text": 0
+                      }
+                    }
+                  },
+                  "block_order": [
+                    "fd_chip3_txt_Tx78Qr"
+                  ]
+                },
+                "fd_chip4_Cy90St": {
+                  "type": "group",
+                  "settings": {
+                    "content_direction": "row",
+                    "horizontal_alignment": "center",
+                    "vertical_alignment": "center",
+                    "gap": 0,
+                    "width": "fit-content",
+                    "width_mobile": "fit-content",
+                    "colors_by_block": true,
+                    "color_scheme": "scheme-brand-cyan",
+                    "group_rounded": "hdt-radius-full",
+                    "padding_top": 8,
+                    "padding_bottom": 8,
+                    "padding_left": 16,
+                    "padding_right": 16,
+                    "padding_rate_mobile": 0
+                  },
+                  "blocks": {
+                    "fd_chip4_txt_Tx12Uv": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>بدون مواد حافظة</p>",
+                        "text_size": "custom",
+                        "font_weight": "bold",
+                        "text_color": "hdt-s-text",
+                        "font_size_text_lg": 13,
+                        "font_size_text": 12,
+                        "letter_spacing_text": 0
+                      }
+                    }
+                  },
+                  "block_order": [
+                    "fd_chip4_txt_Tx12Uv"
+                  ]
+                }
+              },
+              "block_order": [
+                "fd_chip1_Gr78Gh",
+                "fd_chip2_Or12Kl",
+                "fd_chip3_Pk56Op",
+                "fd_chip4_Cy90St"
+              ]
+            }
+          },
+          "block_order": [
+            "fd_heading_Hd12Ab",
+            "fd_subheading_Sb34Cd",
+            "fd_chips_Ch56Ef"
+          ]
+        },
+        "fd_step1_St12Wx": {
+          "type": "_icon_box",
+          "settings": {
+            "url": "",
+            "open_in_new_tab": false,
+            "icon_position": "left",
+            "icon_color_scheme": "scheme-brand-pink",
+            "svg_upload": "<img src=\"{{ 'ayum-icon-freeze.svg' | asset_url }}\" alt=\"\" width=\"30\" height=\"30\" loading=\"lazy\">",
+            "svg_width": 30,
+            "svg_width_mb": 22,
+            "heading": "1 · تجميد سريع",
+            "description": "تجميد عند −40° يقفل الطعم واللون داخل المنتج."
+          }
+        },
+        "fd_step2_St34Yz": {
+          "type": "_icon_box",
+          "settings": {
+            "url": "",
+            "open_in_new_tab": false,
+            "icon_position": "left",
+            "icon_color_scheme": "scheme-brand-cyan",
+            "svg_upload": "<img src=\"{{ 'ayum-icon-vacuum.svg' | asset_url }}\" alt=\"\" width=\"30\" height=\"30\" loading=\"lazy\">",
+            "svg_width": 30,
+            "svg_width_mb": 22,
+            "heading": "2 · سحب الماء",
+            "description": "التفريغ يحوّل الثلج لبخار مباشرة — بدون حرارة تحرق النكهة."
+          }
+        },
+        "fd_step3_St56Za": {
+          "type": "_icon_box",
+          "settings": {
+            "url": "",
+            "open_in_new_tab": false,
+            "icon_position": "left",
+            "icon_color_scheme": "scheme-brand-green",
+            "svg_upload": "<img src=\"{{ 'ayum-icon-pack.svg' | asset_url }}\" alt=\"\" width=\"30\" height=\"30\" loading=\"lazy\">",
+            "svg_width": 30,
+            "svg_width_mb": 22,
+            "heading": "3 · تعبئة محكمة",
+            "description": "عبوة مفرّغة من الهواء تحفظ القرمشة لشهور بدون مواد حافظة."
+          }
+        }
+      },
+      "block_order": [
+        "fd_step1_St12Wx",
+        "fd_step2_St34Yz",
+        "fd_step3_St56Za"
+      ],
+      "settings": {
+        "design": "design_1",
+        "enable_border": false,
+        "enable_box_shadow": false,
+        "source": "svg",
+        "padding": "28px,28px,42px,12px",
+        "col_dk": "3",
+        "col_tb": "3",
+        "col_mb": "1",
+        "space_horizontal": "20",
+        "space_vertical": "20",
+        "space_horizontal_mb": "8",
+        "space_vertical_mb": "8",
+        "layout": "grid",
+        "colors_by_section": true,
+        "color_scheme": "scheme-freeze-dry",
+        "background_opacity": 1,
+        "section_layout": "wrapper_container",
+        "hdt_background_parallax": false,
+        "mg": "",
+        "mg_mb": "",
+        "pd": "48px,,48px,",
+        "pd_mb": "24px,,24px,"
+      }
     }
   },
   "order": [
-    "image_text_about_brand"
+    "image_text_about_brand",
+    "icon_box_freeze_dry"
   ]
 }

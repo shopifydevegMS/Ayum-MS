@@ -150,3 +150,212 @@
   color: rgb(var(--color-pr-sale-price));
   line-height: normal;
 }
+
+/* ==== cca-freeze-dry — homepage "How we freeze-dry" (icon-box, Design 1 - cca) ==== */
+/* Figma: desktop 2001:250, mobile 2001:765. Colors: section scheme-freeze-dry,
+   chips + icon circles use the brand schemes (scheme-brand-*) set per block.
+   hdt-icon-box.css loads after this file, so card rules carry one extra class to win ties. */
+
+.cca-freeze-dry {
+  --cca-ink: var(--color-foreground); /* section ink, kept for chips that switch to a brand scheme */
+}
+
+/* Container: Figma side padding (16px mobile, 20px from 768) */
+.cca-freeze-dry .hdt-container {
+  padding-inline: 16px;
+}
+
+@media (min-width: 768px) {
+  .cca-freeze-dry .hdt-container {
+    padding-inline: 20px;
+  }
+}
+
+/* Heading area: Arabic text boundary, centered */
+.cca-freeze-dry .hdt-section-heading_block {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.cca-freeze-dry .hdt-section-heading_block .hdt-heading-block {
+  justify-content: center;
+  margin: 0;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+}
+
+.cca-freeze-dry .hdt-section-heading_block .hdt-subheading-block {
+  --text-color: rgb(var(--color-pr-sale-price));
+  color: rgb(var(--color-pr-sale-price)); /* Figma Neutral/Muted = the scheme's sale-price field */
+  font-size: 13px; /* Figma 13px; the block's mobile size only allows even values */
+  line-height: 1.8;
+}
+
+.cca-freeze-dry .hdt-section-heading_block :where(p) {
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .cca-freeze-dry .hdt-section-heading_block .hdt-subheading-block {
+    font-size: var(--text-custom);
+    font-weight: var(--font-bold);
+    line-height: 1.556;
+  }
+}
+
+/* Claim chips: one wrapping row in RTL order; tinted brand background + brand border */
+.cca-freeze-dry .hdt-section-heading_block > .hdt-group-block > .hdt-layout-flex {
+  direction: rtl;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.cca-freeze-dry .hdt-section-heading_block .hdt-layout-flex > .hdt-group-block {
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  height: 25px; /* Figma chip height: 25px mobile, 31px desktop (border included) */
+  padding: 0 12px;
+  border: 1px solid rgb(var(--color-background));
+  background: rgb(var(--color-background) / 0.15);
+}
+
+.cca-freeze-dry .hdt-section-heading_block .hdt-layout-flex > .hdt-group-block .hdt-text-warry {
+  --text-color: rgb(var(--cca-ink));
+  color: rgb(var(--cca-ink));
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.cca-freeze-dry .hdt-section-heading_block .hdt-layout-flex > .hdt-group-block :is(.hdt-text-warry, .hdt-text-warry *) {
+  line-height: normal;
+}
+
+@media (min-width: 768px) {
+  .cca-freeze-dry .hdt-section-heading_block > .hdt-group-block > .hdt-layout-flex {
+    gap: 10px;
+  }
+
+  .cca-freeze-dry .hdt-section-heading_block .hdt-layout-flex > .hdt-group-block {
+    height: 31px;
+    padding: 0 16px;
+  }
+
+  .cca-freeze-dry .hdt-section-heading_block .hdt-layout-flex > .hdt-group-block .hdt-text-warry {
+    font-size: 13px;
+  }
+}
+
+/* Step cards grid: RTL order in every locale (step 1 on the right) */
+.cca-freeze-dry .hdt-icon-box .hdt-prent {
+  direction: rtl;
+}
+
+@media (min-width: 768px) {
+  .cca-freeze-dry .hdt-icon-box .hdt-prent {
+    column-gap: 23px;
+  }
+}
+
+/* Equal-height cards: the grid stretches the item, the item stretches the card */
+.cca-freeze-dry .hdt-icon-box .hdt-iconbox-item {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Step card — mobile: icon on the right, title + description beside it */
+.cca-freeze-dry .hdt-iconbox-item .hdt-iconbox-item-wrapper {
+  flex: 1 1 auto;
+  direction: rtl;
+  unicode-bidi: isolate;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    "icon title"
+    "icon desc";
+  align-items: center;
+  column-gap: 12px;
+  row-gap: 3px;
+  padding: 14px;
+  border-radius: 14px;
+  background-color: rgb(var(--color-background2) / 0.6);
+  text-align: start;
+}
+
+.cca-freeze-dry .hdt-iconbox-item .hdt-iconbox-head {
+  display: contents;
+}
+
+.cca-freeze-dry .hdt-iconbox-item .hdt-iconbox-icon {
+  grid-area: icon;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgb(var(--color-background));
+}
+
+.cca-freeze-dry .hdt-iconbox-item .hdt-iconbox-icon :is(img, svg) {
+  display: block;
+  width: 22px;
+  height: 22px;
+}
+
+.cca-freeze-dry .hdt-iconbox-item .hdt-iconbox-heading {
+  grid-area: title;
+  align-self: end;
+  margin: 0;
+  color: rgb(var(--color-foreground));
+  font-size: 17px;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+}
+
+.cca-freeze-dry .hdt-iconbox-item .hdt-iconbox-des {
+  grid-area: desc;
+  align-self: start;
+  margin: 0;
+  color: rgb(var(--color-foreground2));
+  font-size: 13px;
+  font-weight: var(--font-bold);
+  line-height: 1.4;
+  min-height: calc(2em * 1.4); /* always reserve two lines, so cards stay even */
+}
+
+/* Step card — tablet + desktop: icon on top, then title, then description */
+@media (min-width: 768px) {
+  .cca-freeze-dry .hdt-iconbox-item .hdt-iconbox-item-wrapper {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "icon"
+      "title"
+      "desc";
+    align-content: start;
+    row-gap: 12px;
+    padding: var(--padding-content);
+    border-radius: 16px;
+  }
+
+  .cca-freeze-dry .hdt-iconbox-item .hdt-iconbox-icon {
+    justify-self: start;
+    width: 52px;
+    height: 52px;
+  }
+
+  .cca-freeze-dry .hdt-iconbox-item .hdt-iconbox-icon :is(img, svg) {
+    width: 30px;
+    height: 30px;
+  }
+
+  .cca-freeze-dry .hdt-iconbox-item .hdt-iconbox-heading {
+    font-size: 20px;
+  }
+
+  .cca-freeze-dry .hdt-iconbox-item .hdt-iconbox-des {
+    font-size: 14px;
+    font-weight: var(--font-normal);
+    line-height: 1.8;
+    min-height: calc(2em * 1.8);
+  }
+}

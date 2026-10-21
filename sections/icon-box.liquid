@@ -19,7 +19,7 @@
       assign sizes  = '100vw'
   endcase
 %}
-<div class="{{ parent }} {% if section.settings.hdt_background_parallax %} hdt-animate--parallax-bg {% endif %}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};"{%- endif %}>
+<div class="{{ parent }}{% if section.settings.design == 'design_1' %} cca-freeze-dry{% endif %} {% if section.settings.hdt_background_parallax %} hdt-animate--parallax-bg {% endif %}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};"{%- endif %}>
   <div class="{{ child }}">
     {%- if section.settings.section_background != blank -%}
       {% liquid
@@ -75,6 +75,16 @@
       "groups": ["header", "footer", "custom.system"]
     },
     "settings": [
+      {
+        "type": "select",
+        "id": "design",
+        "label": "Design",
+        "default": "default",
+        "options": [
+          { "value": "default", "label": "Default" },
+          { "value": "design_1", "label": "Design 1 - cca" }
+        ]
+      },
       {
         "type": "checkbox",
         "id": "enable_border",
