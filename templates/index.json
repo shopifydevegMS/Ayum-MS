@@ -371,8 +371,55 @@
     },
     "icon_box_freeze_dry": {
       "type": "icon-box",
-      "name": "How we freeze-dry",
       "blocks": {
+        "fd_step1_St12Wx": {
+          "type": "_icon_box",
+          "settings": {
+            "url": "",
+            "open_in_new_tab": false,
+            "icon_position": "left",
+            "icon_color_scheme": "scheme-brand-pink",
+            "image_width": 50,
+            "svg_upload": "<img src=\"{{ 'ayum-icon-freeze.svg' | asset_url }}\" alt=\"\" width=\"30\" height=\"30\" loading=\"lazy\">",
+            "svg_width": 30,
+            "svg_width_mb": 22,
+            "heading": "1 · تجميد سريع",
+            "description": "تجميد عند −40° يقفل الطعم واللون داخل المنتج."
+          },
+          "blocks": {}
+        },
+        "fd_step2_St34Yz": {
+          "type": "_icon_box",
+          "settings": {
+            "url": "",
+            "open_in_new_tab": false,
+            "icon_position": "left",
+            "icon_color_scheme": "scheme-brand-cyan",
+            "image_width": 50,
+            "svg_upload": "<img src=\"{{ 'ayum-icon-vacuum.svg' | asset_url }}\" alt=\"\" width=\"30\" height=\"30\" loading=\"lazy\">",
+            "svg_width": 30,
+            "svg_width_mb": 22,
+            "heading": "2 · سحب الماء",
+            "description": "التفريغ يحوّل الثلج لبخار مباشرة — بدون حرارة تحرق النكهة."
+          },
+          "blocks": {}
+        },
+        "fd_step3_St56Za": {
+          "type": "_icon_box",
+          "settings": {
+            "url": "",
+            "open_in_new_tab": false,
+            "icon_position": "left",
+            "icon_color_scheme": "scheme-brand-green",
+            "image_width": 50,
+            "svg_upload": "<img src=\"{{ 'ayum-icon-pack.svg' | asset_url }}\" alt=\"\" width=\"30\" height=\"30\" loading=\"lazy\">",
+            "svg_width": 30,
+            "svg_width_mb": 22,
+            "heading": "3 · تعبئة محكمة",
+            "description": "عبوة مفرّغة من الهواء تحفظ القرمشة لشهور بدون مواد حافظة."
+          },
+          "blocks": {}
+        },
         "icon-box": {
           "type": "section-heading",
           "static": true,
@@ -394,7 +441,8 @@
                 "font_size_heading_lg": 36,
                 "font_size_heading": 21,
                 "letter_spacing_heading": 0
-              }
+              },
+              "blocks": {}
             },
             "fd_subheading_Sb34Cd": {
               "type": "_sub_heading_section",
@@ -407,7 +455,8 @@
                 "font_size_text_lg": 16,
                 "font_size_text": 14,
                 "letter_spacing_text": 0
-              }
+              },
+              "blocks": {}
             },
             "fd_chips_Ch56Ef": {
               "type": "group",
@@ -416,10 +465,15 @@
                 "vertical_on_mobile": false,
                 "horizontal_alignment": "center",
                 "vertical_alignment": "center",
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
                 "gap": 10,
                 "width": "fill",
+                "custom_width": 100,
                 "width_mobile": "fill",
+                "custom_width_mobile": 100,
                 "colors_by_block": false,
+                "color_scheme": "",
                 "group_rounded": "",
                 "padding_top": 0,
                 "padding_bottom": 0,
@@ -432,11 +486,16 @@
                   "type": "group",
                   "settings": {
                     "content_direction": "row",
+                    "vertical_on_mobile": false,
                     "horizontal_alignment": "center",
                     "vertical_alignment": "center",
+                    "horizontal_alignment_flex_direction_column": "flex-start",
+                    "vertical_alignment_flex_direction_column": "center",
                     "gap": 0,
                     "width": "fit-content",
+                    "custom_width": 100,
                     "width_mobile": "fit-content",
+                    "custom_width_mobile": 100,
                     "colors_by_block": true,
                     "color_scheme": "scheme-brand-green",
                     "group_rounded": "hdt-radius-full",
@@ -451,13 +510,20 @@
                       "type": "text",
                       "settings": {
                         "text": "<p>تصنيع كويتي 100%</p>",
+                        "hidden_br_mobile": false,
+                        "hidden_on_mobile": false,
+                        "ffamily": "",
                         "text_size": "custom",
+                        "line_height": "",
                         "font_weight": "bold",
                         "text_color": "hdt-s-text",
+                        "countdown": "2025-12-30 15:00:00",
+                        "txt_day": "days",
                         "font_size_text_lg": 13,
                         "font_size_text": 12,
                         "letter_spacing_text": 0
-                      }
+                      },
+                      "blocks": {}
                     }
                   },
                   "block_order": [
@@ -468,11 +534,16 @@
                   "type": "group",
                   "settings": {
                     "content_direction": "row",
+                    "vertical_on_mobile": false,
                     "horizontal_alignment": "center",
                     "vertical_alignment": "center",
+                    "horizontal_alignment_flex_direction_column": "flex-start",
+                    "vertical_alignment_flex_direction_column": "center",
                     "gap": 0,
                     "width": "fit-content",
+                    "custom_width": 100,
                     "width_mobile": "fit-content",
+                    "custom_width_mobile": 100,
                     "colors_by_block": true,
                     "color_scheme": "scheme-brand-orange",
                     "group_rounded": "hdt-radius-full",
@@ -487,13 +558,20 @@
                       "type": "text",
                       "settings": {
                         "text": "<p>مناسب لكل الأعمار</p>",
+                        "hidden_br_mobile": false,
+                        "hidden_on_mobile": false,
+                        "ffamily": "",
                         "text_size": "custom",
+                        "line_height": "",
                         "font_weight": "bold",
                         "text_color": "hdt-s-text",
+                        "countdown": "2025-12-30 15:00:00",
+                        "txt_day": "days",
                         "font_size_text_lg": 13,
                         "font_size_text": 12,
                         "letter_spacing_text": 0
-                      }
+                      },
+                      "blocks": {}
                     }
                   },
                   "block_order": [
@@ -504,11 +582,16 @@
                   "type": "group",
                   "settings": {
                     "content_direction": "row",
+                    "vertical_on_mobile": false,
                     "horizontal_alignment": "center",
                     "vertical_alignment": "center",
+                    "horizontal_alignment_flex_direction_column": "flex-start",
+                    "vertical_alignment_flex_direction_column": "center",
                     "gap": 0,
                     "width": "fit-content",
+                    "custom_width": 100,
                     "width_mobile": "fit-content",
+                    "custom_width_mobile": 100,
                     "colors_by_block": true,
                     "color_scheme": "scheme-brand-pink",
                     "group_rounded": "hdt-radius-full",
@@ -523,13 +606,20 @@
                       "type": "text",
                       "settings": {
                         "text": "<p>بدون ألوان صناعية</p>",
+                        "hidden_br_mobile": false,
+                        "hidden_on_mobile": false,
+                        "ffamily": "",
                         "text_size": "custom",
+                        "line_height": "",
                         "font_weight": "bold",
                         "text_color": "hdt-s-text",
+                        "countdown": "2025-12-30 15:00:00",
+                        "txt_day": "days",
                         "font_size_text_lg": 13,
                         "font_size_text": 12,
                         "letter_spacing_text": 0
-                      }
+                      },
+                      "blocks": {}
                     }
                   },
                   "block_order": [
@@ -540,11 +630,16 @@
                   "type": "group",
                   "settings": {
                     "content_direction": "row",
+                    "vertical_on_mobile": false,
                     "horizontal_alignment": "center",
                     "vertical_alignment": "center",
+                    "horizontal_alignment_flex_direction_column": "flex-start",
+                    "vertical_alignment_flex_direction_column": "center",
                     "gap": 0,
                     "width": "fit-content",
+                    "custom_width": 100,
                     "width_mobile": "fit-content",
+                    "custom_width_mobile": 100,
                     "colors_by_block": true,
                     "color_scheme": "scheme-brand-cyan",
                     "group_rounded": "hdt-radius-full",
@@ -559,13 +654,20 @@
                       "type": "text",
                       "settings": {
                         "text": "<p>بدون مواد حافظة</p>",
+                        "hidden_br_mobile": false,
+                        "hidden_on_mobile": false,
+                        "ffamily": "",
                         "text_size": "custom",
+                        "line_height": "",
                         "font_weight": "bold",
                         "text_color": "hdt-s-text",
+                        "countdown": "2025-12-30 15:00:00",
+                        "txt_day": "days",
                         "font_size_text_lg": 13,
                         "font_size_text": 12,
                         "letter_spacing_text": 0
-                      }
+                      },
+                      "blocks": {}
                     }
                   },
                   "block_order": [
@@ -586,48 +688,6 @@
             "fd_subheading_Sb34Cd",
             "fd_chips_Ch56Ef"
           ]
-        },
-        "fd_step1_St12Wx": {
-          "type": "_icon_box",
-          "settings": {
-            "url": "",
-            "open_in_new_tab": false,
-            "icon_position": "left",
-            "icon_color_scheme": "scheme-brand-pink",
-            "svg_upload": "<img src=\"{{ 'ayum-icon-freeze.svg' | asset_url }}\" alt=\"\" width=\"30\" height=\"30\" loading=\"lazy\">",
-            "svg_width": 30,
-            "svg_width_mb": 22,
-            "heading": "1 · تجميد سريع",
-            "description": "تجميد عند −40° يقفل الطعم واللون داخل المنتج."
-          }
-        },
-        "fd_step2_St34Yz": {
-          "type": "_icon_box",
-          "settings": {
-            "url": "",
-            "open_in_new_tab": false,
-            "icon_position": "left",
-            "icon_color_scheme": "scheme-brand-cyan",
-            "svg_upload": "<img src=\"{{ 'ayum-icon-vacuum.svg' | asset_url }}\" alt=\"\" width=\"30\" height=\"30\" loading=\"lazy\">",
-            "svg_width": 30,
-            "svg_width_mb": 22,
-            "heading": "2 · سحب الماء",
-            "description": "التفريغ يحوّل الثلج لبخار مباشرة — بدون حرارة تحرق النكهة."
-          }
-        },
-        "fd_step3_St56Za": {
-          "type": "_icon_box",
-          "settings": {
-            "url": "",
-            "open_in_new_tab": false,
-            "icon_position": "left",
-            "icon_color_scheme": "scheme-brand-green",
-            "svg_upload": "<img src=\"{{ 'ayum-icon-pack.svg' | asset_url }}\" alt=\"\" width=\"30\" height=\"30\" loading=\"lazy\">",
-            "svg_width": 30,
-            "svg_width_mb": 22,
-            "heading": "3 · تعبئة محكمة",
-            "description": "عبوة مفرّغة من الهواء تحفظ القرمشة لشهور بدون مواد حافظة."
-          }
         }
       },
       "block_order": [
@@ -635,10 +695,18 @@
         "fd_step2_St34Yz",
         "fd_step3_St56Za"
       ],
+      "name": "How we freeze-dry",
       "settings": {
         "design": "design_1",
         "enable_border": false,
         "enable_box_shadow": false,
+        "border_color": "#f6f6f8",
+        "heading_color": "#222222",
+        "icon_color": "#222222",
+        "description_color": "#878787",
+        "color_box": "#ffffff",
+        "color_box_hover": "#eb4c4e",
+        "color_content_hover": "#ffffff",
         "source": "svg",
         "padding": "28px,28px,42px,12px",
         "col_dk": "3",
@@ -649,6 +717,23 @@
         "space_horizontal_mb": "8",
         "space_vertical_mb": "8",
         "layout": "grid",
+        "loop": false,
+        "autoplay": 0,
+        "pauseOnHover": false,
+        "navUI": false,
+        "nav_position": "default",
+        "nav_visible": "always",
+        "nav_style": "default",
+        "nav_shape": "default",
+        "nav_size": "small",
+        "nav_hide_mobile": false,
+        "dotUI": false,
+        "pag_style": "default",
+        "pag_rounded": false,
+        "pag_space": 10,
+        "pag_mgt": 10,
+        "only_show_mobile": false,
+        "pag_hide_mobile": false,
         "colors_by_section": true,
         "color_scheme": "scheme-freeze-dry",
         "background_opacity": 1,
@@ -662,8 +747,79 @@
     },
     "testimonials_reviews": {
       "type": "testimonial_section",
-      "name": "Customer reviews",
       "blocks": {
+        "rv_review1_Rd78Hi": {
+          "type": "_testimonial_item",
+          "settings": {
+            "heading": "",
+            "content": "<p>الفراولة طعمها أقوى من الطازجة، وبنتي تاخذها بالمدرسة.</p>",
+            "title": "سارة · السالمية",
+            "pos": "جيلي بيتزا مجفف",
+            "rating": 5,
+            "badge": "شراء موثّق"
+          },
+          "blocks": {}
+        },
+        "rv_review2_Re90Jk": {
+          "type": "_testimonial_item",
+          "settings": {
+            "heading": "",
+            "content": "<p>صوّرت الفيديو وهي تتكسر ونشرته، جاني 30 سؤال بيوم واحد.</p>",
+            "title": "أحمد · حولي",
+            "pos": "توزيعات مناسبات",
+            "rating": 5,
+            "badge": "شراء موثّق"
+          },
+          "blocks": {}
+        },
+        "rv_review3_Rf12Lm": {
+          "type": "_testimonial_item",
+          "settings": {
+            "heading": "",
+            "content": "<p>طلبت السكيتلز للتوزيعات وكل البنات سألوا وين شريتها.</p>",
+            "title": "نورة · الجهراء",
+            "pos": "سكيتلز مجفف بالتجميد",
+            "rating": 5,
+            "badge": "شراء موثّق"
+          },
+          "blocks": {}
+        },
+        "testimonial_item_7ydpka": {
+          "type": "_testimonial_item",
+          "settings": {
+            "heading": "",
+            "content": "<p>طلبت السكيتلز للتوزيعات وكل البنات سألوا وين شريتها.</p>",
+            "title": "نورة · الجهراء",
+            "pos": "سكيتلز مجفف بالتجميد",
+            "rating": 5,
+            "badge": "شراء موثّق"
+          },
+          "blocks": {}
+        },
+        "testimonial_item_LpkDKB": {
+          "type": "_testimonial_item",
+          "settings": {
+            "heading": "",
+            "content": "<p>طلبت السكيتلز للتوزيعات وكل البنات سألوا وين شريتها.</p>",
+            "title": "نورة · الجهراء",
+            "pos": "سكيتلز مجفف بالتجميد",
+            "rating": 5,
+            "badge": "شراء موثّق"
+          },
+          "blocks": {}
+        },
+        "testimonial_item_Q9H7xh": {
+          "type": "_testimonial_item",
+          "settings": {
+            "heading": "",
+            "content": "<p>طلبت السكيتلز للتوزيعات وكل البنات سألوا وين شريتها.</p>",
+            "title": "نورة · الجهراء",
+            "pos": "سكيتلز مجفف بالتجميد",
+            "rating": 5,
+            "badge": "شراء موثّق"
+          },
+          "blocks": {}
+        },
         "our-team": {
           "type": "section-heading",
           "static": true,
@@ -686,7 +842,8 @@
                 "font_size_text_lg": 32,
                 "font_size_text": 24,
                 "letter_spacing_text": 0
-              }
+              },
+              "blocks": {}
             },
             "rv_heading_Rb34De": {
               "type": "_heading_section",
@@ -698,7 +855,8 @@
                 "font_size_heading_lg": 36,
                 "font_size_heading": 21,
                 "letter_spacing_heading": 0
-              }
+              },
+              "blocks": {}
             },
             "rv_subheading_Rc56Fg": {
               "type": "_sub_heading_section",
@@ -711,7 +869,8 @@
                 "font_size_text_lg": 16,
                 "font_size_text": 14,
                 "letter_spacing_text": 0
-              }
+              },
+              "blocks": {}
             }
           },
           "block_order": [
@@ -719,48 +878,24 @@
             "rv_heading_Rb34De",
             "rv_subheading_Rc56Fg"
           ]
-        },
-        "rv_review1_Rd78Hi": {
-          "type": "_testimonial_item",
-          "settings": {
-            "heading": "",
-            "content": "<p>الفراولة طعمها أقوى من الطازجة، وبنتي تاخذها بالمدرسة.</p>",
-            "title": "سارة · السالمية",
-            "pos": "جيلي بيتزا مجفف",
-            "rating": 5,
-            "badge": "شراء موثّق"
-          }
-        },
-        "rv_review2_Re90Jk": {
-          "type": "_testimonial_item",
-          "settings": {
-            "heading": "",
-            "content": "<p>صوّرت الفيديو وهي تتكسر ونشرته، جاني 30 سؤال بيوم واحد.</p>",
-            "title": "أحمد · حولي",
-            "pos": "توزيعات مناسبات",
-            "rating": 5,
-            "badge": "شراء موثّق"
-          }
-        },
-        "rv_review3_Rf12Lm": {
-          "type": "_testimonial_item",
-          "settings": {
-            "heading": "",
-            "content": "<p>طلبت السكيتلز للتوزيعات وكل البنات سألوا وين شريتها.</p>",
-            "title": "نورة · الجهراء",
-            "pos": "سكيتلز مجفف بالتجميد",
-            "rating": 5,
-            "badge": "شراء موثّق"
-          }
         }
       },
       "block_order": [
         "rv_review1_Rd78Hi",
         "rv_review2_Re90Jk",
-        "rv_review3_Rf12Lm"
+        "rv_review3_Rf12Lm",
+        "testimonial_item_7ydpka",
+        "testimonial_item_LpkDKB",
+        "testimonial_item_Q9H7xh"
       ],
+      "name": "Customer reviews",
       "settings": {
         "ter_des": "9",
+        "cl_name": "#222222",
+        "cl_content": "#878787",
+        "cl_bd": "",
+        "cl_bg_item": "",
+        "bdr": 0,
         "content_align": "left",
         "col_dk": "3",
         "col_tb": "2",
@@ -774,6 +909,12 @@
         "autoplay": 0,
         "pauseOnHover": false,
         "navUI": false,
+        "nav_position": "default",
+        "nav_visible": "always",
+        "nav_style": "default",
+        "nav_shape": "default",
+        "nav_size": "small",
+        "nav_hide_mobile": false,
         "dotUI": true,
         "pag_style": "full",
         "pag_rounded": true,
