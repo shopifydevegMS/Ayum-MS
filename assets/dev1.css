@@ -1020,10 +1020,9 @@
   unicode-bidi: isolate;
 }
 
-/* Bundle titles are one line in Figma: no 2-line reservation here */
-.cca-bundles.cca-bundles .hdt-pr-style7 .hdt-card-product__title {
-  min-height: 0;
-}
+/* Aligned card content: the title keeps the shared 2-line space (rule above, clamped
+   at 2) and the subtitle keeps 1 line even when empty (below), so every card's price
+   and button start at the same height whether a title wraps or a subtitle is missing. */
 
 /* Prices: current (start) + compare-at (end), native card-price markup */
 .cca-bundles.cca-bundles .hdt-pr-style7 .hdt-price__list {
