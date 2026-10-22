@@ -99,7 +99,8 @@
                 "show_inventory_tracked": true,
                 "show_inventory_quantity": true,
                 "show_progress_bar": false,
-                "progress_bar_max": 50
+                "progress_bar_max": 50,
+                "cca_stock_text": true
               },
               "blocks": {}
             },

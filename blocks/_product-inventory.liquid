@@ -81,7 +81,7 @@
         <circle cx="7.5" cy="7.5" r="7.5" fill="currentColor"></circle>
         <circle cx="7.5" cy="7.5" r="5" stroke="rgb(255, 255, 255)" stroke-width="1" fill="currentColor"></circle>
       </svg>
-      <span class="hdt-s-text">{{- 'products.product.inventory_low_stock_show_count_html' | t: quantity: inventory_quantity -}}</span>
+      <span class="hdt-s-text">{%- if block.settings.cca_stock_text -%}{%- comment -%} AYUM: optional low-stock wording (off by default = native text) {%- endcomment -%}{{- 'products.product.cca_low_stock_show_count_html' | t: quantity: inventory_quantity -}}{%- else -%}{{- 'products.product.inventory_low_stock_show_count_html' | t: quantity: inventory_quantity -}}{%- endif -%}</span>
     </span>
     <span class="hdt-inline-flex hdt-align-center hdt-stock-status hdt-stock-success" in-stock{% unless in_stock %} hidden{% endunless %}>
       <svg width="15" height="15" aria-hidden="true">
@@ -169,6 +169,13 @@
       "label": "t:sections.main-product.blocks.inventory.settings.progress_bar_max.label",
       "default": 50,
       "visible_if": "{{ block.settings.show_progress_bar == true }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "cca_stock_text",
+      "label": "AYUM low-stock wording (cca)",
+      "info": "Shows \"In stock — only N left\" instead of \"Low stock: N left\".",
+      "default": false
     }
   ],
   "presets": [{ "name": "t:sections.main-product.blocks.inventory.name" }]

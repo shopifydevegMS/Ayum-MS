@@ -149,7 +149,7 @@
                   <button type="button" class="cca-nutrition__btn" aria-disabled="true">{{ cca_nutrition_label }}</button>
                 {%- endif -%}
               </div>
-            {%- endif -%}
+            {%- endif %}
             <hdt-slider-thumb {% if block.settings.enable_thumb_efect %} stagger {% endif %} id="slider-thumb-{{ block.id }}-{{ product.id }}" aria-controls="slider-{{ block.id }}-{{ product.id }}" autoheight class="hdt-slider hdt-ratio--{{ block.settings.image_ratio }}{% unless block.settings.image_size %} hdt-ratio--contain{% endunless %} hdt-slides-4 hdt-slide-spacing-10{% if mobile_media_layout != 'thumbnails' %} hdt-hidden lg:hdt-block{% endif %}" config='{ "active": {% if mobile_media_layout != 'thumbnails' %}false{% else %}true{% endif %}{{ start_index }}, "autoHeight": false, "classNames": false, "dragFree": false, "slidesToScroll": 1, {% if block.settings.cca_nutrition_label != blank %}"containScroll": "trimSnaps", "align": "start",{% else %}"align": "center",{% endif %} "axis": "x", "slides": ".hdt-slider__slide:not([hidden])"{% if desktop_media_layout == 'thumbnail_left' or desktop_media_layout == 'thumbnail_right' %}, "breakpoints": { "(min-width: 1150px)": { "active": true, "axis": "y", "watchSlides": false } }{% endif %} }'>
               <div class="hdt-slider__viewport">
                 <div class="hdt-slider__container">
