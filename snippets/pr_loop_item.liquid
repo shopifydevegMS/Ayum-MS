@@ -23,8 +23,11 @@
         endif -%}
         <a data-pr-url href="{{ product.url }}" class="hdt-card-product__title hdt-text-base hdt-line-clamp hdt-loop-title" data-instant>{{ product.title | escape }}</a>
         {%- render 'card-price', section_id: section_id, product: product, show_volume_note: true, price_class: "hdt-text-base" -%}
-        {%- if settings.show_ultra_btn and block.settings.show_ultra_btn %}
-          {% render 'btn-ultra', class: 'hdt-pr_btn', product: product, product_url: product.url, section_id: section_id, disable_sr_only: true, show_qty: settings.show_qty, attr: attr, placement: 'top', tooltip_auto: 'will-hidden-txt', tooltip_inner: tooltip_inner %}
+        {%- comment -%} AYUM: optional show_btn / add_label params (from _product_complimentary); blank keeps the native behavior {%- endcomment -%}
+        {%- assign cca_show_btn = block.settings.show_ultra_btn -%}
+        {%- if show_btn -%}{%- assign cca_show_btn = true -%}{%- endif -%}
+        {%- if settings.show_ultra_btn and cca_show_btn %}
+          {% render 'btn-ultra', class: 'hdt-pr_btn', product: product, product_url: product.url, section_id: section_id, disable_sr_only: true, show_qty: settings.show_qty, attr: attr, placement: 'top', tooltip_auto: 'will-hidden-txt', tooltip_inner: tooltip_inner, add_label: add_label %}
         {% endif -%}
       </div>
     </div>

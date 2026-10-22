@@ -15,7 +15,7 @@
         <ul class="hdt-product__complimentary-list hdt-ratio--adapt_image">
         {%- for product in product.metafields.shopify--discovery--product_recommendation.complementary_products.value -%}
           <li class="hdt-product__complimentary-item">
-            {%- render 'pr_loop_item', section_id: block.id, product: product, sizes: "84px", widths: "84, 100, 180, 200" -%}
+            {%- render 'pr_loop_item', section_id: block.id, product: product, sizes: "84px", widths: "84, 100, 180, 200", show_btn: block.settings.show_ultra_btn, add_label: block.settings.cca_add_label -%}
           </li>
         {%- endfor -%}
         </ul>
@@ -39,6 +39,13 @@
       "id": "show_ultra_btn",
       "label": "Show button add to cart",
       "default": false
+    },
+    {
+      "type": "text",
+      "id": "cca_add_label",
+      "label": "Button label (cca)",
+      "info": "Shows the button as text instead of an icon. Leave blank for the theme default.",
+      "visible_if": "{{ block.settings.show_ultra_btn }}"
     }
   ],
   "presets": [

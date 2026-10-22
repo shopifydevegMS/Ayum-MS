@@ -124,8 +124,33 @@
               {%- render 'open_lightbox_icon' -%}
             {%- endif -%}
           </div>
-          <div class="hdt-product-media__thumb hdt-text-center">
-            <hdt-slider-thumb {% if block.settings.enable_thumb_efect %} stagger {% endif %} id="slider-thumb-{{ block.id }}-{{ product.id }}" aria-controls="slider-{{ block.id }}-{{ product.id }}" autoheight class="hdt-slider hdt-ratio--{{ block.settings.image_ratio }}{% unless block.settings.image_size %} hdt-ratio--contain{% endunless %} hdt-slides-4 hdt-slide-spacing-10{% if mobile_media_layout != 'thumbnails' %} hdt-hidden lg:hdt-block{% endif %}" config='{ "active": {% if mobile_media_layout != 'thumbnails' %}false{% else %}true{% endif %}{{ start_index }}, "autoHeight": false, "classNames": false, "dragFree": false, "slidesToScroll": 1, "align": "center", "axis": "x", "slides": ".hdt-slider__slide:not([hidden])"{% if desktop_media_layout == 'thumbnail_left' or desktop_media_layout == 'thumbnail_right' %}, "breakpoints": { "(min-width: 1150px)": { "active": true, "axis": "y", "watchSlides": false } }{% endif %} }'>
+          <div class="hdt-product-media__thumb hdt-text-center{% if block.settings.cca_nutrition_label != blank %} cca-media-thumb{% endif %}">
+            {%- if block.settings.cca_nutrition_label != blank -%}
+              {%- comment -%} AYUM: nutrition button beside the thumbnails (blank label = not rendered) {%- endcomment -%}
+              {%- assign cca_nutrition_label = block.settings.cca_nutrition_label | escape -%}
+              {%- assign cca_nutrition_page = block.settings.cca_nutrition_page -%}
+              <div class="cca-nutrition">
+                {%- if cca_nutrition_page.content != blank -%}
+                  <button type="button" class="cca-nutrition__btn" aria-controls="modal-{{ block.id }}-nutrition" aria-expanded="false">{{ cca_nutrition_label }}</button>
+                  <hdt-modal class="hdt-modal hdt-product__modal hdt-modal__link-popup hdt-contents" color-scheme="{{ settings.color_scheme_dialog }}">
+                    <dialog id="modal-{{ block.id }}-nutrition" class="hdt-dialog hdt-dialog-modal" scroll-lock>
+                      <div class="hdt-dialog-modal__header">
+                        <h3 class="hdt-product__modal-title">{{ cca_nutrition_label }}</h3>
+                        <button ref="closeButton" class="hdt-s-text hdt-dialog-btn__close" aria-controls="modal-{{ block.id }}-nutrition" aria-label="{{ 'accessibility.close' | t | escape }}">{%- render 'icon' with 'close' -%}</button>
+                      </div>
+                      <div class="hdt-dialog-modal__inner hdt-current-scrollbar">
+                        <div class="hdt-rte">{{ cca_nutrition_page.content }}</div>
+                      </div>
+                    </dialog>
+                  </hdt-modal>
+                {%- elsif block.settings.cca_nutrition_url != blank -%}
+                  <a class="cca-nutrition__btn" href="{{ block.settings.cca_nutrition_url }}">{{ cca_nutrition_label }}</a>
+                {%- else -%}
+                  <button type="button" class="cca-nutrition__btn" aria-disabled="true">{{ cca_nutrition_label }}</button>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+            <hdt-slider-thumb {% if block.settings.enable_thumb_efect %} stagger {% endif %} id="slider-thumb-{{ block.id }}-{{ product.id }}" aria-controls="slider-{{ block.id }}-{{ product.id }}" autoheight class="hdt-slider hdt-ratio--{{ block.settings.image_ratio }}{% unless block.settings.image_size %} hdt-ratio--contain{% endunless %} hdt-slides-4 hdt-slide-spacing-10{% if mobile_media_layout != 'thumbnails' %} hdt-hidden lg:hdt-block{% endif %}" config='{ "active": {% if mobile_media_layout != 'thumbnails' %}false{% else %}true{% endif %}{{ start_index }}, "autoHeight": false, "classNames": false, "dragFree": false, "slidesToScroll": 1, {% if block.settings.cca_nutrition_label != blank %}"containScroll": "trimSnaps", "align": "start",{% else %}"align": "center",{% endif %} "axis": "x", "slides": ".hdt-slider__slide:not([hidden])"{% if desktop_media_layout == 'thumbnail_left' or desktop_media_layout == 'thumbnail_right' %}, "breakpoints": { "(min-width: 1150px)": { "active": true, "axis": "y", "watchSlides": false } }{% endif %} }'>
               <div class="hdt-slider__viewport">
                 <div class="hdt-slider__container">
                   {%- liquid
@@ -620,6 +645,28 @@
       "label": "t:blocks.carousel.settings.pagination.pag_hide_mobile",
       "default": false,
       "visible_if": "{{ block.settings.navUI }}",
+    },
+    {
+      "type": "header",
+      "content": "Nutrition button (cca)",
+      "info": "Shown beside the thumbnails with the bottom-thumbnails layout. Leave the label blank to hide it."
+    },
+    {
+      "type": "text",
+      "id": "cca_nutrition_label",
+      "label": "Button label"
+    },
+    {
+      "type": "page",
+      "id": "cca_nutrition_page",
+      "label": "Popup page",
+      "info": "Opens the page content in a popup. Connect it to a product metafield to show each product's own nutrition facts."
+    },
+    {
+      "type": "url",
+      "id": "cca_nutrition_url",
+      "label": "Link",
+      "info": "Used when no popup page is set."
     },
   ],
   /*"presets": [{ "name": "t:sections.main-product.blocks.medias.name" }]*/

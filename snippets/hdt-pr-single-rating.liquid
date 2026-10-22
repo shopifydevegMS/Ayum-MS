@@ -1,0 +1,31 @@
+{%- comment -%}
+  AYUM: product page rating (was an empty hook).
+  Reads Shopify's standard review metafields, which Judge.me (and other review apps)
+  keep in sync: reviews.rating and reviews.rating_count. Renders nothing for a
+  product without reviews, so no placeholder stars or counts are ever shown.
+  Accepts:
+  - product: {Object} Product Liquid object (required)
+  - link: {String} URL or #anchor of the reviews list (optional; no link when blank)
+  Usage:
+  {%- render 'hdt-pr-single-rating', product: product, link: '#reviews' -%}
+{%- endcomment -%}
+{%- liquid
+  assign cca_rating = product.metafields.reviews.rating.value
+  assign cca_count = product.metafields.reviews.rating_count.value | default: 0 | plus: 0
+-%}
+{%- if cca_rating != blank and cca_count > 0 -%}
+  {%- liquid
+    assign cca_value = cca_rating.rating | plus: 0
+    assign cca_max = cca_rating.scale_max | default: 5 | plus: 0
+    assign cca_pct = cca_value | times: 100.0 | divided_by: cca_max | round: 1
+    assign cca_label = 'accessibility.star_reviews_info' | t: rating_value: cca_value, rating_max: cca_max
+  -%}
+  <div class="cca-rating cca-rating--single">
+    <span class="cca-rating__value" aria-hidden="true">{{ cca_value | round: 1 }}</span>
+    <span class="cca-rating__stars" style="--cca-rating-pct: {{ cca_pct }}%;" role="img" aria-label="{{ cca_label | escape }}"></span>
+    <span class="cca-rating__count">{{ 'products.product.cca_reviews_count' | t: count: cca_count }}</span>
+    {%- if link != blank -%}
+      <a class="cca-rating__link" href="{{ link | escape }}">{{ 'products.product.cca_read_reviews' | t }}</a>
+    {%- endif -%}
+  </div>
+{%- endif -%}

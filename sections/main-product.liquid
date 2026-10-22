@@ -21,7 +21,7 @@
 
 %}
 
-<div class="hdt-section-inner hdt-s-gradient hdt-section-spacing hdt-section-spacing-{{ section.id }}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};"{%- endif %} hdt-reveal="fade-in">
+<div class="hdt-section-inner hdt-s-gradient hdt-section-spacing hdt-section-spacing-{{ section.id }}{% if section.settings.design == 'design_1' %} cca-main-product{% endif %}"{%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};"{%- endif %} hdt-reveal="fade-in">
   <div class="hdt-container{% if section.settings.fullwidth %}-full hdt-px-15{% endif %}">
     <div class="hdt-secion-main-product--{{ section.id }} hdt-row-grid hdt-grid-cols-1 md:hdt-grid-cols-3">
       {% content_for 'block', type: '_product_sidebar',  id: 'main-product-sidebar' %}
@@ -156,6 +156,22 @@
   ],
   "max_blocks": 1,
   "settings": [
+    {
+      "type": "select",
+      "id": "design",
+      "label": "Design",
+      "default": "default",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "design_1",
+          "label": "Design 1 - cca"
+        }
+      ]
+    },
     {
       "type": "header",
       "content": "t:sections.main-product.settings.header_fbt.content"

@@ -37,12 +37,15 @@
               "type": "_product-title",
               "settings": {
                 "txt_tr_pr": "none",
-                "tag": "h2",
+                "tag": "h1",
                 "heading_size": "h_custom",
-                "font_size_heading_lg": 16,
-                "font_size_heading": 16,
-                "font_weight": "semibold",
-                "letter_spacing_heading": 0
+                "font_size_heading_lg": 34,
+                "font_size_heading": 25,
+                "font_weight": "bold",
+                "letter_spacing_heading": 0,
+                "cca_show_badges": true,
+                "cca_show_rating": true,
+                "cca_reviews_link": ""
               },
               "blocks": {}
             },
@@ -54,12 +57,48 @@
             "product_description_AJaqwJ": {
               "type": "_product-description",
               "settings": {
-                
-                "short_des": "<p>Go kalles this summer with this vintage navy and white striped v-neck t-shirt from the Nike. Perfect for pairing with denim and white kicks for a stylish kalles vibe.</p>",
+
+                "short_des": "",
                 "readm": false,
                 "length": 130,
                 "readm_txt": "Read more",
                 "readl_txt": "Read less"
+              },
+              "blocks": {}
+            },
+            "text_cca_love": {
+              "type": "text",
+              "settings": {
+                "text": "<p><strong>ليش بتحبه</strong></p><ul><li>نكهته واضحة وتخليك تدمنه</li><li>قوام كرنشي بدون سكر أو إضافات</li><li>مناسب للكبار والصغار</li></ul>",
+                "custom_class": "cca-pdp-love"
+              },
+              "blocks": {}
+            },
+            "product_inventory_cca": {
+              "type": "_product-inventory",
+              "settings": {
+                "inventory_threshold": 10,
+                "show_inventory_tracked": true,
+                "show_inventory_quantity": true,
+                "show_progress_bar": false,
+                "progress_bar_max": 50
+              },
+              "blocks": {}
+            },
+            "product_complimentary_cca": {
+              "type": "_product_complimentary",
+              "settings": {
+                "text": "عادةً يُشترى معه:",
+                "show_ultra_btn": true,
+                "cca_add_label": "أضِفه إلى طلبي"
+              },
+              "blocks": {}
+            },
+            "text_cca_perks": {
+              "type": "text",
+              "settings": {
+                "text": "<ul><li>التوصيل المتوقع: خلال 24 ساعة داخل الكويت</li><li>إرجاع خلال 7 أيام · دفع K-Net وApple Pay</li></ul>",
+                "custom_class": "cca-pdp-perks"
               },
               "blocks": {}
             },
@@ -86,12 +125,12 @@
                 "show_quantity_selector": true,
                 "show_dynamic_checkout": false,
                 "show_gift_card_recipient": true,
-                "show_wishlist": true,
-                "show_compare": true,
+                "show_wishlist": false,
+                "show_compare": false,
                 "ani": "hdt-ani-shake is--infinite",
                 "time": 6,
-                "btn_transform": "hdt-uppercase",
-                "btn_style": "hdt-btn-accent",
+                "btn_transform": "",
+                "btn_style": "",
                 "btn_fullwidth": false
               },
               "blocks": {}
@@ -106,12 +145,14 @@
             },
             "product_pickup_Jpchr6": {
               "type": "_product-pickup",
+              "disabled": true,
               "name": "t:sections.main-product.blocks.pickup_availability.name",
               "settings": {},
               "blocks": {}
             },
             "product_trust_badge_QALnxQ": {
               "type": "_product-trust-badge",
+              "disabled": true,
               "settings": {
                 "mess": "",
                 "size": 16,
@@ -125,6 +166,7 @@
             },
             "product_extra_link_HfDmDV": {
               "type": "_product-extra-link",
+              "disabled": true,
               "settings": {},
               "blocks": {
                 "product_size_chart_6Y9gBm": {
@@ -157,6 +199,7 @@
             },
             "product_meta_hnDEjn": {
               "type": "_product-meta",
+              "disabled": true,
               "settings": {},
               "blocks": {
                 "product_meta_available_hVC3VU": {
@@ -190,6 +233,7 @@
             },
             "socials_XYJPwj": {
               "type": "socials",
+              "disabled": true,
               "settings": {
                 "text_color": "hdt-s-text",
                 "type": "share",
@@ -210,12 +254,16 @@
           },
           "block_order": [
             "product_title_ehRqkq",
-            "product_price_9JizTC",
             "product_description_AJaqwJ",
+            "text_cca_love",
+            "product_inventory_cca",
             "product_variant_picker_WMmDTM",
+            "product_price_9JizTC",
             "quantity_selector_tarLcL",
             "product_buy_button_aPmAbD",
             "product_back_instock_qMdMA6",
+            "product_complimentary_cca",
+            "text_cca_perks",
             "product_pickup_Jpchr6",
             "product_trust_badge_QALnxQ",
             "product_extra_link_HfDmDV",
@@ -227,18 +275,18 @@
           "type": "_product-medias",
           "static": true,
           "settings": {
-            "desktop_media_layout": "thumbnail_left",
+            "desktop_media_layout": "thumbnail_bottom",
             "media_size": "medium",
             "mobile_media_layout": "thumbnails",
             "show_first_media": false,
             "use_select_varaint_change_media": true,
-            "enable_media_autoplay": false,
+            "enable_media_autoplay": true,
             "enable_video_looping": false,
             "enable_thumb_efect": true,
-            "image_ratio": "adapt_image",
+            "image_ratio": "square",
             "image_size": true,
             "image_zoom": "zoom_lightbox",
-            "enable_lightbox_icon": false,
+            "enable_lightbox_icon": true,
             "image_zoom_type": "external",
             "zoom_level": 2,
             "max_zoom_lightbox": 3,
@@ -246,7 +294,9 @@
             "nav_style": "outline",
             "nav_shape": "rounded",
             "nav_size": "small",
-            "nav_hide_mobile": true
+            "nav_hide_mobile": false,
+            "cca_nutrition_label": "القيمة الغذائية",
+            "cca_nutrition_url": ""
           },
           "blocks": {}
         }
@@ -255,18 +305,20 @@
         "group_product_9RYttB"
       ],
       "settings": {
+        "design": "design_1",
         "product_list_fbt": [],
         "sticky_atc": true,
+        "hdt_show_sticky_atc": "hdt_show_scrolls_outside_the_scope_of_the_form",
         "ani": "hdt-ani-shake is--infinite",
         "time": 6,
         "btn_transform": "hdt-uppercase",
         "btn_style": "hdt-btn-accent",
-        "colors_by_section": false,
-        "color_scheme": "",
+        "colors_by_section": true,
+        "color_scheme": "scheme-freeze-dry",
         "background_opacity": 1,
         "fullwidth": false,
-        "pd": "30px,,60px,",
-        "pd_mb": "22px,,45px,",
+        "pd": "48px,,48px,",
+        "pd_mb": "24px,,24px,",
         "mg": "",
         "mg_mb": ""
       }

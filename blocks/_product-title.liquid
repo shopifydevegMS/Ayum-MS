@@ -14,6 +14,17 @@
   {%- endstyle -%}
 {%- endif -%}
 <div id="block-{{ block.id }}" class="hdt-product-info__item hdt-product__title" {{ block.shopify_attributes }} style="text-transform: {{ block.settings.txt_tr_pr }}">
+  {%- comment -%} AYUM: optional badges + rating above the title (both off by default) {%- endcomment -%}
+  {%- if block.settings.cca_show_badges and product.metafields.theme.custom_badges.value != blank -%}
+    <div class="cca-product-badges">
+      {%- for badge in product.metafields.theme.custom_badges.value limit: 5 -%}
+        <span class="cca-product-badges__item">{{ badge | escape }}</span>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+  {%- if block.settings.cca_show_rating -%}
+    {%- render 'hdt-pr-single-rating', product: product, link: block.settings.cca_reviews_link -%}
+  {%- endif -%}
   {%- if section.settings.product != blank -%}
     <{{ block.settings.tag }} class="hdt-{{ block.settings.heading_size }} hdt-font-{{ block.settings.font_weight }}">
       <a href="{{ product.url }}" class="hdt-inline-block hdt-s-text">
@@ -199,6 +210,31 @@
         "id":"create_link",
         "label": "t:sections.main-product.blocks.title.settings.create_link.label",
       }*/
+      {
+        "type": "header",
+        "content": "Badges and rating (cca)"
+      },
+      {
+        "type": "checkbox",
+        "id": "cca_show_badges",
+        "label": "Show product badges",
+        "info": "From the product metafield theme.custom_badges (list of text).",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "cca_show_rating",
+        "label": "Show rating",
+        "info": "From the review metafields reviews.rating / reviews.rating_count. Hidden when the product has no reviews.",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "cca_reviews_link",
+        "label": "Reviews link",
+        "info": "URL or #anchor of the reviews list. Leave blank for no link.",
+        "visible_if": "{{ block.settings.cca_show_rating }}"
+      }
     ],
 		"presets": [
       {
