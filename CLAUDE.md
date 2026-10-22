@@ -86,5 +86,7 @@ On branch `dev2`, `assets/dev2.css` replaces `main.css` for all of these rules. 
 - Every rule in `dev2.css` is anchored on a `cca-` class (e.g. `.cca-collection .hdt-card-product`). To restyle a theme element, add a `cca-` class to its markup and keep its `hdt-` classes.
 - Group `dev2.css` by feature, with a comment header per section.
 - Only values that need Liquid (settings, `section.id`) go in an inline `{% style %}` in the section, and only as `--cca-` variables that `dev2.css` uses.
+- **Out-rank the native rule, don't tie it.** `dev2.css` loads in `<head>`, but most sections load their own stylesheet later in `<body>` (`hdt-icon-box.css`, `testimonials.css`, …), and `theme.css` uses nested selectors. On equal specificity the theme wins, so the override silently does nothing. When a rule overrides a property the theme also sets, find the native selector first and use a more specific one: double the scope class (`.cca-home-faq.cca-home-faq .hdt-accordion-item`) or add one more class. Use `!important` only against an `#id` rule or an inline style, with a comment saying why. Before calling it done, check the computed value in the browser.
+- **Don't pad or size an element that native JS animates.** For example, `<hdt-accordion>` animates `<details>` from its `<summary>` height, so padding on `<details>` breaks it. Put spacing on the inner parts (`summary`, the content) instead.
 
 Full rules are in §2.3a of the `generate-section` skill.

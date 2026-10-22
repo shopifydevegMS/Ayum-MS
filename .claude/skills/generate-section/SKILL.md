@@ -116,6 +116,12 @@ All AYUM CSS changes are **additive and live in one file**, so the user can see 
 - **Group `dev2.css` by feature** with a comment header per section/component (e.g. `/* ==== cca-pagination — collection page ==== */`), so a single feature's CSS can also be removed on its own.
 - **Exception: values that need Liquid** (per-instance settings, `section.id`, colors from a setting) can't go in a static `.css` file. Put those in an inline `{% style %}` block in the section, and emit **only `--cca-` custom properties** there, scoped to `#shopify-section-{{ section.id }}`. `dev2.css` then uses those variables. Spacing via `{% render 'spacing-vars', box: section %}` stays as the theme does it.
 - `dev2.css` loads on every page (last in `snippets/css-variables.liquid`), so keep it lean: no duplicated rules, no unused rules left behind after a change.
+- **Out-rank the native rule, don't tie it (permanent — verified failures: icon-box cards, testimonial cards, FAQ card padding).** `dev2.css` loads in `<head>`, but section stylesheets (`hdt-icon-box.css`, `testimonials.css`, `hdt-image-with-text.css`, …) load later in `<body>`, and `theme.css` uses nested selectors whose specificity is easy to misread. On equal specificity the native rule wins and the override silently does nothing. For every property you override:
+  1. Find the native selector(s) that set it (grep `assets/*.css`, including the section's own stylesheet).
+  2. Write a selector with higher specificity: double the scope class (`.cca-home-faq.cca-home-faq .hdt-accordion-item`) or add one more class from the real DOM.
+  3. Use `!important` only when the native value comes from an `#id` selector (e.g. the section-heading margin, the accordion list gap) or an inline style, and comment why.
+  4. Confirm the computed value in the browser (`getComputedStyle`) before reporting it done.
+- **Don't pad or size an element that native JS animates.** `<hdt-accordion>` animates `<details>` from `summary.clientHeight` to `details.scrollHeight`, so padding on `<details>` breaks the open/close motion. Put spacing on the inner parts (`summary`, `.hdt-accordion-content`). Check for inline `style.height` / `timeline()` / `animate()` in the component before styling its box.
 
 ### 2.4 JavaScript architecture
 
@@ -977,6 +983,7 @@ Project-specific additions, each learned from a real failure or constraint in th
 - [ ] Preserved identifiers, presets, merchant data, native behavior, app boundaries, and the The4 license code.
 - [ ] Custom class setting present (or an existing equivalent reused); all CSS scoped.
 - [ ] All new CSS is in `assets/dev2.css`, every new class is `cca-`-prefixed, every rule is anchored on a `cca-` class (§2.3a).
+- [ ] Every override out-ranks the native selector it replaces (not a tie), and its computed value was checked in the browser (§2.3a).
 - [ ] Colors come from color schemes (§2.8a); no hardcoded colors, no unneeded color settings.
 - [ ] Used tokens, logical properties, `ThemeEvents`, shared snippets — no hardcoded colors/fonts/spacing, no invented events, no DOM-parsed money, no Figma URLs.
 - [ ] Blank/empty states, mobile media fallback, and preset all handled.
