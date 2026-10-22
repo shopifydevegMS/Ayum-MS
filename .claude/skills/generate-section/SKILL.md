@@ -100,23 +100,23 @@ Re-verify anything marked *Needs verification* before relying on it.
 - Design tokens live in `snippets/css-variables.liquid` inside a `:root { … }` `{% style %}` block, computed from `settings.*`. Families: spacing `--spacing-*`, colors `--color-*` / `--hdt-btn-*`, typography `--f_family_1..5` / `--font-*` / `--text-*` / `--h0-size..h6-size` (+ `-mb` mobile), layout `--container-max-width*`, radii `--radius-*`.
 - **`--color-*` tokens are space-separated RGB triplets** (e.g. `34 34 34`), consumed as `rgb(var(--color-x))` or `rgb(var(--color-x) / .5)`. `color: var(--color-foreground)` alone is invalid.
 - Global CSS loads **once**, at the end of `css-variables.liquid`: `base.css` + `theme.css` (preload), then `product-card.css`, `collection-products.css`. Do not re-load these anywhere. `base.css` is a Tailwind-preflight + `hdt-` utility library — **do not hand-edit**.
-- Per-section CSS is lazy-loaded as the **first line(s)** of the section file: `{{ 'NAME.css' | asset_url | stylesheet_tag }}`. The theme uses external `asset_url` stylesheets exclusively — there are **zero** `{% stylesheet %}` embedded blocks. (This is how the *theme's own* sections load CSS. AYUM changes don't follow it; they go in `dev1.css`, see §2.3a.)
+- Per-section CSS is lazy-loaded as the **first line(s)** of the section file: `{{ 'NAME.css' | asset_url | stylesheet_tag }}`. The theme uses external `asset_url` stylesheets exclusively — there are **zero** `{% stylesheet %}` embedded blocks. (This is how the *theme's own* sections load CSS. AYUM changes don't follow it; they go in `dev2.css`, see §2.3a.)
 - Instance-scoped CSS goes in an inline `{% style %}` block scoped by `#shopify-section-{{ section.id }}` (or `.hdt-section-spacing-{{ section.id }}` via `{% render 'spacing-vars', box: section %}`).
-- AYUM's global custom override file is **`assets/dev1.css`** (created by the user in place of the previous project's `custom-general.css`). It is loaded **once**, globally, as the last stylesheet in `snippets/css-variables.liquid` (after `base.css`, `theme.css`, `product-card.css`, `collection-products.css`, `main.css`). On branch `dev1` it replaces `main.css` for every rule here; `main.css` stays loaded for other branches but gets no CSS on this branch, so its rules win over theme CSS at equal specificity. Do not load it anywhere else. Never create a second global override file. Use a global override file only for cross-page, custom-class-scoped overrides — not for section-local styling.
-- Do not create custom-class-gated or per-section stylesheets for AYUM work; instance-specific CSS goes in `dev1.css` under the instance's `cca-` class (§2.3a). Do not reuse a previous-project-specific stylesheet or class name.
+- AYUM's global custom override file is **`assets/dev2.css`** (created by the user in place of the previous project's `custom-general.css`). It is loaded **once**, globally, as the last stylesheet in `snippets/css-variables.liquid` (after `base.css`, `theme.css`, `product-card.css`, `collection-products.css`, `main.css`). On branch `dev2` it replaces `main.css` for every rule here; `main.css` stays loaded for other branches but gets no CSS on this branch, so its rules win over theme CSS at equal specificity. Do not load it anywhere else. Never create a second global override file. Use a global override file only for cross-page, custom-class-scoped overrides — not for section-local styling.
+- Do not create custom-class-gated or per-section stylesheets for AYUM work; instance-specific CSS goes in `dev2.css` under the instance's `cca-` class (§2.3a). Do not reuse a previous-project-specific stylesheet or class name.
 
-### 2.3a `cca-` prefix + `assets/dev1.css` (permanent — user rule)
+### 2.3a `cca-` prefix + `assets/dev2.css` (permanent — user rule)
 
-All AYUM CSS changes are **additive and live in one file**, so the user can see every change in one place and remove them all by deleting `assets/dev1.css`.
+All AYUM CSS changes are **additive and live in one file**, so the user can see every change in one place and remove them all by deleting `assets/dev2.css`.
 
 - **Every new CSS class Claude adds starts with `cca-`**, e.g. `cca-pagination`, `cca-collection-strip`, `cca-filter-sheet__header` (BEM-style `__element` / `--modifier` after the prefix is fine). New CSS custom properties use `--cca-` (e.g. `--cca-card-gap`). Before using a name, grep the repo to confirm it's unused.
-- **All new CSS goes in `assets/dev1.css`.** Don't create per-section stylesheets for AYUM work, and don't edit the theme's own stylesheets (`base.css`, `theme.css`, `product-card.css`, the per-section `*.css` files, etc.).
-- **Every rule in `dev1.css` must be anchored on a `cca-` class**, e.g. `.cca-pagination { … }` or `.cca-collection .hdt-card-product { … }`. That way it only affects markup Claude marked, and never restyles native theme output on its own. A bare `.hdt-…` selector without a `cca-` ancestor is not allowed.
-- **Restyling an existing theme element:** add a `cca-` class to its markup (or to a wrapper, switched on by the section's AYUM design option, §6) and target it from `dev1.css`. Keep the native `hdt-` classes; only add new ones.
-- **Group `dev1.css` by feature** with a comment header per section/component (e.g. `/* ==== cca-pagination — collection page ==== */`), so a single feature's CSS can also be removed on its own.
-- **Exception: values that need Liquid** (per-instance settings, `section.id`, colors from a setting) can't go in a static `.css` file. Put those in an inline `{% style %}` block in the section, and emit **only `--cca-` custom properties** there, scoped to `#shopify-section-{{ section.id }}`. `dev1.css` then uses those variables. Spacing via `{% render 'spacing-vars', box: section %}` stays as the theme does it.
-- `dev1.css` loads on every page (last in `snippets/css-variables.liquid`), so keep it lean: no duplicated rules, no unused rules left behind after a change.
-- **Out-rank the native rule, don't tie it (permanent — verified failures: icon-box cards, testimonial cards, FAQ card padding).** `dev1.css` loads in `<head>`, but section stylesheets (`hdt-icon-box.css`, `testimonials.css`, `hdt-image-with-text.css`, …) load later in `<body>`, and `theme.css` uses nested selectors whose specificity is easy to misread. On equal specificity the native rule wins and the override silently does nothing. For every property you override:
+- **All new CSS goes in `assets/dev2.css`.** Don't create per-section stylesheets for AYUM work, and don't edit the theme's own stylesheets (`base.css`, `theme.css`, `product-card.css`, the per-section `*.css` files, etc.).
+- **Every rule in `dev2.css` must be anchored on a `cca-` class**, e.g. `.cca-pagination { … }` or `.cca-collection .hdt-card-product { … }`. That way it only affects markup Claude marked, and never restyles native theme output on its own. A bare `.hdt-…` selector without a `cca-` ancestor is not allowed.
+- **Restyling an existing theme element:** add a `cca-` class to its markup (or to a wrapper, switched on by the section's AYUM design option, §6) and target it from `dev2.css`. Keep the native `hdt-` classes; only add new ones.
+- **Group `dev2.css` by feature** with a comment header per section/component (e.g. `/* ==== cca-pagination — collection page ==== */`), so a single feature's CSS can also be removed on its own.
+- **Exception: values that need Liquid** (per-instance settings, `section.id`, colors from a setting) can't go in a static `.css` file. Put those in an inline `{% style %}` block in the section, and emit **only `--cca-` custom properties** there, scoped to `#shopify-section-{{ section.id }}`. `dev2.css` then uses those variables. Spacing via `{% render 'spacing-vars', box: section %}` stays as the theme does it.
+- `dev2.css` loads on every page (last in `snippets/css-variables.liquid`), so keep it lean: no duplicated rules, no unused rules left behind after a change.
+- **Out-rank the native rule, don't tie it (permanent — verified failures: icon-box cards, testimonial cards, FAQ card padding).** `dev2.css` loads in `<head>`, but section stylesheets (`hdt-icon-box.css`, `testimonials.css`, `hdt-image-with-text.css`, …) load later in `<body>`, and `theme.css` uses nested selectors whose specificity is easy to misread. On equal specificity the native rule wins and the override silently does nothing. For every property you override:
   1. Find the native selector(s) that set it (grep `assets/*.css`, including the section's own stylesheet).
   2. Write a selector with higher specificity: double the scope class (`.cca-home-faq.cca-home-faq .hdt-accordion-item`) or add one more class from the real DOM.
   3. Use `!important` only when the native value comes from an `#id` selector (e.g. the section-heading margin, the accordion list gap) or an inline style, and comment why.
@@ -396,7 +396,7 @@ An isolated new section is acceptable when the design requires structural markup
 ```
 
 - In the Liquid, the AYUM option adds the stable scope class to the **outermost section wrapper**, keeping all native classes: `{% if section.settings.design == 'design_1' %} cca-hero-slider{% endif %}` (or `collection_des == '16'`, `tabs_des == 'design_1'`). All AYUM CSS for that section is anchored on that class, so every other instance (default option) is untouched.
-- A new option value may have no native CSS of its own (e.g. `hdt-collection-style16`). Reproduce the native layout it is based on inside the `cca-` scope in `dev1.css` (e.g. design 16 reproduces design 8's static title bar), instead of editing native snippets.
+- A new option value may have no native CSS of its own (e.g. `hdt-collection-style16`). Reproduce the native layout it is based on inside the `cca-` scope in `dev2.css` (e.g. design 16 reproduces design 8's static title bar), instead of editing native snippets.
 - Markup that must differ for the AYUM design (e.g. the hero's Figma arrow SVG) is wrapped in the same condition, with the native markup in `{% else %}`.
 - Set the option in the instance's template JSON (§7a) — never a class string.
 - **Blocks** (heading / text / button) still use their optional `custom_class` text setting: one block type plays several roles in a design (badge, description, mobile description), which a single design option can't express. Ask the user before converting a block to design options.
@@ -505,8 +505,8 @@ Before editing CSS, inspect the project and identify the correct stylesheet for 
 | Need | Location |
 | --- | --- |
 | Instance-specific values that need Liquid (colors from settings, gated logic) | inline `{% style %}` in the section, scoped to `#shopify-section-{{ section.id }}`, emitting only `--cca-` variables (§2.3a) |
-| Any new AYUM rule (section, block, card, override) | `assets/dev1.css`, anchored on a `cca-` class (§2.3a) |
-| Rules gated to one instance of a **shared** section | `assets/dev1.css`, selectors prefixed with that instance's `cca-` custom class |
+| Any new AYUM rule (section, block, card, override) | `assets/dev2.css`, anchored on a `cca-` class (§2.3a) |
+| Rules gated to one instance of a **shared** section | `assets/dev2.css`, selectors prefixed with that instance's `cca-` custom class |
 | Truly global rule | a token in `css-variables.liquid` — **never** a section file, never `base.css` |
 
 Never hardcode a color, spacing, radius, or width where a token exists. **Colors follow §2.8a: color scheme variables first, a new color scheme second, a per-section color setting only as a last resort.** When a color setting is unavoidable, emit it as `{{ setting.rgb }}` and wrap usages in `rgb(...)`.
@@ -575,7 +575,7 @@ Preserve: drag · swipe · keyboard behavior where supported · navigation · pa
 **Every AYUM section that uses a carousel (`<hdt-slider>` product / collection / card track) gets this fix.** Hero/slideshow, product media galleries, thumbnails and quick view are excluded — they don't sit inside a padded container.
 
 - **Root cause (measured in the live preview with real drags):** the native `.hdt-slider__viewport` has `overflow: hidden` and sits *inside* the `.hdt-container` side padding, so while dragging, cards are cut 16px (mobile) / 20px (desktop) before the container edge and seem to slide behind an invisible gutter.
-- **Fix:** the viewport stops clipping and the container clips at its **outer** edge — the screen edge on phones/tablets, the 1320px container edge on wide screens. Add the section's scope class to the shared rule in `assets/dev1.css` ("cca carousel edges") instead of writing a new copy:
+- **Fix:** the viewport stops clipping and the container clips at its **outer** edge — the screen edge on phones/tablets, the 1320px container edge on wide screens. Add the section's scope class to the shared rule in `assets/dev2.css` ("cca carousel edges") instead of writing a new copy:
 
 ```css
 .cca-<section>.cca-<section> .hdt-container {
@@ -756,7 +756,7 @@ Before claiming completion, verify:
 - the target instance in the template JSON is filled with the Figma content and settings (§7a), and nothing else in that file changed
 - the diff is limited to the intended files
 
-Practical checks that work here: JSON parse of every edited `{% schema %}` and template JSON; brace/tag balance; `git diff --stat` to confirm scope; grep for physical `left`/`right` in new CSS; grep for `var(--color-` not wrapped in `rgb(`; grep for new `@media` values outside 768/1150; grep `assets/dev1.css` to confirm every rule is anchored on a `cca-` class; grep the diff to confirm no CSS was added outside `dev1.css` (except `--cca-` variables in inline `{% style %}`).
+Practical checks that work here: JSON parse of every edited `{% schema %}` and template JSON; brace/tag balance; `git diff --stat` to confirm scope; grep for physical `left`/`right` in new CSS; grep for `var(--color-` not wrapped in `rgb(`; grep for new `@media` values outside 768/1150; grep `assets/dev2.css` to confirm every rule is anchored on a `cca-` class; grep the diff to confirm no CSS was added outside `dev2.css` (except `--cca-` variables in inline `{% style %}`).
 
 **Do not run destructive commands. Do not run broad formatting across unrelated files. Never run `shopify theme check` yourself — when it would help, ask the user in the chat to run it and share the output.** Never report it as passed unless the user shared a passing result.
 
@@ -817,7 +817,7 @@ Screenshots:        [links/attachments — visual confirmation only]
 Dynamic content source: [settings / blocks / product / collection / metafield / menu / app]
 Grid or carousel behavior: [desktop / tablet / mobile]
 Related product-card requirements: [card style, badges, price, add-to-cart placement]
-Correct CSS file: assets/dev1.css (+ inline {% style %} with --cca- variables only if Liquid values are needed)
+Correct CSS file: assets/dev2.css (+ inline {% style %} with --cca- variables only if Liquid values are needed)
 Existing section/base to inspect: [file path(s)]
 
 RULES (all mandatory):
@@ -897,7 +897,7 @@ Project-specific additions, each learned from a real failure or constraint in th
 - introducing a third layout breakpoint (only 768 and 1150 exist)
 - hardcoding `font-family` instead of using the theme font tokens (the theme font — currently Almarai — is already global)
 - putting Liquid inside a plain static `.css` asset
-- adding a new CSS class without the `cca-` prefix, putting AYUM CSS anywhere but `assets/dev1.css`, or writing a `dev1.css` rule not anchored on a `cca-` class (§2.3a)
+- adding a new CSS class without the `cca-` prefix, putting AYUM CSS anywhere but `assets/dev2.css`, or writing a `dev2.css` rule not anchored on a `cca-` class (§2.3a)
 - registering a custom element name that collides with a native `hdt-` component
 - copying `block.shopify_attributes` onto a duplicated/decorative DOM copy
 - inventing testimonial/review/marketing content that does not exist — seed only verified copy and leave the rest for the merchant
@@ -942,7 +942,7 @@ Project-specific additions, each learned from a real failure or constraint in th
 | Situation | Action |
 | --- | --- |
 | Existing section/snippet/component already does it | Use as-is; configure via existing settings |
-| Needs a visual tweak only | Add a `cca-` class (or `cca-` custom class value) and style it in `assets/dev1.css` |
+| Needs a visual tweak only | Add a `cca-` class (or `cca-` custom class value) and style it in `assets/dev2.css` |
 | New behavior useful to all instances | Add an additive setting/param, or extend the shared snippet/base class |
 | Behavior must be isolated to one surface | Custom-class-gated markup/CSS or a blank-default setting on the original first; duplicate the closest file only after proving those insufficient **and getting user approval** (§5.0) |
 | Change would regress a live shared instance or its preset | Prove an inert additive setting can't avoid the regression; only then, with user approval, build an isolated new section reusing the theme's conventions inside it |
@@ -985,7 +985,7 @@ Project-specific additions, each learned from a real failure or constraint in th
 - [ ] Edited only editable source — no `*.min.js`, `base.css`, `theme.css`, or `settings_data.json` hand-edits (except an additive color scheme, §2.8a).
 - [ ] Preserved identifiers, presets, merchant data, native behavior, app boundaries, and the The4 license code.
 - [ ] Custom class setting present (or an existing equivalent reused); all CSS scoped.
-- [ ] All new CSS is in `assets/dev1.css`, every new class is `cca-`-prefixed, every rule is anchored on a `cca-` class (§2.3a).
+- [ ] All new CSS is in `assets/dev2.css`, every new class is `cca-`-prefixed, every rule is anchored on a `cca-` class (§2.3a).
 - [ ] Every override out-ranks the native selector it replaces (not a tie), and its computed value was checked in the browser (§2.3a).
 - [ ] Colors come from color schemes (§2.8a); no hardcoded colors, no unneeded color settings.
 - [ ] Used tokens, logical properties, `ThemeEvents`, shared snippets — no hardcoded colors/fonts/spacing, no invented events, no DOM-parsed money, no Figma URLs.
