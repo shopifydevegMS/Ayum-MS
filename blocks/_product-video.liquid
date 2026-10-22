@@ -1,3 +1,96 @@
+{%- if section.settings.style == '3' -%}
+  {%- comment -%} AYUM card (Style "3 - cca"): video on tap, real product + native add to cart {%- endcomment -%}
+  {%- liquid
+    assign video = block.settings.video
+    assign product = block.settings.product
+    assign poster = block.settings.poster | default: video.preview_image
+    assign duration = ''
+    if video != blank and video.duration > 0
+      assign secs = video.duration | divided_by: 1000
+      assign mins = secs | divided_by: 60
+      assign rest = secs | modulo: 60
+      assign duration = mins | append: ':'
+      if rest < 10
+        assign duration = duration | append: '0'
+      endif
+      assign duration = duration | append: rest
+    endif
+    assign has_video = false
+    if video != blank or block.settings.external_video_url != blank
+      assign has_video = true
+    endif
+  -%}
+  <div id="hdt-media-{{ block.id }}" class="hdt-slider__slide cca-video-slide" {{ block.shopify_attributes }}>
+    <div class="cca-video-card">
+      <div class="cca-video-card__media">
+        {%- if poster != blank -%}
+          {{ poster | image_url: width: 720 | image_tag: loading: 'lazy', widths: '360, 540, 720', sizes: '(min-width: 1150px) 240px, (min-width: 768px) 30vw, 50vw', class: 'cca-video-card__poster', alt: '' }}
+        {%- elsif has_video == false -%}
+          {{ 'image' | placeholder_svg_tag: 'cca-video-card__poster hdt-placeholder-svg' }}
+        {%- endif -%}
+        {%- if video != blank -%}
+          <hdt-video-player type="video" class="cca-video-card__player">
+            <video playsinline preload="none"{% if poster != blank %} poster="{{ poster | image_url: width: 720 }}"{% endif %} aria-label="{{ product.title | default: video.alt | escape }}">
+              {%- for source in video.sources -%}
+                <source src="{{ source.url }}" type="{{ source.mime_type }}">
+              {%- endfor -%}
+            </video>
+          </hdt-video-player>
+        {%- elsif block.settings.external_video_url != blank -%}
+          <hdt-video-player host="{{ block.settings.external_video_url.type }}" class="cca-video-card__player">
+            <template>
+              {%- if block.settings.external_video_url.type == 'youtube' -%}
+                <iframe src="https://www.youtube.com/embed/{{ block.settings.external_video_url.id }}?playsinline=1&autoplay=1&rel=0&modestbranding=1&enablejsapi=1&origin={{ 'https://' | append: request.host | url_encode }}" allow="autoplay; encrypted-media" allowfullscreen="allowfullscreen" title="{{ product.title | escape }}"></iframe>
+              {%- else -%}
+                <iframe src="https://player.vimeo.com/video/{{ block.settings.external_video_url.id }}?autoplay=1&playsinline=1&title=0&byline=0&portrait=0" allow="autoplay; encrypted-media" allowfullscreen="allowfullscreen" title="{{ product.title | escape }}"></iframe>
+              {%- endif -%}
+            </template>
+          </hdt-video-player>
+        {%- endif -%}
+        {%- if block.settings.views != blank -%}
+          <span class="cca-video-card__views">{{ block.settings.views | escape }}</span>
+        {%- endif -%}
+        {%- if duration != blank -%}
+          <span class="cca-video-card__duration">{{ duration }}</span>
+        {%- endif -%}
+        {%- if has_video -%}
+          <button type="button" class="cca-video-card__play" aria-label="{{ 'products.product.media.play_video' | t }}">
+            <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8.97 4.88L20.05 12L8.97 19.12V4.88Z" fill="currentColor" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg>
+          </button>
+        {%- endif -%}
+      </div>
+      {%- if product != blank -%}
+        <div class="cca-video-card__info">
+          <div class="cca-video-card__product">
+            {%- if product.featured_image != blank -%}
+              <a href="{{ product.url }}" class="cca-video-card__thumb" tabindex="-1" aria-hidden="true">
+                {{ product.featured_image | image_url: width: 96 | image_tag: loading: 'lazy', width: 48, height: 48, alt: '' }}
+              </a>
+            {%- endif -%}
+            <div class="cca-video-card__text">
+              {%- if section.settings.product_label != blank -%}
+                <span class="cca-video-card__label">{{ section.settings.product_label | escape }}</span>
+              {%- endif -%}
+              <a href="{{ product.url }}" class="cca-video-card__title">{{ product.title }}</a>
+              <div class="cca-video-card__price">
+                {%- render 'card-price', product: product, price_class: 'hdt-price-wrapp', show_compare_at_price: true -%}
+              </div>
+            </div>
+          </div>
+          <div class="cca-video-card__cta">
+            {%- render 'btn-ultra', product: product, product_url: product.url, section_id: section.id, disable_sr_only: true, add_label: section.settings.button_label -%}
+          </div>
+        </div>
+      {%- elsif request.design_mode -%}
+        <div class="cca-video-card__info">
+          <div class="cca-video-card__text">
+            <span class="cca-video-card__title">{{ 'onboarding.product_title' | t }}</span>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+{%- else -%}
 <div id="hdt-media-{{ block.id }}" class="hdt-slider__slide md:hdt-height--{{ section.settings.image_height }} hdt-height--{{ section.settings.image_height_mb }} hdt-ratio--adapt_image" {{ block.shopify_attributes }} hdt-reveal="slide-in" timeline>
   {%- style -%}
   #hdt-media-{{ block.id }} {
@@ -97,6 +190,7 @@
     {%- endif -%}
   </div>
 </div>
+{%- endif -%}
 
 {% schema %}
   {
@@ -123,6 +217,20 @@
         "type": "product",
         "id": "product",
         "label": "Product"
+      },
+      {
+        "type": "image_picker",
+        "id": "poster",
+        "label": "Poster image",
+        "info": "Optional. Shown before the video plays. Defaults to the video's own preview image.",
+        "visible_if": "{{ section.settings.style == '3' }}"
+      },
+      {
+        "type": "text",
+        "id": "views",
+        "label": "Views label",
+        "info": "Optional, e.g. a real view count. Hidden when blank.",
+        "visible_if": "{{ section.settings.style == '3' }}"
       },
     ],
     "presets": [

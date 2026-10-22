@@ -362,11 +362,13 @@
 
 /* ==== cca carousel edges — shared (every AYUM <hdt-slider> card carousel joins this rule) ==== */
 /* The viewport stops clipping inside the container padding; the container clips at its outer edge. */
-.cca-customer-reviews.cca-customer-reviews .hdt-container {
+.cca-customer-reviews.cca-customer-reviews .hdt-container,
+.cca-shoppable-videos.cca-shoppable-videos .hdt-container {
   overflow-x: clip;
 }
 
-.cca-customer-reviews.cca-customer-reviews .hdt-prent .hdt-slider__viewport {
+.cca-customer-reviews.cca-customer-reviews .hdt-prent .hdt-slider__viewport,
+.cca-shoppable-videos.cca-shoppable-videos hdt-slider .hdt-slider__viewport {
   overflow: visible;
 }
 
@@ -564,5 +566,376 @@
 }
 
 .cca-customer-reviews .hdt-pagination button {
+  opacity: 1;
+}
+
+/* ==== cca-shoppable-videos — homepage "Shoppable videos" (product-video, Style 3 - cca) ==== */
+/* Figma: desktop 2001:366, mobile 2001:861. Colors: scheme-products — text (ink), text2 (muted),
+   background (card + light badge), background2 (media backdrop), line_border (card border),
+   price (pink), button (cyan button + progress), secondary_button_label (views text). */
+
+/* Container: Figma side padding (16px mobile, 20px from 768) */
+.cca-shoppable-videos .hdt-container {
+  padding-inline: 16px;
+}
+
+@media (min-width: 768px) {
+  .cca-shoppable-videos .hdt-container {
+    padding-inline: 20px;
+  }
+}
+
+/* Heading area: Arabic text boundary, centered */
+.cca-shoppable-videos .hdt-section-heading_block {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.cca-shoppable-videos .hdt-section-heading_block .hdt-heading-block {
+  justify-content: center;
+  margin: 0;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+}
+
+.cca-shoppable-videos .hdt-section-heading_block :where(p) {
+  margin: 0;
+}
+
+.cca-shoppable-videos .hdt-section-heading_block .hdt-subheading-block {
+  font-size: 13px; /* Figma 13px; the block mobile size only allows even values */
+  font-weight: var(--font-normal);
+  line-height: 1.8;
+}
+
+@media (max-width: 767px) {
+  .cca-shoppable-videos .hdt-section-heading_block {
+    /* Figma mobile: 14px to the cards. !important is required: the theme sets this
+       margin from the block "Margin bottom" setting with an #id selector. */
+    margin-bottom: 14px !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .cca-shoppable-videos .hdt-section-heading_block .hdt-subheading-block {
+    font-size: var(--text-custom);
+    font-weight: var(--font-bold);
+    line-height: 1.556;
+  }
+}
+
+/* Slider track: Figma gaps (12 / 24 / 38px); mobile card about 46% of the screen (172px at 375) */
+.cca-shoppable-videos hdt-slider {
+  --slide-spacing: 12px;
+}
+
+@media (max-width: 767px) {
+  .cca-shoppable-videos hdt-slider {
+    --slide-size: calc(min(46vw, 240px) + var(--slide-spacing));
+  }
+}
+
+@media (min-width: 768px) {
+  .cca-shoppable-videos hdt-slider {
+    --slide-spacing: 24px;
+  }
+}
+
+@media (min-width: 1150px) {
+  .cca-shoppable-videos hdt-slider {
+    --slide-spacing: 38px;
+  }
+}
+
+/* Mobile: slides other than the active one fade (the slider's own "is-selected" class) */
+.cca-shoppable-videos .cca-video-slide {
+  display: flex;
+}
+
+@media (max-width: 767px) {
+  .cca-shoppable-videos hdt-slider.is--enabled .hdt-slider__slide:not(.is-selected) .cca-video-card {
+    opacity: 0.5;
+  }
+}
+
+/* Card */
+.cca-shoppable-videos .cca-video-card {
+  direction: rtl;
+  unicode-bidi: isolate;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid rgb(var(--color-line-border));
+  border-radius: 16px;
+  background: rgb(var(--color-background));
+  text-align: start;
+  transition: opacity 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cca-shoppable-videos .cca-video-card {
+    transition: none;
+  }
+}
+
+/* Media: 9:16, poster underneath, player on top */
+.cca-shoppable-videos .cca-video-card__media {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  background: rgb(var(--color-background2));
+  cursor: pointer;
+}
+
+.cca-shoppable-videos .cca-video-card__poster,
+.cca-shoppable-videos .cca-video-card__player,
+.cca-shoppable-videos .cca-video-card__player :is(video, iframe) {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  object-fit: cover;
+}
+
+.cca-shoppable-videos .cca-video-card__views,
+.cca-shoppable-videos .cca-video-card__duration {
+  position: absolute;
+  z-index: 2;
+  padding: 3px 9px;
+  border-radius: 9px;
+  font-size: 10px;
+  font-weight: var(--font-bold);
+  line-height: normal;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.cca-shoppable-videos .cca-video-card__views {
+  inset-block-start: 14px;
+  inset-inline-start: 12px;
+  background: rgb(var(--color-background) / 0.9);
+  color: rgb(var(--hdt-btn-outline-color));
+}
+
+.cca-shoppable-videos .cca-video-card__duration {
+  inset-block-end: 17px;
+  inset-inline-end: 12px; /* left side: the card is always RTL */
+  background: rgb(var(--color-foreground) / 0.75);
+  color: rgb(var(--color-background));
+}
+
+.cca-shoppable-videos .cca-video-card__play {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  margin: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(var(--color-foreground) / 0.35);
+  color: rgb(var(--color-background));
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.cca-shoppable-videos .cca-video-card__play svg {
+  width: 24px;
+  height: 24px;
+}
+
+.cca-shoppable-videos .cca-video-card__play:focus-visible {
+  outline: 2px solid rgb(var(--color-background));
+  outline-offset: 2px;
+}
+
+/* While a video plays, hide the overlays (a tap anywhere on the video pauses it) */
+.cca-shoppable-videos .cca-video-card__media:has(hdt-video-player[playing]) :is(.cca-video-card__play, .cca-video-card__views, .cca-video-card__duration) {
+  opacity: 0;
+}
+
+/* Product info */
+.cca-shoppable-videos .cca-video-card__info {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  gap: 8px;
+  padding: 14px;
+}
+
+.cca-shoppable-videos .cca-video-card__product {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cca-shoppable-videos .cca-video-card__thumb {
+  display: none; /* desktop only, as in Figma */
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.cca-shoppable-videos .cca-video-card__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cca-shoppable-videos .cca-video-card__text {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  gap: 8px;
+  min-width: 0;
+}
+
+.cca-shoppable-videos .cca-video-card__label {
+  color: rgb(var(--color-foreground2));
+  font-size: 10px;
+  font-weight: var(--font-bold);
+  line-height: normal;
+}
+
+.cca-shoppable-videos .cca-video-card__title {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  color: rgb(var(--color-foreground));
+  font-size: 17px;
+  font-weight: var(--font-extrabold);
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.cca-shoppable-videos .cca-video-card__price,
+.cca-shoppable-videos .cca-video-card__price * {
+  color: rgb(var(--color-pr-price));
+  font-size: 13px;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+}
+
+/* Compare-at (old) price: muted and struck through, so it differs from the pink sale price */
+.cca-shoppable-videos .cca-video-card__price .hdt-compare-at-price {
+  color: rgb(var(--color-pr-sale-price));
+  font-size: 0.8em;
+  font-weight: var(--font-bold);
+  text-decoration: line-through;
+}
+
+.cca-shoppable-videos .cca-video-card__price .hdt-compare-at-price * {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/* Arabic labels: no truncation clip (it cuts the glyphs) */
+.cca-shoppable-videos .cca-video-card .hdt-truncate {
+  overflow: visible;
+}
+
+/* Native add-to-cart (btn-ultra), shown as a full-width pill with its text label */
+.cca-shoppable-videos .cca-video-card__cta {
+  margin-block-start: auto;
+}
+
+.cca-shoppable-videos .cca-video-card__cta :is(wrapp-hdt-pr-frm, wrapp-hdt-pr-frm > form, .hdt-ultra_btn_parent) {
+  display: block;
+  width: 100%;
+  max-width: none;
+}
+
+.cca-shoppable-videos .cca-video-card__cta .hdt-card-product__btn-ultra {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 20px;
+  background: rgb(var(--hdt-btn-bg));
+  color: rgb(var(--hdt-btn-color));
+  font-size: 12px;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.cca-shoppable-videos .cca-video-card__cta .hdt-card-product__btn-ultra:hover {
+  background: rgb(var(--hdt-btn-hover-bg));
+  color: rgb(var(--hdt-btn-hover-color));
+}
+
+.cca-shoppable-videos .cca-video-card__cta .hdt-pr-card-icon {
+  display: none;
+}
+
+@media (min-width: 1150px) {
+  .cca-shoppable-videos .cca-video-card__views {
+    inset-block-start: 15px;
+    inset-inline-start: 13px;
+  }
+
+  .cca-shoppable-videos .cca-video-card__duration {
+    inset-block-end: 24px;
+    inset-inline-end: 16px;
+  }
+
+  .cca-shoppable-videos .cca-video-card__views,
+  .cca-shoppable-videos .cca-video-card__duration {
+    padding: 4px 10px;
+    border-radius: 10px;
+    font-size: 11px;
+  }
+
+  .cca-shoppable-videos .cca-video-card__info {
+    gap: 10px;
+  }
+
+  .cca-shoppable-videos .cca-video-card__thumb {
+    display: block;
+  }
+
+  .cca-shoppable-videos .cca-video-card__label {
+    display: none;
+  }
+
+  .cca-shoppable-videos .cca-video-card__title {
+    font-size: 15px;
+  }
+
+  .cca-shoppable-videos .cca-video-card__price,
+  .cca-shoppable-videos .cca-video-card__price * {
+    font-size: 17px;
+  }
+
+  .cca-shoppable-videos .cca-video-card__cta .hdt-card-product__btn-ultra {
+    padding-block: 11px;
+    border-radius: 22px;
+    font-size: 17px;
+  }
+}
+
+/* Progress (native "full" pagination): 510px track, tinted base, cyan active segment */
+.cca-shoppable-videos .hdt-pagination {
+  --pag-bg: rgb(var(--hdt-btn-bg) / 0.12);
+  --pag-bg-active: rgb(var(--hdt-btn-bg));
+  width: min(510px, 100%);
+  margin-inline: auto;
+}
+
+.cca-shoppable-videos .hdt-pagination button {
   opacity: 1;
 }

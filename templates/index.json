@@ -932,11 +932,130 @@
         "pd": "48px,,48px,",
         "pd_mb": "24px,,24px,"
       }
+    },
+    "shoppable_videos": {
+      "type": "product-video",
+      "name": "Shoppable videos",
+      "blocks": {
+        "product-video": {
+          "type": "section-heading",
+          "static": true,
+          "settings": {
+            "design_heading": "1",
+            "horizontal": false,
+            "alignment": "center",
+            "heading_gap": 16,
+            "margin_bottom": 32
+          },
+          "blocks": {
+            "sv_heading_Va12Bc": {
+              "type": "_heading_section",
+              "settings": {
+                "heading": "شوفها وهي تتقرمش",
+                "line_height": "",
+                "heading_size": "h_custom",
+                "text_color": "hdt-s-text",
+                "font_size_heading_lg": 36,
+                "font_size_heading": 21,
+                "letter_spacing_heading": 0
+              }
+            },
+            "sv_subheading_Vb34De": {
+              "type": "_sub_heading_section",
+              "settings": {
+                "text": "<p>كل فيديو يوريك منتج واحد — واطلبه من نفس الكارت</p>",
+                "hidden_br_mobile": false,
+                "hidden_on_mobile": false,
+                "text_size": "custom",
+                "text_color": "hdt-text-secondary",
+                "font_size_text_lg": 16,
+                "font_size_text": 14,
+                "letter_spacing_text": 0
+              }
+            }
+          },
+          "block_order": [
+            "sv_heading_Va12Bc",
+            "sv_subheading_Vb34De"
+          ]
+        },
+        "sv_video1_Vc56Fg": {
+          "type": "_product-video",
+          "settings": {
+            "external_video_url": "",
+            "views": ""
+          }
+        },
+        "sv_video2_Vd78Hi": {
+          "type": "_product-video",
+          "settings": {
+            "external_video_url": "",
+            "views": ""
+          }
+        },
+        "sv_video3_Ve90Jk": {
+          "type": "_product-video",
+          "settings": {
+            "external_video_url": "",
+            "views": ""
+          }
+        },
+        "sv_video4_Vf12Lm": {
+          "type": "_product-video",
+          "settings": {
+            "external_video_url": "",
+            "views": ""
+          }
+        },
+        "sv_video5_Vg34No": {
+          "type": "_product-video",
+          "settings": {
+            "external_video_url": "",
+            "views": ""
+          }
+        }
+      },
+      "block_order": [
+        "sv_video1_Vc56Fg",
+        "sv_video2_Vd78Hi",
+        "sv_video3_Ve90Jk",
+        "sv_video4_Vf12Lm",
+        "sv_video5_Vg34No"
+      ],
+      "settings": {
+        "full_width": false,
+        "color_scheme": "scheme-products",
+        "style": "3",
+        "product_label": "المنتج في الفيديو",
+        "button_label": "اطلب المنتج",
+        "image_height": "adapt_image_first",
+        "image_height_mb": "adapt_image_first",
+        "col_dk": "5",
+        "col_tb": "3",
+        "col_mb": "2",
+        "space_items": "x",
+        "loop": false,
+        "autoplay": 0,
+        "pauseOnHover": false,
+        "navUI": false,
+        "dotUI": true,
+        "pag_style": "full",
+        "pag_rounded": true,
+        "pag_space": 0,
+        "pag_mgt": 32,
+        "only_show_mobile": false,
+        "pag_hide_mobile": true,
+        "mg": "",
+        "mg_mb": "",
+        "pd": "64px,,40px,",
+        "pd_mb": "24px,,24px,"
+      }
     }
   },
   "order": [
     "image_text_about_brand",
     "icon_box_freeze_dry",
-    "testimonials_reviews"
+    "testimonials_reviews",
+    "shoppable_videos"
   ]
 }

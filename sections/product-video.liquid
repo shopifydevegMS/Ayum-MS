@@ -19,7 +19,7 @@
 {% endstyle %}
 <div
   id="{{ section.id }}"
-  class="hdt-s-inner hdt-section-spacing hdt-section-spacing-{{ section.id }} hdt-s-gradient{%- if section.settings.image_height == 'full' -%} hdt-fullscreen-desktop{%- endif %} hdt-style-{{ section.settings.style }}"
+  class="hdt-s-inner hdt-section-spacing hdt-section-spacing-{{ section.id }} hdt-s-gradient{%- if section.settings.image_height == 'full' -%} hdt-fullscreen-desktop{%- endif %} hdt-style-{{ section.settings.style }}{% if section.settings.style == '3' %} cca-shoppable-videos{% endif %}"
   color-scheme="{{ section.settings.color_scheme }}"
 >
   <div class="hdt-container{%- if section.settings.full_width -%}-full{%- endif -%}" id="Video-{{ section.id }}">
@@ -43,7 +43,7 @@
         </div>
       {%- endif -%}
     </div>
-    <hdt-slider id="Slider-{{ section.id }}" class="hdt-slider hdt-relative lg:hdt-slides-{{ section.settings.col_dk }} md:hdt-slides-{{ section.settings.col_tb }} hdt-slides-{{ section.settings.col_mb }} hdt-slide-spacing-{{ section.settings.space_items }}" config='{ "id": "Slider-{{ section.id }}", "navUI": "{{ section.settings.navUI }}", "dotUI": true, "loop": {{ section.settings.loop }}, "autoPlay": {{ section.settings.autoplay | times: 1000 }}, "pauseOnHover": {{ section.settings.pauseOnHover }} }'>
+    <hdt-slider id="Slider-{{ section.id }}" class="hdt-slider hdt-relative lg:hdt-slides-{{ section.settings.col_dk }} md:hdt-slides-{{ section.settings.col_tb }} hdt-slides-{{ section.settings.col_mb }} hdt-slide-spacing-{{ section.settings.space_items }}" config='{ "id": "Slider-{{ section.id }}", "navUI": "{{ section.settings.navUI }}", "dotUI": true, "loop": {{ section.settings.loop }}, "autoPlay": {{ section.settings.autoplay | times: 1000 }}, "pauseOnHover": {{ section.settings.pauseOnHover }}{% if section.settings.style == '3' %}, "breakpoints": { "(max-width: 767px)": { "align": "center", "slidesToScroll": 1 } }{% endif %} }'>
       <div class="hdt-slider__viewport hdt-relative">
         <div class="hdt-slider__container">
           {% content_for 'blocks' %}
@@ -95,9 +95,27 @@
         {
           "value": "2",
           "label": "Style 2"
+        },
+        {
+          "value": "3",
+          "label": "3 - cca"
         }
       ],
       "default": "1"
+    },
+    {
+      "type": "text",
+      "id": "product_label",
+      "label": "Product label",
+      "info": "Small text above the product name on mobile, e.g. \"The product in the video\".",
+      "visible_if": "{{ section.settings.style == '3' }}"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "info": "Leave blank to use the theme's add-to-cart text.",
+      "visible_if": "{{ section.settings.style == '3' }}"
     },
     {
       "type": "select",
@@ -178,6 +196,10 @@
         {
           "label": "4",
           "value": "4"
+        },
+        {
+          "label": "5",
+          "value": "5"
         }
       ]
     },
