@@ -400,7 +400,22 @@ An isolated new section is acceptable when the design requires structural markup
 - Markup that must differ for the AYUM design (e.g. the hero's Figma arrow SVG) is wrapped in the same condition, with the native markup in `{% else %}`.
 - Set the option in the instance's template JSON (§7a) — never a class string.
 - **Blocks** (heading / text / button) still use their optional `custom_class` text setting: one block type plays several roles in a design (badge, description, mobile description), which a single design option can't express. Ask the user before converting a block to design options.
-- Single-instance sections that always carry their `cca-` class (announcement bar, header) need neither.
+- **No exceptions for "single-instance" sections.** The header, announcement bar, footer and every other original section get the same design option. A section that has one instance today can be added again, reused on another page or by another project. Never hardcode a `cca-` scope class on a wrapper.
+- **Setting id collision:** if the section already has a setting with id `design` for something else (e.g. `announcement-bar` uses `design` for slider/marquee), name the new select `cca_design` (label "AYUM design").
+
+### 6.1 Original Kalles files stay reusable (permanent — user rule, verified failure)
+
+Every edit to an original Kalles file (`sections/`, `blocks/`, `snippets/`, `assets/custom.js`) must leave the **default output byte-for-byte the same** for any instance that hasn't opted in. A merchant who adds the original section or block fresh from the Theme Editor must get the original Kalles result.
+
+Failure this rule comes from: `cca-header` and `cca-announcement-bar` were added to the section wrappers with no condition, so every instance of those sections picked up AYUM styling. Fixed by gating each behind a design option.
+
+- **Every `cca-` class, AYUM attribute or AYUM markup in an original file is inside a condition** on a setting or design option that is off/blank/`default` by default: `{% if section.settings.design == 'design_1' %} cca-x{% endif %}`, `{% if block.settings.x != blank %}…{% endif %}`. Never write `class="cca-x hdt-…"` without a condition.
+- **Snippet parameters** default to the native behavior when not passed (e.g. `atc_label` blank → theme translation). Callers that don't pass them render exactly as before.
+- **New settings** default to `false`, blank, or `default`. Never change the default, `min`/`max` or options of an existing native setting in a way that changes what existing instances render.
+- **JavaScript in `custom.js`** only acts on elements inside a `cca-` scope (`closest('.cca-x')`), or on a `cca-` custom element. Don't change native components or bind to native selectors on every page.
+- **Turn it on for the live instance**: set the option in the template / section-group JSON (§7a) so the store keeps the AYUM look.
+- **Before reporting done**, grep the diff of every original file for `cca-` and confirm each hit is inside a condition, a `cca-` element, or a Liquid comment:
+  `git diff <base> -- sections blocks snippets | grep '^+' | grep 'cca-'`.
 
 Hard-won lesson (verified in this repo): **never put a layout-affecting box property on the height-observed sticky-header element.** A `border-bottom` on `<hdt-sticky-header>` fed the theme's `ResizeObserver` → `--header-height` feedback loop and inflated the header toward viewport height. Use `box-shadow: inset …` for hairlines on observed elements.
 
@@ -985,6 +1000,7 @@ Project-specific additions, each learned from a real failure or constraint in th
 - [ ] Edited only editable source — no `*.min.js`, `base.css`, `theme.css`, or `settings_data.json` hand-edits (except an additive color scheme, §2.8a).
 - [ ] Preserved identifiers, presets, merchant data, native behavior, app boundaries, and the The4 license code.
 - [ ] Custom class setting present (or an existing equivalent reused); all CSS scoped.
+- [ ] Every `cca-` class / AYUM markup added to an original Kalles file is behind a setting or design option that is off by default; a fresh instance of the section/block renders exactly like Kalles (§6.1).
 - [ ] All new CSS is in `assets/dev2.css`, every new class is `cca-`-prefixed, every rule is anchored on a `cca-` class (§2.3a).
 - [ ] Every override out-ranks the native selector it replaces (not a tie), and its computed value was checked in the browser (§2.3a).
 - [ ] Colors come from color schemes (§2.8a); no hardcoded colors, no unneeded color settings.

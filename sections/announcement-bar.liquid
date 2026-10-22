@@ -137,7 +137,7 @@
 {%- endcapture -%}
 {%- assign cca_default_label = 'sections.announcements.copy_code' | t -%}
 {%- assign cca_default_copied = 'sections.announcements.copied' | t -%}
-<div class="hdt-announcement-bar cca-announcement-bar hdt-s-gradient hdt-type-close-{{ section.settings.close_btn  }}{% if section.settings.show_line_separator and section.blocks.size > 0 %} hdt-announcement-bar--bottom-border{% endif %}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};"{%- endif %}>
+<div class="hdt-announcement-bar{% if section.settings.cca_design == 'design_1' %} cca-announcement-bar{% endif %} hdt-s-gradient hdt-type-close-{{ section.settings.close_btn  }}{% if section.settings.show_line_separator and section.blocks.size > 0 %} hdt-announcement-bar--bottom-border{% endif %}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};"{%- endif %}>
   <div class="hdt-container{% if section.settings.full_width %}-full hdt-px-15{% endif %}">
     {%- if section.blocks.size > 0 -%}
       <div class="hdt-announcement-bar__grid">
@@ -245,6 +245,16 @@
     ]
   },
   "settings": [
+    {
+      "type": "select",
+      "id": "cca_design",
+      "label": "AYUM design",
+      "default": "default",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "design_1", "label": "Design 1 - cca" }
+      ]
+    },
     {
       "type": "checkbox",
       "id": "show_line_separator",

@@ -50,6 +50,18 @@ Rules:
 
 The full workflow (Figma inspection, reporting, CSS/RTL/JS rules, validation) is in the `generate-section` skill: [.claude/skills/generate-section/SKILL.md](.claude/skills/generate-section/SKILL.md).
 
+## Original Kalles files stay reusable (mandatory)
+
+A fresh instance of any original section, block or snippet must render exactly like Kalles. Every AYUM change inside an original file is opt-in:
+
+- Every `cca-` class, AYUM attribute or AYUM markup sits inside a condition on a setting or design option that is off, blank or `default` by default (`{% if section.settings.design == 'design_1' %} cca-header{% endif %}`). Never add a `cca-` class without a condition, even to a section that only has one instance today (header, announcement bar, footer). If the section already uses `design` as a setting id, name the new select `cca_design`.
+- New snippet parameters and settings default to the native behavior. Don't change existing native defaults or options.
+- JavaScript in `custom.js` only acts inside a `cca-` scope or on a `cca-` element.
+- Turn the option on for the live instance in the template / section-group JSON so the store keeps the AYUM look.
+- Before calling it done, grep the added lines in `sections/`, `blocks/` and `snippets/` for `cca-` and confirm each one is gated.
+
+Full rules are in §6.1 of the skill.
+
 ## Fill the template with the Figma content (mandatory)
 
 A section task isn't done when the code works. The section instance on the page must also look like Figma. After the Liquid/CSS/JS changes, edit that instance in the page's template JSON (`templates/index.json` for the homepage, `sections/header-group.json` / `footer-group.json` for header and footer sections, and so on):
