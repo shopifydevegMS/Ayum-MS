@@ -28,7 +28,7 @@
             "letter_spacing_text": 0,
             "space": 15,
             "alignment": "left",
-            "alignment_mb": "left",
+            "alignment_mb": "center",
             "colors_by_section": false,
             "color_scheme": "scheme-c9476b69-abc7-454f-a946-2d5a9f5f3a37",
             "background_opacity": 0,
@@ -38,16 +38,17 @@
             "mg": ",,50px,",
             "mg_mb": ",,30px,",
             "pd": "",
-            "pd_mb": ""
+            "pd_mb": "",
+            "cca_order_mb": 1
           },
           "blocks": {
             "footer_image_d8wFnT": {
               "type": "_footer-image",
               "settings": {
                 "custom_width": "custom",
-                "image_w": 96,
-                "image_w_tb": 96,
-                "image_w_mb": 96
+                "image_w": 154,
+                "image_w_tb": 120,
+                "image_w_mb": 64
               },
               "blocks": {}
             },
@@ -59,7 +60,8 @@
                 "space_md": 30,
                 "space": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "custom_liquid_P3m7HC": {
               "type": "_liquid",
@@ -77,7 +79,8 @@
                 "font_size_text": 14,
                 "letter_spacing_text": 0
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "spacer_ETKTxk": {
               "type": "spacer",
@@ -87,7 +90,8 @@
                 "space_md": 20,
                 "space": 20
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "socials_nemGjD": {
               "type": "socials",
@@ -107,6 +111,13 @@
                 "space_item": 40
               },
               "blocks": {}
+            },
+            "footer_brand_text": {
+              "type": "text",
+              "settings": {
+                "text": "<p>المصنع الوحيد في الكويت لمنتجات التجفيف بالتجميد — فواكه وحلويات وسكيتلز وخضار، تصنيع محلي 100%.</p>",
+                "text_color": "hdt-text-secondary"
+              }
             }
           },
           "block_order": [
@@ -114,13 +125,14 @@
             "spacer_69LYhC",
             "custom_liquid_P3m7HC",
             "spacer_ETKTxk",
+            "footer_brand_text",
             "socials_nemGjD"
           ]
         },
         "footer_column_C3zLBR": {
           "type": "_footer-column",
           "settings": {
-            "col_heading": "Categories",
+            "col_heading": "المتجر",
             "hide_on_desktop": false,
             "hide_on_mobile": false,
             "only_mobile": true,
@@ -141,7 +153,9 @@
             "mg": ",,50px,",
             "mg_mb": ",,30px,",
             "pd": "",
-            "pd_mb": ""
+            "pd_mb": "",
+            "cca_open_mobile": true,
+            "cca_order_mb": 2
           },
           "blocks": {
             "linklist_mTLiQc": {
@@ -166,7 +180,7 @@
         "footer_column_3Dap6p": {
           "type": "_footer-column",
           "settings": {
-            "col_heading": "Information",
+            "col_heading": "خدمة العملاء",
             "hide_on_desktop": false,
             "hide_on_mobile": false,
             "only_mobile": true,
@@ -187,7 +201,8 @@
             "mg": ",,50px,",
             "mg_mb": ",,30px,",
             "pd": "",
-            "pd_mb": ""
+            "pd_mb": "",
+            "cca_order_mb": 3
           },
           "blocks": {
             "linklist_BDr677": {
@@ -212,7 +227,7 @@
         "footer_column_U4EkTn": {
           "type": "_footer-column",
           "settings": {
-            "col_heading": "Useful links",
+            "col_heading": "عن أيم",
             "hide_on_desktop": false,
             "hide_on_mobile": false,
             "only_mobile": true,
@@ -233,7 +248,8 @@
             "mg": ",,50px,",
             "mg_mb": ",,30px,",
             "pd": "",
-            "pd_mb": ""
+            "pd_mb": "",
+            "cca_order_mb": 4
           },
           "blocks": {
             "linklist_cCjYzb": {
@@ -258,7 +274,7 @@
         "footer_column_dYTFqa": {
           "type": "_footer-column",
           "settings": {
-            "col_heading": "Newsletter Signup",
+            "col_heading": "تواصل معنا",
             "hide_on_desktop": false,
             "hide_on_mobile": false,
             "only_mobile": true,
@@ -275,11 +291,12 @@
             "background_opacity": 0,
             "width_lg": 25,
             "width_md": 50,
-            "width": 100,
+            "width": 0,
             "mg": ",,50px,",
             "mg_mb": ",,30px,",
             "pd": "",
-            "pd_mb": ""
+            "pd_mb": "",
+            "cca_order_mb": 5
           },
           "blocks": {
             "text_Mh6Yzg": {
@@ -299,7 +316,8 @@
                 "font_size_text": 14,
                 "letter_spacing_text": 0
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "spacer_NL7ph9": {
               "type": "spacer",
@@ -309,7 +327,8 @@
                 "space_md": 18,
                 "space": 18
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "newsletter_k8PhDN": {
               "type": "_newsletter",
@@ -327,7 +346,8 @@
                 "icon_height": 14,
                 "icon_spacing": 5
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "spacer_QaUeJi": {
               "type": "spacer",
@@ -337,7 +357,8 @@
                 "space_md": 20,
                 "space": 20
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "footer_image_TVmt7r": {
               "type": "_footer-image",
@@ -347,7 +368,18 @@
                 "image_w_tb": 100,
                 "image_w_mb": 100
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
+            },
+            "linklist_contact": {
+              "type": "_linklist",
+              "settings": {
+                "menu_inline": false,
+                "align": "left",
+                "align_mb": "left",
+                "menu": "",
+                "text_size": "base"
+              }
             }
           },
           "block_order": [
@@ -355,27 +387,130 @@
             "spacer_NL7ph9",
             "newsletter_k8PhDN",
             "spacer_QaUeJi",
-            "footer_image_TVmt7r"
+            "footer_image_TVmt7r",
+            "linklist_contact"
+          ]
+        },
+        "footer_column_payments": {
+          "type": "_footer-column",
+          "settings": {
+            "col_heading": "",
+            "hide_on_desktop": false,
+            "hide_on_mobile": false,
+            "only_mobile": false,
+            "sec_heading_size": "lg",
+            "font_size_text_lg": 16,
+            "font_size_text": 14,
+            "font_weight_text": "medium",
+            "letter_spacing_text": 0,
+            "space": 30,
+            "alignment": "left",
+            "alignment_mb": "left",
+            "colors_by_section": false,
+            "color_scheme": "scheme-c9476b69-abc7-454f-a946-2d5a9f5f3a37",
+            "background_opacity": 0,
+            "width_lg": 16,
+            "width_md": 50,
+            "width": 100,
+            "mg": ",,50px,",
+            "mg_mb": ",,30px,",
+            "pd": "",
+            "pd_mb": "",
+            "cca_order_mb": 6
+          },
+          "blocks": {
+            "payments_label": {
+              "type": "text",
+              "settings": {
+                "text": "<p>طرق الدفع</p>",
+                "text_color": "hdt-text-secondary"
+              }
+            },
+            "payments_icons": {
+              "type": "_payment_icons",
+              "settings": {
+                "cca_use_shop_types": true,
+                "svg": "",
+                "height": 27
+              }
+            }
+          },
+          "block_order": [
+            "payments_label",
+            "payments_icons"
+          ]
+        },
+        "footer_column_legal": {
+          "type": "_footer-column",
+          "settings": {
+            "col_heading": "",
+            "hide_on_desktop": false,
+            "hide_on_mobile": false,
+            "only_mobile": false,
+            "sec_heading_size": "lg",
+            "font_size_text_lg": 16,
+            "font_size_text": 14,
+            "font_weight_text": "medium",
+            "letter_spacing_text": 0,
+            "space": 30,
+            "alignment": "left",
+            "alignment_mb": "left",
+            "colors_by_section": false,
+            "color_scheme": "scheme-c9476b69-abc7-454f-a946-2d5a9f5f3a37",
+            "background_opacity": 0,
+            "width_lg": 16,
+            "width_md": 50,
+            "width": 100,
+            "mg": ",,50px,",
+            "mg_mb": ",,30px,",
+            "pd": "",
+            "pd_mb": "",
+            "cca_order_mb": 7
+          },
+          "blocks": {
+            "legal_links": {
+              "type": "_linklist",
+              "settings": {
+                "menu_inline": true,
+                "align": "left",
+                "align_mb": "center",
+                "menu": "",
+                "text_size": "base"
+              }
+            },
+            "legal_copyright": {
+              "type": "_copyright",
+              "settings": {
+                "text": "© [year] أيوم · جميع الحقوق محفوظة"
+              }
+            }
+          },
+          "block_order": [
+            "legal_links",
+            "legal_copyright"
           ]
         }
       },
       "block_order": [
         "footer_column_pA3QPh",
+        "footer_column_U4EkTn",
         "footer_column_C3zLBR",
         "footer_column_3Dap6p",
-        "footer_column_U4EkTn",
-        "footer_column_dYTFqa"
+        "footer_column_dYTFqa",
+        "footer_column_payments",
+        "footer_column_legal"
       ],
       "settings": {
         "collapse": true,
         "full_width": false,
         "mg": "",
         "mg_mb": "",
-        "pd": "75px,,75px,",
-        "pd_mb": "56px,,56px,",
+        "pd": "56px,,32px,",
+        "pd_mb": "32px,,28px,",
         "colors_by_section": true,
-        "color_scheme": "scheme-c9476b69-abc7-454f-a946-2d5a9f5f3a37",
-        "background_opacity": 1
+        "color_scheme": "scheme-footer",
+        "background_opacity": 1,
+        "design": "design_1"
       }
     }
   },

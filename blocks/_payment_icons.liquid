@@ -1,6 +1,11 @@
 <div class="hdt-payments-wrap">
   {%- assign arr = block.settings.svg | remove: ' ' | split: "," -%}
   <div class="hdt-pr hdt-row-flex" style="--height-img:{{ block.settings.height }}px; gap:10px;">
+    {%- if block.settings.cca_use_shop_types -%}
+      {%- for type in shop.enabled_payment_types -%}
+        {{ type | payment_type_svg_tag: class: 'cca-payment-icon' }}
+      {%- endfor -%}
+    {%- endif -%}
     {%- for img in arr -%}
       {%- if img contains 'cust4__' -%}
         {%- assign getIMG = img | remove_first: "cust4__" -%}
@@ -23,6 +28,13 @@
     "name": "t:blocks.payment.name",
     "class": "hdt-payment-icons",
     "settings": [
+      {
+        "type": "checkbox",
+        "id": "cca_use_shop_types",
+        "label": "Show the store's enabled payment methods",
+        "info": "Shows Shopify's icons for the payment methods active in Settings → Payments. Icons from the list below are added after them.",
+        "default": false
+      },
       {
         "type": "textarea",
         "id": "svg",

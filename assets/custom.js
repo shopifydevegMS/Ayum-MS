@@ -487,6 +487,52 @@ window.addEventListener('resize', function () {
   }
 });
 
+// AYUM: keyboard + ARIA for the mobile footer accordion. The native headings are <div>s,
+// so on mobile (where they toggle) they get role="button", focus, Enter/Space and an
+// up-to-date aria-expanded; on desktop (always open) the attributes are removed.
+function ccaSyncFooterAccordionA11y() {
+  const mobile = window.innerWidth < 768;
+  document.querySelectorAll('.hdt-footer-section .hdt-footer-heading').forEach(function (heading) {
+    const interactive = mobile && getComputedStyle(heading).pointerEvents !== 'none';
+    if (interactive) {
+      heading.setAttribute('role', 'button');
+      heading.setAttribute('tabindex', '0');
+      heading.setAttribute('aria-expanded', heading.parentElement.classList.contains('open') ? 'true' : 'false');
+    } else {
+      heading.removeAttribute('role');
+      heading.removeAttribute('tabindex');
+      heading.removeAttribute('aria-expanded');
+    }
+    if (heading.dataset.ccaA11y) return;
+    heading.dataset.ccaA11y = '1';
+    heading.addEventListener('keydown', function (event) {
+      if (heading.getAttribute('role') !== 'button') return;
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        heading.click();
+      }
+    });
+    // runs after the native toggle (bound earlier), so the state is already updated
+    heading.addEventListener('click', function () {
+      if (heading.getAttribute('role') === 'button') {
+        heading.setAttribute('aria-expanded', heading.parentElement.classList.contains('open') ? 'true' : 'false');
+      }
+    });
+  });
+}
+ccaSyncFooterAccordionA11y();
+window.addEventListener('resize', debounce(ccaSyncFooterAccordionA11y, 150));
+
+// Theme Editor: a re-rendered footer gets fresh headings; bind the native toggle once per heading
+document.addEventListener('shopify:section:load', function (event) {
+  if (!event.target.querySelector('.hdt-footer-section')) return;
+  event.target.querySelectorAll('.hdt-footer-heading').forEach(function (element) {
+    element.removeEventListener('click', handleAccordionClick);
+    element.addEventListener('click', handleAccordionClick);
+  });
+  ccaSyncFooterAccordionA11y();
+});
+
 
 // --------------------------
 // Back to top

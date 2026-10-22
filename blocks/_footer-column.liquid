@@ -2,6 +2,7 @@
   {% render 'spacing-vars', box: block %}
   .hdt-group-block--{{ block.id }} {
     --gap: var(--spacing-x);
+    {%- if block.settings.cca_order_mb != blank %} --cca-order-mb: {{ block.settings.cca_order_mb }};{% endif %}
     {%- capture width -%}
     --width-group-lg: {{ block.settings.width_lg }}%;
     --width-group-md: {{ block.settings.width_md }}%;
@@ -61,7 +62,7 @@
 {%- if block.settings.width_lg == 0 %} lg:hdt-hidden{% else %} lg:hdt-flex{% endif -%}
 {%- endcapture -%}
 <div {%- if block.settings.colors_by_section %} color-scheme="{{ block.settings.color_scheme }}" style="--background-opacity: {{ block.settings.background_opacity }};" {%- endif %} class="hdt-group-block--{{ block.id }} hdt-footer-col-block {%- if block.settings.colors_by_section %} hdt-s-gradient {% endif %} {{ visible }} hdt-text-{{ block.settings.alignment_mb }} md:hdt-text-{{ block.settings.alignment }}" {{ block.shopify_attributes }}>
-  <div class="hdt-section-spacing hdt-section-spacing-{{ block.id }}">
+  <div class="hdt-section-spacing hdt-section-spacing-{{ block.id }}{% if block.settings.cca_open_mobile %} open{% endif %}">
   {%- if block.settings.col_heading != blank -%}
     <div class="hdt-footer-heading hdt-text-{{ block.settings.sec_heading_size }} hdt-font-{{ block.settings.font_weight_text }} collapsible hdt-flex md:hdt-block hdt-align-center hdt-justify-between hdt-s-text">
       <span class="hdt-footer-heading-text">{{ block.settings.col_heading }}</span>
@@ -161,6 +162,19 @@
       "id": "only_mobile",
       "label": "t:blocks.footer_column.settings.only_mobile",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "cca_open_mobile",
+      "label": "Open on mobile by default",
+      "info": "Mobile accordion only. Starts this column expanded.",
+      "default": false
+    },
+    {
+      "type": "number",
+      "id": "cca_order_mb",
+      "label": "Mobile order",
+      "info": "Optional. Position of this column on mobile when the footer design is \"Design 1 - cca\" (lower comes first). Leave blank to keep the block order."
     },
     {
       "type": "select",

@@ -69,7 +69,7 @@
     flex: 1 0 100%;
   }
 {%- endstyle -%}
-<div class="hdt-section-inner {{ section.id }} hdt-footer-section hdt-relative hdt-s-gradient hdt-section-spacing hdt-section-spacing-{{ section.id }}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};" {%- endif %} hdt-reveal="fade-in">
+<div class="hdt-section-inner {{ section.id }} hdt-footer-section{% if section.settings.design == 'design_1' %} cca-footer{% endif %} hdt-relative hdt-s-gradient hdt-section-spacing hdt-section-spacing-{{ section.id }}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};" {%- endif %} hdt-reveal="fade-in">
   {%- if section.settings.background_image != blank -%}
     {{ section.settings.background_image | image_url: width: section.settings.background_image.width | image_tag: loading: 'lazy', width: section.settings.background_image.width, height: section.settings.background_image.height, sizes: "100vw", widths: "375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840", class: 'hdt-footer-background-image hdt-w-full hdt-h-full hdt-object-cover hdt-absolute hdt-top-0 hdt-left-0 hdt-right-0 hdt-bottom-0' }}
   {%- endif -%}
@@ -98,6 +98,16 @@
     }
   ],
   "settings": [
+    {
+      "type": "select",
+      "id": "design",
+      "label": "Design",
+      "default": "default",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "design_1", "label": "Design 1 - cca" }
+      ]
+    },
     {
       "type":"checkbox",
       "id":"collapse",

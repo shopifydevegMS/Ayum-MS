@@ -1168,3 +1168,310 @@
 :is(.cca-best-sellers, .cca-bundles):is(.cca-best-sellers, .cca-bundles) .hdt-slider__products .hdt-slider__viewport {
   overflow: visible;
 }
+
+/* ==== cca-footer — global footer (footer section, Design: "Design 1 - cca") ==== */
+/* Figma: desktop 2001:483, mobile 2001:942. Colors: "scheme-footer" (white text on ink;
+   the Figma opacities are applied to the scheme's foreground color).
+   Column roles are found by content (:has), so no extra markup is needed:
+   brand = has the footer image, links = has a heading, payments / legal = last two rows. */
+
+.cca-footer.cca-footer {
+  --cca-ft-gutter: 1.6rem;
+  color: rgb(var(--color-foreground));
+}
+
+.cca-footer.cca-footer .hdt-container {
+  padding-inline: var(--cca-ft-gutter);
+}
+
+.cca-footer.cca-footer .hdt-row {
+  margin-inline: 0;
+  row-gap: 0;
+}
+
+.cca-footer.cca-footer .hdt-row > .hdt-footer-col-block {
+  padding-inline: 0;
+}
+
+/* Columns carry the theme's default 50/30px bottom margin: spacing comes from the row here */
+.cca-footer.cca-footer .hdt-footer-col-block > .hdt-section-spacing {
+  margin: 0;
+  padding: 0;
+}
+
+/* -- Brand: logo, description, socials */
+.cca-footer.cca-footer .hdt-footer-col-block:has(.hdt-block-footer-image) .hdt-col-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cca-footer.cca-footer .hdt-block-footer-image .hdt-image-wrap {
+  margin-inline: auto;
+}
+
+.cca-footer.cca-footer .hdt-footer-col-block:has(.hdt-block-footer-image) .hdt-text-warry {
+  color: rgb(var(--color-foreground) / 0.75);
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.8;
+}
+
+.cca-footer.cca-footer .hdt-socials__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.2rem 0 0;
+  padding: 0;
+}
+
+.cca-footer.cca-footer .hdt-socials__list .hdt-socials__item {
+  margin: 0;
+  order: 4;
+}
+
+/* Figma order (RTL): Instagram, WhatsApp, TikTok */
+.cca-footer.cca-footer .hdt-socials__list .hdt-socials__item:has(.hdt-social-instagram) {
+  order: 1;
+}
+
+.cca-footer.cca-footer .hdt-socials__list .hdt-socials__item:has(.hdt-social-whatsapp) {
+  order: 2;
+}
+
+.cca-footer.cca-footer .hdt-socials__list .hdt-socials__item:has(.hdt-social-tiktok) {
+  order: 3;
+}
+
+.cca-footer.cca-footer .hdt-socials__list .hdt-socials__item a {
+  inline-size: 4rem;
+  block-size: 4rem;
+  border-radius: 50%;
+  background-color: rgb(var(--color-foreground) / 0.18);
+  color: rgb(var(--color-foreground));
+}
+
+.cca-footer.cca-footer .hdt-socials__list .hdt-socials__item a svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+/* -- Link columns: heading + menu */
+.cca-footer.cca-footer .hdt-footer-heading {
+  color: rgb(var(--color-foreground));
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: normal;
+}
+
+.cca-footer.cca-footer .hdt-footer-col-block .hdt-footer-heading + .hdt-collapse-content {
+  margin-block-start: 1.2rem;
+}
+
+.cca-footer.cca-footer .hdt-menu-list {
+  gap: 1rem;
+}
+
+.cca-footer.cca-footer .hdt-menu-list a {
+  color: rgb(var(--color-foreground) / 0.7);
+  font-size: 1.8rem;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.cca-footer.cca-footer .hdt-menu-list a:hover {
+  color: rgb(var(--color-foreground));
+}
+
+/* -- Payments row: label + real payment icons */
+.cca-footer.cca-footer .hdt-footer-col-block:has(.hdt-payments-wrap) .hdt-col-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cca-footer.cca-footer .hdt-footer-col-block:has(.hdt-payments-wrap) .hdt-text-warry {
+  color: rgb(var(--color-foreground) / 0.6);
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.cca-footer.cca-footer .hdt-payments-wrap .hdt-row-flex {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.74rem !important; /* the block writes gap: 10px inline */
+}
+
+.cca-footer.cca-footer .hdt-payments-wrap .cca-payment-icon {
+  width: auto;
+  height: 2.66rem;
+}
+
+/* -- Legal links + copyright */
+.cca-footer.cca-footer .hdt-footer-col-block:has(.hdt-copyright) .hdt-col-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.cca-footer.cca-footer .hdt-footer-col-block:has(.hdt-copyright) .hdt-menu-list {
+  justify-content: center;
+  gap: 0.6rem 1.4rem;
+}
+
+.cca-footer.cca-footer .hdt-footer-col-block:has(.hdt-copyright) .hdt-menu-list a {
+  color: rgb(var(--color-foreground) / 0.65);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.cca-footer.cca-footer .hdt-copyright,
+.cca-footer.cca-footer .hdt-copyright * {
+  color: rgb(var(--color-foreground) / 0.5);
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: normal;
+}
+
+/* Arabic copy reads RTL in every locale; alignment stays as set per column */
+.cca-footer.cca-footer :is(.hdt-footer-heading-text, .hdt-menu-list a, .hdt-text-warry, .hdt-copyright) {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+/* Mobile: brand, accordion groups (with dividers), payments, legal, in the Figma order */
+@media (max-width: 767px) {
+  .cca-footer.cca-footer .hdt-footer-col-block {
+    order: var(--cca-order-mb, 0);
+  }
+
+  .cca-footer.cca-footer .hdt-footer-col-block:has(.hdt-block-footer-image) {
+    margin-block-end: 2.2rem;
+  }
+
+  .cca-footer.cca-footer .hdt-footer-col-block:has(.hdt-footer-heading) {
+    padding-block: 1.6rem;
+    border-block-end: 1px solid rgb(var(--color-foreground) / 0.15);
+  }
+
+  .cca-footer.cca-footer .hdt-footer-col-block:has(.hdt-payments-wrap),
+  .cca-footer.cca-footer .hdt-footer-col-block:has(.hdt-copyright) {
+    margin-block-start: 2.2rem;
+  }
+
+  /* closed groups: no gap under the heading */
+  .cca-footer.cca-footer .hdt-footer-col-block:not(:has(.open)) .hdt-footer-heading + .hdt-collapse-content {
+    margin-block-start: 0;
+  }
+
+  /* "Open on mobile by default": visible before the first tap (the JS writes heights after) */
+  .cca-footer.cca-footer .hdt-footer-collapse-true .open > .hdt-collapse-content {
+    height: auto;
+  }
+
+  /* + / − drawn by the native icon, sized and colored like Figma (22px glyph, 70%) */
+  .cca-footer.cca-footer .hdt-footer-heading .hdt-collapse-icon::before {
+    width: 1.2rem;
+    height: 0.2rem;
+    background-color: rgb(var(--color-foreground) / 0.7);
+  }
+
+  .cca-footer.cca-footer .hdt-footer-heading .hdt-collapse-icon::after {
+    width: 0.2rem;
+    height: 1.2rem;
+    background-color: rgb(var(--color-foreground) / 0.7);
+  }
+}
+
+/* Tablet + desktop: brand, link columns in a row, divider, payments, legal row */
+@media (min-width: 768px) {
+  .cca-footer.cca-footer .hdt-row {
+    row-gap: 3.6rem;
+  }
+
+  .cca-footer.cca-footer .hdt-footer-col-block:has(.hdt-block-footer-image) {
+    flex: 0 0 100%;
+  }
+
+  .cca-footer.cca-footer .hdt-footer-col-block:has(.hdt-block-footer-image) .hdt-col-content {
+    align-items: flex-start;
+    gap: 1.4rem;
+  }
+
+  .cca-footer.cca-footer .hdt-block-footer-image .hdt-image-wrap {
+    margin-inline: 0;
+  }
+
+  .cca-footer.cca-footer .hdt-socials__list {
+    justify-content: flex-start;
+    margin-block-start: 0;
+  }
+
+  .cca-footer.cca-footer .hdt-footer-col-block:has(.hdt-footer-heading) {
+    flex: 1 1 0;
+    width: auto;
+    min-width: 0;
+  }
+
+  .cca-footer.cca-footer .hdt-footer-col-block:has(.hdt-payments-wrap),
+  .cca-footer.cca-footer .hdt-footer-col-block:has(.hdt-copyright) {
+    flex: 0 0 100%;
+  }
+
+  .cca-footer.cca-footer .hdt-footer-col-block:has(.hdt-payments-wrap) {
+    padding-block-start: 2.4rem;
+    border-block-start: 1px solid rgb(var(--color-foreground) / 0.15);
+  }
+
+  /* Payments sit at the inline end (left in RTL): label, then icons */
+  .cca-footer.cca-footer .hdt-footer-col-block:has(.hdt-payments-wrap) .hdt-col-content {
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 1.2rem;
+  }
+
+  /* Legal links at the start, copyright at the end */
+  .cca-footer.cca-footer .hdt-footer-col-block:has(.hdt-copyright) .hdt-col-content {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+  }
+
+  .cca-footer.cca-footer .hdt-footer-col-block:has(.hdt-copyright) .hdt-menu-list {
+    justify-content: flex-start;
+    gap: 1rem 1.8rem;
+  }
+
+  .cca-footer.cca-footer .hdt-copyright,
+  .cca-footer.cca-footer .hdt-copyright * {
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+}
+
+/* Desktop: 375px brand column + 56px gap, link columns spread over the rest */
+@media (min-width: 1150px) {
+  .cca-footer.cca-footer {
+    --cca-ft-gutter: 2rem;
+  }
+
+  .cca-footer.cca-footer .hdt-footer-col-block:has(.hdt-block-footer-image) {
+    flex: 0 0 37.5rem;
+    margin-inline-end: 5.6rem;
+  }
+
+  .cca-footer.cca-footer .hdt-footer-col-block:has(.hdt-footer-heading) {
+    flex: 0 0 auto;
+  }
+
+  /* "~" not "+": every column is preceded by its own <style> tag */
+  .cca-footer.cca-footer .hdt-footer-col-block:has(.hdt-footer-heading) ~ .hdt-footer-col-block:has(.hdt-footer-heading) {
+    margin-inline-start: auto;
+  }
+}
