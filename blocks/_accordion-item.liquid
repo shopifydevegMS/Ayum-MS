@@ -1,5 +1,5 @@
 <!-- accordion-item.liquid -->
-<hdt-accordion class="hdt-content" {{ block.shopify_attributes }}>
+<hdt-accordion class="hdt-content{% if block.settings.hide_mobile %} cca-hide-mobile{% endif %}" {{ block.shopify_attributes }}>
   <details class="hdt-accordion-item" {%- if block.settings.open %} open {%- endif %} itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
     {%- if block.settings.title != blank -%}
       <summary class="hdt-flex hdt-text-base hdt-font-medium hdt-justify-between hdt-font-medium" aria-expanded="{%- if block.settings.open -%} true {%- else -%} false {%- endif -%}" >      
@@ -8,12 +8,18 @@
           <span itemprop="name">{{ block.settings.title }}</span>
         </span>
         <span class="hdt-accordion-icon hdt-relative hdt-inline-flex hdt-align-center hdt-justify-center">
+          {%- if section.settings.accordion_des == '4' -%}
+          {%- comment -%} AYUM design: bold + / − drawn in CSS (sized like Figma's Almarai ExtraBold glyphs, always centered) {%- endcomment -%}
+          <span class="hdt-icon-plus cca-faq-sign cca-faq-sign--plus" aria-hidden="true"></span>
+          <span class="hdt-icon-minus cca-faq-sign cca-faq-sign--minus" aria-hidden="true"></span>
+          {%- else -%}
           <svg class="hdt-icon-plus" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
             <path d="M12 6.85714H6.85714V12H5.14286V6.85714H0V5.14286H5.14286V0H6.85714V5.14286H12V6.85714Z" fill="currentColor"/>
           </svg>
           <svg class="hdt-icon-minus hdt-absolute hdt-top-0 hdt-left-0 hdt-right-0 hdt-bottom-0" width="12" height="2" viewBox="0 0 12 2" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="12" height="2" fill="currentColor"/>
           </svg>
+          {%- endif -%}
         </span>
       </summary>
     {%- endif -%}
@@ -150,6 +156,12 @@
         "type": "richtext",
         "id": "content",
         "label": "t:sections.accordion.blocks.accordion_item.content"
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_mobile",
+        "label": "Hide on mobile",
+        "default": false
       }
     ],
     "presets": [

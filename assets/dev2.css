@@ -939,3 +939,191 @@
 .cca-shoppable-videos .hdt-pagination button {
   opacity: 1;
 }
+
+/* ==== cca-hide-mobile — accordion item "Hide on mobile" setting (blocks/_accordion-item.liquid) ==== */
+@media (max-width: 767px) {
+  .cca-hide-mobile {
+    display: none;
+  }
+}
+
+/* ==== cca-home-faq — homepage FAQ (accordion, Design 4 - cca) ==== */
+/* Figma: desktop 2001:446, mobile 2001:911. Colors: scheme-faq — background (cyan 15%),
+   background2 (white card), line_border (card border), text (question), text2 (answer), accent (+ / −). */
+
+/* Container: Figma side padding (16px mobile, 20px from 768) */
+.cca-home-faq .hdt-container {
+  padding-inline: 16px;
+}
+
+@media (min-width: 768px) {
+  .cca-home-faq .hdt-container {
+    padding-inline: 20px;
+  }
+}
+
+/* Heading: Arabic text boundary, centered */
+.cca-home-faq .hdt-section-heading_block {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.cca-home-faq .hdt-section-heading_block .hdt-heading-block {
+  justify-content: center;
+  margin: 0;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+}
+
+/* List: centered, max 922px; gaps 8px mobile / 12px from 768.
+   !important is required: the section sets gap: 10px with an #id selector. */
+.cca-home-faq .hdt-row-accordion {
+  max-width: 922px;
+  margin-inline: auto;
+  gap: 8px !important;
+}
+
+@media (min-width: 768px) {
+  .cca-home-faq .hdt-row-accordion {
+    gap: 12px !important;
+  }
+}
+
+/* "Open one at a time": the native <hdt-accordion-group single-open> wrapper must not
+   break the flex list, so it lays its items out as if it were not there */
+.cca-accordion-group {
+  display: contents;
+}
+
+/* Card. Scope class doubled (.cca-home-faq.cca-home-faq): this section's native accordion
+   rules live in theme.css and win specificity ties otherwise.
+   Padding sits on the question row and the answer, not on <details>: the native open/close
+   animation sizes <details> from the summary height, so padding on <details> breaks it.
+   Closed card = 18 + text + 18 = 58px desktop (Figma), with no fixed height. */
+.cca-home-faq.cca-home-faq .hdt-accordion-item {
+  direction: rtl;
+  unicode-bidi: isolate;
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid rgb(var(--color-line-border));
+  border-radius: 12px;
+  background: rgb(var(--color-background2));
+  text-align: start;
+}
+
+.cca-home-faq.cca-home-faq .hdt-accordion-item summary {
+  gap: 12px;
+  padding: 14px;
+  background: none;
+  color: rgb(var(--color-foreground));
+  font-size: 13px;
+  font-weight: var(--font-bold);
+  line-height: normal;
+  list-style: none;
+}
+
+.cca-home-faq.cca-home-faq .hdt-accordion-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.cca-home-faq.cca-home-faq .hdt-accordion-item summary:focus-visible {
+  outline: 2px solid rgb(var(--color-accent));
+  outline-offset: -2px;
+  border-radius: 12px;
+}
+
+.cca-home-faq.cca-home-faq .hdt-accordion-item .hdt-accordion-title {
+  padding: 0;
+  color: rgb(var(--color-foreground));
+}
+
+/* Title is blue only while its item is open (the summary's real aria-expanded state),
+   not on hover or after a click on a closed item */
+.cca-home-faq.cca-home-faq .hdt-accordion-item summary:hover .hdt-accordion-title {
+  color: rgb(var(--color-foreground));
+}
+
+.cca-home-faq.cca-home-faq .hdt-accordion-item summary[aria-expanded="true"] .hdt-accordion-title {
+  color: rgb(var(--color-accent));
+}
+
+/* + / − : bold bars drawn in CSS, sized like Figma's Almarai ExtraBold glyphs
+   (a text glyph sits off-center in its line box, bars are always centered).
+   Both signs share one grid cell; the native aria-expanded rules on
+   .hdt-icon-plus / .hdt-icon-minus still swap them. */
+.cca-home-faq.cca-home-faq .hdt-accordion-item .hdt-accordion-icon {
+  --cca-sign-size: 9px;
+  --cca-sign-stroke: 3px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: var(--cca-sign-size);
+  min-width: 0;
+  height: var(--cca-sign-size);
+  min-height: 0;
+  background: none;
+  color: rgb(var(--color-accent));
+}
+
+.cca-home-faq.cca-home-faq .hdt-accordion-item .cca-faq-sign {
+  position: relative;
+  grid-area: 1 / 1;
+  width: var(--cca-sign-size); /* explicit: an empty grid item at 100% collapses to 0 wide */
+  height: var(--cca-sign-size);
+  transition: 0.3s ease;
+}
+
+.cca-home-faq.cca-home-faq .hdt-accordion-item .cca-faq-sign::before,
+.cca-home-faq.cca-home-faq .hdt-accordion-item .cca-faq-sign--plus::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  border-radius: 1px;
+  background: currentColor;
+}
+
+.cca-home-faq.cca-home-faq .hdt-accordion-item .cca-faq-sign::before {
+  width: 100%;
+  height: var(--cca-sign-stroke);
+}
+
+.cca-home-faq.cca-home-faq .hdt-accordion-item .cca-faq-sign--plus::after {
+  width: var(--cca-sign-stroke);
+  height: 100%;
+}
+
+/* Answer: Figma gap under the question is 8px mobile / 10px desktop
+   (the summary already has 14 / 18px of bottom padding, so pull the answer up) */
+.cca-home-faq.cca-home-faq .hdt-accordion-item .hdt-accordion-content {
+  margin: -6px 0 0;
+  padding: 0 14px 14px;
+  border: 0;
+  color: rgb(var(--color-foreground2));
+  font-size: 12px;
+  font-weight: var(--font-normal);
+  line-height: 1.8;
+}
+
+.cca-home-faq.cca-home-faq .hdt-accordion-item .hdt-accordion-content :where(p) {
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .cca-home-faq.cca-home-faq .hdt-accordion-item summary {
+    padding: 18px 24px;
+    font-size: 19px;
+  }
+
+  .cca-home-faq.cca-home-faq .hdt-accordion-item .hdt-accordion-icon {
+    --cca-sign-size: 11px;
+    --cca-sign-stroke: 2.5px;
+  }
+
+  .cca-home-faq.cca-home-faq .hdt-accordion-item .hdt-accordion-content {
+    margin-block-start: -8px;
+    padding: 0 24px 18px;
+    font-size: 15px;
+    line-height: 1.85;
+  }
+}

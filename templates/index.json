@@ -1086,12 +1086,117 @@
         "pd": "64px,,40px,",
         "pd_mb": "24px,,24px,"
       }
+    },
+    "faq": {
+      "type": "accordion",
+      "name": "FAQ",
+      "blocks": {
+        "accordion-heading": {
+          "type": "section-heading",
+          "static": true,
+          "settings": {
+            "design_heading": "1",
+            "horizontal": false,
+            "alignment": "center",
+            "heading_gap": 0,
+            "margin_bottom": 32
+          },
+          "blocks": {
+            "faq_heading_Fa12Bc": {
+              "type": "_heading_section",
+              "settings": {
+                "heading": "أسئلة شائعة",
+                "line_height": "",
+                "heading_size": "h_custom",
+                "text_color": "hdt-s-text",
+                "font_size_heading_lg": 36,
+                "font_size_heading": 21,
+                "letter_spacing_heading": 0
+              }
+            }
+          },
+          "block_order": [
+            "faq_heading_Fa12Bc"
+          ]
+        },
+        "faq_item1_Fb34De": {
+          "type": "_accordion-item",
+          "settings": {
+            "open": true,
+            "icon": "none",
+            "title": "كم مدة الصلاحية بعد فتح العبوة؟",
+            "content": "<p>يفضّل استهلاكه خلال 7 أيام من الفتح مع إغلاق الباكت جيداً — الرطوبة هي العدو الوحيد للقرمشة.</p>",
+            "hide_mobile": false
+          }
+        },
+        "faq_item2_Fc56Fg": {
+          "type": "_accordion-item",
+          "settings": {
+            "open": false,
+            "icon": "none",
+            "title": "هل الفواكه فيها سكر مضاف؟",
+            "content": "",
+            "hide_mobile": false
+          }
+        },
+        "faq_item3_Fd78Hi": {
+          "type": "_accordion-item",
+          "settings": {
+            "open": false,
+            "icon": "none",
+            "title": "كم تستغرق مدة التوصيل داخل الكويت؟",
+            "content": "",
+            "hide_mobile": false
+          }
+        },
+        "faq_item4_Fe90Jk": {
+          "type": "_accordion-item",
+          "settings": {
+            "open": false,
+            "icon": "none",
+            "title": "هل تشحنون خارج الكويت؟",
+            "content": "",
+            "hide_mobile": false
+          }
+        },
+        "faq_item5_Ff12Lm": {
+          "type": "_accordion-item",
+          "settings": {
+            "open": false,
+            "icon": "none",
+            "title": "ما سياسة الإرجاع والاستبدال؟",
+            "content": "",
+            "hide_mobile": true
+          }
+        }
+      },
+      "block_order": [
+        "faq_item1_Fb34De",
+        "faq_item2_Fc56Fg",
+        "faq_item3_Fd78Hi",
+        "faq_item4_Fe90Jk",
+        "faq_item5_Ff12Lm"
+      ],
+      "settings": {
+        "accordion_des": "4",
+        "single_open": true,
+        "section_layout": "wrapper_container",
+        "hdt_background_parallax": false,
+        "colors_by_section": true,
+        "color_scheme": "scheme-faq",
+        "background_opacity": 1,
+        "mg": "",
+        "mg_mb": "",
+        "pd": "48px,,48px,",
+        "pd_mb": "24px,,24px,"
+      }
     }
   },
   "order": [
     "image_text_about_brand",
     "icon_box_freeze_dry",
     "testimonials_reviews",
-    "shoppable_videos"
+    "shoppable_videos",
+    "faq"
   ]
 }
