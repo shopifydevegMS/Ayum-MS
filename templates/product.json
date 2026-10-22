@@ -42,13 +42,39 @@
                 "vertical_on_mobile": false,
                 "horizontal_alignment": "flex-start",
                 "vertical_alignment": "center",
-                "gap": 8
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 8,
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100,
+                "colors_by_block": false,
+                "color_scheme": "",
+                "group_rounded": "",
+                "padding_top": 0,
+                "padding_bottom": 0,
+                "padding_left": 0,
+                "padding_right": 0,
+                "padding_rate_mobile": 0
               },
               "blocks": {
                 "text_cca_badge_kuwait": {
                   "type": "text",
                   "settings": {
                     "text": "<p>صنع في الكويت</p>",
+                    "hidden_br_mobile": false,
+                    "hidden_on_mobile": false,
+                    "ffamily": "",
+                    "text_size": "base",
+                    "line_height": "",
+                    "font_weight": "normal",
+                    "text_color": "hdt-s-text",
+                    "countdown": "2025-12-30 15:00:00",
+                    "txt_day": "days",
+                    "font_size_text_lg": 16,
+                    "font_size_text": 14,
+                    "letter_spacing_text": 0,
                     "cca_design": "badge"
                   },
                   "blocks": {}
@@ -57,6 +83,18 @@
                   "type": "text",
                   "settings": {
                     "text": "<p>طبيعي 100%</p>",
+                    "hidden_br_mobile": false,
+                    "hidden_on_mobile": false,
+                    "ffamily": "",
+                    "text_size": "base",
+                    "line_height": "",
+                    "font_weight": "normal",
+                    "text_color": "hdt-s-text",
+                    "countdown": "2025-12-30 15:00:00",
+                    "txt_day": "days",
+                    "font_size_text_lg": 16,
+                    "font_size_text": 14,
+                    "letter_spacing_text": 0,
                     "cca_design": "badge"
                   },
                   "blocks": {}
@@ -79,7 +117,7 @@
                 "letter_spacing_heading": 0,
                 "cca_show_badges": false,
                 "cca_show_rating": true,
-                "cca_reviews_link": ""
+                "cca_reviews_link": "#"
               },
               "blocks": {}
             },
