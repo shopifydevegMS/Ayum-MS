@@ -17,10 +17,11 @@
         "color_scheme": "scheme-c9476b69-abc7-454f-a946-2d5a9f5f3a37",
         "background_opacity": 1,
         "section_layout": "wrapper_container",
-        "pd": "20px,,20px,",
-        "pd_mb": "15px,,15px,",
+        "hdt_background_parallax": false,
         "mg": "",
-        "mg_mb": ""
+        "mg_mb": "",
+        "pd": "20px,,20px,",
+        "pd_mb": "15px,,15px,"
       }
     },
     "main-product": {
@@ -54,12 +55,21 @@
             "product_description_AJaqwJ": {
               "type": "_product-description",
               "settings": {
-                
+                "des": "2",
                 "short_des": "<p>Go kalles this summer with this vintage navy and white striped v-neck t-shirt from the Nike. Perfect for pairing with denim and white kicks for a stylish kalles vibe.</p>",
                 "readm": false,
                 "length": 130,
                 "readm_txt": "Read more",
-                "readl_txt": "Read less"
+                "readl_txt": "Read less",
+                "ffamily": "",
+                "text_size": "base",
+                "line_height": "",
+                "font_weight": "normal",
+                "heading_color": "",
+                "text_color": "hdt-text-secondary",
+                "font_size_text_lg": 16,
+                "font_size_text": 14,
+                "letter_spacing_text": 0
               },
               "blocks": {}
             },
@@ -87,7 +97,13 @@
                 "show_dynamic_checkout": false,
                 "show_gift_card_recipient": true,
                 "show_wishlist": true,
+                "color_wishlist": "#222222",
+                "color_hover_wishlist": "#56cfe1",
+                "color_active_wishlist": "#e81e1e",
                 "show_compare": true,
+                "color_compare": "#222222",
+                "color_hover_compare": "#56cfe1",
+                "color_active_compare": "#e81e1e",
                 "ani": "hdt-ani-shake is--infinite",
                 "time": 6,
                 "btn_transform": "hdt-uppercase",
@@ -116,7 +132,6 @@
                 "mess": "",
                 "size": 16,
                 "source": "1",
-                "image": "shopify://shop_images/trust_img.png",
                 "wimg": 370,
                 "svg": "amazon,american_express,apple_pay,bitcoin,dankort,diners_club,discover,dogecoin,dwolla,forbrugsforeningen,interac,google_pay,jcb,klarna,klarna-pay-later,litecoin,maestro,master,paypal,shopify_pay,sofort,visa",
                 "height": 30
@@ -223,10 +238,21 @@
             "socials_XYJPwj"
           ]
         },
+        "main-product-sidebar": {
+          "type": "_product_sidebar",
+          "static": true,
+          "settings": {
+            "color_scheme": "",
+            "space": 50,
+            "last_order": false
+          },
+          "blocks": {}
+        },
         "main-product-medias": {
           "type": "_product-medias",
           "static": true,
           "settings": {
+            "media_box_size": 50,
             "desktop_media_layout": "thumbnail_left",
             "media_size": "medium",
             "mobile_media_layout": "thumbnails",
@@ -257,6 +283,9 @@
       "settings": {
         "product_list_fbt": [],
         "sticky_atc": true,
+        "hdt_enable_choose_variant": true,
+        "hdt_layout_atc_mob": "hdt_layout_atc_mob_default",
+        "hdt_show_sticky_atc": "hdt_show_always",
         "ani": "hdt-ani-shake is--infinite",
         "time": 6,
         "btn_transform": "hdt-uppercase",
@@ -265,10 +294,10 @@
         "color_scheme": "",
         "background_opacity": 1,
         "fullwidth": false,
-        "pd": "30px,,60px,",
-        "pd_mb": "22px,,45px,",
         "mg": "",
-        "mg_mb": ""
+        "mg_mb": "",
+        "pd": "30px,,60px,",
+        "pd_mb": "22px,,45px,"
       }
     },
     "tabs": {
@@ -307,10 +336,102 @@
         "colors_by_section": true,
         "color_scheme": "scheme-c9476b69-abc7-454f-a946-2d5a9f5f3a37",
         "background_opacity": 1,
-        "pd": "60px,,60px,",
-        "pd_mb": "30px,,30px,",
         "mg": "",
-        "mg_mb": ""
+        "mg_mb": "",
+        "pd": "60px,,60px,",
+        "pd_mb": "30px,,30px,"
+      }
+    },
+    "cca_product_reviews": {
+      "type": "custom-section",
+      "blocks": {
+        "cca_rv_heading": {
+          "type": "section-heading",
+          "settings": {
+            "design_heading": "1",
+            "horizontal": false,
+            "alignment": "center",
+            "heading_gap": 16,
+            "margin_bottom": 0
+          },
+          "blocks": {
+            "cca_rv_stars": {
+              "type": "_sub_heading_section",
+              "settings": {
+                "text": "<p>★★★★★</p>",
+                "hidden_br_mobile": false,
+                "hidden_on_mobile": false,
+                "text_size": "custom",
+                "text_color": "hdt-text-primary",
+                "font_size_text_lg": 22,
+                "font_size_text": 22,
+                "letter_spacing_text": 0
+              },
+              "blocks": {}
+            },
+            "cca_rv_title": {
+              "type": "_heading_section",
+              "settings": {
+                "heading": "عملاؤنا يتحدثون عن تجربتهم",
+                "line_height": "",
+                "heading_size": "h_custom",
+                "text_color": "hdt-s-text",
+                "font_size_heading_lg": 39,
+                "font_size_heading": 24,
+                "letter_spacing_heading": 0
+              },
+              "blocks": {}
+            },
+            "cca_rv_text": {
+              "type": "_sub_heading_section",
+              "settings": {
+                "text": "<p>نؤمن أن تجربتك معنا يجب أن تكون استثنائية من البداية للنهاية.</p>",
+                "hidden_br_mobile": false,
+                "hidden_on_mobile": false,
+                "text_size": "custom",
+                "text_color": "hdt-s-text",
+                "font_size_text_lg": 17,
+                "font_size_text": 12,
+                "letter_spacing_text": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "cca_rv_stars",
+            "cca_rv_title",
+            "cca_rv_text"
+          ]
+        },
+        "judge_me_reviews_review_widget_XREbAf": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "real_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "cca_rv_heading",
+        "judge_me_reviews_review_widget_XREbAf"
+      ],
+      "settings": {
+        "design": "design_1",
+        "layout": "10",
+        "item_spacing": 40,
+        "item_spacing_tb": 32,
+        "item_spacing_mb": 16,
+        "colors_by_section": true,
+        "color_scheme": "scheme-product-reviews",
+        "background_opacity": 0.4,
+        "section_layout": "wrapper_container",
+        "hdt_background_parallax": false,
+        "mg": "",
+        "mg_mb": "",
+        "pd": "48px,,30px,",
+        "pd_mb": "24px,,24px,"
       }
     },
     "sidebar": {
@@ -387,10 +508,11 @@
         "color_scheme": "",
         "background_opacity": 0,
         "section_layout": "container",
-        "pd": "75px,,75px,",
-        "pd_mb": "37px,,37px,",
+        "hdt_background_parallax": false,
         "mg": "",
-        "mg_mb": ""
+        "mg_mb": "",
+        "pd": "75px,,75px,",
+        "pd_mb": "37px,,37px,"
       }
     },
     "recently-products": {
@@ -432,6 +554,8 @@
         "image_size": true,
         "show_vendor": false,
         "pr_border": "none",
+        "sort_by": "new_to_old",
+        "availability": "show",
         "limit": 10,
         "col_dk": "4",
         "col_tb": "3",
@@ -458,10 +582,11 @@
         "color_scheme": "",
         "background_opacity": 0,
         "section_layout": "container",
-        "pd": ",,50px,",
-        "pd_mb": ",,40px,",
+        "hdt_background_parallax": false,
         "mg": "",
-        "mg_mb": ""
+        "mg_mb": "",
+        "pd": ",,50px,",
+        "pd_mb": ",,40px,"
       }
     }
   },
@@ -469,6 +594,7 @@
     "breadcrumb",
     "main-product",
     "tabs",
+    "cca_product_reviews",
     "sidebar",
     "related-products",
     "recently-products"

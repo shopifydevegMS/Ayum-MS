@@ -1127,3 +1127,579 @@
     line-height: 1.85;
   }
 }
+
+/* ==== cca-product-reviews — product page "Customer reviews" (custom-section, Design 1 - cca) + Judge.me Review Widget app block ==== */
+/* Figma: desktop 2048:1720, mobile 2048:2247. Colors: scheme-product-reviews —
+   background (yellow, 40% via the section opacity), text (teal heading + summary), text2 (muted date),
+   background2 (white panels), button / button_label / button_border (write-review pill),
+   secondary_button_label (review body, read as --hdt-link-color), accent (decorative top stars, review stars),
+   pr_rating (summary + histogram stars), pr_text (reviewer name, pagination), price (strong green: top bar, check box),
+   sale_price + line_border (verified badge).
+   All review data, the form, verification and pagination stay Judge.me's: this block only restyles its DOM.
+   Judge.me's CSS loads after this file, so every widget rule doubles the scope class and adds .jdgm-rev-widg.
+   No display is set on elements Judge.me hides itself (.jdgm-temp-hidden, unverified badges, clear-filter row). */
+
+.cca-product-reviews {
+  --cca-pr-line: rgb(var(--color-foreground) / 0.1);
+  --cca-pr-track: rgb(var(--color-foreground) / 0.1);
+  --cca-pr-body: var(--hdt-link-color);
+}
+
+/* Container: Figma side padding (16px mobile, 20px from 768) */
+.cca-product-reviews .hdt-container {
+  padding-inline: 16px;
+}
+
+/* Heading area: Arabic text boundary, centered */
+.cca-product-reviews .hdt-section-heading_block {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.cca-product-reviews .hdt-section-heading_block :where(p) {
+  margin: 0;
+}
+
+.cca-product-reviews .hdt-section-heading_block .hdt-heading-block {
+  justify-content: center;
+  margin: 0;
+  font-weight: var(--font-extrabold);
+  line-height: 1.333; /* Figma mobile 32/24 */
+}
+
+.cca-product-reviews .hdt-section-heading_block .hdt-subheading-block.hdt-text-primary {
+  font-weight: var(--font-normal);
+  line-height: normal; /* decorative stars, not a rating */
+}
+
+.cca-product-reviews .hdt-section-heading_block .hdt-subheading-block.hdt-s-text {
+  color: rgb(var(--color-foreground) / 0.62);
+  font-weight: var(--font-normal);
+  line-height: normal;
+}
+
+/* Judge.me app block wrapper: mobile cards sit 16px inside the heading (32px from the screen edge at 375) */
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget {
+  max-width: none;
+  margin-block: 0;
+  margin-inline: clamp(0px, calc((100vw - 320px) * 0.29), 16px);
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: rgb(var(--color-foreground));
+}
+
+/* The section heading replaces Judge.me's own "Customer Reviews" title */
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev-widg__title {
+  display: none;
+}
+
+/* ---- Rating summary panel (stacked below 1150) ---- */
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev-widg__header {
+  margin: 0;
+  padding: 12px 24px 14px;
+  border: 1px solid var(--cca-pr-line);
+  border-radius: 14px;
+  background: rgb(var(--color-background2));
+  text-align: center;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev-widg__header:not(.jdgm-temp-hidden) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev-widg__header > * {
+  margin: 0;
+}
+
+/* Score: average + stars, then "based on N reviews" with the check box */
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg :is(.jdgm-rev-widg__summary, .jdgm-rev-widg__summary-inner) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px 8px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev-widg__summary-average {
+  order: -1;
+  color: rgb(var(--color-foreground));
+  font-size: 20px;
+  font-weight: var(--font-bold);
+  line-height: normal;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev-widg__summary-stars {
+  margin: 0;
+  line-height: 1;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev-widg__summary-stars .jdgm-star {
+  color: rgb(var(--color-pr-rating));
+  font-size: 18px;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev-widg__summary-text {
+  display: flex;
+  flex-basis: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 0;
+  color: rgb(var(--color-foreground));
+  font-size: 13px;
+  line-height: normal;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev-widg__summary-text::before {
+  content: "\2713" / "";
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  background: rgb(var(--color-pr-price));
+  color: rgb(var(--color-background2));
+  font-size: 11px;
+  font-weight: var(--font-bold);
+  line-height: 1;
+}
+
+/* Histogram: stars · bar · count per row (Judge.me's percentage is hidden; Figma shows the count) */
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-histogram {
+  width: min(100%, 345px);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-histogram:not(.jdgm-temp-hidden) {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-histogram__row:not(.jdgm-histogram__clear-filter) {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  line-height: normal;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-histogram__row:focus-visible {
+  outline: 2px solid rgb(var(--color-foreground));
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-histogram__star {
+  flex: 0 0 auto;
+  margin: 0;
+  line-height: 1;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-histogram__star .jdgm-star {
+  color: rgb(var(--color-pr-rating));
+  font-size: 13px;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg :is(.jdgm-histogram__star, .jdgm-rev-widg__summary-stars, .jdgm-rev__rating) .jdgm-star.jdgm--off {
+  opacity: 0.35;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-histogram__bar {
+  flex: 1 1 auto;
+  height: 8px;
+  margin: 0;
+  border: 0;
+  border-radius: 99px;
+  background: var(--cca-pr-track);
+  overflow: hidden;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-histogram__bar-content {
+  height: 100%;
+  border-radius: 99px;
+  background: rgb(var(--color-pr-price));
+}
+
+/* Figma: 4-3 stars light green, 2-1 stars neutral (rows without data-rating keep the strong green) */
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-histogram__row:is([data-rating="4"], [data-rating="3"]) .jdgm-histogram__bar-content {
+  background: rgb(var(--color-pr-price) / 0.4);
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-histogram__row:is([data-rating="2"], [data-rating="1"]) .jdgm-histogram__bar-content {
+  background: rgb(var(--color-foreground2) / 0.4);
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-histogram__percentage {
+  display: none;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-histogram__frequency {
+  flex: 0 0 auto;
+  min-width: 3ch;
+  margin: 0;
+  color: rgb(var(--color-foreground));
+  font-size: 12px;
+  font-weight: var(--font-semibold);
+  text-align: center;
+}
+
+/* Write-review pill (Judge.me's link keeps its own click handler and form) */
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg :is(.jdgm-widget-actions-wrapper, .jdgm-rev-widg__actions) {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  text-align: center;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-write-rev-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: min(100%, 260px);
+  min-height: 44px;
+  margin: 0;
+  padding: 8px 30px;
+  border: 1px solid rgb(var(--hdt-btn-border-color));
+  border-radius: 99px;
+  background: rgb(var(--hdt-btn-bg));
+  color: rgb(var(--hdt-btn-color));
+  font-size: 13px;
+  font-weight: var(--font-bold);
+  line-height: normal;
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-write-rev-link:hover {
+  background: rgb(var(--hdt-btn-border-color));
+  color: rgb(var(--hdt-btn-bg));
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-write-rev-link:focus-visible {
+  outline: 2px solid rgb(var(--hdt-btn-border-color));
+  outline-offset: 2px;
+}
+
+/* The review form opens under the summary, full width, edge-aligned */
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-form-wrapper {
+  width: 100%;
+  text-align: start;
+}
+
+/* ---- Review list ---- */
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev-widg__body {
+  margin: 16px 0 0;
+  padding: 0;
+  border: 0;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev {
+  margin: 0;
+  padding: 16px 22px;
+  border: 1px solid var(--cca-pr-line);
+  border-radius: 11px;
+  background: rgb(var(--color-background2));
+  text-align: start;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev + .jdgm-rev {
+  margin-top: 12px;
+}
+
+/* Header: stars, date, then name + verified badge */
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 8px;
+  margin: 0;
+  padding: 0;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg :is(.jdgm-rev__icon, .jdgm-rev__br) {
+  display: none;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev__rating {
+  order: 1;
+  flex-basis: 100%;
+  margin: 0;
+  line-height: 1;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev__rating .jdgm-star {
+  color: rgb(var(--color-accent));
+  font-size: 11px;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev__timestamp {
+  order: 2;
+  flex-basis: 100%;
+  margin: 4px 0 0;
+  color: rgb(var(--color-foreground2));
+  font-size: 10px;
+  line-height: normal;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev__author-wrapper,
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev__header > .jdgm-rev__author {
+  order: 3;
+  margin: 8px 0 0;
+  color: rgb(var(--color-pr-text));
+  font-size: 15px;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev__buyer-badge-wrapper {
+  order: 4;
+  margin: 8px 0 0;
+}
+
+/* Verified badge: Judge.me decides when it shows; only its look changes here */
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev__buyer-badge {
+  gap: 5px;
+  align-items: center;
+  padding: 2px 9px;
+  border: 1px solid rgb(var(--color-line-border));
+  border-radius: 20px;
+  background: rgb(var(--color-line-border) / 0.4);
+  color: rgb(var(--color-pr-sale-price));
+  font-size: 10px;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev[data-verified-buyer="true"] .jdgm-rev__buyer-badge {
+  display: inline-flex;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev__buyer-badge::after {
+  content: "";
+  order: -1; /* Figma: the dot sits before the label */
+  flex: 0 0 auto;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* Content: each review takes its direction from its own text (Arabic RTL, English LTR) */
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev__content {
+  margin: 8px 0 0;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg :is(.jdgm-rev__title, .jdgm-rev__body) {
+  unicode-bidi: plaintext;
+  text-align: start;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev__title {
+  display: block;
+  margin: 0 0 4px;
+  color: rgb(var(--color-pr-text));
+  font-size: 14px;
+  font-weight: var(--font-bold);
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev__body {
+  margin: 0;
+  color: rgb(var(--cca-pr-body));
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev__body :where(p) {
+  margin: 0;
+}
+
+/* ---- Pagination (Judge.me's own pages, current page bold) ---- */
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-paginate {
+  margin: 16px 0 0;
+  padding: 0;
+  text-align: center;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-paginate__page {
+  display: inline-block;
+  min-width: 24px;
+  margin: 0 4px;
+  color: rgb(var(--color-pr-text));
+  font-size: 14px;
+  line-height: 24px;
+  text-decoration: none;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-paginate__page.jdgm-curt {
+  font-weight: var(--font-bold);
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-paginate__page:focus-visible {
+  outline: 2px solid rgb(var(--color-pr-text));
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (min-width: 768px) {
+  .cca-product-reviews {
+    --cca-pr-line: rgb(var(--color-foreground) / 0.18);
+    --cca-pr-track: rgb(var(--color-foreground) / 0.18);
+  }
+
+  .cca-product-reviews .hdt-container {
+    padding-inline: 20px;
+  }
+
+  .cca-product-reviews .hdt-section-heading_block .hdt-subheading-block.hdt-s-text {
+    line-height: 1.765; /* Figma 30/17 */
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-review-widget {
+    margin-inline: 0;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev-widg__header {
+    padding: 24px;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-histogram:not(.jdgm-temp-hidden) {
+    gap: 9px;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-write-rev-link {
+    min-height: 47px;
+    font-size: 14.5px;
+  }
+
+  /* Review list sits in one white panel; pagination stays on the section background below it */
+  .cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev-widg__body {
+    margin-top: 40px;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev-widg__reviews:has(.jdgm-rev) {
+    padding: 28px 32px 29px;
+    border: 1px solid var(--cca-pr-line);
+    border-radius: 16px;
+    background: rgb(var(--color-background2));
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev {
+    padding: 20px 24px;
+    border-radius: 12px;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev__rating .jdgm-star {
+    font-size: 16px;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev__timestamp {
+    margin-top: 0;
+    font-size: 11px;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev__author-wrapper,
+  .cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev__header > .jdgm-rev__author {
+    margin-top: 10px;
+    font-size: 17px;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev__buyer-badge-wrapper {
+    margin-top: 10px;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev__buyer-badge {
+    padding: 3px 10px;
+    font-size: 11px;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev__buyer-badge::after {
+    width: 7px;
+    height: 7px;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev__content {
+    margin-top: 10px;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev__body {
+    font-size: 14px;
+    line-height: 1.85;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-paginate {
+    margin-top: 40px;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-paginate__page {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1150px) {
+  .cca-product-reviews .hdt-section-heading_block .hdt-heading-block {
+    line-height: 1.38; /* Figma 53.82/39 */
+  }
+
+  /* Summary panel in one row: score (start) · histogram (center) · write review (end) */
+  .cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev-widg__header {
+    padding: 24px clamp(24px, 7.3vw, 105px);
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev-widg__header:not(.jdgm-temp-hidden) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 345px) minmax(0, 1fr);
+    align-items: center;
+    gap: 24px;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev-widg__header > * {
+    grid-column: 1 / -1;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev-widg__header > .jdgm-rev-widg__summary {
+    grid-area: 1 / 1;
+    justify-self: start;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev-widg__header > .jdgm-histogram {
+    grid-area: 1 / 2;
+    width: 100%;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev-widg__header > :is(.jdgm-widget-actions-wrapper, .jdgm-rev-widg__actions) {
+    grid-area: 1 / 3;
+    justify-self: end;
+    width: auto;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-rev-widg :is(.jdgm-rev-widg__summary, .jdgm-rev-widg__summary-inner),
+  .cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev-widg__summary-text {
+    justify-content: flex-start;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-rev-widg__summary-average {
+    font-size: 22px;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-write-rev-link {
+    width: 260px;
+  }
+}
