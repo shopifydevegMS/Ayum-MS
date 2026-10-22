@@ -514,9 +514,21 @@ function ccaSyncFooterAccordionA11y() {
     });
     // runs after the native toggle (bound earlier), so the state is already updated
     heading.addEventListener('click', function () {
-      if (heading.getAttribute('role') === 'button') {
-        heading.setAttribute('aria-expanded', heading.parentElement.classList.contains('open') ? 'true' : 'false');
-      }
+      if (heading.getAttribute('role') !== 'button') return;
+      const group = heading.parentElement;
+      const isOpen = group.classList.contains('open');
+      heading.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      // AYUM footer: only one group open at a time on mobile
+      const footer = heading.closest('.cca-footer');
+      if (!isOpen || !footer) return;
+      footer.querySelectorAll('.hdt-footer-heading').forEach(function (other) {
+        const otherGroup = other.parentElement;
+        if (other === heading || !otherGroup.classList.contains('open')) return;
+        otherGroup.classList.remove('open');
+        const content = otherGroup.querySelector('.hdt-collapse-content');
+        if (content) content.style.height = '0';
+        if (other.getAttribute('role') === 'button') other.setAttribute('aria-expanded', 'false');
+      });
     });
   });
 }
