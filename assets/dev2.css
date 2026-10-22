@@ -1,0 +1,1129 @@
+/* ==== cca-about-brand — homepage "About the brand" (image_text, Design 1 - cca) ==== */
+/* Figma: desktop 2001:230, mobile 2001:749. Colors come from scheme-about-brand. */
+
+/* Container: Figma side padding (16px mobile, 20px from 768) → 1280px content, 612px columns at 1440 */
+.cca-about-brand .hdt-container {
+  padding-inline: 16px;
+}
+
+@media (min-width: 768px) {
+  .cca-about-brand .hdt-container {
+    padding-inline: 20px;
+  }
+}
+
+/* Layout: image first on mobile; image physically left, content right on ≥768 in every locale.
+   direction: ltr is geometry only — the content column restores rtl for its Arabic text. */
+.cca-about-brand .hdt-row-grid {
+  direction: ltr;
+  align-items: center;
+  row-gap: 14px;
+}
+
+@media (min-width: 768px) {
+  .cca-about-brand .hdt-row-grid {
+    column-gap: clamp(24px, 3.9vw, 56px);
+  }
+}
+
+/* Image: fixed crop from Figma (343×220 mobile, 612×380 desktop), rounded corners */
+.cca-about-brand .hdt-image-wrap {
+  --ratio-percent: 64.14%;
+  border-radius: 16px;
+}
+
+@media (min-width: 1150px) {
+  .cca-about-brand .hdt-image-wrap {
+    --ratio-percent: 62.09%;
+    border-radius: 20px;
+  }
+}
+
+/* Content column: Arabic text boundary + vertical rhythm (alignment comes from the block's own settings) */
+.cca-about-brand .hdt-image_text_column {
+  direction: rtl;
+  unicode-bidi: isolate;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  line-height: normal;
+}
+
+.cca-about-brand .hdt-image_text_column :where(h1, h2, h3, h4, h5, h6, p) {
+  margin: 0;
+}
+
+/* Mobile: the label sits 8px above the heading (Figma groups them) */
+@media (max-width: 767px) {
+  .cca-about-brand .hdt-image_text_column > :first-child {
+    margin-block-end: -6px;
+  }
+}
+
+@media (min-width: 768px) {
+  .cca-about-brand .hdt-image_text_column {
+    gap: 20px;
+  }
+}
+
+@media (min-width: 1150px) {
+  .cca-about-brand .hdt-image_text_column {
+    gap: 24px;
+  }
+}
+
+/* Typography: the "Bold" weight maps to Almarai ExtraBold (800) in this design */
+.cca-about-brand :is(.hdt-font-bold, .hdt-font-bold *) {
+  font-weight: var(--font-extrabold);
+}
+
+.cca-about-brand .hdt-image_text_column > .hdt-h_custom {
+  line-height: 1.45;
+}
+
+.cca-about-brand .hdt-text-secondary {
+  line-height: 1.85;
+}
+
+@media (min-width: 1150px) {
+  .cca-about-brand .hdt-text-secondary {
+    line-height: 1.9;
+  }
+}
+
+/* Figma's desktop line break in the description; narrower columns wrap naturally */
+@media (max-width: 1149px) {
+  .cca-about-brand .hdt-text-secondary br {
+    display: none;
+  }
+}
+
+/* Statistics: three equal columns on mobile (more wrap to a new row), natural widths on ≥768 */
+.cca-about-brand .hdt-layout-flex--row {
+  flex-wrap: wrap;
+  gap: 12px 10px;
+}
+
+@media (max-width: 767px) {
+  /* Figma's 11px label; the text block's mobile size setting only allows even values */
+  .cca-about-brand .hdt-layout-flex--row .hdt-text-custom {
+    font-size: 11px;
+  }
+
+  .cca-about-brand .hdt-layout-flex--row > .hdt-group-block {
+    flex: 1 1 calc((100% - 20px) / 3);
+    min-width: 0;
+  }
+
+  .cca-about-brand .hdt-layout-flex--row .hdt-layout-flex--column {
+    align-items: center;
+  }
+}
+
+@media (min-width: 768px) {
+  .cca-about-brand .hdt-layout-flex--row {
+    gap: 12px 24px;
+  }
+
+  .cca-about-brand .hdt-layout-flex--row > .hdt-group-block {
+    flex: 0 0 auto;
+  }
+}
+
+@media (min-width: 1150px) {
+  .cca-about-brand .hdt-layout-flex--row {
+    column-gap: 32px;
+    padding-block-end: 9px;
+  }
+}
+
+/* Numbers like "+400" stay in visual order inside the RTL column */
+.cca-about-brand .hdt-layout-flex--row .hdt-h_custom {
+  direction: ltr;
+  unicode-bidi: isolate;
+  line-height: normal;
+}
+
+/* Stat labels use the scheme's muted color (Figma Neutral/Muted, the sale-price field) */
+.cca-about-brand .hdt-layout-flex--row .hdt-text-custom {
+  --text-color: rgb(var(--color-pr-sale-price));
+  color: rgb(var(--color-pr-sale-price));
+  line-height: normal;
+}
+
+/* ==== cca-freeze-dry — homepage "How we freeze-dry" (icon-box, Design 1 - cca) ==== */
+/* Figma: desktop 2001:250, mobile 2001:765. Colors: section scheme-freeze-dry,
+   chips + icon circles use the brand schemes (scheme-brand-*) set per block.
+   hdt-icon-box.css loads after this file, so card rules carry one extra class to win ties. */
+
+.cca-freeze-dry {
+  --cca-ink: var(--color-foreground); /* section ink, kept for chips that switch to a brand scheme */
+}
+
+/* Container: Figma side padding (16px mobile, 20px from 768) */
+.cca-freeze-dry .hdt-container {
+  padding-inline: 16px;
+}
+
+@media (min-width: 768px) {
+  .cca-freeze-dry .hdt-container {
+    padding-inline: 20px;
+  }
+}
+
+/* Heading area: Arabic text boundary, centered */
+.cca-freeze-dry .hdt-section-heading_block {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.cca-freeze-dry .hdt-section-heading_block .hdt-heading-block {
+  justify-content: center;
+  margin: 0;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+}
+
+.cca-freeze-dry .hdt-section-heading_block .hdt-subheading-block {
+  --text-color: rgb(var(--color-pr-sale-price));
+  color: rgb(var(--color-pr-sale-price)); /* Figma Neutral/Muted = the scheme's sale-price field */
+  font-size: 13px; /* Figma 13px; the block's mobile size only allows even values */
+  line-height: 1.8;
+}
+
+.cca-freeze-dry .hdt-section-heading_block :where(p) {
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .cca-freeze-dry .hdt-section-heading_block .hdt-subheading-block {
+    font-size: var(--text-custom);
+    font-weight: var(--font-bold);
+    line-height: 1.556;
+  }
+}
+
+/* Claim chips: one wrapping row in RTL order; tinted brand background + brand border */
+.cca-freeze-dry .hdt-section-heading_block > .hdt-group-block > .hdt-layout-flex {
+  direction: rtl;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.cca-freeze-dry .hdt-section-heading_block .hdt-layout-flex > .hdt-group-block {
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  height: 25px; /* Figma chip height: 25px mobile, 31px desktop (border included) */
+  padding: 0 12px;
+  border: 1px solid rgb(var(--color-background));
+  background: rgb(var(--color-background) / 0.15);
+}
+
+.cca-freeze-dry .hdt-section-heading_block .hdt-layout-flex > .hdt-group-block .hdt-text-warry {
+  --text-color: rgb(var(--cca-ink));
+  color: rgb(var(--cca-ink));
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.cca-freeze-dry .hdt-section-heading_block .hdt-layout-flex > .hdt-group-block :is(.hdt-text-warry, .hdt-text-warry *) {
+  line-height: normal;
+}
+
+@media (min-width: 768px) {
+  .cca-freeze-dry .hdt-section-heading_block > .hdt-group-block > .hdt-layout-flex {
+    gap: 10px;
+  }
+
+  .cca-freeze-dry .hdt-section-heading_block .hdt-layout-flex > .hdt-group-block {
+    height: 31px;
+    padding: 0 16px;
+  }
+
+  .cca-freeze-dry .hdt-section-heading_block .hdt-layout-flex > .hdt-group-block .hdt-text-warry {
+    font-size: 13px;
+  }
+}
+
+/* Step cards grid: RTL order in every locale (step 1 on the right) */
+.cca-freeze-dry .hdt-icon-box .hdt-prent {
+  direction: rtl;
+}
+
+@media (min-width: 768px) {
+  .cca-freeze-dry .hdt-icon-box .hdt-prent {
+    column-gap: 23px;
+  }
+}
+
+/* Equal-height cards: the grid stretches the item, the item stretches the card */
+.cca-freeze-dry .hdt-icon-box .hdt-iconbox-item {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Step card — mobile: icon on the right, title + description beside it */
+.cca-freeze-dry .hdt-iconbox-item .hdt-iconbox-item-wrapper {
+  flex: 1 1 auto;
+  direction: rtl;
+  unicode-bidi: isolate;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    "icon title"
+    "icon desc";
+  align-items: center;
+  column-gap: 12px;
+  row-gap: 3px;
+  padding: 14px;
+  border-radius: 14px;
+  background-color: rgb(var(--color-background2) / 0.6);
+  text-align: start;
+}
+
+.cca-freeze-dry .hdt-iconbox-item .hdt-iconbox-head {
+  display: contents;
+}
+
+.cca-freeze-dry .hdt-iconbox-item .hdt-iconbox-icon {
+  grid-area: icon;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgb(var(--color-background));
+}
+
+.cca-freeze-dry .hdt-iconbox-item .hdt-iconbox-icon :is(img, svg) {
+  display: block;
+  width: 22px;
+  height: 22px;
+}
+
+.cca-freeze-dry .hdt-iconbox-item .hdt-iconbox-heading {
+  grid-area: title;
+  align-self: end;
+  margin: 0;
+  color: rgb(var(--color-foreground));
+  font-size: 17px;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+}
+
+.cca-freeze-dry .hdt-iconbox-item .hdt-iconbox-des {
+  grid-area: desc;
+  align-self: start;
+  margin: 0;
+  color: rgb(var(--color-foreground2));
+  font-size: 13px;
+  font-weight: var(--font-bold);
+  line-height: 1.4;
+  min-height: calc(2em * 1.4); /* always reserve two lines, so cards stay even */
+}
+
+/* Step card — tablet + desktop: icon on top, then title, then description */
+@media (min-width: 768px) {
+  .cca-freeze-dry .hdt-iconbox-item .hdt-iconbox-item-wrapper {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "icon"
+      "title"
+      "desc";
+    align-content: start;
+    row-gap: 12px;
+    padding: var(--padding-content);
+    border-radius: 16px;
+  }
+
+  .cca-freeze-dry .hdt-iconbox-item .hdt-iconbox-icon {
+    justify-self: start;
+    width: 52px;
+    height: 52px;
+  }
+
+  .cca-freeze-dry .hdt-iconbox-item .hdt-iconbox-icon :is(img, svg) {
+    width: 30px;
+    height: 30px;
+  }
+
+  .cca-freeze-dry .hdt-iconbox-item .hdt-iconbox-heading {
+    font-size: 20px;
+  }
+
+  .cca-freeze-dry .hdt-iconbox-item .hdt-iconbox-des {
+    font-size: 14px;
+    font-weight: var(--font-normal);
+    line-height: 1.8;
+    min-height: calc(2em * 1.8);
+  }
+}
+
+/* ==== cca carousel edges — shared (every AYUM <hdt-slider> card carousel joins this rule) ==== */
+/* The viewport stops clipping inside the container padding; the container clips at its outer edge. */
+.cca-customer-reviews.cca-customer-reviews .hdt-container,
+.cca-shoppable-videos.cca-shoppable-videos .hdt-container {
+  overflow-x: clip;
+}
+
+.cca-customer-reviews.cca-customer-reviews .hdt-prent .hdt-slider__viewport,
+.cca-shoppable-videos.cca-shoppable-videos hdt-slider .hdt-slider__viewport {
+  overflow: visible;
+}
+
+/* ==== cca-customer-reviews — homepage "Customer reviews" (testimonial_section, Design 9 - cca) ==== */
+/* Figma: desktop 2001:316, mobile 2001:826. Colors: scheme-reviews —
+   background (yellow, 40% via the section opacity), text (ink), text2 (muted), accent (orange cards,
+   top stars, active progress), pr_rating (card stars), background2 (white card text + badge),
+   line_border (badge border), sale_price (badge green), button (progress track tint).
+   testimonials.css loads after this file, so card rules carry one extra class to win ties. */
+
+/* Container: Figma side padding (16px mobile, 20px from 768) */
+.cca-customer-reviews .hdt-container {
+  padding-inline: 16px;
+}
+
+@media (min-width: 768px) {
+  .cca-customer-reviews .hdt-container {
+    padding-inline: 20px;
+  }
+}
+
+/* Heading area: Arabic text boundary, centered */
+.cca-customer-reviews .hdt-section-heading_block {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.cca-customer-reviews .hdt-section-heading_block .hdt-heading-block {
+  justify-content: center;
+  margin: 0;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+}
+
+.cca-customer-reviews .hdt-section-heading_block :where(p) {
+  margin: 0;
+}
+
+@media (max-width: 767px) {
+  .cca-customer-reviews .hdt-section-heading_block {
+    /* Figma mobile: 14px to the cards. !important is required: the theme sets this
+       margin from the block's "Margin bottom" setting with an #id selector. */
+    margin-bottom: 14px !important;
+  }
+}
+
+.cca-customer-reviews .hdt-section-heading_block .hdt-subheading-block.hdt-text-primary {
+  font-weight: var(--font-normal);
+  line-height: normal; /* the decorative top stars */
+}
+
+.cca-customer-reviews .hdt-section-heading_block .hdt-subheading-block.hdt-text-secondary {
+  font-size: 13px; /* Figma 13px; the block's mobile size only allows even values */
+  font-weight: var(--font-normal);
+  line-height: 1.8;
+}
+
+@media (min-width: 768px) {
+  .cca-customer-reviews .hdt-section-heading_block .hdt-subheading-block.hdt-text-secondary {
+    font-size: var(--text-custom);
+    font-weight: var(--font-bold);
+    line-height: 1.556;
+  }
+}
+
+/* Review cards: equal height per row, reviewer info pinned to the bottom */
+.cca-customer-reviews .hdt-testimonial-item,
+.cca-customer-reviews .hdt-testimonial-item .testimonial-inner,
+.cca-customer-reviews .hdt-testimonial-item .hdt-quote-wrap {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* Figma card height: 192px mobile, 223px desktop. min-height, so a longer review grows instead of being cut off */
+.cca-customer-reviews .hdt-testimonial-item .testimonial-inner {
+  min-height: 192px; /* Figma 192px; a longer review grows instead of overflowing */
+}
+
+.cca-customer-reviews .hdt-testimonial-item .hdt-quote-wrap {
+  direction: rtl;
+  unicode-bidi: isolate;
+  padding: 18px;
+  border-radius: 16px;
+  background: rgb(var(--color-accent));
+  color: rgb(var(--color-background2));
+  text-align: start;
+}
+
+.cca-customer-reviews .hdt-testimonial-item .hdt-quote-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  align-items: flex-start;
+  gap: 12px;
+  background: none;
+}
+
+.cca-customer-reviews .hdt-testimonial-item .hdt-rating-wapper {
+  min-height: 0;
+  margin: 0;
+  line-height: 0;
+}
+
+.cca-customer-reviews .hdt-testimonial-item .hdt-rating-wapper svg {
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  fill: rgb(var(--color-pr-rating));
+}
+
+.cca-customer-reviews .hdt-testimonial-item .hdt-quote-content p {
+  margin: 0;
+  color: rgb(var(--color-background2));
+  font-size: 15px;
+  font-weight: var(--font-normal);
+  line-height: 1.85;
+}
+
+.cca-customer-reviews .hdt-testimonial-item .hdt-quote-author {
+  margin-block-start: auto;
+  color: rgb(var(--color-background2));
+  font-size: 13px;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+}
+
+.cca-customer-reviews .hdt-testimonial-item .hdt-quote-position {
+  margin-block-start: -10px; /* 2px under the name (the card gap is 12px) */
+  color: rgb(var(--color-background2));
+  font-size: 12px;
+  font-weight: var(--font-bold);
+  line-height: 1.15; /* "normal" is ~1.5 for Almarai Bold and added ~5px to the card */
+}
+
+/* Badge (block setting "Badge") */
+.cca-customer-reviews .cca-review-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border: 1px solid rgb(var(--color-line-border));
+  border-radius: 20px;
+  background: rgb(var(--color-background2));
+  color: rgb(var(--color-pr-sale-price));
+  font-size: 11px;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+}
+
+.cca-customer-reviews .cca-review-badge::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+@media (min-width: 768px) {
+  .cca-customer-reviews .hdt-testimonial-item .testimonial-inner {
+    min-height: 223px;
+  }
+
+  .cca-customer-reviews .hdt-testimonial-item .hdt-quote-wrap {
+    padding: 24px;
+  }
+
+  .cca-customer-reviews .hdt-testimonial-item .hdt-rating-wapper svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .cca-customer-reviews .hdt-testimonial-item .hdt-quote-content p {
+    font-size: 16px;
+    line-height: 1.8;
+  }
+
+  .cca-customer-reviews .hdt-testimonial-item .hdt-quote-author {
+    font-size: 17px;
+  }
+
+  .cca-customer-reviews .hdt-testimonial-item .hdt-quote-position {
+    margin-block-start: -8px; /* 4px under the name */
+    font-size: 13px;
+  }
+}
+
+/* Progress (native "full" pagination): 510px track, tinted base, orange active segment */
+.cca-customer-reviews .hdt-pagination {
+  --pag-bg: rgb(var(--hdt-btn-bg) / 0.12);
+  --pag-bg-active: rgb(var(--color-accent));
+  width: min(510px, 100%);
+  margin-inline: auto;
+}
+
+.cca-customer-reviews .hdt-pagination button {
+  opacity: 1;
+}
+
+/* ==== cca-shoppable-videos — homepage "Shoppable videos" (product-video, Style 3 - cca) ==== */
+/* Figma: desktop 2001:366, mobile 2001:861. Colors: scheme-products — text (ink), text2 (muted),
+   background (card + light badge), background2 (media backdrop), line_border (card border),
+   price (pink), button (cyan button + progress), secondary_button_label (views text). */
+
+/* Container: Figma side padding (16px mobile, 20px from 768) */
+.cca-shoppable-videos .hdt-container {
+  padding-inline: 16px;
+}
+
+@media (min-width: 768px) {
+  .cca-shoppable-videos .hdt-container {
+    padding-inline: 20px;
+  }
+}
+
+/* Heading area: Arabic text boundary, centered */
+.cca-shoppable-videos .hdt-section-heading_block {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.cca-shoppable-videos .hdt-section-heading_block .hdt-heading-block {
+  justify-content: center;
+  margin: 0;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+}
+
+.cca-shoppable-videos .hdt-section-heading_block :where(p) {
+  margin: 0;
+}
+
+.cca-shoppable-videos .hdt-section-heading_block .hdt-subheading-block {
+  font-size: 13px; /* Figma 13px; the block mobile size only allows even values */
+  font-weight: var(--font-normal);
+  line-height: 1.8;
+}
+
+@media (max-width: 767px) {
+  .cca-shoppable-videos .hdt-section-heading_block {
+    /* Figma mobile: 14px to the cards. !important is required: the theme sets this
+       margin from the block "Margin bottom" setting with an #id selector. */
+    margin-bottom: 14px !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .cca-shoppable-videos .hdt-section-heading_block .hdt-subheading-block {
+    font-size: var(--text-custom);
+    font-weight: var(--font-bold);
+    line-height: 1.556;
+  }
+}
+
+/* Slider track: Figma gaps (12 / 24 / 38px); mobile card about 46% of the screen (172px at 375) */
+.cca-shoppable-videos hdt-slider {
+  --slide-spacing: 12px;
+}
+
+@media (max-width: 767px) {
+  .cca-shoppable-videos hdt-slider {
+    --slide-size: calc(min(46vw, 240px) + var(--slide-spacing));
+  }
+}
+
+@media (min-width: 768px) {
+  .cca-shoppable-videos hdt-slider {
+    --slide-spacing: 24px;
+  }
+}
+
+@media (min-width: 1150px) {
+  .cca-shoppable-videos hdt-slider {
+    --slide-spacing: 38px;
+  }
+}
+
+/* Mobile: slides other than the active one fade (the slider's own "is-selected" class) */
+.cca-shoppable-videos .cca-video-slide {
+  display: flex;
+}
+
+@media (max-width: 767px) {
+  .cca-shoppable-videos hdt-slider.is--enabled .hdt-slider__slide:not(.is-selected) .cca-video-card {
+    opacity: 0.5;
+  }
+}
+
+/* Card */
+.cca-shoppable-videos .cca-video-card {
+  direction: rtl;
+  unicode-bidi: isolate;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid rgb(var(--color-line-border));
+  border-radius: 16px;
+  background: rgb(var(--color-background));
+  text-align: start;
+  transition: opacity 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cca-shoppable-videos .cca-video-card {
+    transition: none;
+  }
+}
+
+/* Media: 9:16, poster underneath, player on top */
+.cca-shoppable-videos .cca-video-card__media {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  background: rgb(var(--color-background2));
+  cursor: pointer;
+}
+
+.cca-shoppable-videos .cca-video-card__poster,
+.cca-shoppable-videos .cca-video-card__player,
+.cca-shoppable-videos .cca-video-card__player :is(video, iframe) {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  object-fit: cover;
+}
+
+.cca-shoppable-videos .cca-video-card__views,
+.cca-shoppable-videos .cca-video-card__duration {
+  position: absolute;
+  z-index: 2;
+  padding: 3px 9px;
+  border-radius: 9px;
+  font-size: 10px;
+  font-weight: var(--font-bold);
+  line-height: normal;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.cca-shoppable-videos .cca-video-card__views {
+  inset-block-start: 14px;
+  inset-inline-start: 12px;
+  background: rgb(var(--color-background) / 0.9);
+  color: rgb(var(--hdt-btn-outline-color));
+}
+
+.cca-shoppable-videos .cca-video-card__duration {
+  inset-block-end: 17px;
+  inset-inline-end: 12px; /* left side: the card is always RTL */
+  background: rgb(var(--color-foreground) / 0.75);
+  color: rgb(var(--color-background));
+}
+
+.cca-shoppable-videos .cca-video-card__play {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  margin: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(var(--color-foreground) / 0.35);
+  color: rgb(var(--color-background));
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.cca-shoppable-videos .cca-video-card__play svg {
+  width: 24px;
+  height: 24px;
+}
+
+.cca-shoppable-videos .cca-video-card__play:focus-visible {
+  outline: 2px solid rgb(var(--color-background));
+  outline-offset: 2px;
+}
+
+/* While a video plays, hide the overlays (a tap anywhere on the video pauses it) */
+.cca-shoppable-videos .cca-video-card__media:has(hdt-video-player[playing]) :is(.cca-video-card__play, .cca-video-card__views, .cca-video-card__duration) {
+  opacity: 0;
+}
+
+/* Product info */
+.cca-shoppable-videos .cca-video-card__info {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  gap: 8px;
+  padding: 14px;
+}
+
+.cca-shoppable-videos .cca-video-card__product {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cca-shoppable-videos .cca-video-card__thumb {
+  display: none; /* desktop only, as in Figma */
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.cca-shoppable-videos .cca-video-card__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cca-shoppable-videos .cca-video-card__text {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  gap: 8px;
+  min-width: 0;
+}
+
+.cca-shoppable-videos .cca-video-card__label {
+  color: rgb(var(--color-foreground2));
+  font-size: 10px;
+  font-weight: var(--font-bold);
+  line-height: normal;
+}
+
+.cca-shoppable-videos .cca-video-card__title {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  color: rgb(var(--color-foreground));
+  font-size: 17px;
+  font-weight: var(--font-extrabold);
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.cca-shoppable-videos .cca-video-card__price,
+.cca-shoppable-videos .cca-video-card__price * {
+  color: rgb(var(--color-pr-price));
+  font-size: 13px;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+}
+
+/* Compare-at (old) price: muted and struck through, so it differs from the pink sale price */
+.cca-shoppable-videos .cca-video-card__price .hdt-compare-at-price {
+  color: rgb(var(--color-pr-sale-price));
+  font-size: 0.8em;
+  font-weight: var(--font-bold);
+  text-decoration: line-through;
+}
+
+.cca-shoppable-videos .cca-video-card__price .hdt-compare-at-price * {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/* Arabic labels: no truncation clip (it cuts the glyphs) */
+.cca-shoppable-videos .cca-video-card .hdt-truncate {
+  overflow: visible;
+}
+
+/* Native add-to-cart (btn-ultra), shown as a full-width pill with its text label */
+.cca-shoppable-videos .cca-video-card__cta {
+  margin-block-start: auto;
+}
+
+.cca-shoppable-videos .cca-video-card__cta :is(wrapp-hdt-pr-frm, wrapp-hdt-pr-frm > form, .hdt-ultra_btn_parent) {
+  display: block;
+  width: 100%;
+  max-width: none;
+}
+
+.cca-shoppable-videos .cca-video-card__cta .hdt-card-product__btn-ultra {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 20px;
+  background: rgb(var(--hdt-btn-bg));
+  color: rgb(var(--hdt-btn-color));
+  font-size: 12px;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.cca-shoppable-videos .cca-video-card__cta .hdt-card-product__btn-ultra:hover {
+  background: rgb(var(--hdt-btn-hover-bg));
+  color: rgb(var(--hdt-btn-hover-color));
+}
+
+.cca-shoppable-videos .cca-video-card__cta .hdt-pr-card-icon {
+  display: none;
+}
+
+@media (min-width: 1150px) {
+  .cca-shoppable-videos .cca-video-card__views {
+    inset-block-start: 15px;
+    inset-inline-start: 13px;
+  }
+
+  .cca-shoppable-videos .cca-video-card__duration {
+    inset-block-end: 24px;
+    inset-inline-end: 16px;
+  }
+
+  .cca-shoppable-videos .cca-video-card__views,
+  .cca-shoppable-videos .cca-video-card__duration {
+    padding: 4px 10px;
+    border-radius: 10px;
+    font-size: 11px;
+  }
+
+  .cca-shoppable-videos .cca-video-card__info {
+    gap: 10px;
+  }
+
+  .cca-shoppable-videos .cca-video-card__thumb {
+    display: block;
+  }
+
+  .cca-shoppable-videos .cca-video-card__label {
+    display: none;
+  }
+
+  .cca-shoppable-videos .cca-video-card__title {
+    font-size: 15px;
+  }
+
+  .cca-shoppable-videos .cca-video-card__price,
+  .cca-shoppable-videos .cca-video-card__price * {
+    font-size: 17px;
+  }
+
+  .cca-shoppable-videos .cca-video-card__cta .hdt-card-product__btn-ultra {
+    padding-block: 11px;
+    border-radius: 22px;
+    font-size: 17px;
+  }
+}
+
+/* Progress (native "full" pagination): 510px track, tinted base, cyan active segment */
+.cca-shoppable-videos .hdt-pagination {
+  --pag-bg: rgb(var(--hdt-btn-bg) / 0.12);
+  --pag-bg-active: rgb(var(--hdt-btn-bg));
+  width: min(510px, 100%);
+  margin-inline: auto;
+}
+
+.cca-shoppable-videos .hdt-pagination button {
+  opacity: 1;
+}
+
+/* ==== cca-hide-mobile — accordion item "Hide on mobile" setting (blocks/_accordion-item.liquid) ==== */
+@media (max-width: 767px) {
+  .cca-hide-mobile {
+    display: none;
+  }
+}
+
+/* ==== cca-home-faq — homepage FAQ (accordion, Design 4 - cca) ==== */
+/* Figma: desktop 2001:446, mobile 2001:911. Colors: scheme-faq — background (cyan 15%),
+   background2 (white card), line_border (card border), text (question), text2 (answer), accent (+ / −). */
+
+/* Container: Figma side padding (16px mobile, 20px from 768) */
+.cca-home-faq .hdt-container {
+  padding-inline: 16px;
+}
+
+@media (min-width: 768px) {
+  .cca-home-faq .hdt-container {
+    padding-inline: 20px;
+  }
+}
+
+/* Heading: Arabic text boundary, centered */
+.cca-home-faq .hdt-section-heading_block {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.cca-home-faq .hdt-section-heading_block .hdt-heading-block {
+  justify-content: center;
+  margin: 0;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+}
+
+/* List: centered, max 922px; gaps 8px mobile / 12px from 768.
+   !important is required: the section sets gap: 10px with an #id selector. */
+.cca-home-faq .hdt-row-accordion {
+  max-width: 922px;
+  margin-inline: auto;
+  gap: 8px !important;
+}
+
+@media (min-width: 768px) {
+  .cca-home-faq .hdt-row-accordion {
+    gap: 12px !important;
+  }
+}
+
+/* "Open one at a time": the native <hdt-accordion-group single-open> wrapper must not
+   break the flex list, so it lays its items out as if it were not there */
+.cca-accordion-group {
+  display: contents;
+}
+
+/* Card. Scope class doubled (.cca-home-faq.cca-home-faq): this section's native accordion
+   rules live in theme.css and win specificity ties otherwise.
+   Padding sits on the question row and the answer, not on <details>: the native open/close
+   animation sizes <details> from the summary height, so padding on <details> breaks it.
+   Closed card = 18 + text + 18 = 58px desktop (Figma), with no fixed height. */
+.cca-home-faq.cca-home-faq .hdt-accordion-item {
+  direction: rtl;
+  unicode-bidi: isolate;
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid rgb(var(--color-line-border));
+  border-radius: 12px;
+  background: rgb(var(--color-background2));
+  text-align: start;
+}
+
+.cca-home-faq.cca-home-faq .hdt-accordion-item summary {
+  gap: 12px;
+  padding: 14px;
+  background: none;
+  color: rgb(var(--color-foreground));
+  font-size: 13px;
+  font-weight: var(--font-bold);
+  line-height: normal;
+  list-style: none;
+}
+
+.cca-home-faq.cca-home-faq .hdt-accordion-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.cca-home-faq.cca-home-faq .hdt-accordion-item summary:focus-visible {
+  outline: 2px solid rgb(var(--color-accent));
+  outline-offset: -2px;
+  border-radius: 12px;
+}
+
+.cca-home-faq.cca-home-faq .hdt-accordion-item .hdt-accordion-title {
+  padding: 0;
+  color: rgb(var(--color-foreground));
+}
+
+/* Title is blue only while its item is open (the summary's real aria-expanded state),
+   not on hover or after a click on a closed item */
+.cca-home-faq.cca-home-faq .hdt-accordion-item summary:hover .hdt-accordion-title {
+  color: rgb(var(--color-foreground));
+}
+
+.cca-home-faq.cca-home-faq .hdt-accordion-item summary[aria-expanded="true"] .hdt-accordion-title {
+  color: rgb(var(--color-accent));
+}
+
+/* + / − : bold bars drawn in CSS, sized like Figma's Almarai ExtraBold glyphs
+   (a text glyph sits off-center in its line box, bars are always centered).
+   Both signs share one grid cell; the native aria-expanded rules on
+   .hdt-icon-plus / .hdt-icon-minus still swap them. */
+.cca-home-faq.cca-home-faq .hdt-accordion-item .hdt-accordion-icon {
+  --cca-sign-size: 9px;
+  --cca-sign-stroke: 3px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: var(--cca-sign-size);
+  min-width: 0;
+  height: var(--cca-sign-size);
+  min-height: 0;
+  background: none;
+  color: rgb(var(--color-accent));
+}
+
+.cca-home-faq.cca-home-faq .hdt-accordion-item .cca-faq-sign {
+  position: relative;
+  grid-area: 1 / 1;
+  width: var(--cca-sign-size); /* explicit: an empty grid item at 100% collapses to 0 wide */
+  height: var(--cca-sign-size);
+  transition: 0.3s ease;
+}
+
+.cca-home-faq.cca-home-faq .hdt-accordion-item .cca-faq-sign::before,
+.cca-home-faq.cca-home-faq .hdt-accordion-item .cca-faq-sign--plus::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  border-radius: 1px;
+  background: currentColor;
+}
+
+.cca-home-faq.cca-home-faq .hdt-accordion-item .cca-faq-sign::before {
+  width: 100%;
+  height: var(--cca-sign-stroke);
+}
+
+.cca-home-faq.cca-home-faq .hdt-accordion-item .cca-faq-sign--plus::after {
+  width: var(--cca-sign-stroke);
+  height: 100%;
+}
+
+/* Answer: Figma gap under the question is 8px mobile / 10px desktop
+   (the summary already has 14 / 18px of bottom padding, so pull the answer up) */
+.cca-home-faq.cca-home-faq .hdt-accordion-item .hdt-accordion-content {
+  margin: -6px 0 0;
+  padding: 0 14px 14px;
+  border: 0;
+  color: rgb(var(--color-foreground2));
+  font-size: 12px;
+  font-weight: var(--font-normal);
+  line-height: 1.8;
+}
+
+.cca-home-faq.cca-home-faq .hdt-accordion-item .hdt-accordion-content :where(p) {
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .cca-home-faq.cca-home-faq .hdt-accordion-item summary {
+    padding: 18px 24px;
+    font-size: 19px;
+  }
+
+  .cca-home-faq.cca-home-faq .hdt-accordion-item .hdt-accordion-icon {
+    --cca-sign-size: 11px;
+    --cca-sign-stroke: 2.5px;
+  }
+
+  .cca-home-faq.cca-home-faq .hdt-accordion-item .hdt-accordion-content {
+    margin-block-start: -8px;
+    padding: 0 24px 18px;
+    font-size: 15px;
+    line-height: 1.85;
+  }
+}

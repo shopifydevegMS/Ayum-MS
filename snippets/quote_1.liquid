@@ -5,6 +5,10 @@
     {%- endif -%}
   <div class="hdt-quote-content">
      {%- render 'rating_star', rating: block.settings.rating -%}
+     {%- if section.settings.ter_des == '9' -%}
+       {%- if block.settings.rating >= 1 -%}<span class="sr-only">{{ 'accessibility.star_reviews_info' | t: rating_value: block.settings.rating, rating_max: 5 }}</span>{%- endif -%}
+       {%- if block.settings.badge != blank -%}<span class="cca-review-badge">{{ block.settings.badge | escape }}</span>{%- endif -%}
+     {%- endif -%}
      {% if block.settings.heading != blank %}
      <h3 class="hdt-testimonial-heading">{{ block.settings.heading }}</h3>
      {% endif %}

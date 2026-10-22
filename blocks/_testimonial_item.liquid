@@ -55,6 +55,13 @@
         "default": 5,
         "info": "Set less than '1' to disable Rating."
       },
+      {
+        "type": "text",
+        "id": "badge",
+        "label": "Badge",
+        "info": "Short label under the stars, e.g. a verified-purchase note. Only use it when it is true for this review.",
+        "visible_if": "{{ section.settings.ter_des == '9' }}"
+      },
     ],
     "presets": [
       {

@@ -4803,3 +4803,31 @@ class CcaCopyCode extends HTMLElement {
   }
 }
 if (!customElements.get('cca-copy-code')) customElements.define('cca-copy-code', CcaCopyCode);
+// ==== cca-shoppable-videos — tap to play/pause, one video at a time (AYUM) ====
+// The native <hdt-video-player> (without "autoplay") only binds a one-time click-to-play.
+// This adds a delegated play/pause toggle on the card media and pauses the other
+// videos in the same section when one starts. Delegated on document, so it survives
+// Theme Editor section reloads and block add/remove/reorder without re-binding.
+if (!window.ccaVideoCardsReady) {
+  window.ccaVideoCardsReady = true;
+
+  document.addEventListener('click', (event) => {
+    const media = event.target.closest('.cca-shoppable-videos .cca-video-card__media');
+    if (!media) return;
+    const player = media.querySelector('hdt-video-player');
+    if (!player) return;
+    if (player.playing) {
+      player.pause();
+    } else {
+      player.play();
+    }
+  });
+
+  document.addEventListener('media:play', (event) => {
+    const section = event.target.closest('.cca-shoppable-videos');
+    if (!section) return;
+    section.querySelectorAll('hdt-video-player[playing]').forEach((player) => {
+      if (player !== event.target) player.pause();
+    });
+  });
+}

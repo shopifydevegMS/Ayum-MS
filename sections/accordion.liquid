@@ -20,7 +20,7 @@
   endcase
 -%}
 
-<div id="{{ section.id }}" class="{{ parent }} {% if section.settings.hdt_background_parallax %} hdt-animate--parallax-bg {% endif %} hdt-s-gradient hdt-section-spacing hdt-section-spacing-{{ section.id }}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};"{%- endif %}>
+<div id="{{ section.id }}" class="{{ parent }}{% if section.settings.accordion_des == '4' %} cca-home-faq{% endif %} {% if section.settings.hdt_background_parallax %} hdt-animate--parallax-bg {% endif %} hdt-s-gradient hdt-section-spacing hdt-section-spacing-{{ section.id }}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};"{%- endif %}>
   <div class="{{ child }}">
     {%- if section.settings.section_background != blank -%}
       {% liquid
@@ -30,7 +30,9 @@
     {%- endif -%}
     {% content_for "block", type: "section-heading", id: "accordion-heading" %}
     <div class="hdt-flex hdt-flex-col hdt-justify-between hdt-row-accordion hdt-accordion-style{{ section.settings.accordion_des }}">
+      {%- if section.settings.single_open -%}<hdt-accordion-group single-open class="cca-accordion-group">{%- endif -%}
       {% content_for "blocks" %}
+      {%- if section.settings.single_open -%}</hdt-accordion-group>{%- endif -%}
     </div>
   </div>
 </div>
@@ -66,9 +68,20 @@
         {
           "value": "2",
           "label": "2"
+        },
+        {
+          "value": "4",
+          "label": "4 - cca"
         }
       ],
       "default": "1"
+    },
+    {
+      "type": "checkbox",
+      "id": "single_open",
+      "label": "Open one at a time",
+      "info": "Opening an item closes the others.",
+      "default": false
     },
     {
       "type": "header",

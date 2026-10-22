@@ -20,7 +20,7 @@
       assign sizes  = '100vw'
   endcase
 %}
-<div class="{{ parent }} {% if section.settings.hdt_background_parallax %} hdt-animate--parallax-bg {% endif %}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};"{%- endif %}>
+<div class="{{ parent }}{% if section.settings.ter_des == '9' %} cca-customer-reviews{% endif %} {% if section.settings.hdt_background_parallax %} hdt-animate--parallax-bg {% endif %}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};"{%- endif %}>
   <div class="{{ child }}">
     {%- if section.settings.section_background != blank -%}
       {% liquid
@@ -117,6 +117,10 @@
           {
             "value": "8",
             "label": "t:sections.testimonials_section.settings.ter_des.design_8"
+          },
+          {
+            "value": "9",
+            "label": "9 - cca"
           }
         ],
         "default": "1",

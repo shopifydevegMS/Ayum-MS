@@ -22,7 +22,7 @@ Uses the Shopify CLI (install separately):
 - **Sections and theme blocks**: sections in `sections/` mostly render theme blocks from `blocks/` via `{% content_for 'blocks' %}` or static `{% content_for 'block', type: ..., id: ... %}`. Block files starting with `_` are private (only usable inside the sections/blocks that reference them); files without the prefix (`text`, `heading`, `button`, `group`, …) are general-purpose blocks.
 - **CSS**: global styles are in `base.css` and `theme.css` (don't hand-edit either); all project CSS changes go in `assets/dev1.css` (see below), which loads last in `snippets/css-variables.liquid` so it wins over theme CSS; each section loads its own stylesheet (e.g. `{{ 'featured-collection-2.css' | asset_url | stylesheet_tag }}`). The theme's own classes and assets use the `hdt-` prefix.
 - **Snippets**: shared partials, including many product-card variants (`card-product1`–`12`) chosen by theme settings.
-- **Templates and config**: `templates/*.json` (with alternates such as `collection.left-sidebar.json`) plus `sections/*-group.json` and `config/settings_data.json` hold merchant content and settings. They are often overwritten by Shopify editor syncs, so put behavior in Liquid/schema, not in these files, and expect merge conflicts. The one required edit is filling the section instance with the Figma content (see "Fill the template with the Figma content" below).
+- **Templates and config**: `templates/*.json` (with alternates such as `collection.left-sidebar.json`) plus `sections/*-group.json` and `config/settings_data.json` hold merchant content and settings. They are often overwritten by Shopify editor syncs, so put behavior in Liquid/schema, not in these files, and expect merge conflicts. The one required edit is filling the section instance with the Figma content (see "Fill the template with the Figma content" below; for homepage sections that means `templates/index.json`).
 - **Locales**: storefront strings live in `locales/*.json` (`en.default.json` is the source); schema labels use `t:` keys from `*.schema.json`. When you add a translation key, add it to `en.default.json` and to `ar.json`.
 
 ## Building or changing sections: existing-first ladder (mandatory)
@@ -58,7 +58,7 @@ A section task isn't done when the code works. The section instance on the page 
 - If the section isn't on the page yet, add it in the right place in `order`.
 - Hide demo blocks Figma doesn't show with `"disabled": true` instead of deleting them.
 - Edit only that one instance. Keep every other section, block, setting and order entry exactly as it is, and keep the file's CRLF line endings.
-- Don't invent content. If Figma has an image or text you don't have, leave the setting for the merchant and list it in the report.
+- Don't invent content. If Figma has an image or text you don't have, leave the setting for the merchant and list it in the report. Never put a Figma asset URL in the JSON.
 - **Range values must be on a step.** Before writing a `range` setting's value, read its `min`/`max`/`step` from the schema: Shopify refuses to upload the file unless `(value - min) / step` is a whole number (e.g. step 2 from 50 → even numbers only; Figma 153 becomes 154). Same when adding a range setting: `min`, `max` and `default` all on the step grid, at most 101 steps.
 - Tell the user to commit the JSON soon, because a save in the Theme Editor overwrites it.
 
@@ -87,5 +87,7 @@ On branch `dev1`, `assets/dev1.css` replaces `main.css` for all of these rules. 
 - Every rule in `dev1.css` is anchored on a `cca-` class (e.g. `.cca-collection .hdt-card-product`). To restyle a theme element, add a `cca-` class to its markup and keep its `hdt-` classes.
 - Group `dev1.css` by feature, with a comment header per section.
 - Only values that need Liquid (settings, `section.id`) go in an inline `{% style %}` in the section, and only as `--cca-` variables that `dev1.css` uses.
+- **Out-rank the native rule, don't tie it.** `dev1.css` loads in `<head>`, but most sections load their own stylesheet later in `<body>` (`hdt-icon-box.css`, `testimonials.css`, …), and `theme.css` uses nested selectors. On equal specificity the theme wins, so the override silently does nothing. When a rule overrides a property the theme also sets, find the native selector first and use a more specific one: double the scope class (`.cca-home-faq.cca-home-faq .hdt-accordion-item`) or add one more class. Use `!important` only against an `#id` rule or an inline style, with a comment saying why. Before calling it done, check the computed value in the browser.
+- **Don't pad or size an element that native JS animates.** For example, `<hdt-accordion>` animates `<details>` from its `<summary>` height, so padding on `<details>` breaks it. Put spacing on the inner parts (`summary`, the content) instead.
 
 Full rules are in §2.3a of the `generate-section` skill.

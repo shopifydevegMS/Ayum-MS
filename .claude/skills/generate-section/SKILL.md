@@ -116,6 +116,12 @@ All AYUM CSS changes are **additive and live in one file**, so the user can see 
 - **Group `dev1.css` by feature** with a comment header per section/component (e.g. `/* ==== cca-pagination — collection page ==== */`), so a single feature's CSS can also be removed on its own.
 - **Exception: values that need Liquid** (per-instance settings, `section.id`, colors from a setting) can't go in a static `.css` file. Put those in an inline `{% style %}` block in the section, and emit **only `--cca-` custom properties** there, scoped to `#shopify-section-{{ section.id }}`. `dev1.css` then uses those variables. Spacing via `{% render 'spacing-vars', box: section %}` stays as the theme does it.
 - `dev1.css` loads on every page (last in `snippets/css-variables.liquid`), so keep it lean: no duplicated rules, no unused rules left behind after a change.
+- **Out-rank the native rule, don't tie it (permanent — verified failures: icon-box cards, testimonial cards, FAQ card padding).** `dev1.css` loads in `<head>`, but section stylesheets (`hdt-icon-box.css`, `testimonials.css`, `hdt-image-with-text.css`, …) load later in `<body>`, and `theme.css` uses nested selectors whose specificity is easy to misread. On equal specificity the native rule wins and the override silently does nothing. For every property you override:
+  1. Find the native selector(s) that set it (grep `assets/*.css`, including the section's own stylesheet).
+  2. Write a selector with higher specificity: double the scope class (`.cca-home-faq.cca-home-faq .hdt-accordion-item`) or add one more class from the real DOM.
+  3. Use `!important` only when the native value comes from an `#id` selector (e.g. the section-heading margin, the accordion list gap) or an inline style, and comment why.
+  4. Confirm the computed value in the browser (`getComputedStyle`) before reporting it done.
+- **Don't pad or size an element that native JS animates.** `<hdt-accordion>` animates `<details>` from `summary.clientHeight` to `details.scrollHeight`, so padding on `<details>` breaks the open/close motion. Put spacing on the inner parts (`summary`, `.hdt-accordion-content`). Check for inline `style.height` / `timeline()` / `animate()` in the component before styling its box.
 
 ### 2.4 JavaScript architecture
 
@@ -442,7 +448,7 @@ Rules:
 
 - Edit only the target instance. Every other section, block, setting and `order` entry stays byte-for-byte unchanged.
 - Keep the file's encoding and **CRLF** line endings. Use the Edit tool or a script that preserves `\r\n`. **Never use `sed -i` in `sections/`, `templates/` or `config/` while `shopify theme dev` may be running:** it writes a temporary `sed*` file there, `theme dev` tries to upload it, and the preview breaks with "Failed to Upload Theme Files" until `theme dev` is restarted (verified failure).
-- Don't invent content. Images, products, collections or text you don't have stay blank for the merchant; list each one in the report under "Manual Theme Editor steps".
+- Don't invent content. Images, products, collections or text you don't have stay blank for the merchant; list each one in the report under "Manual Theme Editor steps". Never put a `figma.com` / `api/mcp/asset` URL in the JSON (§3); an image setting is filled only when the image already exists in Shopify Files (`shopify://shop_images/...`).
 - Validate: parse the JSON (strip the leading `/* … */` banner first), and if `shopify theme dev` is running, fetch `http://127.0.0.1:9292/` and confirm the section renders with the new content.
 - **Every `range` value must sit on a step (permanent — repeated upload failure).** Shopify rejects the whole file ("Setting 'image_w' must be a step in the range") unless `min <= value <= max` **and** `(value - min) / step` is a whole number. Before writing any range value into template JSON, read that setting's `min`/`max`/`step` from the block's or section's schema — never assume step 1 (e.g. `_footer-image` `image_w` is 50–250 step 2, so Figma's 153 must become 152 or 154). When a Figma value is off-step, use the nearest valid step and note it in the report.
 - This JSON is overwritten whenever someone saves in the Theme Editor, so tell the user to commit it promptly.
@@ -980,6 +986,7 @@ Project-specific additions, each learned from a real failure or constraint in th
 - [ ] Preserved identifiers, presets, merchant data, native behavior, app boundaries, and the The4 license code.
 - [ ] Custom class setting present (or an existing equivalent reused); all CSS scoped.
 - [ ] All new CSS is in `assets/dev1.css`, every new class is `cca-`-prefixed, every rule is anchored on a `cca-` class (§2.3a).
+- [ ] Every override out-ranks the native selector it replaces (not a tie), and its computed value was checked in the browser (§2.3a).
 - [ ] Colors come from color schemes (§2.8a); no hardcoded colors, no unneeded color settings.
 - [ ] Used tokens, logical properties, `ThemeEvents`, shared snippets — no hardcoded colors/fonts/spacing, no invented events, no DOM-parsed money, no Figma URLs.
 - [ ] Blank/empty states, mobile media fallback, and preset all handled.
