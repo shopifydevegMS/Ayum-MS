@@ -151,7 +151,7 @@
   endif
 -%}
 
-<hdt-sticky-header sticky-type="{{ section.settings.sticky_type }}" prefix="header" class="cca-header hdt-header hdt-main-header hdt-header-{{ section.settings.header_layout }} hdt-header-tranparent-{{ section.settings.header_transparent }} hdt-header-fullwidth-{{ section.settings.header_fullwidth }}{% if section.settings.sticky_glass %} hdt-header-sticky--glass{% endif %}" color-scheme="{{ section.settings.header_colors }}">
+<hdt-sticky-header sticky-type="{{ section.settings.sticky_type }}" prefix="header" class="hdt-header{% if section.settings.design == 'design_1' %} cca-header{% endif %} hdt-main-header hdt-header-{{ section.settings.header_layout }} hdt-header-tranparent-{{ section.settings.header_transparent }} hdt-header-fullwidth-{{ section.settings.header_fullwidth }}{% if section.settings.sticky_glass %} hdt-header-sticky--glass{% endif %}" color-scheme="{{ section.settings.header_colors }}">
   <div class="hdt-container{% if section.settings.header_fullwidth %}-full hdt-px-15{% endif %}">
     <div data-header-height class="hdt-flex hdt-align-center hdt-spacing-15 md:hdt-px-15 hdt-px-10 {% if section.settings.header_border_bottom %}hdt-border-b{% endif %}">
       {%- if section.settings.header_layout == "logo_left" -%}
@@ -540,6 +540,16 @@
     ]
   },
   "settings": [
+    {
+      "type": "select",
+      "id": "design",
+      "label": "Design",
+      "default": "default",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "design_1", "label": "Design 1 - cca" }
+      ]
+    },
     {
       "type": "paragraph",
       "content": "t:sections.header.settings.header_note"
