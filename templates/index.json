@@ -1089,8 +1089,62 @@
     },
     "faq": {
       "type": "accordion",
-      "name": "FAQ",
       "blocks": {
+        "faq_item1_Fb34De": {
+          "type": "_accordion-item",
+          "settings": {
+            "open": true,
+            "icon": "none",
+            "title": "كم مدة الصلاحية بعد فتح العبوة؟",
+            "content": "<p>يفضّل استهلاكه خلال 7 أيام من الفتح مع إغلاق الباكت جيداً — الرطوبة هي العدو الوحيد للقرمشة.</p>",
+            "hide_mobile": false
+          },
+          "blocks": {}
+        },
+        "faq_item2_Fc56Fg": {
+          "type": "_accordion-item",
+          "settings": {
+            "open": false,
+            "icon": "none",
+            "title": "هل الفواكه فيها سكر مضاف؟",
+            "content": "<p>يفضّل استهلاكه خلال 7 أيام من الفتح مع إغلاق الباكت جيداً — الرطوبة هي العدو الوحيد للقرمشة.</p>",
+            "hide_mobile": false
+          },
+          "blocks": {}
+        },
+        "faq_item3_Fd78Hi": {
+          "type": "_accordion-item",
+          "settings": {
+            "open": false,
+            "icon": "none",
+            "title": "كم تستغرق مدة التوصيل داخل الكويت؟",
+            "content": "<p>يفضّل استهلاكه خلال 7 أيام من الفتح مع إغلاق الباكت جيداً — الرطوبة هي العدو الوحيد للقرمشة.</p>",
+            "hide_mobile": false
+          },
+          "blocks": {}
+        },
+        "faq_item4_Fe90Jk": {
+          "type": "_accordion-item",
+          "settings": {
+            "open": false,
+            "icon": "none",
+            "title": "هل تشحنون خارج الكويت؟",
+            "content": "<p>يفضّل استهلاكه خلال 7 أيام من الفتح مع إغلاق الباكت جيداً — الرطوبة هي العدو الوحيد للقرمشة.</p>",
+            "hide_mobile": false
+          },
+          "blocks": {}
+        },
+        "faq_item5_Ff12Lm": {
+          "type": "_accordion-item",
+          "settings": {
+            "open": false,
+            "icon": "none",
+            "title": "ما سياسة الإرجاع والاستبدال؟",
+            "content": "<p>يفضّل استهلاكه خلال 7 أيام من الفتح مع إغلاق الباكت جيداً — الرطوبة هي العدو الوحيد للقرمشة.</p>",
+            "hide_mobile": true
+          },
+          "blocks": {}
+        },
         "accordion-heading": {
           "type": "section-heading",
           "static": true,
@@ -1112,62 +1166,13 @@
                 "font_size_heading_lg": 36,
                 "font_size_heading": 21,
                 "letter_spacing_heading": 0
-              }
+              },
+              "blocks": {}
             }
           },
           "block_order": [
             "faq_heading_Fa12Bc"
           ]
-        },
-        "faq_item1_Fb34De": {
-          "type": "_accordion-item",
-          "settings": {
-            "open": true,
-            "icon": "none",
-            "title": "كم مدة الصلاحية بعد فتح العبوة؟",
-            "content": "<p>يفضّل استهلاكه خلال 7 أيام من الفتح مع إغلاق الباكت جيداً — الرطوبة هي العدو الوحيد للقرمشة.</p>",
-            "hide_mobile": false
-          }
-        },
-        "faq_item2_Fc56Fg": {
-          "type": "_accordion-item",
-          "settings": {
-            "open": false,
-            "icon": "none",
-            "title": "هل الفواكه فيها سكر مضاف؟",
-            "content": "",
-            "hide_mobile": false
-          }
-        },
-        "faq_item3_Fd78Hi": {
-          "type": "_accordion-item",
-          "settings": {
-            "open": false,
-            "icon": "none",
-            "title": "كم تستغرق مدة التوصيل داخل الكويت؟",
-            "content": "",
-            "hide_mobile": false
-          }
-        },
-        "faq_item4_Fe90Jk": {
-          "type": "_accordion-item",
-          "settings": {
-            "open": false,
-            "icon": "none",
-            "title": "هل تشحنون خارج الكويت؟",
-            "content": "",
-            "hide_mobile": false
-          }
-        },
-        "faq_item5_Ff12Lm": {
-          "type": "_accordion-item",
-          "settings": {
-            "open": false,
-            "icon": "none",
-            "title": "ما سياسة الإرجاع والاستبدال؟",
-            "content": "",
-            "hide_mobile": true
-          }
         }
       },
       "block_order": [
@@ -1177,6 +1182,7 @@
         "faq_item4_Fe90Jk",
         "faq_item5_Ff12Lm"
       ],
+      "name": "FAQ",
       "settings": {
         "accordion_des": "4",
         "single_open": true,
