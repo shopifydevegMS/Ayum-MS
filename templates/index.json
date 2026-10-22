@@ -935,8 +935,67 @@
     },
     "shoppable_videos": {
       "type": "product-video",
-      "name": "Shoppable videos",
       "blocks": {
+        "sv_video1_Vc56Fg": {
+          "type": "_product-video",
+          "settings": {
+            "video": "shopify://files/videos/c524a7ed5fbc410e8a175a1d9fe0bf70.HD-720p-1.6Mbps-68701371.mp4",
+            "external_video_url": "",
+            "product": "آيس-كريم-ساندويتش-مجفف",
+            "views": ""
+          },
+          "blocks": {}
+        },
+        "sv_video2_Vd78Hi": {
+          "type": "_product-video",
+          "settings": {
+            "video": "shopify://files/videos/7b439082930e43e58d2fbf6e973b1459.HD-720p-1.6Mbps-77414298.mp4",
+            "external_video_url": "",
+            "product": "جيلي-بيتزا-مجفف",
+            "views": ""
+          },
+          "blocks": {}
+        },
+        "sv_video3_Ve90Jk": {
+          "type": "_product-video",
+          "settings": {
+            "video": "shopify://files/videos/6a62f41bd599465aaeba74efe94e1fb1.HD-1080p-2.5Mbps-82852977.mp4",
+            "external_video_url": "",
+            "product": "c45برواني-بيكان-جوكليت-ss-copy",
+            "views": ""
+          },
+          "blocks": {}
+        },
+        "product_video_JmHAe4": {
+          "type": "_product-video",
+          "settings": {
+            "video": "shopify://files/videos/7b439082930e43e58d2fbf6e973b1459.HD-720p-1.6Mbps-77414298.mp4",
+            "external_video_url": "",
+            "product": "جيلي-بيتزا-مجفف",
+            "views": ""
+          },
+          "blocks": {}
+        },
+        "product_video_t6hbNt": {
+          "type": "_product-video",
+          "settings": {
+            "video": "shopify://files/videos/7b439082930e43e58d2fbf6e973b1459.HD-720p-1.6Mbps-77414298.mp4",
+            "external_video_url": "",
+            "product": "جيلي-بيتزا-مجفف",
+            "views": ""
+          },
+          "blocks": {}
+        },
+        "product_video_fdxfLT": {
+          "type": "_product-video",
+          "settings": {
+            "video": "shopify://files/videos/7b439082930e43e58d2fbf6e973b1459.HD-720p-1.6Mbps-77414298.mp4",
+            "external_video_url": "",
+            "product": "جيلي-بيتزا-مجفف",
+            "views": ""
+          },
+          "blocks": {}
+        },
         "product-video": {
           "type": "section-heading",
           "static": true,
@@ -958,7 +1017,8 @@
                 "font_size_heading_lg": 36,
                 "font_size_heading": 21,
                 "letter_spacing_heading": 0
-              }
+              },
+              "blocks": {}
             },
             "sv_subheading_Vb34De": {
               "type": "_sub_heading_section",
@@ -971,57 +1031,25 @@
                 "font_size_text_lg": 16,
                 "font_size_text": 14,
                 "letter_spacing_text": 0
-              }
+              },
+              "blocks": {}
             }
           },
           "block_order": [
             "sv_heading_Va12Bc",
             "sv_subheading_Vb34De"
           ]
-        },
-        "sv_video1_Vc56Fg": {
-          "type": "_product-video",
-          "settings": {
-            "external_video_url": "",
-            "views": ""
-          }
-        },
-        "sv_video2_Vd78Hi": {
-          "type": "_product-video",
-          "settings": {
-            "external_video_url": "",
-            "views": ""
-          }
-        },
-        "sv_video3_Ve90Jk": {
-          "type": "_product-video",
-          "settings": {
-            "external_video_url": "",
-            "views": ""
-          }
-        },
-        "sv_video4_Vf12Lm": {
-          "type": "_product-video",
-          "settings": {
-            "external_video_url": "",
-            "views": ""
-          }
-        },
-        "sv_video5_Vg34No": {
-          "type": "_product-video",
-          "settings": {
-            "external_video_url": "",
-            "views": ""
-          }
         }
       },
       "block_order": [
         "sv_video1_Vc56Fg",
         "sv_video2_Vd78Hi",
         "sv_video3_Ve90Jk",
-        "sv_video4_Vf12Lm",
-        "sv_video5_Vg34No"
+        "product_video_JmHAe4",
+        "product_video_t6hbNt",
+        "product_video_fdxfLT"
       ],
+      "name": "Shoppable videos",
       "settings": {
         "full_width": false,
         "color_scheme": "scheme-products",
@@ -1029,7 +1057,9 @@
         "product_label": "المنتج في الفيديو",
         "button_label": "اطلب المنتج",
         "image_height": "adapt_image_first",
+        "fixed_height": 500,
         "image_height_mb": "adapt_image_first",
+        "fixed_height_mb": 300,
         "col_dk": "5",
         "col_tb": "3",
         "col_mb": "2",
@@ -1038,6 +1068,12 @@
         "autoplay": 0,
         "pauseOnHover": false,
         "navUI": false,
+        "nav_position": "default",
+        "nav_visible": "always",
+        "nav_style": "default",
+        "nav_shape": "default",
+        "nav_size": "small",
+        "nav_hide_mobile": false,
         "dotUI": true,
         "pag_style": "full",
         "pag_rounded": true,
