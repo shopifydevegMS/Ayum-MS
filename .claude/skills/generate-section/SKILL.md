@@ -444,6 +444,7 @@ Rules:
 - Keep the file's encoding and **CRLF** line endings. Use the Edit tool or a script that preserves `\r\n`. **Never use `sed -i` in `sections/`, `templates/` or `config/` while `shopify theme dev` may be running:** it writes a temporary `sed*` file there, `theme dev` tries to upload it, and the preview breaks with "Failed to Upload Theme Files" until `theme dev` is restarted (verified failure).
 - Don't invent content. Images, products, collections or text you don't have stay blank for the merchant; list each one in the report under "Manual Theme Editor steps".
 - Validate: parse the JSON (strip the leading `/* … */` banner first), and if `shopify theme dev` is running, fetch `http://127.0.0.1:9292/` and confirm the section renders with the new content.
+- **Every `range` value must sit on a step (permanent — repeated upload failure).** Shopify rejects the whole file ("Setting 'image_w' must be a step in the range") unless `min <= value <= max` **and** `(value - min) / step` is a whole number. Before writing any range value into template JSON, read that setting's `min`/`max`/`step` from the block's or section's schema — never assume step 1 (e.g. `_footer-image` `image_w` is 50–250 step 2, so Figma's 153 must become 152 or 154). When a Figma value is off-step, use the nearest valid step and note it in the report.
 - This JSON is overwritten whenever someone saves in the Theme Editor, so tell the user to commit it promptly.
 
 ---
@@ -455,6 +456,7 @@ All merchant-managed content should remain editable where practical: headings ·
 Schema rules:
 
 - keep JSON valid (a stray comma breaks the whole page/template)
+- **adding a `range` setting:** `min`, `max` and `default` must all be on the step grid (`(max - min) / step` and `(default - min) / step` are whole numbers) and the range must have at most 101 steps; changing an existing range's `min`/`step` must keep every saved value valid — check every instance in `templates/*.json` and `sections/*-group.json`
 - preserve existing IDs, settings, blocks, presets
 - keep labels clear; keep section and block names within Shopify limits; avoid unnecessarily long labels
 - avoid duplicate IDs
@@ -738,6 +740,7 @@ Before claiming completion, verify:
 - Theme Editor reload works
 - optional empty settings do not break markup
 - schema JSON is valid
+- every `range` value in the edited template / group JSON is within `min`–`max` **and on a step**, checked against the schema (§7a) — this is the check that catches "must be a step in the range" upload errors
 - Liquid syntax is valid (`{% style %}` / `{% schema %}` / `{% content_for %}` tags balanced)
 - JavaScript has no obvious syntax errors
 - no minified files were edited

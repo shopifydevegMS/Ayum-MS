@@ -59,6 +59,7 @@ A section task isn't done when the code works. The section instance on the page 
 - Hide demo blocks Figma doesn't show with `"disabled": true` instead of deleting them.
 - Edit only that one instance. Keep every other section, block, setting and order entry exactly as it is, and keep the file's CRLF line endings.
 - Don't invent content. If Figma has an image or text you don't have, leave the setting for the merchant and list it in the report.
+- **Range values must be on a step.** Before writing a `range` setting's value, read its `min`/`max`/`step` from the schema: Shopify refuses to upload the file unless `(value - min) / step` is a whole number (e.g. step 2 from 50 → even numbers only; Figma 153 becomes 154). Same when adding a range setting: `min`, `max` and `default` all on the step grid, at most 101 steps.
 - Tell the user to commit the JSON soon, because a save in the Theme Editor overwrites it.
 
 Full rules are in §7a of the `generate-section` skill.
