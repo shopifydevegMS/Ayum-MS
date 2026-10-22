@@ -3,9 +3,15 @@
     assign product = section.settings.product
   endunless
   assign description_excerpt = product.metafields.theme.description_excerpt | default: block.settings.short_des | default: product.description
+  assign cca_full_description = product.description
+  # AYUM: optional - line breaks (<br>) become spaces so the text flows as one paragraph (off by default)
+  if block.settings.cca_remove_br
+    assign description_excerpt = description_excerpt | replace: '<br />', ' ' | replace: '<br/>', ' ' | replace: '<br>', ' '
+    assign cca_full_description = cca_full_description | replace: '<br />', ' ' | replace: '<br/>', ' ' | replace: '<br>', ' '
+  endif
   if description_excerpt == blank
-    continue 
-  endif 
+    continue
+  endif
 -%}
 {%- capture css -%}
   {%- if block.settings.ffamily != '' -%}--ff:var({{ block.settings.ffamily }}); {%- endif -%}
@@ -14,7 +20,7 @@
 {%- if product.description != blank and block.settings.des == '1' -%}    
   <div class="hdt-product-info__item hdt-product__description" {{ block.shopify_attributes }}>
     <div class="hdt-rte {{ block.settings.heading_color }} {{ block.settings.text_color }} hdt-text-{{ block.settings.text_size }} hdt-font-{{ block.settings.font_weight }} {{ block.settings.line_height }}" {%- if css != blank %} style="{{ css }}"{% endif %}>
-      {{ product.description }}
+      {{ cca_full_description }}
     </div>
   </div>
 {%- elsif description_excerpt != blank -%}
@@ -98,6 +104,13 @@
       "label": "t:sections.main-product.blocks.description.settings.readl_txt.label",
       "default": "Read less",
       "visible_if": "{{ block.settings.readm and block.settings.des == '2' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "cca_remove_br",
+      "label": "Remove line breaks (cca)",
+      "info": "Turns line breaks in the description into spaces, so the text flows as one paragraph.",
+      "default": false
     },
     {
       "type": "header",

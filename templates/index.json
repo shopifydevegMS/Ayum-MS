@@ -65,7 +65,7 @@
                 "font_size_text_lg": 16,
                 "font_size_text": 14,
                 "letter_spacing_text": 0,
-                "custom_class": "cca-hero-badge"
+                "cca_design": "hero_badge"
               },
               "blocks": {}
             },
@@ -102,7 +102,7 @@
                 "font_size_text_lg": 16,
                 "font_size_text": 14,
                 "letter_spacing_text": 0,
-                "custom_class": "cca-hero-desc"
+                "cca_design": "hero_desc"
               },
               "blocks": {}
             },
@@ -122,7 +122,7 @@
                 "font_size_text_lg": 16,
                 "font_size_text": 14,
                 "letter_spacing_text": 0,
-                "custom_class": "cca-hero-desc cca-hero-desc--mobile"
+                "cca_design": "hero_desc_mobile"
               },
               "blocks": {}
             },
@@ -264,7 +264,7 @@
                 "font_size_text_lg": 16,
                 "font_size_text": 14,
                 "letter_spacing_text": 0,
-                "custom_class": "cca-hero-badge"
+                "cca_design": "hero_badge"
               },
               "blocks": {}
             },
@@ -301,7 +301,7 @@
                 "font_size_text_lg": 16,
                 "font_size_text": 14,
                 "letter_spacing_text": 0,
-                "custom_class": "cca-hero-desc"
+                "cca_design": "hero_desc"
               },
               "blocks": {}
             },
@@ -321,7 +321,7 @@
                 "font_size_text_lg": 16,
                 "font_size_text": 14,
                 "letter_spacing_text": 0,
-                "custom_class": "cca-hero-desc cca-hero-desc--mobile"
+                "cca_design": "hero_desc_mobile"
               },
               "blocks": {}
             },

@@ -1488,7 +1488,6 @@
 
 .cca-main-product.cca-main-product {
   --cca-mp-gutter: 1.6rem;
-  --cca-mp-surface: rgb(var(--color-background2) / 0.5);
 }
 
 .cca-main-product.cca-main-product .hdt-container {
@@ -1825,34 +1824,64 @@
 }
 
 @media (min-width: 1150px) {
+  /* Figma: the description wraps at the same width as the feature box below it (514px) */
+  .cca-main-product.cca-main-product .hdt-product__description {
+    max-width: 51.4rem;
+  }
+
   .cca-main-product.cca-main-product .hdt-product__description .hdt-rte {
     font-size: 1.5rem;
     line-height: 1.85;
   }
 }
 
-/* "Why you'll love it" box (native text block, custom class cca-pdp-love) */
-.cca-main-product.cca-main-product .cca-pdp-love {
+/* Text block, Design "Badge - cca" (e.g. "صنع في الكويت"). Put several in a horizontal
+   group block (gap 8) for a badge row. */
+.cca-text-badge.cca-text-badge {
+  padding: 0.4rem 1rem;
+  border-radius: 1rem;
+  background-color: rgb(var(--color-background2) / 0.6);
+  color: rgb(var(--color-foreground) / 0.45);
+  font-size: 1rem;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.cca-text-badge.cca-text-badge > * {
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .cca-text-badge.cca-text-badge {
+    padding: 0.5rem 1.2rem;
+    border-radius: 1.2rem;
+    font-size: 1.1rem;
+  }
+}
+
+/* Text block, Design "Feature box - cca" ("ليش بتحبه"): heading paragraph + bullet list */
+.cca-text-features.cca-text-features {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
   padding: 1.4rem;
   border-radius: 1.4rem;
-  background-color: var(--cca-mp-surface);
+  background-color: rgb(var(--color-background2) / 0.5);
 }
 
-.cca-main-product.cca-main-product .cca-pdp-love > * {
+.cca-text-features.cca-text-features > * {
   margin: 0;
 }
 
-.cca-main-product.cca-main-product .cca-pdp-love p {
+.cca-text-features.cca-text-features p {
   color: rgb(var(--color-foreground));
   font-size: 1.3rem;
   font-weight: var(--font-extrabold);
   line-height: normal;
 }
 
-.cca-main-product.cca-main-product .cca-pdp-love ul {
+.cca-text-features.cca-text-features ul {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
@@ -1860,7 +1889,7 @@
   list-style: none;
 }
 
-.cca-main-product.cca-main-product .cca-pdp-love li {
+.cca-text-features.cca-text-features li {
   display: flex;
   align-items: center;
   gap: 0.8rem;
@@ -1870,7 +1899,7 @@
   line-height: normal;
 }
 
-.cca-main-product.cca-main-product .cca-pdp-love li::before {
+.cca-text-features.cca-text-features li::before {
   content: "";
   flex: 0 0 0.6rem;
   block-size: 0.6rem;
@@ -1879,26 +1908,26 @@
 }
 
 @media (min-width: 1150px) {
-  .cca-main-product.cca-main-product .cca-pdp-love {
+  .cca-text-features.cca-text-features {
     max-width: 51.4rem;
     gap: 1rem;
     padding: 1.6rem 1.8rem;
   }
 
-  .cca-main-product.cca-main-product .cca-pdp-love p {
+  .cca-text-features.cca-text-features p {
     font-size: 1.7rem;
   }
 
-  .cca-main-product.cca-main-product .cca-pdp-love ul {
+  .cca-text-features.cca-text-features ul {
     gap: 1rem;
   }
 
-  .cca-main-product.cca-main-product .cca-pdp-love li {
+  .cca-text-features.cca-text-features li {
     gap: 1rem;
     font-size: 1.4rem;
   }
 
-  .cca-main-product.cca-main-product .cca-pdp-love li::before {
+  .cca-text-features.cca-text-features li::before {
     flex-basis: 0.7rem;
     block-size: 0.7rem;
     border-radius: 0.4rem;
@@ -2022,6 +2051,9 @@
 }
 
 .cca-main-product.cca-main-product .hdt-product-form__quantity .hdt-quantity-wrapp button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center; /* icon centered in the button, so it never sits on the pill border */
   width: 2.8rem;
   height: 4.7rem;
   padding-inline: 0;
@@ -2217,19 +2249,19 @@
   }
 }
 
-/* Shipping / payment panel (native text block, custom class cca-pdp-perks).
+/* Text block, Design "Info list - cca" (shipping / payment panel).
    Icon by row: first = truck, last = return, any row between = box. */
-.cca-main-product.cca-main-product .cca-pdp-perks {
+.cca-text-info.cca-text-info {
   padding: 1.4rem;
   border-radius: 1.4rem;
-  background-color: var(--cca-mp-surface);
+  background-color: rgb(var(--color-background2) / 0.5);
 }
 
-.cca-main-product.cca-main-product .cca-pdp-perks > * {
+.cca-text-info.cca-text-info > * {
   margin: 0;
 }
 
-.cca-main-product.cca-main-product .cca-pdp-perks ul {
+.cca-text-info.cca-text-info ul {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
@@ -2237,7 +2269,7 @@
   list-style: none;
 }
 
-.cca-main-product.cca-main-product .cca-pdp-perks li {
+.cca-text-info.cca-text-info li {
   display: flex;
   align-items: center;
   gap: 0.8rem;
@@ -2248,7 +2280,7 @@
   line-height: normal;
 }
 
-.cca-main-product.cca-main-product .cca-pdp-perks li::before {
+.cca-text-info.cca-text-info li::before {
   content: "";
   flex: 0 0 2rem;
   block-size: 2rem;
@@ -2257,31 +2289,31 @@
   mask: url("cca-icon-box.svg") center / contain no-repeat;
 }
 
-.cca-main-product.cca-main-product .cca-pdp-perks li:first-child::before {
+.cca-text-info.cca-text-info li:first-child::before {
   -webkit-mask-image: url("cca-icon-truck.svg");
   mask-image: url("cca-icon-truck.svg");
 }
 
-.cca-main-product.cca-main-product .cca-pdp-perks li:last-child:not(:first-child)::before {
+.cca-text-info.cca-text-info li:last-child:not(:first-child)::before {
   -webkit-mask-image: url("cca-icon-return.svg");
   mask-image: url("cca-icon-return.svg");
 }
 
 @media (min-width: 1150px) {
-  .cca-main-product.cca-main-product .cca-pdp-perks {
+  .cca-text-info.cca-text-info {
     padding: 1.6rem 1.8rem;
   }
 
-  .cca-main-product.cca-main-product .cca-pdp-perks ul {
+  .cca-text-info.cca-text-info ul {
     gap: 1rem;
   }
 
-  .cca-main-product.cca-main-product .cca-pdp-perks li {
+  .cca-text-info.cca-text-info li {
     gap: 1rem;
     font-size: 1.3rem;
   }
 
-  .cca-main-product.cca-main-product .cca-pdp-perks li::before {
+  .cca-text-info.cca-text-info li::before {
     flex-basis: 2.2rem;
     block-size: 2.2rem;
   }

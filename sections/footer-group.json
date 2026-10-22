@@ -69,8 +69,7 @@
                 "txt_day": "days",
                 "font_size_text_lg": 16,
                 "font_size_text": 14,
-                "letter_spacing_text": 0,
-                "custom_class": ""
+                "letter_spacing_text": 0
               },
               "blocks": {}
             },
@@ -336,8 +335,7 @@
                 "txt_day": "days",
                 "font_size_text_lg": 16,
                 "font_size_text": 14,
-                "letter_spacing_text": 0,
-                "custom_class": ""
+                "letter_spacing_text": 0
               },
               "blocks": {}
             },

@@ -12,7 +12,7 @@
   {%- if block.settings.ffamily != '' -%}--ff:var({{ block.settings.ffamily }}); {%- endif -%}
 {%- endcapture -%}
 
-<div {{ effect }} id="block-{{ block.id }}" class="hdt-text-warry hdt-rte {{ block.settings.text_color }}{% if block.settings.hidden_br_mobile %} hdt-br-hidden{% endif %}{% if block.settings.hidden_on_mobile %} hdt-hide-mobile{% endif %} hdt-text-{{ block.settings.text_size }} hdt-font-{{ block.settings.font_weight }} {{ block.settings.line_height }}{% if block.settings.custom_class != blank %} {{ block.settings.custom_class | strip | escape }}{% endif %}" {{ block.shopify_attributes }} {%- if css != blank %} style="{{ css }}"{% endif %}>
+<div {{ effect }} id="block-{{ block.id }}" class="hdt-text-warry hdt-rte {{ block.settings.text_color }}{% if block.settings.hidden_br_mobile %} hdt-br-hidden{% endif %}{% if block.settings.hidden_on_mobile %} hdt-hide-mobile{% endif %} hdt-text-{{ block.settings.text_size }} hdt-font-{{ block.settings.font_weight }} {{ block.settings.line_height }}{% case block.settings.cca_design %}{% when 'badge' %} cca-text-badge{% when 'features' %} cca-text-features{% when 'info' %} cca-text-info{% when 'hero_badge' %} cca-hero-badge{% when 'hero_desc' %} cca-hero-desc{% when 'hero_desc_mobile' %} cca-hero-desc cca-hero-desc--mobile{% endcase %}" {{ block.shopify_attributes }} {%- if css != blank %} style="{{ css }}"{% endif %}>
   {%- assign now_y = 'now' | date: '%Y' -%}
   {%- capture cap_date -%}
     <hdt-countdown config='{"month":"{{ block.settings.countdown | date: '%m' | plus: 0 }}", "date":"{{ block.settings.countdown | date: '%d, %Y %H:%M:%S' }}", "hideTimerOnComplete": true, "hasZero": true }'>
@@ -256,10 +256,20 @@
       "visible_if": "{{ block.settings.text_size == 'custom' }}"
     },
     {
-      "type": "text",
-      "id": "custom_class",
-      "label": "Custom CSS class",
-      "info": "Optional. Extra class for this text, e.g. cca-…"
+      "type": "select",
+      "id": "cca_design",
+      "label": "Design",
+      "info": "AYUM styles. Default keeps the theme text. Hero styles apply inside the hero slider (Design 1 - cca).",
+      "default": "default",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "badge", "label": "Badge - cca" },
+        { "value": "features", "label": "Feature box - cca" },
+        { "value": "info", "label": "Info list - cca" },
+        { "value": "hero_badge", "label": "Hero badge - cca" },
+        { "value": "hero_desc", "label": "Hero description - cca" },
+        { "value": "hero_desc_mobile", "label": "Hero description, mobile - cca" }
+      ]
     }
   ],
   "presets": [

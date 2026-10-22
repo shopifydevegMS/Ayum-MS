@@ -283,7 +283,7 @@
       "inventory_in_stock_show_count_html": "<span data-quantity>{{ quantity }}<\/span> in stock",
       "inventory_low_stock": "Low stock",
       "inventory_low_stock_show_count_html": "Low stock: <span data-quantity>{{ quantity }}<\/span> left",
-      "cca_low_stock_show_count_html": "In stock — only <span data-quantity>{{ quantity }}<\/span> left",
+      "cca_low_stock_show_count_html": "In stock — only <span data-quantity>{{ quantity }}<\/span> left in this size",
       "cca_reviews_count": "({{ count }} reviews)",
       "cca_read_reviews": "Read reviews",
       "inventory_out_of_stock": "Out of stock",
