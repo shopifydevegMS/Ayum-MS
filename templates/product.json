@@ -334,50 +334,6 @@
     "product_details_cca": {
       "type": "icon-box",
       "blocks": {
-        "icon-box": {
-          "type": "section-heading",
-          "static": true,
-          "settings": {
-            "design_heading": "1",
-            "horizontal": false,
-            "alignment": "center",
-            "heading_gap": 16,
-            "margin_bottom": 24
-          },
-          "blocks": {
-            "pd_heading_cca": {
-              "type": "_heading_section",
-              "settings": {
-                "heading": "سناك خفيف ينفع بالدوام، بالطريق، وبأي وقت.",
-                "line_height": "",
-                "heading_size": "h_custom",
-                "text_color": "hdt-s-text",
-                "font_size_heading_lg": 28,
-                "font_size_heading": 19,
-                "letter_spacing_heading": 0
-              },
-              "blocks": {}
-            },
-            "pd_text_cca": {
-              "type": "_sub_heading_section",
-              "settings": {
-                "text": "<p>شرائح أناناس طازجة تتجمّد ثم يُسحب منها الماء بالتفريغ بدون حرارة، فتحتفظ بنكهتها وقيمتها الغذائية ويتحول قوامها لقرمشة خفيفة ما تنملّ.</p>",
-                "hidden_br_mobile": false,
-                "hidden_on_mobile": false,
-                "text_size": "custom",
-                "text_color": "hdt-text-secondary",
-                "font_size_text_lg": 16,
-                "font_size_text": 14,
-                "letter_spacing_text": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "pd_heading_cca",
-            "pd_text_cca"
-          ]
-        },
         "pd_after_open_cca": {
           "type": "_icon_box",
           "settings": {
@@ -422,9 +378,53 @@
             "svg_width": 24,
             "svg_width_mb": 20,
             "heading": "المكونات",
-            "description": "أناناس طبيعي 100% — لا شيء غير ذلك"
+            "description": "أناناس طبيعي 100%"
           },
           "blocks": {}
+        },
+        "icon-box": {
+          "type": "section-heading",
+          "static": true,
+          "settings": {
+            "design_heading": "1",
+            "horizontal": false,
+            "alignment": "center",
+            "heading_gap": 16,
+            "margin_bottom": 24
+          },
+          "blocks": {
+            "pd_heading_cca": {
+              "type": "_heading_section",
+              "settings": {
+                "heading": "سناك خفيف ينفع بالدوام، بالطريق، وبأي وقت.",
+                "line_height": "",
+                "heading_size": "h_custom",
+                "text_color": "hdt-s-text",
+                "font_size_heading_lg": 28,
+                "font_size_heading": 19,
+                "letter_spacing_heading": 0
+              },
+              "blocks": {}
+            },
+            "pd_text_cca": {
+              "type": "_sub_heading_section",
+              "settings": {
+                "text": "<p>شرائح أناناس طازجة تتجمّد ثم يُسحب منها الماء بالتفريغ بدون حرارة، فتحتفظ بنكهتها وقيمتها الغذائية.</p>",
+                "hidden_br_mobile": false,
+                "hidden_on_mobile": false,
+                "text_size": "custom",
+                "text_color": "hdt-text-secondary",
+                "font_size_text_lg": 16,
+                "font_size_text": 14,
+                "letter_spacing_text": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "pd_heading_cca",
+            "pd_text_cca"
+          ]
         }
       },
       "block_order": [
@@ -436,6 +436,13 @@
         "design": "design_2",
         "enable_border": false,
         "enable_box_shadow": false,
+        "border_color": "#f6f6f8",
+        "heading_color": "#222222",
+        "icon_color": "#222222",
+        "description_color": "#878787",
+        "color_box": "#ffffff",
+        "color_box_hover": "#eb4c4e",
+        "color_content_hover": "#ffffff",
         "source": "svg",
         "padding": "0px,0px,0px,0px",
         "col_dk": "3",
@@ -446,8 +453,23 @@
         "space_horizontal_mb": "0",
         "space_vertical_mb": "0",
         "layout": "grid",
+        "loop": false,
+        "autoplay": 0,
+        "pauseOnHover": false,
         "navUI": false,
+        "nav_position": "default",
+        "nav_visible": "always",
+        "nav_style": "default",
+        "nav_shape": "default",
+        "nav_size": "small",
+        "nav_hide_mobile": false,
         "dotUI": false,
+        "pag_style": "default",
+        "pag_rounded": false,
+        "pag_space": 10,
+        "pag_mgt": 10,
+        "only_show_mobile": false,
+        "pag_hide_mobile": false,
         "colors_by_section": true,
         "color_scheme": "scheme-surface",
         "background_opacity": 0.6,
