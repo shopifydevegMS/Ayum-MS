@@ -379,8 +379,8 @@ An isolated new section is acceptable when the design requires structural markup
 
 **Turn an AYUM design on through the section's design select, not a "Custom CSS class" text setting.** (The user replaced the earlier custom-class rule: merchants should pick a design, not type a class.)
 
-- **The section already has a design select** (e.g. `collection_des` in `collections-list`, `tabs_des` in `tabs-collection`): add **one new option beside the existing ones**. Numeric selects take the next free number with a ` - cca` label suffix (`{ "value": "16", "label": "16 - cca" }`); named selects take `{ "value": "design_1", "label": "Design 1 - cca" }`. Never change or remove existing options or the default.
-- **The section has no design select** (e.g. `slideshow`, `featured-collection`): add one as the first setting:
+- **The section already has a select that picks its design or style**, whatever its id or label (e.g. `collection_des` in `collections-list`, `tabs_des` in `tabs-collection`, `product_des` "Product design" in `related-products`, other `*_des` / `*_style` selects): add **one new option beside the existing ones** in that select, and **never add a second `design` select next to it**. Check the schema for such a select before adding anything. Numeric selects take the next free number with a ` - cca` label suffix (`related-products` `product_des` has 1–11, so the AYUM option is `{ "value": "12", "label": "12 - cca" }`; `collections-list` → `"16 - cca"`); named selects take `{ "value": "design_1", "label": "Design 1 - cca" }`. Never change or remove existing options or the default. If the new value is built on an existing design (card design 12 = card design 7 + AYUM options), let it share that design's code path (`when '7', '12'`) so it keeps the native markup and classes, and keep its AYUM-only options inactive for the native value. Failure this comes from: `related-products` got a separate `design` select even though its "Product design" select already offered 11 designs.
+- **The section has no design or style select at all** (e.g. `slideshow`, `featured-collection`): add one as the first setting:
 
 ```json
 {
@@ -395,7 +395,7 @@ An isolated new section is acceptable when the design requires structural markup
 }
 ```
 
-- In the Liquid, the AYUM option adds the stable scope class to the **outermost section wrapper**, keeping all native classes: `{% if section.settings.design == 'design_1' %} cca-hero-slider{% endif %}` (or `collection_des == '16'`, `tabs_des == 'design_1'`). All AYUM CSS for that section is anchored on that class, so every other instance (default option) is untouched.
+- In the Liquid, the AYUM option adds the stable scope class to the **outermost section wrapper**, keeping all native classes: `{% if section.settings.design == 'design_1' %} cca-hero-slider{% endif %}` (or `collection_des == '16'`, `tabs_des == 'design_1'`, `product_des == '12'`). All AYUM CSS for that section is anchored on that class, so every other instance (default option) is untouched.
 - A new option value may have no native CSS of its own (e.g. `hdt-collection-style16`). Reproduce the native layout it is based on inside the `cca-` scope in `dev2.css` (e.g. design 16 reproduces design 8's static title bar), instead of editing native snippets.
 - Markup that must differ for the AYUM design (e.g. the hero's Figma arrow SVG) is wrapped in the same condition, with the native markup in `{% else %}`.
 - Set the option in the instance's template JSON (§7a) — never a class string.
