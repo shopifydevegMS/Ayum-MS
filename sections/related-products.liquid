@@ -44,7 +44,7 @@
 {%- capture sizes -%}
   (min-width: 1150px) calc(({{ current_width }} -  ({{ space_item }} * ( {{ section.settings.col_dk }} - 1 ))) * 1 / {{ section.settings.col_dk }}),(min-width: 768px) calc( ({{ current_width_tb }} - ({{ space_item_tb }} * ( {{ section.settings.col_tb }} - 1 ))) * 1 / {{ section.settings.col_tb }}), calc( ({{ current_width_mb }} - ({{ space_item_mb }} * ( {{ section.settings.col_mb }} - 1 ) )) * 1 / {{ section.settings.col_mb }})
 {%- endcapture -%}
-<div id="{{ section.id }}" class="{{ parent }} hdt-related-products-{{ section.settings.display_type }} {% if section.settings.hdt_background_parallax %} hdt-animate--parallax-bg {% endif %}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};"{%- endif %} hdt-reveal="fade-in">
+<div id="{{ section.id }}" class="{{ parent }}{% if section.settings.product_des == '12' %} cca-recommendations{% endif %} hdt-related-products-{{ section.settings.display_type }} {% if section.settings.hdt_background_parallax %} hdt-animate--parallax-bg {% endif %}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};"{%- endif %} hdt-reveal="fade-in">
   <div class="{{ child }}">
     {%- if section.settings.section_background != blank -%}
       {% liquid
@@ -182,6 +182,10 @@
           {
             "value": "11",
             "label": "11"
+          },
+          {
+            "value": "12",
+            "label": "12 - cca"
           }
         ],
         "default": "1"
@@ -230,6 +234,14 @@
         "id": "show_vendor",
         "label": "t:sections.recently-products.settings.show_vendor.label",
         "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_type",
+        "label": "Show product type",
+        "info": "Product design 12 - cca only. Shows the product's type (and rating) above its title.",
+        "default": false,
+        "visible_if": "{{ section.settings.product_des == '12' }}"
       },
       {
         "type": "select",

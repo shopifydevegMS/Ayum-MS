@@ -363,12 +363,14 @@
 /* ==== cca carousel edges — shared (every AYUM <hdt-slider> card carousel joins this rule) ==== */
 /* The viewport stops clipping inside the container padding; the container clips at its outer edge. */
 .cca-customer-reviews.cca-customer-reviews .hdt-container,
-.cca-shoppable-videos.cca-shoppable-videos .hdt-container {
+.cca-shoppable-videos.cca-shoppable-videos .hdt-container,
+.cca-recommendations.cca-recommendations .hdt-container {
   overflow-x: clip;
 }
 
 .cca-customer-reviews.cca-customer-reviews .hdt-prent .hdt-slider__viewport,
-.cca-shoppable-videos.cca-shoppable-videos hdt-slider .hdt-slider__viewport {
+.cca-shoppable-videos.cca-shoppable-videos hdt-slider .hdt-slider__viewport,
+.cca-recommendations.cca-recommendations .hdt-slider__products .hdt-slider__viewport {
   overflow: visible;
 }
 
@@ -1701,5 +1703,457 @@
 
   .cca-product-reviews.cca-product-reviews .jdgm-rev-widg .jdgm-write-rev-link {
     width: 260px;
+  }
+}
+
+/* ==== cca-des-mobile — icon box "Description (Mobile)" setting (blocks/_icon_box.liquid, any design) ==== */
+/* Only rendered when the block's mobile description is filled; otherwise the native description shows alone. */
+.cca-des-mobile {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .cca-des-desktop {
+    display: none;
+  }
+
+  .cca-des-mobile {
+    display: inline;
+  }
+}
+
+/* ==== cca-why-ayum — product page "Why AYUM" (icon-box, Design 2 - cca) ==== */
+/* Figma: desktop 2048:1867, mobile 2048:2354 ("Why Ayum (shared block)"). Colors: section scheme-why-ayum
+   (brand cyan background, 40% via the section opacity; ink text; white cards at 50%), icon circles use the
+   brand schemes (scheme-brand-*) set per block. hdt-icon-box.css loads after this file, so card rules carry
+   one extra class to win ties. Card order is pinned RTL in every locale (first card on the right). */
+
+/* Container: Figma side padding (16px mobile, 20px from 768) */
+.cca-why-ayum .hdt-container {
+  padding-inline: 16px;
+}
+
+/* Heading area: Arabic text boundary, centered */
+.cca-why-ayum .hdt-section-heading_block {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.cca-why-ayum .hdt-section-heading_block :where(p) {
+  margin: 0;
+}
+
+.cca-why-ayum .hdt-section-heading_block .hdt-heading-block {
+  justify-content: center;
+  margin: 0;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+}
+
+.cca-why-ayum .hdt-section-heading_block .hdt-subheading-block {
+  color: rgb(var(--color-foreground) / 0.75);
+  font-weight: var(--font-bold);
+  line-height: 1.556; /* Figma 24.9/16 */
+}
+
+/* Cards grid: 2 columns below 1150 (col_mb / col_tb), 4 from 1150 (col_dk) */
+.cca-why-ayum.cca-why-ayum .hdt-icon-box .hdt-prent {
+  direction: rtl;
+  column-gap: 12px; /* Figma 12px; the schema's mobile gap options skip 12 */
+  row-gap: 12px;
+}
+
+/* Equal-height cards: the grid stretches Shopify's block wrapper, the wrapper stretches the item, the item the card */
+.cca-why-ayum .hdt-icon-box .hdt-prent > .shopify-block,
+.cca-why-ayum .hdt-icon-box .hdt-iconbox-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.cca-why-ayum .hdt-icon-box .hdt-iconbox-item {
+  flex: 1 1 auto;
+}
+
+/* Card: icon, then title, then description, edge-aligned (right in Arabic) */
+.cca-why-ayum .hdt-iconbox-item .hdt-iconbox-item-wrapper {
+  flex: 1 1 auto;
+  direction: rtl;
+  unicode-bidi: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 14px;
+  border-radius: 14px;
+  background-color: rgb(var(--color-background2) / 0.5);
+  text-align: start;
+}
+
+.cca-why-ayum .hdt-iconbox-item .hdt-iconbox-head {
+  display: contents;
+}
+
+/* Icon circle: color from the block's "Icon color scheme" */
+.cca-why-ayum .hdt-iconbox-item .hdt-iconbox-icon {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: rgb(var(--color-background));
+}
+
+.cca-why-ayum .hdt-iconbox-item .hdt-iconbox-icon :is(img, svg) {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+.cca-why-ayum .hdt-iconbox-item .hdt-iconbox-heading {
+  margin: 0;
+  color: rgb(var(--color-foreground));
+  font-size: 12px;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+}
+
+.cca-why-ayum .hdt-iconbox-item .hdt-iconbox-des {
+  margin: 0;
+  color: rgb(var(--color-foreground) / 0.8);
+  font-size: 11px;
+  font-weight: var(--font-normal);
+  line-height: 1.75;
+}
+
+/* Informational cards (no link): no native hover. hdt-icon-box.css recolors every
+   descendant on hover (".hdt-iconbox-item-wrapper:hover *") and bounces the icon. */
+.cca-why-ayum .hdt-iconbox-des :is(.cca-des-desktop, .cca-des-mobile) {
+  color: inherit;
+}
+
+.cca-why-ayum .hdt-iconbox-item:hover .hdt-iconbox-icon {
+  animation: none;
+}
+
+@media (min-width: 768px) {
+  .cca-why-ayum .hdt-container {
+    padding-inline: 20px;
+  }
+
+  .cca-why-ayum.cca-why-ayum .hdt-icon-box .hdt-prent {
+    column-gap: 20px;
+    row-gap: 20px;
+  }
+
+  .cca-why-ayum .hdt-iconbox-item .hdt-iconbox-item-wrapper {
+    gap: 12px;
+    padding: var(--padding-content);
+    border-radius: 16px;
+  }
+
+  .cca-why-ayum .hdt-iconbox-item .hdt-iconbox-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .cca-why-ayum .hdt-iconbox-item .hdt-iconbox-icon :is(img, svg) {
+    width: 26px;
+    height: 26px;
+  }
+
+  .cca-why-ayum .hdt-iconbox-item .hdt-iconbox-heading {
+    font-size: 17px;
+  }
+
+  .cca-why-ayum .hdt-iconbox-item .hdt-iconbox-des {
+    font-size: 13px;
+    line-height: 1.8;
+  }
+}
+
+@media (min-width: 1150px) {
+  .cca-why-ayum .hdt-section-heading_block .hdt-heading-block {
+    line-height: 1.45; /* Figma 145% */
+  }
+}
+
+/* ==== cca-recommendations — product page "You may also like" (related-products, Design 1 - cca) ==== */
+/* Figma: desktop 2048:1904, mobile 2048:2389. Colors: "scheme-products" color scheme.
+   Data: Shopify product recommendations (native related-products, display type "Product recommendations").
+   Card: native design 7 with "Show product type" — same card as the homepage Best sellers / Bundles
+   (dev1.css), reproduced here under this section's own scope. Rating: snippets/hdt-pr-card-rating
+   (Judge.me metafields; nothing renders without reviews). Progress: the native "full" pagination.
+   Section stylesheets load after this file, so every override doubles the scope class. */
+
+.cca-recommendations.cca-recommendations .hdt-container {
+  padding-inline: 16px;
+}
+
+/* Heading + subtitle (native section-heading block) */
+.cca-recommendations.cca-recommendations .hdt-section-heading_block {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.cca-recommendations.cca-recommendations .hdt-section-heading_block :where(p) {
+  margin: 0;
+}
+
+.cca-recommendations.cca-recommendations .hdt-section-heading_block .hdt-heading-block {
+  justify-content: center;
+  margin: 0;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+}
+
+.cca-recommendations.cca-recommendations .hdt-section-heading_block .hdt-subheading-block {
+  font-size: 13px; /* Figma 13px; the block's mobile size only allows even values */
+  font-weight: var(--font-normal);
+  line-height: 1.8;
+}
+
+/* Product card (design 7) */
+.cca-recommendations.cca-recommendations .hdt-pr-style7 {
+  --atc-cl: rgb(var(--hdt-btn-color));
+  --atc-bg-cl: rgb(var(--hdt-btn-bg));
+  --atc-cl-hover: rgb(var(--hdt-btn-hover-color));
+  --atc-bg-cl-hover: rgb(var(--hdt-btn-hover-bg));
+}
+
+.cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-card-product__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  height: 100%;
+  padding: 10px;
+  border: 1px solid rgb(var(--color-line-border));
+  border-radius: 16px;
+  background-color: rgb(var(--color-background));
+}
+
+.cca-recommendations.cca-recommendations .hdt-pr-style7 :is(.hdt-card-product__media, .hdt-card-product__media-wrapp) {
+  border-radius: 10px;
+}
+
+.cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-card-product__info {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-card-product__info > * {
+  margin: 0;
+}
+
+/* Badges: white pill, pink text, top inline-start corner of the image */
+.cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-badge__wrapp {
+  top: 7px;
+  left: auto;
+  right: auto;
+  inset-inline-start: 7px;
+  align-items: flex-start;
+}
+
+.cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-badge {
+  min-width: 0;
+  min-height: 0;
+  padding: 4px 10px;
+  border-radius: 10px;
+  background-color: rgb(var(--color-background));
+  color: rgb(var(--color-pr-price));
+  font-size: 10px;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+/* Meta row: product type and rating at opposite ends (Figma keeps this order in both locales) */
+.cca-recommendations.cca-recommendations .cca-card-meta {
+  display: flex;
+  align-self: stretch;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  min-height: 13px; /* the row keeps its height without a type or rating, so cards line up */
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+.cca-recommendations.cca-recommendations .cca-card-meta .cca-card-type {
+  min-width: 0;
+  overflow: hidden;
+  color: rgb(var(--color-foreground2));
+  font-size: 11px;
+  font-weight: var(--font-normal);
+  line-height: normal;
+  text-align: start;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.cca-recommendations.cca-recommendations .cca-card-meta .cca-rating {
+  flex-shrink: 0;
+}
+
+.cca-recommendations.cca-recommendations .cca-rating__stars {
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+/* Title: always reserves 2 lines (clamped at 2) so prices and buttons line up */
+.cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-card-product__title {
+  --line-clamp-count: 2;
+  min-height: 2.6em; /* 2 lines x 1.3 line-height */
+  font-size: 13px;
+  font-weight: var(--font-extrabold);
+  line-height: 1.3;
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-price-wrapp {
+  justify-content: center;
+  font-size: 15px;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+}
+
+/* On sale: the current price stays pink, the struck-through compare-at price is gray
+   (native colors are the other way round: base.css / product-card.css) */
+.cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-price-wrapp .hdt-price {
+  color: rgb(var(--color-pr-price));
+}
+
+.cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-price-wrapp .hdt-compare-at-price {
+  color: rgb(var(--color-foreground2));
+}
+
+/* Native add to cart, restyled: full-width pill at the bottom of the card, label only */
+.cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-pr-btns-group1 {
+  align-self: stretch;
+  margin-block-start: auto;
+}
+
+.cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-pr-btns-group1 .hdt-card-product__btn-ultra {
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 24px;
+  font-size: 12px;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+}
+
+.cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-pr-btns-group1 .hdt-card-product__btn-ultra .hdt-pr-card-icon {
+  display: none;
+}
+
+/* Progress bar (native "full" pagination, desktop + tablet only): segments of a 3px track */
+.cca-recommendations.cca-recommendations .hdt-slider .hdt-pagination.hdt-style-full {
+  width: min(510px, 100%);
+  margin-inline: auto;
+  gap: 0;
+  overflow: hidden;
+  border-radius: 2px;
+  --pag-h: 3px;
+  --pag-h-active: 3px;
+  --pag-bg: rgb(var(--color-background2));
+  --pag-bg-active: rgb(var(--color-accent));
+}
+
+.cca-recommendations.cca-recommendations .hdt-slider .hdt-pagination.hdt-style-full button {
+  border: 0;
+  border-radius: 0;
+  opacity: 1;
+}
+
+/* One page only (4 or fewer products on desktop): no progress bar */
+.cca-recommendations.cca-recommendations .hdt-slider .hdt-pagination:not(:has(> :nth-child(2))) {
+  display: none;
+}
+
+/* Mobile: swipe track, ~2 cards (158px at 375) + peek, 12px apart */
+@media (max-width: 767px) {
+  .cca-recommendations.cca-recommendations .hdt-section-heading_block {
+    /* Figma mobile: 12px to the cards. !important is required: the theme sets this
+       margin from the block's "Margin bottom" setting with an #id selector. */
+    margin-bottom: 12px !important;
+  }
+
+  .cca-recommendations.cca-recommendations .hdt-slider__products .hdt-slider__viewport {
+    --slide-spacing: 12px;
+    --slide-size: calc(clamp(144px, 42.13vw, 200px) + var(--slide-spacing));
+  }
+}
+
+/* Tablet + desktop */
+@media (min-width: 768px) {
+  .cca-recommendations.cca-recommendations .hdt-section-heading_block .hdt-subheading-block {
+    font-size: var(--text-custom);
+    font-weight: var(--font-bold);
+    line-height: 1.556; /* Figma 24.9/16 */
+  }
+
+  .cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-card-product__wrapper {
+    gap: 10px;
+    padding: 14px;
+  }
+
+  .cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-card-product__info {
+    gap: 10px;
+  }
+
+  .cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-badge__wrapp {
+    top: 11px;
+    inset-inline-start: 11px;
+  }
+
+  .cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-badge {
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 11px;
+  }
+
+  .cca-recommendations.cca-recommendations .cca-card-meta {
+    min-height: 16px;
+  }
+
+  .cca-recommendations.cca-recommendations .cca-card-meta .cca-card-type,
+  .cca-recommendations.cca-recommendations .cca-card-meta .cca-rating {
+    font-size: 13px;
+    font-weight: var(--font-bold);
+  }
+
+  .cca-recommendations.cca-recommendations .cca-rating__stars {
+    font-size: 13px;
+    letter-spacing: 2px;
+  }
+
+  .cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-card-product__title {
+    font-size: clamp(16px, 1.53vw, 22px);
+  }
+
+  .cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-price-wrapp {
+    font-size: clamp(16px, 1.39vw, 20px);
+  }
+
+  .cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-pr-btns-group1 .hdt-card-product__btn-ultra {
+    padding-block: 12px;
+    font-size: clamp(14px, 1.18vw, 17px);
+  }
+}
+
+@media (min-width: 1150px) {
+  .cca-recommendations.cca-recommendations .hdt-container {
+    padding-inline: 20px;
   }
 }

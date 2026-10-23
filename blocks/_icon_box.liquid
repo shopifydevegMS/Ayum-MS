@@ -3,7 +3,7 @@
   <div class="hdt-iconbox-item-wrapper hdt-text-center">
     {% if block.settings.url != blank %}<a class="hdt-full-width-link"  aria-label="link" href="{{ block.settings.url }}"></a>{% endif %}
     <span class="hdt-iconbox-head hdt-flex hdt-align-center hdt-justify-center">
-      <div class="hdt-iconbox-icon"{% if section.settings.design == 'design_1' %} color-scheme="{{ block.settings.icon_color_scheme }}"{% endif %}>
+      <div class="hdt-iconbox-icon"{% if section.settings.design == 'design_1' or section.settings.design == 'design_2' %} color-scheme="{{ block.settings.icon_color_scheme }}"{% endif %}>
         {%- if block.settings.image != blank and section.settings.source == 'image' -%}
           <span class="hdt-iconbox-icon__image " style="--max-width:{{ block.settings.image.width }}px;--width:{{ block.settings.image_width }}px;">
           {{ block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: 'lazy', width: block.settings.image.width, height: block.settings.image.height, class: '' , sizes: sizes, widths: "24, 52, 48, 104, 120, 240, 360, 480, 600" }}
@@ -20,7 +20,12 @@
         <h5 class="hdt-iconbox-heading {% if block.settings.icon_position == 'right' %} hdt-order-first{% endif %}">{{ block.settings.heading }}</h5>
       {%- endif -%}
     </span>
-    {% if block.settings.description != blank %}
+    {% if block.settings.description_mb != blank %}
+      <div class="hdt-iconbox-des">
+        {%- if block.settings.description != blank -%}<span class="cca-des-desktop">{{ block.settings.description }}</span>{%- endif -%}
+        <span class="cca-des-mobile">{{ block.settings.description_mb }}</span>
+      </div>
+    {% elsif block.settings.description != blank %}
       <div class="hdt-iconbox-des">
         {{ block.settings.description }}
       </div>
@@ -68,9 +73,9 @@
         "type": "color_scheme",
         "id": "icon_color_scheme",
         "label": "Icon color scheme",
-        "info": "Circle color behind the icon (Design 1 - cca).",
+        "info": "Circle color behind the icon (Design 1 / Design 2 - cca).",
         "default": "scheme-1",
-        "visible_if": "{{ section.settings.design == 'design_1' }}"
+        "visible_if": "{{ section.settings.design == 'design_1' or section.settings.design == 'design_2' }}"
       },
       {
         "type": "image_picker",
@@ -134,6 +139,12 @@
         "id": "description",
         "label": "Description",
         "default": "Description"
+      },
+      {
+        "type": "text",
+        "id": "description_mb",
+        "label": "Description (Mobile)",
+        "info": "Optional. Replaces the description on screens below 768px."
       }
     ],
     "presets": [
