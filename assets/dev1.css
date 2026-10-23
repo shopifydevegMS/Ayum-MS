@@ -1511,10 +1511,6 @@
     --cca-mp-gutter: 2rem;
   }
 
-  .cca-main-product.cca-main-product .hdt-container {
-    max-width: calc(132rem + 2 * var(--cca-mp-gutter));
-  }
-
   .cca-main-product.cca-main-product .hdt-row-grid {
     --spacing-x: 4.8rem;
   }
@@ -2316,5 +2312,199 @@
   .cca-text-info.cca-text-info li::before {
     flex-basis: 2.2rem;
     block-size: 2.2rem;
+  }
+}
+
+/* ==== cca-product-details — product page "Product details" (icon-box, Design 2 - cca) ==== */
+/* Figma: desktop 2048:1691, mobile 2048:2219. Colors: section scheme-surface
+   (background = surface, background2 = white panel, accent = cyan, line border = separators).
+   hdt-icon-box.css loads after this file, so rules carry a doubled scope class. */
+
+.cca-product-details.cca-product-details {
+  /* Figma surface at 45% on mobile, 60% on desktop (the section's opacity setting).
+     !important: the native opacity variable is an inline style on this element. */
+  --background-opacity: 0.45 !important;
+  border-block: 0.1rem solid rgb(var(--color-accent) / 0.12);
+}
+
+@media (min-width: 768px) {
+  .cca-product-details.cca-product-details {
+    --background-opacity: 0.6 !important;
+  }
+}
+
+/* Empty state: items without a description are not rendered (blocks/_icon_box), so a product
+   with no details shows no empty panel. The Theme Editor still shows the section. */
+html:not(.shopify-design-mode) .cca-product-details.cca-product-details:not(:has(.hdt-iconbox-item)) {
+  display: none;
+}
+
+.cca-product-details.cca-product-details .hdt-container {
+  padding-inline: 1.6rem;
+}
+
+@media (min-width: 768px) {
+  .cca-product-details.cca-product-details .hdt-container {
+    padding-inline: 2rem;
+  }
+}
+
+/* Heading + description: Arabic text boundary, centered */
+.cca-product-details.cca-product-details .hdt-section-heading_block {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+@media (max-width: 767px) {
+  /* Figma mobile: 16px to the panel. !important: the native value comes from an #id rule */
+  .cca-product-details.cca-product-details .hdt-section-heading_block {
+    margin-bottom: 1.6rem !important;
+  }
+}
+
+.cca-product-details.cca-product-details .hdt-section-heading_block .hdt-heading-block {
+  justify-content: center;
+  margin: 0;
+  color: rgb(var(--color-foreground));
+  font-weight: var(--font-extrabold);
+  line-height: 1.55;
+}
+
+.cca-product-details.cca-product-details .hdt-section-heading_block .hdt-subheading-block {
+  --text-color: rgb(var(--color-foreground2));
+  color: rgb(var(--color-foreground2));
+  font-weight: var(--font-normal);
+  line-height: 1.56;
+}
+
+.cca-product-details.cca-product-details .hdt-section-heading_block :where(p) {
+  margin: 0;
+}
+
+/* Even line lengths when the text wraps (Figma mobile: two balanced lines), with no
+   hardcoded <br> or fixed width, so any product's text wraps well */
+.cca-product-details.cca-product-details .hdt-section-heading_block :is(.hdt-heading-block, .hdt-subheading-block) {
+  text-wrap: balance;
+}
+
+@media (min-width: 768px) {
+  .cca-product-details.cca-product-details .hdt-section-heading_block .hdt-heading-block {
+    line-height: 1.65;
+  }
+
+  .cca-product-details.cca-product-details .hdt-section-heading_block .hdt-subheading-block {
+    line-height: 2;
+  }
+}
+
+/* Panel: white rounded card; items stacked on mobile, one row from 768 */
+.cca-product-details.cca-product-details .hdt-icon-box {
+  padding: 0.4rem 1.8rem;
+  border-radius: 1.6rem;
+  background-color: rgb(var(--color-background2));
+}
+
+.cca-product-details.cca-product-details .hdt-icon-box .hdt-prent {
+  direction: rtl; /* first item on the right in every locale */
+  gap: 0;
+}
+
+@media (min-width: 768px) {
+  .cca-product-details.cca-product-details .hdt-icon-box {
+    padding: 2.4rem 0.8rem;
+  }
+}
+
+/* Each item sits in Shopify's block wrapper; an item skipped for having no text leaves an
+   empty wrapper, which takes no grid cell. */
+.cca-product-details.cca-product-details .hdt-prent > .shopify-block:not(:has(.hdt-iconbox-item)) {
+  display: none;
+}
+
+/* Separators: horizontal between stacked items, vertical between columns */
+.cca-product-details.cca-product-details .hdt-prent > .shopify-block:has(.hdt-iconbox-item) ~ .shopify-block:has(.hdt-iconbox-item) {
+  border-block-start: 0.1rem solid rgb(var(--color-line-border));
+}
+
+@media (min-width: 768px) {
+  .cca-product-details.cca-product-details .hdt-prent > .shopify-block:has(.hdt-iconbox-item) ~ .shopify-block:has(.hdt-iconbox-item) {
+    border-block-start: 0;
+    border-inline-start: 0.1rem solid rgb(var(--color-line-border));
+  }
+}
+
+/* Item: icon, title, text, centered; no native card background, hover or bounce */
+.cca-product-details.cca-product-details .hdt-iconbox-item .hdt-iconbox-item-wrapper {
+  direction: rtl;
+  unicode-bidi: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  height: 100%;
+  padding: 1.6rem 0;
+  border-radius: 0;
+  background-color: transparent;
+}
+
+@media (min-width: 768px) {
+  .cca-product-details.cca-product-details .hdt-iconbox-item .hdt-iconbox-item-wrapper {
+    padding: 0 1.6rem;
+  }
+}
+
+.cca-product-details.cca-product-details .hdt-iconbox-item .hdt-iconbox-head {
+  flex-direction: column;
+  gap: 0.6rem;
+  margin: 0;
+}
+
+.cca-product-details.cca-product-details .hdt-iconbox-item:hover .hdt-iconbox-icon {
+  animation: none;
+}
+
+/* Icon: the Figma SVG as a mask, painted in the scheme accent (cyan) */
+.cca-product-details.cca-product-details .cca-pd-icon {
+  display: block;
+  inline-size: 2rem;
+  block-size: 2rem;
+  background-color: rgb(var(--color-accent));
+  -webkit-mask: var(--cca-icon) center / contain no-repeat;
+  mask: var(--cca-icon) center / contain no-repeat;
+}
+
+@media (min-width: 768px) {
+  .cca-product-details.cca-product-details .cca-pd-icon {
+    inline-size: 2.4rem;
+    block-size: 2.4rem;
+  }
+}
+
+.cca-product-details.cca-product-details .hdt-iconbox-item .hdt-iconbox-heading {
+  margin: 0;
+  color: rgb(var(--color-accent));
+  font-size: 1.1rem;
+  font-weight: var(--font-bold);
+  line-height: normal;
+}
+
+.cca-product-details.cca-product-details .hdt-iconbox-item .hdt-iconbox-des {
+  margin: 0;
+  color: rgb(var(--color-foreground));
+  font-size: 1.4rem;
+  font-weight: var(--font-bold);
+  line-height: 1.7;
+}
+
+@media (min-width: 768px) {
+  .cca-product-details.cca-product-details .hdt-iconbox-item .hdt-iconbox-heading {
+    font-size: 1.7rem;
+    font-weight: var(--font-extrabold);
+  }
+
+  .cca-product-details.cca-product-details .hdt-iconbox-item .hdt-iconbox-des {
+    font-size: 1.6rem;
+    font-weight: var(--font-normal);
+    line-height: 2;
   }
 }

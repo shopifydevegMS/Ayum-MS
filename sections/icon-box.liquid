@@ -19,7 +19,7 @@
       assign sizes  = '100vw'
   endcase
 %}
-<div class="{{ parent }}{% if section.settings.design == 'design_1' %} cca-freeze-dry{% endif %} {% if section.settings.hdt_background_parallax %} hdt-animate--parallax-bg {% endif %}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};"{%- endif %}>
+<div class="{{ parent }}{% if section.settings.design == 'design_1' %} cca-freeze-dry{% elsif section.settings.design == 'design_2' %} cca-product-details{% endif %} {% if section.settings.hdt_background_parallax %} hdt-animate--parallax-bg {% endif %}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};"{%- endif %}>
   <div class="{{ child }}">
     {%- if section.settings.section_background != blank -%}
       {% liquid
@@ -82,7 +82,8 @@
         "default": "default",
         "options": [
           { "value": "default", "label": "Default" },
-          { "value": "design_1", "label": "Design 1 - cca" }
+          { "value": "design_1", "label": "Design 1 - cca" },
+          { "value": "design_2", "label": "Design 2 - cca" }
         ]
       },
       {

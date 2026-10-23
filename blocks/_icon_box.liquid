@@ -1,4 +1,10 @@
-<!-- blocks/_icon_box.liquid -->
+{%- liquid
+  # AYUM Design 2: an item without a description is not rendered
+  assign cca_skip = false
+  if section.settings.design == 'design_2' and block.settings.description == blank
+    assign cca_skip = true
+  endif
+-%}{%- unless cca_skip -%}<!-- blocks/_icon_box.liquid -->
 <div class="hdt-iconbox-item hdt-relative" {{ block.shopify_attributes }}>
   <div class="hdt-iconbox-item-wrapper hdt-text-center">
     {% if block.settings.url != blank %}<a class="hdt-full-width-link"  aria-label="link" href="{{ block.settings.url }}"></a>{% endif %}
@@ -28,6 +34,7 @@
   </div>
 </div>
 
+{% endunless -%}
 {% schema %}
   {
     "name": "Icon box",
