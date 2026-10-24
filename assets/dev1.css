@@ -1151,7 +1151,7 @@
   }
 }
 
-/* ==== cca carousel edges — Categories, Best sellers, Bundles ==== */
+/* ==== cca carousel edges — Categories, Best sellers, Bundles, Collection strips ==== */
 /* Root cause (measured in the live preview): the native .hdt-slider__viewport has
    overflow: hidden and sits INSIDE the container's side padding, so moving cards were
    cut 16px (mobile) / 20px (desktop) before the container edge and seemed to slide
@@ -1160,11 +1160,13 @@
    on wide screens). The viewport keeps its size, so slide positions, snapping, arrows
    and dots are unchanged; overflow-x: clip creates no scroll box and no page overflow. */
 .cca-categories.cca-categories .hdt-container,
+.cca-collection-strips.cca-collection-strips .hdt-container,
 :is(.cca-best-sellers, .cca-bundles):is(.cca-best-sellers, .cca-bundles) .hdt-container {
   overflow-x: clip;
 }
 
 .cca-categories.cca-categories .hdt-collections-list .hdt-slider__viewport,
+.cca-collection-strips.cca-collection-strips .hdt-slider__viewport,
 :is(.cca-best-sellers, .cca-bundles):is(.cca-best-sellers, .cca-bundles) .hdt-slider__products .hdt-slider__viewport {
   overflow: visible;
 }
@@ -2506,5 +2508,221 @@ html:not(.shopify-design-mode) .cca-product-details.cca-product-details:not(:has
     font-size: 1.6rem;
     font-weight: var(--font-normal);
     line-height: 2;
+  }
+}
+
+/* ==== cca-collection-strips — collection page (Top list collections, Design: "Design 1 - cca") ==== */
+/* Figma: desktop 1:812, mobile 1:1095 (no Auto Layout: layout rebuilt with the native slider).
+   Strip colors: the section scheme (scheme-products): background2 at 16% + line border.
+   Card colors: each block's scheme; its BACKGROUND is the card accent (the scheme-brand-*
+   schemes), used for the 12% tint, the arrow, the 22% active tint and the active border.
+   Titles keep the strip's ink (--cca-strip-ink, resolved above the cards' own scheme).
+   Cards are Arabic content: direction is pinned RTL on each card (image on the right),
+   while the slider track follows the page dir. Arrows sit inside the container, over the
+   track ends, so the shared "carousel edges" clip never cuts them. */
+
+.cca-collection-strips.cca-collection-strips {
+  border-block-start: 0;
+}
+
+.cca-collection-strips.cca-collection-strips .hdt-s-gradient {
+  background: rgb(var(--color-background2) / 0.16);
+  border-block-end: 1px solid rgb(var(--color-line-border));
+}
+
+.cca-collection-strips.cca-collection-strips .hdt-content {
+  --cca-strip-ink: var(--color-foreground);
+  --cca-strip-nav: 44px;
+  --cca-strip-inset: 0px;
+  width: 100%;
+  padding-inline: var(--cca-strip-inset);
+}
+
+.cca-collection-strips.cca-collection-strips .hdt-content .hdt-slider {
+  --slide-spacing: 10px;
+  padding: 0;
+}
+
+/* Mobile: cards hug their content (native auto slide size); no arrows (Figma 1:1095). */
+.cca-collection-strips.cca-collection-strips .hdt-slider .hdt-slider__slide {
+  --slide-size: auto;
+}
+
+.cca-collection-strips.cca-collection-strips .hdt-slider .hdt-navigation {
+  display: none;
+}
+
+/* Card */
+.cca-collection-strips.cca-collection-strips .hdt-slider__slide .cca-collection-strips__card {
+  direction: rtl;
+  unicode-bidi: isolate;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  max-inline-size: 260px;
+  padding-block: 8px;
+  padding-inline: 8px 14px;
+  border-radius: 14px;
+  background-color: rgb(var(--color-background) / 0.12);
+  color: rgb(var(--cca-strip-ink));
+  transition: background-color 0.3s ease;
+}
+
+.cca-collection-strips.cca-collection-strips .hdt-slider__slide .cca-collection-strips__card:hover {
+  color: rgb(var(--cca-strip-ink));
+  background-color: rgb(var(--color-background) / 0.18);
+}
+
+.cca-collection-strips.cca-collection-strips .hdt-slider__slide .cca-collection-strips__card--active {
+  background-color: rgb(var(--color-background) / 0.22);
+  box-shadow: inset 0 0 0 1.5px rgb(var(--color-background));
+}
+
+.cca-collection-strips.cca-collection-strips .hdt-slider__slide .cca-collection-strips__card:focus-visible {
+  outline: 2px solid rgb(var(--color-background));
+  outline-offset: 2px;
+}
+
+.cca-collection-strips .cca-collection-strips__media {
+  flex: 0 0 auto;
+  inline-size: 54px;
+  aspect-ratio: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: rgb(var(--color-background) / 0.35);
+}
+
+.cca-collection-strips .cca-collection-strips__media img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.cca-collection-strips .cca-collection-strips__body {
+  flex: 1 1 auto;
+  min-inline-size: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.cca-collection-strips .cca-collection-strips__title {
+  min-inline-size: 0;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+
+.cca-collection-strips .cca-collection-strips__arrow {
+  flex: 0 0 auto;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+  color: rgb(var(--color-background));
+}
+
+/* Tablet + desktop: fixed-share cards (about 5 visible at 1440), arrows over the track ends. */
+@media (min-width: 768px) {
+  .cca-collection-strips.cca-collection-strips .hdt-content {
+    --cca-strip-nav: 40px;
+    --cca-strip-inset: calc(var(--cca-strip-nav) - 8px);
+  }
+
+  .cca-collection-strips.cca-collection-strips .hdt-content .hdt-slider {
+    --slide-spacing: 8px;
+  }
+
+  .cca-collection-strips.cca-collection-strips .hdt-slider .hdt-slider__slide {
+    --slide-size: max(25%, 236px);
+  }
+
+  .cca-collection-strips.cca-collection-strips .hdt-slider__slide .cca-collection-strips__card {
+    max-inline-size: none;
+    min-block-size: 78px;
+    gap: 20px;
+    padding-block: 12px;
+    padding-inline: 12px 16px;
+    border-radius: 16px;
+  }
+
+  .cca-collection-strips .cca-collection-strips__media {
+    border-radius: 12px;
+  }
+
+  .cca-collection-strips .cca-collection-strips__body {
+    gap: 8px;
+  }
+
+  .cca-collection-strips .cca-collection-strips__title {
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .cca-collection-strips .cca-collection-strips__arrow {
+    font-size: 20px;
+  }
+
+  .cca-collection-strips.cca-collection-strips .hdt-slider .hdt-navigation {
+    display: flex;
+    z-index: 2;
+    inset-inline: calc(-1 * var(--cca-strip-inset));
+    width: auto;
+    margin: 0;
+    --nav-size: var(--cca-strip-nav);
+    --nav-size-icon: 12px;
+    --nav-rounded: 50%;
+    --nav-bg: rgb(var(--color-background));
+    --nav-bg-hv: rgb(var(--color-background));
+    --nav-border: transparent;
+    --nav-border-hv: transparent;
+    --nav-color: rgb(var(--color-foreground) / 0.75);
+    --nav-color-hv: rgb(var(--color-foreground));
+  }
+
+  .cca-collection-strips.cca-collection-strips .hdt-slider .hdt-navigation .hdt-slider__button {
+    transform: none;
+    justify-content: center;
+    border-width: 0;
+    box-shadow: 0 2px 8px rgb(var(--color-foreground) / 0.14);
+  }
+
+  /* At either end the arrow is not needed; hide it instead of covering the first/last card. */
+  .cca-collection-strips.cca-collection-strips .hdt-slider .hdt-navigation .hdt-slider__button:disabled {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@media (min-width: 1150px) {
+  .cca-collection-strips.cca-collection-strips .hdt-content {
+    --cca-strip-nav: 44px;
+  }
+
+  .cca-collection-strips.cca-collection-strips .hdt-slider .hdt-slider__slide {
+    --slide-size: max(20%, 266px); /* Figma: 258px card + 8px gap */
+  }
+
+  .cca-collection-strips.cca-collection-strips .hdt-slider__slide .cca-collection-strips__card {
+    min-block-size: 84px;
+    padding-inline: 12px 20px;
+  }
+
+  .cca-collection-strips .cca-collection-strips__media {
+    inline-size: 61px;
+  }
+
+  .cca-collection-strips .cca-collection-strips__title {
+    font-size: 19px;
+  }
+
+  .cca-collection-strips .cca-collection-strips__arrow {
+    font-size: 25px;
   }
 }

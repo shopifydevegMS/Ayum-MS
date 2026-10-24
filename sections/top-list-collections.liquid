@@ -21,6 +21,11 @@
 
   assign show_type = section.settings.show_type
   assign sort_by = section.settings.sort
+
+  # AYUM collection strips (Design 1 - cca): image cards with per-card color scheme
+  if section.settings.design == 'design_1'
+    assign cca_strips = true
+  endif
 %}
 {%- capture hdt_content -%}
   {%- case show_type -%}
@@ -64,10 +69,35 @@
     {%- when 'collection_added' -%}
       {%- for block in section.blocks -%}
         {%- assign category = block.settings.collection -%}
+        {%- if cca_strips and category == blank -%}
+          {%- continue -%}
+        {%- endif -%}
         {%- if category.products.size == 0 -%}
           {%- continue -%}
         {%- endif -%}
         {%- assign show_section = true -%}
+        {%- if cca_strips -%}
+          {%- liquid
+            assign cca_active = false
+            if collection != blank and category.handle == collection.handle
+              assign cca_active = true
+            endif
+            assign cca_image = category.featured_image
+          -%}
+          <div class="hdt-slider__slide{% if cca_active %} hdt-current-active{% endif %}" {{ block.shopify_attributes }}>
+            <a href="{{ category.url }}" class="cca-collection-strips__card{% if cca_active %} cca-collection-strips__card--active{% endif %}" color-scheme="{{ block.settings.color_scheme }}"{% if cca_active %} aria-current="page"{% endif %}>
+              <span class="cca-collection-strips__media">
+                {%- if cca_image != blank -%}
+                  {{- cca_image | image_url: width: 183 | image_tag: widths: '61,122,183', sizes: '(min-width: 1150px) 61px, 54px', loading: 'lazy', alt: '' -}}
+                {%- endif -%}
+              </span>
+              <span class="cca-collection-strips__body">
+                <span class="cca-collection-strips__title">{{- category.title -}}</span>
+                <span class="cca-collection-strips__arrow" aria-hidden="true">&rsaquo;</span>
+              </span>
+            </a>
+          </div>
+        {%- else -%}
         <div class="hdt-slider__slide{% if category.handle == collection.handle %} hdt-current-active{% endif %}">
           <a href="{{ category.url }}">
             {%- if block.settings.icon != blank -%}
@@ -78,6 +108,7 @@
             {{- category.title -}}
           </a>
         </div>
+        {%- endif -%}
       {%- endfor -%}
     {%- when 'menu' -%}
       {%- if section.settings.menu != blank -%}
@@ -108,7 +139,7 @@
   {%- endcase -%}
 {%- endcapture -%}
 {%- if show_section -%}
-  <div class="{% if section.settings.hide_mobile %}hdt-hidden md:hdt-block{% endif %}">
+  <div class="{% if section.settings.hide_mobile %}hdt-hidden md:hdt-block{% endif %}{% if cca_strips %} cca-collection-strips{% endif %}">
     <div class="{{ parent }} {% if section.settings.hdt_background_parallax %} hdt-animate--parallax-bg {% endif %}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};" {%- endif %}>
       <div class="{{ child }}">
         {%- if section.settings.section_background != blank -%}
@@ -118,7 +149,7 @@
             {{ image | image_url: width: image.width | image_tag: width: image.width, height: image.height, sizes: sizes, widths: '200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800,1900,2000', loading: 'lazy', class: 'hdt-section-background hdt-absolute hdt-top-0 hdt-left-0 hdt-w-full hdt-h-full hdt-pe-none hdt-object-cover hdt-object-center' }}
         {%- endif -%}
         <div class="hdt-content" style="{% if section.settings.section_layout == 'full_width' %}--container-max-width: 100vw;{% endif %}">
-          <hdt-slider id="Slider-{{ section.id }}" class="hdt-slider hdt-relative hdt-slide-spacing-x hdt-slides-auto" config='{ "id": "Slider-{{ section.id }}", "navUI": {{ section.settings.navUI }}, "align": "center", "classNames": true, "dragFree": true, "slidesToScroll": 1 }'>
+          <hdt-slider id="Slider-{{ section.id }}" class="hdt-slider hdt-relative hdt-slide-spacing-x hdt-slides-auto" config='{ "id": "Slider-{{ section.id }}", "navUI": {{ section.settings.navUI }}, "align": "{% if cca_strips %}start{% else %}center{% endif %}", "classNames": true, "dragFree": true, "slidesToScroll": 1 }'>
             <div class="hdt-slider__viewport hdt-relative">
               <div class="hdt-slider__container">
                 {{ hdt_content }}
@@ -151,6 +182,17 @@
       ]
     },
     "settings": [
+      {
+        "type": "select",
+        "id": "design",
+        "label": "Design",
+        "default": "default",
+        "options": [
+          { "value": "default", "label": "Default" },
+          { "value": "design_1", "label": "Design 1 - cca" }
+        ],
+        "info": "Design 1 shows image cards and works with \"Collection added\" blocks."
+      },
       {
         "type": "radio",
         "id": "show_type",
@@ -331,6 +373,14 @@
             "id": "icon",
             "label": "t:blocks.icon.custom_svg_icon.label",
             "info": "t:blocks.icon.custom_svg_icon.content"
+          },
+          {
+            "type": "color_scheme",
+            "id": "color_scheme",
+            "label": "t:sections.all.colors.label",
+            "default": "scheme-1",
+            "info": "Design 1 - cca: the scheme background is the card accent (tint, arrow, active border).",
+            "visible_if": "{{ section.settings.design == 'design_1' }}"
           },
         ]
       }
