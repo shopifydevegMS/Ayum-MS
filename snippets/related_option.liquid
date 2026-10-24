@@ -125,7 +125,12 @@
             break
           endif
         endfor
-      when '7'
+      when '7', '12'
+        # AYUM: "12 - cca" renders card design 7 with the AYUM card options
+        assign cca_show_type = false
+        if section.settings.product_des == '12'
+          assign cca_show_type = section.settings.show_type
+        endif
         capture btn_wishlist_code
           if settings.wishlist_mode != '0'
             render 'btn-wishlist', class: 'hdt-card-product__btn-wishlist hdt-pr_btn', placement: 'left'
@@ -140,7 +145,7 @@
           unless settings.remove_collection_url or section.settings.product_list != blank
             assign product_url = product.url | within: section.settings.collection
           endunless
-          render 'card-product7', card_product: product, section_id: section.id, class: "hdt-slider__slide hdt-pr-style7", sizes: sizes, image_ratio: section.settings.image_ratio, color_list: color_list, size_list: size_list, product_url: product_url, btn_wishlist_code: btn_wishlist_code, show_vendor: section.settings.show_vendor
+          render 'card-product7', card_product: product, section_id: section.id, class: "hdt-slider__slide hdt-pr-style7", sizes: sizes, image_ratio: section.settings.image_ratio, color_list: color_list, size_list: size_list, product_url: product_url, btn_wishlist_code: btn_wishlist_code, show_vendor: section.settings.show_vendor, show_type: cca_show_type
           assign count = count | plus: 1
           if count >= section.settings.limit
             break

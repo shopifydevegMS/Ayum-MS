@@ -22,8 +22,17 @@
       assign child  = ''
       assign sizes  = '100vw'
   endcase
+  # AYUM Design 1 - cca (product reviews): hide on the storefront until an app block (Judge.me) is added
+  assign cca_hide = false
+  if section.settings.design == 'design_1' and request.design_mode == false
+    assign cca_app_blocks = section.blocks | where: 'type', '@app'
+    if cca_app_blocks.size == 0
+      assign cca_hide = true
+    endif
+  endif
 %}
-<div id="{{ section.id }}" class="{{ parent }} {% if section.settings.hdt_background_parallax %} hdt-animate--parallax-bg {% endif %}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};"{%- endif %} hdt-reveal="fade-in">
+{%- unless cca_hide -%}
+<div id="{{ section.id }}" class="{{ parent }}{% if section.settings.design == 'design_1' %} cca-product-reviews{% endif %} {% if section.settings.hdt_background_parallax %} hdt-animate--parallax-bg {% endif %}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};"{%- endif %} hdt-reveal="fade-in">
   <div class="{{ child }}">
     {% comment %} hdt-animate--parallax {% endcomment %}
     {%- if section.settings.section_background != blank -%}
@@ -37,6 +46,7 @@
     </div>
   </div>
 </div>
+{%- endunless -%}
 {% schema %}
 {
   "name": "t:sections.custom_section.name",
@@ -62,6 +72,17 @@
     },
   ],
   "settings": [
+    {
+      "type": "select",
+      "id": "design",
+      "label": "Design",
+      "default": "default",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "design_1", "label": "Design 1 - cca" }
+      ],
+      "info": "Design 1 - cca: product reviews (add the Judge.me Review Widget app block). Hidden on the storefront until the app block is added."
+    },
     {
       "type": "select",
       "id": "layout",

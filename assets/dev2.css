@@ -363,12 +363,14 @@
 /* ==== cca carousel edges — shared (every AYUM <hdt-slider> card carousel joins this rule) ==== */
 /* The viewport stops clipping inside the container padding; the container clips at its outer edge. */
 .cca-customer-reviews.cca-customer-reviews .hdt-container,
-.cca-shoppable-videos.cca-shoppable-videos .hdt-container {
+.cca-shoppable-videos.cca-shoppable-videos .hdt-container,
+.cca-recommendations.cca-recommendations .hdt-container {
   overflow-x: clip;
 }
 
 .cca-customer-reviews.cca-customer-reviews .hdt-prent .hdt-slider__viewport,
-.cca-shoppable-videos.cca-shoppable-videos hdt-slider .hdt-slider__viewport {
+.cca-shoppable-videos.cca-shoppable-videos hdt-slider .hdt-slider__viewport,
+.cca-recommendations.cca-recommendations .hdt-slider__products .hdt-slider__viewport {
   overflow: visible;
 }
 
@@ -1125,5 +1127,962 @@
     padding: 0 24px 18px;
     font-size: 15px;
     line-height: 1.85;
+  }
+}
+
+/* ==== cca-product-reviews — product page "Customer reviews" (custom-section, Design 1 - cca) + Judge.me Review Widget app block ==== */
+/* Figma: desktop 2048:1720, mobile 2048:2247. Colors: scheme-product-reviews —
+   background (yellow, 40% via the section opacity), text (teal heading + summary), text2 (muted date),
+   background2 (white panels), button / button_label / button_border (write-review pill),
+   secondary_button_label (review body, read as --hdt-link-color), accent (decorative top stars, review stars),
+   pr_rating (summary + histogram stars), pr_text (reviewer name), price (strong green: histogram bar),
+   sale_price + line_border (verified badge).
+   Targets Judge.me's current widget (.jdgm-widget-revamp, jm-* classes, rendered by Vue).
+   All review data, the form, filters and pagination stay Judge.me's: this block only restyles its DOM.
+   Judge.me's scoped rules reach (0,4,0), so every widget rule starts with the (0,4,0) prefix
+   ".cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp".
+   Judge.me sets colors and star sizes inline from its own --jm-* variables, so those variables are
+   redefined below the inline element instead of fighting the inline style. */
+
+.cca-product-reviews {
+  --cca-pr-line: rgb(var(--color-foreground) / 0.1);
+  --cca-pr-track: rgb(var(--color-foreground) / 0.1);
+}
+
+/* Container: Figma side padding (16px mobile, 20px from 768) */
+.cca-product-reviews .hdt-container {
+  padding-inline: 16px;
+}
+
+/* Heading area: Arabic text boundary, centered */
+.cca-product-reviews .hdt-section-heading_block {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.cca-product-reviews .hdt-section-heading_block :where(p) {
+  margin: 0;
+}
+
+.cca-product-reviews .hdt-section-heading_block .hdt-heading-block {
+  justify-content: center;
+  margin: 0;
+  font-weight: var(--font-extrabold);
+  line-height: 1.333; /* Figma mobile 32/24 */
+}
+
+.cca-product-reviews .hdt-section-heading_block .hdt-subheading-block.hdt-text-primary {
+  font-weight: var(--font-normal);
+  line-height: normal; /* decorative stars, not a rating */
+}
+
+.cca-product-reviews .hdt-section-heading_block .hdt-subheading-block.hdt-s-text {
+  color: rgb(var(--color-foreground) / 0.62);
+  font-weight: var(--font-normal);
+  line-height: normal;
+}
+
+/* ---- Widget frame ---- */
+/* !important: Judge.me writes max-width: 1200px and margin: 0 auto inline from the block setting.
+   Mobile cards sit 16px inside the heading (32px from the screen edge at 375). */
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp {
+  max-width: none !important;
+  margin: 0 clamp(0px, calc((100vw - 320px) * 0.29), 16px) !important;
+  font-size: 16px;
+}
+
+/* Judge.me colors, mapped to the section's color scheme (its inline values sit on .jm-review-widget) */
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-widget__header-and-body {
+  --jm-review-widget-text-color: rgb(var(--color-foreground));
+  --jm-review-widget-lighter-text-color: rgb(var(--color-foreground2));
+  --jm-review-widget-star-and-histogram-color: rgb(var(--color-pr-rating));
+  --jm-review-widget-button-color: rgb(var(--hdt-btn-border-color));
+  --jm-review-widget-button-text-color: rgb(var(--hdt-btn-bg));
+  --jm-review-widget-bar-chart-height: 8px;
+  gap: 16px;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-widget {
+  padding-block: 0;
+  color: rgb(var(--color-foreground));
+}
+
+/* ---- Rating summary panel (stacked below 1150) ---- */
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-widget-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 24px 14px;
+  border: 1px solid var(--cca-pr-line);
+  border-radius: 14px;
+  background: rgb(var(--color-background2));
+  text-align: center;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-widget-header > * {
+  margin: 0;
+}
+
+/* Figma shows no filter / sort bar; empty spacer divs would add a gap */
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-widget-header > :is(.jm-review-widget-header__filters-wrapper, .jm-center:empty) {
+  display: none;
+}
+
+/* Score: average, then Judge.me's review-count line */
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-average-rating-display .jm-cluster {
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px 8px;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-average-rating-display .jm-text {
+  color: rgb(var(--color-foreground2));
+  font-size: 13px;
+  line-height: normal;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-average-rating-display .jm-text:first-child {
+  color: rgb(var(--color-foreground));
+  font-size: 20px;
+  font-weight: var(--font-bold);
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-widget-header__main-content {
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+/* Histogram: rating · star · bar · count per row */
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-widget-header__star-rating-histogram {
+  flex: 0 0 auto;
+  width: min(100%, 345px);
+  min-width: 0;
+  max-width: none;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-histogram .jm-stack > * + * {
+  margin-block-start: 6px;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-histogram-row {
+  --cca-pr-fill: rgb(var(--color-pr-price));
+  align-items: center;
+  gap: 10px;
+  color: rgb(var(--color-foreground));
+  font-size: 12px;
+  line-height: normal;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-histogram-row:focus-visible {
+  outline: 2px solid rgb(var(--color-foreground));
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* !important: Judge.me sets each star's font-size inline */
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-histogram-row .jm-star-rating__font-icon {
+  font-size: 13px !important;
+}
+
+/* Judge.me redefines --jm-progress-* inline on every bar, so the colors are set directly */
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-histogram-row .jm-progress-bar {
+  direction: ltr; /* geometry only: Figma fills the bar from the left in both directions */
+  border-radius: 99px;
+  background: var(--cca-pr-track);
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-histogram-row .jm-progress-bar__fill {
+  border-radius: 99px;
+  background: var(--cca-pr-fill);
+}
+
+/* Figma: 4-3 stars light green, 2-1 stars neutral. Judge.me always renders the rows 5 → 1 and gives them no rating attribute. */
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-histogram-row:is(:nth-child(2), :nth-child(3)) {
+  --cca-pr-fill: rgb(var(--color-pr-price) / 0.4);
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-histogram-row:is(:nth-child(4), :nth-child(5)) {
+  --cca-pr-fill: rgb(var(--color-foreground2) / 0.4);
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-histogram-row__frequency {
+  min-width: 3ch;
+  color: rgb(var(--color-foreground));
+  font-weight: var(--font-semibold);
+  text-align: center;
+}
+
+/* Write-review pill (Judge.me's button keeps its own click handler and form) */
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-action-buttons {
+  justify-content: center;
+  width: 100%;
+  max-width: none;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-action-buttons > *,
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-no-reviews-state__action-buttons {
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-action-buttons__button {
+  width: min(100%, 260px);
+  min-height: 44px;
+  margin: 0;
+  padding: 8px 30px;
+  border: 1px solid rgb(var(--hdt-btn-border-color));
+  border-radius: 99px;
+  background: rgb(var(--hdt-btn-bg));
+  color: rgb(var(--hdt-btn-color));
+  font-size: 13px;
+  font-weight: var(--font-bold);
+  line-height: normal;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-action-buttons__button:is(:hover, :focus-visible) {
+  background: rgb(var(--hdt-btn-border-color));
+  color: rgb(var(--hdt-btn-bg));
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-action-buttons__button:focus-visible {
+  outline: 2px solid rgb(var(--hdt-btn-border-color));
+  outline-offset: 2px;
+}
+
+/* ---- Review list ---- */
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jdgm-review-list {
+  padding-block-start: 0;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jdgm-review-list > * + * {
+  margin-block-start: 12px;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-item {
+  padding: 16px 22px;
+  border: 1px solid var(--cca-pr-line);
+  border-radius: 11px;
+  background: rgb(var(--color-background2));
+  color: rgb(var(--color-foreground));
+  text-align: start;
+}
+
+/* Figma order: stars, date, name + verified badge, review text. The avatar is not in Figma. */
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-item__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-item__content > * {
+  margin: 0;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-item :is(.jm-reviewer-info, .jm-reviewer-info__details) {
+  display: contents;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-item .jm-reviewer-avatar {
+  display: none;
+}
+
+/* Each review item re-declares Judge.me's colors inline, so they are mapped again one level down */
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-item > * {
+  --jm-review-widget-text-color: rgb(var(--color-foreground));
+  --jm-review-widget-lighter-text-color: rgb(var(--color-foreground2));
+  --jm-review-widget-star-and-histogram-color: rgb(var(--color-accent));
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-item .jm-star-rating {
+  line-height: 1;
+}
+
+/* !important: Judge.me sets each star's font-size inline */
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-item .jm-star-rating__font-icon {
+  font-size: 11px !important;
+}
+
+/* Date (and any other meta line Judge.me adds) */
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-reviewer-info__details > .jm-cluster {
+  order: 2;
+  margin: 4px 0 0;
+  color: rgb(var(--color-foreground2));
+  font-size: 10px;
+  line-height: normal;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-reviewer-info__details > .jm-cluster:has(.jm-reviewer-info__name) {
+  order: 3;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-reviewer-info__details :is(.jm-text, time) {
+  color: inherit;
+  font-size: inherit;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-reviewer-info__details .jm-reviewer-info__name {
+  color: rgb(var(--color-pr-text));
+  font-size: 15px;
+  font-weight: var(--font-extrabold);
+}
+
+/* Verified badge: Judge.me decides when it shows; only its look changes here */
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-verified-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 9px;
+  border: 1px solid rgb(var(--color-line-border));
+  border-radius: 20px;
+  background: rgb(var(--color-line-border) / 0.4);
+  color: rgb(var(--color-pr-sale-price));
+  font-size: 10px;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-verified-badge :is(.jm-text, .jm-verified-badge__icon) {
+  margin: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-item .jm-review-content {
+  order: 4;
+  margin-top: 8px;
+}
+
+/* Each review takes its direction from its own text (Arabic RTL, English LTR) */
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-content :is(.jm-review-content__title, .jm-review-content__body) {
+  unicode-bidi: plaintext;
+  text-align: start;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-content__title {
+  color: rgb(var(--color-pr-text));
+  font-size: 14px;
+  font-weight: var(--font-bold);
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-content__body {
+  color: rgb(var(--hdt-link-color));
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-content__body :where(p) {
+  margin: 0;
+  line-height: inherit;
+}
+
+/* ---- Pagination (Judge.me's own controls) ---- */
+.cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-pagination-controls {
+  margin-block: 16px 0;
+  color: rgb(var(--color-pr-text));
+}
+
+@media (min-width: 768px) {
+  .cca-product-reviews {
+    --cca-pr-line: rgb(var(--color-foreground) / 0.18);
+    --cca-pr-track: rgb(var(--color-foreground) / 0.18);
+  }
+
+  .cca-product-reviews .hdt-container {
+    padding-inline: 20px;
+  }
+
+  .cca-product-reviews .hdt-section-heading_block .hdt-subheading-block.hdt-s-text {
+    line-height: 1.765; /* Figma 30/17 */
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp {
+    margin-inline: 0 !important; /* see the widget frame rule */
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-widget__header-and-body {
+    gap: 40px;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-widget-header {
+    padding: 24px;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-histogram .jm-stack > * + * {
+    margin-block-start: 9px;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-action-buttons__button {
+    min-height: 47px;
+    font-size: 14.5px;
+  }
+
+  /* Review list sits in one white panel */
+  .cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jdgm-review-list:has(.jm-review-item) {
+    padding: 28px 32px 29px;
+    border: 1px solid var(--cca-pr-line);
+    border-radius: 16px;
+    background: rgb(var(--color-background2));
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-item {
+    padding: 20px 24px;
+    border-radius: 12px;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-item .jm-star-rating__font-icon {
+    font-size: 16px !important; /* see the mobile rule */
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-reviewer-info__details > .jm-cluster {
+    margin-top: 0;
+    font-size: 11px;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-reviewer-info__details > .jm-cluster:has(.jm-reviewer-info__name) {
+    margin-top: 10px;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-reviewer-info__details .jm-reviewer-info__name {
+    font-size: 17px;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-verified-badge {
+    padding: 3px 10px;
+    font-size: 11px;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-item .jm-review-content {
+    margin-top: 10px;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-content__body {
+    font-size: 14px;
+    line-height: 1.85;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-pagination-controls {
+    margin-block-start: 40px;
+  }
+}
+
+@media (min-width: 1150px) {
+  .cca-product-reviews .hdt-section-heading_block .hdt-heading-block {
+    line-height: 1.38; /* Figma 53.82/39 */
+  }
+
+  /* Summary panel in one row: score (start) · histogram (center) · write review (end) */
+  .cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-widget-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 345px) minmax(0, 1fr);
+    align-items: center;
+    gap: 24px;
+    padding: 24px clamp(24px, 7.3vw, 105px);
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-widget-header > * {
+    grid-column: 1 / -1;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-widget-header > .jm-review-widget-header__summary-section {
+    grid-area: 1 / 1;
+    align-items: flex-start;
+    justify-self: start;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-widget-header > .jm-review-widget-header__main-content {
+    display: contents;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-widget-header__star-rating-histogram {
+    grid-area: 1 / 2;
+    width: 100%;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-widget-header__main-content > .jm-action-buttons {
+    grid-area: 1 / 3;
+    justify-self: end;
+    width: auto;
+  }
+
+  /* No reviews yet: Judge.me shows only "be the first" + the button, so keep it stacked and centered */
+  .cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-widget-header:not(:has(.jm-histogram)) {
+    display: flex;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-review-widget-header:not(:has(.jm-histogram)) > .jm-review-widget-header__summary-section {
+    align-items: center;
+    justify-self: auto;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-average-rating-display .jm-cluster {
+    justify-content: flex-start;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-average-rating-display .jm-text:first-child {
+    font-size: 22px;
+  }
+
+  .cca-product-reviews.cca-product-reviews .jdgm-review-widget.jdgm-widget-revamp .jm-action-buttons__button {
+    width: 260px;
+  }
+}
+
+/* ==== cca-des-mobile — icon box "Description (Mobile)" setting (blocks/_icon_box.liquid, any design) ==== */
+/* Only rendered when the block's mobile description is filled; otherwise the native description shows alone. */
+.cca-des-mobile {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .cca-des-desktop {
+    display: none;
+  }
+
+  .cca-des-mobile {
+    display: inline;
+  }
+}
+
+/* ==== cca-why-ayum — product page "Why AYUM" (icon-box, Design 2 - cca) ==== */
+/* Figma: desktop 2048:1867, mobile 2048:2354 ("Why Ayum (shared block)"). Colors: section scheme-why-ayum
+   (brand cyan background, 40% via the section opacity; ink text; white cards at 50%), icon circles use the
+   brand schemes (scheme-brand-*) set per block. hdt-icon-box.css loads after this file, so card rules carry
+   one extra class to win ties. Card order is pinned RTL in every locale (first card on the right). */
+
+/* Container: Figma side padding (16px mobile, 20px from 768) */
+.cca-why-ayum .hdt-container {
+  padding-inline: 16px;
+}
+
+/* Heading area: Arabic text boundary, centered */
+.cca-why-ayum .hdt-section-heading_block {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.cca-why-ayum .hdt-section-heading_block :where(p) {
+  margin: 0;
+}
+
+.cca-why-ayum .hdt-section-heading_block .hdt-heading-block {
+  justify-content: center;
+  margin: 0;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+}
+
+.cca-why-ayum .hdt-section-heading_block .hdt-subheading-block {
+  color: rgb(var(--color-foreground) / 0.75);
+  font-weight: var(--font-bold);
+  line-height: 1.556; /* Figma 24.9/16 */
+}
+
+/* Cards grid: 2 columns below 1150 (col_mb / col_tb), 4 from 1150 (col_dk) */
+.cca-why-ayum.cca-why-ayum .hdt-icon-box .hdt-prent {
+  direction: rtl;
+  column-gap: 12px; /* Figma 12px; the schema's mobile gap options skip 12 */
+  row-gap: 12px;
+}
+
+/* Equal-height cards: the grid stretches Shopify's block wrapper, the wrapper stretches the item, the item the card */
+.cca-why-ayum .hdt-icon-box .hdt-prent > .shopify-block,
+.cca-why-ayum .hdt-icon-box .hdt-iconbox-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.cca-why-ayum .hdt-icon-box .hdt-iconbox-item {
+  flex: 1 1 auto;
+}
+
+/* Card: icon, then title, then description, edge-aligned (right in Arabic) */
+.cca-why-ayum .hdt-iconbox-item .hdt-iconbox-item-wrapper {
+  flex: 1 1 auto;
+  direction: rtl;
+  unicode-bidi: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 14px;
+  border-radius: 14px;
+  background-color: rgb(var(--color-background2) / 0.5);
+  text-align: start;
+}
+
+.cca-why-ayum .hdt-iconbox-item .hdt-iconbox-head {
+  display: contents;
+}
+
+/* Icon circle: color from the block's "Icon color scheme" */
+.cca-why-ayum .hdt-iconbox-item .hdt-iconbox-icon {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: rgb(var(--color-background));
+}
+
+.cca-why-ayum .hdt-iconbox-item .hdt-iconbox-icon :is(img, svg) {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+.cca-why-ayum .hdt-iconbox-item .hdt-iconbox-heading {
+  margin: 0;
+  color: rgb(var(--color-foreground));
+  font-size: 12px;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+}
+
+.cca-why-ayum .hdt-iconbox-item .hdt-iconbox-des {
+  margin: 0;
+  color: rgb(var(--color-foreground) / 0.8);
+  font-size: 11px;
+  font-weight: var(--font-normal);
+  line-height: 1.75;
+}
+
+/* Informational cards (no link): no native hover. hdt-icon-box.css recolors every
+   descendant on hover (".hdt-iconbox-item-wrapper:hover *") and bounces the icon. */
+.cca-why-ayum .hdt-iconbox-des :is(.cca-des-desktop, .cca-des-mobile) {
+  color: inherit;
+}
+
+.cca-why-ayum .hdt-iconbox-item:hover .hdt-iconbox-icon {
+  animation: none;
+}
+
+@media (min-width: 768px) {
+  .cca-why-ayum .hdt-container {
+    padding-inline: 20px;
+  }
+
+  .cca-why-ayum.cca-why-ayum .hdt-icon-box .hdt-prent {
+    column-gap: 20px;
+    row-gap: 20px;
+  }
+
+  .cca-why-ayum .hdt-iconbox-item .hdt-iconbox-item-wrapper {
+    gap: 12px;
+    padding: var(--padding-content);
+    border-radius: 16px;
+  }
+
+  .cca-why-ayum .hdt-iconbox-item .hdt-iconbox-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .cca-why-ayum .hdt-iconbox-item .hdt-iconbox-icon :is(img, svg) {
+    width: 26px;
+    height: 26px;
+  }
+
+  .cca-why-ayum .hdt-iconbox-item .hdt-iconbox-heading {
+    font-size: 17px;
+  }
+
+  .cca-why-ayum .hdt-iconbox-item .hdt-iconbox-des {
+    font-size: 13px;
+    line-height: 1.8;
+  }
+}
+
+@media (min-width: 1150px) {
+  .cca-why-ayum .hdt-section-heading_block .hdt-heading-block {
+    line-height: 1.45; /* Figma 145% */
+  }
+}
+
+/* ==== cca-recommendations — product page "You may also like" (related-products, Design 1 - cca) ==== */
+/* Figma: desktop 2048:1904, mobile 2048:2389. Colors: "scheme-products" color scheme.
+   Data: Shopify product recommendations (native related-products, display type "Product recommendations").
+   Card: native design 7 with "Show product type" — same card as the homepage Best sellers / Bundles
+   (dev1.css), reproduced here under this section's own scope. Rating: snippets/hdt-pr-card-rating
+   (Judge.me metafields; nothing renders without reviews). Progress: the native "full" pagination.
+   Section stylesheets load after this file, so every override doubles the scope class. */
+
+.cca-recommendations.cca-recommendations .hdt-container {
+  padding-inline: 16px;
+}
+
+/* Heading + subtitle (native section-heading block) */
+.cca-recommendations.cca-recommendations .hdt-section-heading_block {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.cca-recommendations.cca-recommendations .hdt-section-heading_block :where(p) {
+  margin: 0;
+}
+
+.cca-recommendations.cca-recommendations .hdt-section-heading_block .hdt-heading-block {
+  justify-content: center;
+  margin: 0;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+}
+
+.cca-recommendations.cca-recommendations .hdt-section-heading_block .hdt-subheading-block {
+  font-size: 13px; /* Figma 13px; the block's mobile size only allows even values */
+  font-weight: var(--font-normal);
+  line-height: 1.8;
+}
+
+/* Product card (design 7) */
+.cca-recommendations.cca-recommendations .hdt-pr-style7 {
+  --atc-cl: rgb(var(--hdt-btn-color));
+  --atc-bg-cl: rgb(var(--hdt-btn-bg));
+  --atc-cl-hover: rgb(var(--hdt-btn-hover-color));
+  --atc-bg-cl-hover: rgb(var(--hdt-btn-hover-bg));
+}
+
+.cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-card-product__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  height: 100%;
+  padding: 10px;
+  border: 1px solid rgb(var(--color-line-border));
+  border-radius: 16px;
+  background-color: rgb(var(--color-background));
+}
+
+.cca-recommendations.cca-recommendations .hdt-pr-style7 :is(.hdt-card-product__media, .hdt-card-product__media-wrapp) {
+  border-radius: 10px;
+}
+
+.cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-card-product__info {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-card-product__info > * {
+  margin: 0;
+}
+
+/* Badges: white pill, pink text, top inline-start corner of the image */
+.cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-badge__wrapp {
+  top: 7px;
+  left: auto;
+  right: auto;
+  inset-inline-start: 7px;
+  align-items: flex-start;
+}
+
+.cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-badge {
+  min-width: 0;
+  min-height: 0;
+  padding: 4px 10px;
+  border-radius: 10px;
+  background-color: rgb(var(--color-background));
+  color: rgb(var(--color-pr-price));
+  font-size: 10px;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+/* Meta row: product type and rating at opposite ends (Figma keeps this order in both locales) */
+.cca-recommendations.cca-recommendations .cca-card-meta {
+  display: flex;
+  align-self: stretch;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  min-height: 13px; /* the row keeps its height without a type or rating, so cards line up */
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+.cca-recommendations.cca-recommendations .cca-card-meta .cca-card-type {
+  min-width: 0;
+  overflow: hidden;
+  color: rgb(var(--color-foreground2));
+  font-size: 11px;
+  font-weight: var(--font-normal);
+  line-height: normal;
+  text-align: start;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.cca-recommendations.cca-recommendations .cca-card-meta .cca-rating {
+  flex-shrink: 0;
+}
+
+.cca-recommendations.cca-recommendations .cca-rating__stars {
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+/* Title: always reserves 2 lines (clamped at 2) so prices and buttons line up */
+.cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-card-product__title {
+  --line-clamp-count: 2;
+  min-height: 2.6em; /* 2 lines x 1.3 line-height */
+  font-size: 13px;
+  font-weight: var(--font-extrabold);
+  line-height: 1.3;
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-price-wrapp {
+  justify-content: center;
+  font-size: 15px;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+}
+
+/* On sale: the current price stays pink, the struck-through compare-at price is gray
+   (native colors are the other way round: base.css / product-card.css) */
+.cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-price-wrapp .hdt-price {
+  color: rgb(var(--color-pr-price));
+}
+
+.cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-price-wrapp .hdt-compare-at-price {
+  color: rgb(var(--color-foreground2));
+}
+
+/* Native add to cart, restyled: full-width pill at the bottom of the card, label only */
+.cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-pr-btns-group1 {
+  align-self: stretch;
+  margin-block-start: auto;
+}
+
+.cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-pr-btns-group1 .hdt-card-product__btn-ultra {
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 24px;
+  font-size: 12px;
+  font-weight: var(--font-extrabold);
+  line-height: normal;
+}
+
+.cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-pr-btns-group1 .hdt-card-product__btn-ultra .hdt-pr-card-icon {
+  display: none;
+}
+
+/* Progress bar (native "full" pagination, desktop + tablet only): segments of a 3px track */
+.cca-recommendations.cca-recommendations .hdt-slider .hdt-pagination.hdt-style-full {
+  width: min(510px, 100%);
+  margin-inline: auto;
+  gap: 0;
+  overflow: hidden;
+  border-radius: 2px;
+  --pag-h: 3px;
+  --pag-h-active: 3px;
+  --pag-bg: rgb(var(--color-background2));
+  --pag-bg-active: rgb(var(--color-accent));
+}
+
+.cca-recommendations.cca-recommendations .hdt-slider .hdt-pagination.hdt-style-full button {
+  border: 0;
+  border-radius: 0;
+  opacity: 1;
+}
+
+/* One page only (4 or fewer products on desktop): no progress bar */
+.cca-recommendations.cca-recommendations .hdt-slider .hdt-pagination:not(:has(> :nth-child(2))) {
+  display: none;
+}
+
+/* Mobile: swipe track, ~2 cards (158px at 375) + peek, 12px apart */
+@media (max-width: 767px) {
+  .cca-recommendations.cca-recommendations .hdt-section-heading_block {
+    /* Figma mobile: 12px to the cards. !important is required: the theme sets this
+       margin from the block's "Margin bottom" setting with an #id selector. */
+    margin-bottom: 12px !important;
+  }
+
+  .cca-recommendations.cca-recommendations .hdt-slider__products .hdt-slider__viewport {
+    --slide-spacing: 12px;
+    --slide-size: calc(clamp(144px, 42.13vw, 200px) + var(--slide-spacing));
+  }
+}
+
+/* Tablet + desktop */
+@media (min-width: 768px) {
+  .cca-recommendations.cca-recommendations .hdt-section-heading_block .hdt-subheading-block {
+    font-size: var(--text-custom);
+    font-weight: var(--font-bold);
+    line-height: 1.556; /* Figma 24.9/16 */
+  }
+
+  .cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-card-product__wrapper {
+    gap: 10px;
+    padding: 14px;
+  }
+
+  .cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-card-product__info {
+    gap: 10px;
+  }
+
+  .cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-badge__wrapp {
+    top: 11px;
+    inset-inline-start: 11px;
+  }
+
+  .cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-badge {
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 11px;
+  }
+
+  .cca-recommendations.cca-recommendations .cca-card-meta {
+    min-height: 16px;
+  }
+
+  .cca-recommendations.cca-recommendations .cca-card-meta .cca-card-type,
+  .cca-recommendations.cca-recommendations .cca-card-meta .cca-rating {
+    font-size: 13px;
+    font-weight: var(--font-bold);
+  }
+
+  .cca-recommendations.cca-recommendations .cca-rating__stars {
+    font-size: 13px;
+    letter-spacing: 2px;
+  }
+
+  .cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-card-product__title {
+    font-size: clamp(16px, 1.53vw, 22px);
+  }
+
+  .cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-price-wrapp {
+    font-size: clamp(16px, 1.39vw, 20px);
+  }
+
+  .cca-recommendations.cca-recommendations .hdt-pr-style7 .hdt-pr-btns-group1 .hdt-card-product__btn-ultra {
+    padding-block: 12px;
+    font-size: clamp(14px, 1.18vw, 17px);
+  }
+}
+
+@media (min-width: 1150px) {
+  .cca-recommendations.cca-recommendations .hdt-container {
+    padding-inline: 20px;
   }
 }
