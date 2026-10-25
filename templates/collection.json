@@ -122,6 +122,45 @@
         "pd_mb": "16px,,0px,"
       }
     },
+    "cca_collection_seo": {
+      "type": "custom-section",
+      "blocks": {
+        "cca_seo_heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>عن الحلويات المجففة بالتجميد</p>",
+            "cca_design": "seo_heading",
+            "text_color": "hdt-s-text"
+          }
+        },
+        "cca_seo_text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>كل منتجاتنا تُصنّع في مصنعنا داخل الكويت — إحنا المصنع الوحيد اللي ينتج منتجات التجفيف بالتجميد محلياً بدل الاستيراد، وكل باكت يتعبأ ويتفحص عندنا.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "cca_seo_heading",
+        "cca_seo_text"
+      ],
+      "settings": {
+        "design": "design_2",
+        "layout": "10",
+        "item_spacing": 12,
+        "item_spacing_tb": 12,
+        "item_spacing_mb": 8,
+        "colors_by_section": true,
+        "color_scheme": "scheme-collection-seo",
+        "background_opacity": 0.3,
+        "section_layout": "wrapper_container",
+        "hdt_background_parallax": false,
+        "mg": "",
+        "mg_mb": "",
+        "pd": "48px,,48px,",
+        "pd_mb": "28px,,28px,"
+      }
+    },
     "main-collection": {
       "type": "main-collection",
       "blocks": {
@@ -135,12 +174,9 @@
       ],
       "settings": {
         "show_description": true,
-        "cca_seo_color_scheme": "scheme-reviews",
-        "cca_seo_heading": "عن الحلويات المجففة بالتجميد",
-        "cca_seo_text": "<p>كل منتجاتنا تُصنّع في مصنعنا داخل الكويت — إحنا المصنع الوحيد اللي ينتج منتجات التجفيف بالتجميد محلياً بدل الاستيراد، وكل باكت يتعبأ ويتفحص عندنا.</p>",
         "use_read_more": false,
         "read_more_height": 300,
-        "description_position": "after",
+        "description_position": "before",
         "product_des": "11",
         "image_ratio": "square",
         "image_size": true,
@@ -187,6 +223,7 @@
   "order": [
     "collections_list_simple_4yRUED",
     "main_heading_PHNGje",
-    "main-collection"
+    "main-collection",
+    "cca_collection_seo"
   ]
 }

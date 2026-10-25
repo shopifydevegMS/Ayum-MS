@@ -124,39 +124,16 @@
 {%- capture sizes -%}
  {%- render 'sizes', enable_list: true, full_width: section.settings.section_layout, col_mobile: col_mobile, col_tablet: col_tablet, col_desktop: col_desktop -%}
 {%- endcapture -%}
-{%- liquid
-  # AYUM SEO block (Product design "11 - cca"): static text from the section settings,
-  # falling back to the collection description
-  if cca_grid and section.settings.cca_seo_text != blank
-    assign cca_seo_text = section.settings.cca_seo_text
-  endif
--%}
-{%- if section.settings.show_description and collection.description != blank or cca_seo_text != blank -%}
+{%- if section.settings.show_description and collection.description != blank -%}
   {%- capture collection_description -%}
-    <div class="hdt-main-collection-description-wrap{% if cca_grid %} cca-collection-seo{% endif %}"{% if cca_grid %} color-scheme="{{ section.settings.cca_seo_color_scheme }}"{% endif %}>
+    <div class="hdt-main-collection-description-wrap">
       <div class="{{ parent }} {% if section.settings.hdt_background_parallax %} hdt-animate--parallax-bg {% endif %}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};"{%- endif %}>
         <div class="{{ child }}">
-          <readmore-less-wrap class="hdt-contents hdt-collection-description" hdt-reveal="slide-in" timeline{% if cca_grid %} color-scheme="{{ section.settings.cca_seo_color_scheme }}"{% endif %}>
-            {%- if cca_grid -%}
-              {%- liquid
-                # AYUM SEO heading: optional collection metafield custom.seo_heading, else "About <title>"
-                assign cca_seo_heading = section.settings.cca_seo_heading | default: collection.metafields.custom.seo_heading.value | default: '' | strip
-                if cca_seo_heading == blank
-                  assign cca_seo_prefix = 'sections.collection_template.cca_seo_heading' | t: title: ''
-                  assign cca_seo_start = collection.title | slice: 0, cca_seo_prefix.size
-                  if cca_seo_start == cca_seo_prefix
-                    assign cca_seo_heading = collection.title
-                  else
-                    assign cca_seo_heading = 'sections.collection_template.cca_seo_heading' | t: title: collection.title
-                  endif
-                endif
-              -%}
-              <h2 class="cca-collection-seo__heading">{{ cca_seo_heading | escape }}</h2>
-            {%- endif %}
+          <readmore-less-wrap class="hdt-contents hdt-collection-description" hdt-reveal="slide-in" timeline>
             <div class="wrapper" wrap-content style="--max-height: {{ section.settings.read_more_height }}px;">
               <readmore-less config='{"useReadMore": {{ section.settings.use_read_more | default: false }}, "readMoreHeight": {{ section.settings.read_more_height }} }'>
                 <div class="hdt-rte" >
-                  {{ cca_seo_text | default: collection.description }}
+                  {{ collection.description }}
                 </div>
               </readmore-less>
             </div>
@@ -510,28 +487,6 @@
         },
       ],
       "default": "before"
-    },
-    {
-      "type": "color_scheme",
-      "id": "cca_seo_color_scheme",
-      "label": "Description colors - cca",
-      "default": "scheme-1",
-      "info": "Product design 11 - cca: background (at 30%), accent border and text of the collection description.",
-      "visible_if": "{{ section.settings.product_des == '11' and section.settings.show_description }}"
-    },
-    {
-      "type": "text",
-      "id": "cca_seo_heading",
-      "label": "SEO heading - cca",
-      "info": "Blank: the collection metafield custom.seo_heading, else \"About\" + the collection title.",
-      "visible_if": "{{ section.settings.product_des == '11' and section.settings.show_description }}"
-    },
-    {
-      "type": "richtext",
-      "id": "cca_seo_text",
-      "label": "SEO text - cca",
-      "info": "Blank: the collection description.",
-      "visible_if": "{{ section.settings.product_des == '11' and section.settings.show_description }}"
     },
     {
       "type": "select",

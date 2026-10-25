@@ -82,7 +82,7 @@
                 "font_size_heading_lg": 46,
                 "font_size_heading": 25,
                 "letter_spacing_heading": 0,
-                "custom_class": "cca-hero-heading"
+                "cca_design": "hero_heading"
               },
               "blocks": {}
             },
@@ -281,7 +281,7 @@
                 "font_size_heading_lg": 46,
                 "font_size_heading": 25,
                 "letter_spacing_heading": 0,
-                "custom_class": "cca-hero-heading"
+                "cca_design": "hero_heading"
               },
               "blocks": {}
             },

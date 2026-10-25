@@ -4,7 +4,7 @@
     assign effect = 'reval'
   endif   
 %}
-<div {{ effect }} id="block-{{ block.id }}" class="hdt-text-warry hdt-rte {{ block.settings.text_color }}{% if block.settings.hidden_br_mobile %} hdt-br-hidden{% endif %}{% if block.settings.hidden_on_mobile %} hdt-hide-mobile{% endif %} hdt-{{ block.settings.heading_size }} {{ block.settings.line_height }} hdt-font-{{ block.settings.font_weight }}{% if block.settings.custom_class != blank %} {{ block.settings.custom_class | strip | escape }}{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.heading }}</div>
+<div {{ effect }} id="block-{{ block.id }}" class="hdt-text-warry hdt-rte {{ block.settings.text_color }}{% if block.settings.hidden_br_mobile %} hdt-br-hidden{% endif %}{% if block.settings.hidden_on_mobile %} hdt-hide-mobile{% endif %} hdt-{{ block.settings.heading_size }} {{ block.settings.line_height }} hdt-font-{{ block.settings.font_weight }}{% case block.settings.cca_design %}{% when 'seo_heading' %} cca-collection-seo__heading{% when 'hero_heading' %} cca-hero-heading{% endcase %}" {{ block.shopify_attributes }}>{{ block.settings.heading }}</div>
 {%- if block.settings.heading_size == "h_custom" -%}
   {%- style -%}
     #block-{{ block.id }} {
@@ -194,10 +194,16 @@
       "visible_if": "{{ block.settings.heading_size == 'h_custom' }}"
     },
     {
-      "type": "text",
-      "id": "custom_class",
-      "label": "Custom CSS class",
-      "info": "Optional. Extra class for this heading, e.g. cca-…"
+      "type": "select",
+      "id": "cca_design",
+      "label": "Design",
+      "info": "AYUM styles. Default keeps the theme heading.",
+      "default": "default",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "seo_heading", "label": "SEO heading - cca" },
+        { "value": "hero_heading", "label": "Hero heading - cca" }
+      ]
     }
   ],
   "presets": [

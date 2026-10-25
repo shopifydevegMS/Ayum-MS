@@ -32,7 +32,7 @@
   endif
 %}
 {%- unless cca_hide -%}
-<div id="{{ section.id }}" class="{{ parent }}{% if section.settings.design == 'design_1' %} cca-product-reviews{% endif %} {% if section.settings.hdt_background_parallax %} hdt-animate--parallax-bg {% endif %}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};"{%- endif %} hdt-reveal="fade-in">
+<div id="{{ section.id }}" class="{{ parent }}{% if section.settings.design == 'design_1' %} cca-product-reviews{% elsif section.settings.design == 'design_2' %} cca-collection-seo{% endif %} {% if section.settings.hdt_background_parallax %} hdt-animate--parallax-bg {% endif %}" {%- if section.settings.colors_by_section %} color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};"{%- endif %} hdt-reveal="fade-in">
   <div class="{{ child }}">
     {% comment %} hdt-animate--parallax {% endcomment %}
     {%- if section.settings.section_background != blank -%}
@@ -79,9 +79,10 @@
       "default": "default",
       "options": [
         { "value": "default", "label": "Default" },
-        { "value": "design_1", "label": "Design 1 - cca" }
+        { "value": "design_1", "label": "Design 1 - cca" },
+        { "value": "design_2", "label": "Design 2 - cca" }
       ],
-      "info": "Design 1 - cca: product reviews (add the Judge.me Review Widget app block). Hidden on the storefront until the app block is added."
+      "info": "Design 1 - cca: product reviews (add the Judge.me Review Widget app block). Hidden on the storefront until the app block is added. Design 2 - cca: collection SEO text (a Heading block set to Design: SEO heading - cca, plus a Text block in the scheme's Text 2 color)."
     },
     {
       "type": "select",

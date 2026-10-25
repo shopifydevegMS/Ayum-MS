@@ -655,7 +655,6 @@
       "view_all": "View all"
     },
     "collection_template": {
-      "cca_seo_heading": "About {{ title }}",
       "title": "Collection",
       "short_by_txt": "Sort",
       "empty": "This collection is empty",
