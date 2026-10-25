@@ -28,6 +28,11 @@
           assign default_label = 'general.pagination.load_more_products' | t
           assign label = lm_text | default: default_label
         endif
+        # AYUM: "[n]" in the button label = how many products the next click adds
+        if label contains '[n]'
+          assign cca_next_count = paginate.items | minus: paginate.current_offset | minus: paginate.page_size | at_most: paginate.page_size
+          assign label = label | replace: '[n]', cca_next_count
+        endif
       -%}
       <div loadmore-btn-wrapp class="hdt-pagination-wrapper {{ class }} hdt-text-{{ paginate_pos }} hdt-justify-items-{{ paginate_pos }}" style="--pagination-distance:{{ dis_pagination }}px;">
         {%- if section.settings.enable_progressbar -%}

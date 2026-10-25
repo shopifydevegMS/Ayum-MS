@@ -195,12 +195,47 @@
         </div>
       </div>
       {%- endif -%}
+      {%- if cca_grid and section.settings.enable_filtering and blocks_type contains 'filter' and collection.filters.size > 0 -%}
+        {%- liquid
+          assign cca_active_total = 0
+          for cca_f in collection.filters
+            if cca_f.type == 'price_range'
+              if cca_f.min_value.value != nil or cca_f.max_value.value != nil
+                assign cca_active_total = cca_active_total | plus: 1
+              endif
+            else
+              assign cca_active_total = cca_active_total | plus: cca_f.active_values.size
+            endif
+          endfor
+        -%}
+        <div class="cca-collection__quick-filters lg:hdt-hidden" role="group" aria-label="{{ 'products.facets.filter_button' | t | escape }}">
+          <button type="button" class="cca-collection__quick-filter cca-collection__quick-filter--all" aria-controls="hdt-shop-sidebar-drawer">
+            {{- 'products.facets.cca_all_filters' | t -}}
+            {%- if cca_active_total > 0 %} ({{ cca_active_total }}){% endif -%}
+          </button>
+          {%- for cca_f in collection.filters -%}
+            {%- liquid
+              assign cca_f_count = cca_f.active_values.size
+              if cca_f.type == 'price_range'
+                assign cca_f_count = 0
+                if cca_f.min_value.value != nil or cca_f.max_value.value != nil
+                  assign cca_f_count = 1
+                endif
+              endif
+            -%}
+            <button type="button" class="cca-collection__quick-filter{% if cca_f_count > 0 %} cca-collection__quick-filter--active{% endif %}" aria-controls="hdt-shop-sidebar-drawer" data-cca-filter-group="{{ cca_f.param_name | escape }}">
+              {{- cca_f.label | escape -}}
+              {%- if cca_f_count > 0 %}<span class="sr-only"> ({{ 'products.facets.filters_selected' | t: count: cca_f_count }})</span>{% endif -%}
+            </button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
       {%- render 'active-filters', results: collection, results_count: collection.products_count -%}
       {%- endcapture -%}
       {%- unless cca_grid -%}{{ shop_control }}{%- endunless -%}
       <div class="{% if has_sidebar and section.settings.sidebar_drawer == false %} hdt-row-flex hdt-sidebar_drawer_{{ section.settings.sidebar_drawer }} hdt-flex-cols-1 lg:hdt-flex-cols-2{% else %} hdt-flex-cols-1{% endif %} ">
         <div class="hdt-shop-content hdt-col">
-          {%- if cca_grid -%}{{ shop_control }}{%- endif -%}
+          {%- if cca_grid -%}<div class="cca-collection__bar">{{ shop_control }}</div>{%- endif -%}
           {%- if collection.all_products_count == 0 -%}
             <div class="hdt-template hdt-template--empty hdt-text-center hdt-flex hdt-flex-col hdt-align-center hdt-justify-center">
               <p class="hdt-h5 hdt-s-text">{{ 'sections.collection_template.empty' | t -}}</p>

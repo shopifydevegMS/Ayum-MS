@@ -253,7 +253,7 @@
     },
     "collections": {
         "pagination": {
-            "bar_with_count_html": "لقد شاهدت <span data-current-bar>{{ current_count }}</span> من {{ total_count }} منتج"
+            "bar_with_count_html": "عرض <span data-current-bar>{{ current_count }}</span> من {{ total_count }} منتج"
         }
     },
     "products": {
@@ -410,7 +410,7 @@
             "use_fewer_filters_html": "<div>استخدم عدداً أقل من المرشحات أو <wrapp-hdt-facet-url><a class=\"{{ class }}\" href=\"{{ link }}\">إزالة الكل</a></wrapp-hdt-facet-url></div>",
             "apply": "تطبيق",
             "clear": "مسح",
-            "clear_all": "إزالة الكل",
+            "clear_all": "مسح",
             "filter_and_sort": "تصفية وترتيب",
             "filter_by_label": "تصفية:",
             "filter_button": "تصفية",
@@ -435,6 +435,7 @@
             },
             "cca_chip_all": "الكل",
             "cca_filter_title": "تصفية النتائج",
+            "cca_all_filters": "كل الفلاتر",
             "filter_button_price": "تصفية",
             "switch_view": "التبديل إلى عرض الشبكة {{ number }}",
             "switch_view_list": "التبديل إلى عرض القائمة",

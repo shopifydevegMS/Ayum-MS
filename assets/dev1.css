@@ -2544,6 +2544,12 @@ html:not(.shopify-design-mode) .cca-product-details.cca-product-details:not(:has
   padding: 0;
 }
 
+/* The first card always starts at the container edge (native centers the cards when
+   they all fit, via .hdt-hidden-slider-nav). */
+.cca-collection-strips.cca-collection-strips .hdt-slider.hdt-hidden-slider-nav .hdt-slider__container {
+  justify-content: flex-start;
+}
+
 /* Mobile: cards hug their content (native auto slide size); no arrows (Figma 1:1095). */
 .cca-collection-strips.cca-collection-strips .hdt-slider .hdt-slider__slide {
   --slide-size: auto;
@@ -2633,7 +2639,6 @@ html:not(.shopify-design-mode) .cca-product-details.cca-product-details:not(:has
 @media (min-width: 768px) {
   .cca-collection-strips.cca-collection-strips .hdt-content {
     --cca-strip-nav: 40px;
-    --cca-strip-inset: calc(var(--cca-strip-nav) - 8px);
   }
 
   .cca-collection-strips.cca-collection-strips .hdt-content .hdt-slider {
@@ -2884,6 +2889,13 @@ html:not(.shopify-design-mode) .cca-product-details.cca-product-details:not(:has
    The sidebar is the native filter block with "sidebar drawer" off: always open beside the
    grid from 1150px, the native drawer below that. The toolbar sits above the grid column. */
 
+/* Native applies the section padding twice (the [main-content] wrapper and the inner
+   container wrapper both carry hdt-section-spacing). Keep only the outer one, so the
+   space under the collection header matches Figma. */
+.cca-collection.cca-collection .hdt-container > .hdt-section-spacing {
+  padding-block: 0;
+}
+
 /* Toolbar: results count (start) + sort (end) */
 .cca-collection.cca-collection .hdt-shop-control {
   margin-block: 0 2rem;
@@ -2966,8 +2978,12 @@ html:not(.shopify-design-mode) .cca-product-details.cca-product-details:not(:has
   border-block-end: 1px solid rgb(var(--color-line-border));
 }
 
+/* Lists grow with their values (Figma has no inner scroll). The native 200px scroll box
+   showed its dark 5px scrollbar on 1px rounding overflow at some zoom levels. */
 .cca-collection.cca-collection .hdt-main-sidebar .hdt-filter .hdt-filter-group__list {
+  max-height: none;
   margin-inline-end: 0;
+  overflow: visible;
 }
 
 .cca-collection.cca-collection .hdt-main-sidebar .hdt-filter ul:not(.hdt-filter-group__list--color) .hdt-filter-group__list-item + .hdt-filter-group__list-item {
@@ -3045,5 +3061,384 @@ html:not(.shopify-design-mode) .cca-product-details.cca-product-details:not(:has
 
   .cca-collection .cca-collection__count {
     font-size: 1.8rem;
+  }
+}
+
+/* -- cca-collection: filter icons (Figma 1:942) -- */
+/* Check mark keeps its normal orientation in RTL (native mirrors it) */
+.cca-collection.cca-collection .hdt-main-sidebar .hdt-filter :checked + label .hdt-facets-checkbox svg {
+  transform: scale(1);
+}
+
+/* Group toggle: "−" when open, "+" when closed (replaces the native chevron) */
+.cca-collection.cca-collection .hdt-main-sidebar .hdt-filter .hdt-facet-title_icon {
+  display: none;
+}
+
+.cca-collection.cca-collection .hdt-main-sidebar .hdt-filter .hdt-facet-title > span:last-child::before {
+  content: "−";
+  color: rgb(var(--color-foreground2));
+  font-size: 1.7rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.cca-collection.cca-collection .hdt-main-sidebar .hdt-filter summary[aria-expanded="false"] .hdt-facet-title > span:last-child::before {
+  content: "+";
+}
+
+/* Card hover icons (wishlist / compare / quick view) are not in the design */
+.cca-collection.cca-collection .hdt-pr-style7 .hdt-pr-btns-group2 {
+  display: none;
+}
+
+/* -- cca-collection: sort button arrow = Figma "▾" -- */
+.cca-collection.cca-collection .hdt-popover__sorting > button > svg {
+  display: none;
+}
+
+.cca-collection.cca-collection .hdt-popover__sorting > button::after {
+  content: "▾";
+  flex: 0 0 auto;
+  color: rgb(var(--hdt-btn-outline-color));
+  font-size: 1.1rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* -- cca-collection: active filters = removable pills (Figma 1:1162) -- */
+.cca-collection.cca-collection .hdt-active-filters {
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-block: 0 2rem;
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+/* Native separates items with a divider line; pills don't need it */
+.cca-collection.cca-collection .hdt-active-filters > * {
+  margin-inline-end: 0;
+  padding-inline-end: 0;
+  border: 0;
+}
+
+.cca-collection.cca-collection .hdt-active-filters .hdt-active-filters__count {
+  display: none;
+}
+
+.cca-collection.cca-collection .hdt-active-filters a.hdt-active-filters__remove {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 1rem;
+  border-radius: 1.2rem;
+  background-color: rgb(var(--color-background2));
+  color: rgb(var(--hdt-btn-outline-color));
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.cca-collection.cca-collection .hdt-active-filters a.hdt-active-filters__remove::before {
+  content: "×";
+  order: 1; /* after the label: the inline-end side, as in Figma */
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  background: none;
+  transform: none;
+  font-weight: 800;
+}
+
+.cca-collection.cca-collection .hdt-active-filters a::after {
+  display: none;
+}
+
+.cca-collection.cca-collection .hdt-active-filters a.hdt-active-filters__clear-all {
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  color: rgb(var(--color-pr-price));
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* !important: the native clear-all hover (facets.css) sets its colors with !important */
+.cca-collection.cca-collection .hdt-active-filters a.hdt-active-filters__clear-all:hover {
+  background-color: transparent !important;
+  color: rgb(var(--color-pr-price)) !important;
+  text-decoration: underline;
+}
+
+.cca-collection.cca-collection .hdt-active-filters a.hdt-active-filters__clear-all::before {
+  display: none;
+}
+
+/* -- cca-collection: load more + "viewed X of Y" under it (Figma 1:938 / 1:1222) -- */
+.cca-collection.cca-collection .hdt-pagination-wrapper[loadmore-btn-wrapp] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  padding-block-start: 0;
+  border-block-start: 0;
+}
+
+.cca-collection.cca-collection .hdt-pagination-wrapper .hdt-lm-bar {
+  order: 2;
+}
+
+.cca-collection.cca-collection .hdt-pagination-wrapper .hdt-lm-bar .hdt-lm-bar-text {
+  color: rgb(var(--color-foreground2));
+  font-size: 1.3rem;
+  font-weight: 700;
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.cca-collection.cca-collection .hdt-pagination-wrapper .hdt-lm-bar .hdt-lm-bar-progress {
+  display: none;
+}
+
+.cca-collection.cca-collection .hdt-pagination-wrapper a.hdt-loamore-btn {
+  min-height: 0;
+  padding: 1.3rem 3.4rem;
+  border: 1.5px solid rgb(var(--color-foreground));
+  border-radius: 2.4rem;
+  background-color: transparent;
+  color: rgb(var(--color-foreground));
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* -- cca-collection: phones (Figma 1:1139) -- */
+@media (max-width: 767px) {
+  /* Sort: full-width pill on its own row, "ترتيب: <current>" */
+  .cca-collection.cca-collection .hdt-shop-control {
+    flex-wrap: wrap;
+    row-gap: 1rem;
+  }
+
+  .cca-collection.cca-collection .hdt-shop-control > .hdt-col.hdt-control-sorting {
+    order: -1;
+    width: 100%;
+  }
+
+  .cca-collection.cca-collection .hdt-shop-control > .hdt-col.hdt-control-layout:not(:has(*)) {
+    display: none;
+  }
+
+  .cca-collection.cca-collection .hdt-control-sorting .hdt-popover__sorting {
+    width: 100%;
+  }
+
+  .cca-collection.cca-collection .hdt-popover__sorting > button {
+    justify-content: center;
+    width: 100%;
+    gap: 0.8rem;
+    padding: 1.1rem 1.4rem;
+    border-radius: 2.2rem;
+  }
+
+  .cca-collection.cca-collection .hdt-popover__sorting > button > span.md\:hdt-block {
+    display: block;
+  }
+
+  .cca-collection.cca-collection .hdt-popover__sorting > button > span.md\:hdt-hidden {
+    order: -1;
+  }
+
+  .cca-collection.cca-collection .hdt-popover__sorting > button > span.md\:hdt-hidden::after {
+    content: ":";
+  }
+
+  .cca-collection.cca-collection .hdt-pagination-wrapper[loadmore-btn-wrapp] {
+    align-items: stretch;
+  }
+
+  .cca-collection.cca-collection .hdt-pagination-wrapper wrapp-hdt-lm-main-url {
+    display: block;
+  }
+
+  .cca-collection.cca-collection .hdt-pagination-wrapper a.hdt-loamore-btn {
+    width: 100%;
+  }
+}
+
+/* -- cca-collection: sort list popup (no Figma frame; built from the Figma sort button,
+   chip and card tokens: white panel, border, 16 radius, shadow 1, cyan selected pill) -- */
+.cca-collection.cca-collection .hdt-popover.hdt-popover-sort-list {
+  padding: 0.8rem;
+  border: 1px solid rgb(var(--color-line-border));
+  border-radius: 1.6rem;
+  /* explicit: the section sets --background-opacity: 0, which the native panel inherits */
+  background: rgb(var(--color-background));
+  box-shadow: 0 2px 8px rgb(var(--color-foreground) / 0.14);
+}
+
+.cca-collection.cca-collection .hdt-popover-sort-list .hdt-popover__arrow {
+  display: none;
+}
+
+.cca-collection.cca-collection .hdt-popover__sorting hdt-richlist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 22rem;
+}
+
+.cca-collection.cca-collection .hdt-popover__sorting hdt-richlist button {
+  padding: 1rem 1.4rem;
+  border-radius: 1rem;
+  color: rgb(var(--color-foreground));
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: start;
+  direction: rtl;
+  unicode-bidi: isolate;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.cca-collection.cca-collection .hdt-popover__sorting hdt-richlist button:hover {
+  background-color: rgb(var(--color-background2));
+  color: rgb(var(--color-foreground));
+}
+
+.cca-collection.cca-collection .hdt-popover__sorting hdt-richlist button[aria-selected="true"],
+.cca-collection.cca-collection .hdt-popover__sorting hdt-richlist button[aria-selected="true"]:hover {
+  background-color: rgb(var(--hdt-btn-bg));
+  color: rgb(var(--hdt-btn-color));
+}
+
+/* Phones: the native list opens as a bottom sheet */
+@media (max-width: 767px) {
+  .cca-collection.cca-collection .hdt-popover.hdt-popover-sort-list {
+    padding: 0 1.6rem 2.4rem;
+    border-block-end: 0;
+    border-radius: 1.6rem 1.6rem 0 0;
+  }
+
+  .cca-collection.cca-collection .hdt-popover-sort-list .hdt-popover__header {
+    align-items: center;
+    margin-block-end: 1.2rem;
+    padding: 1.6rem 0;
+    border-block-end: 1px solid rgb(var(--color-line-border));
+    color: rgb(var(--color-foreground));
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-transform: none;
+  }
+
+  .cca-collection.cca-collection .hdt-popover__sorting hdt-richlist {
+    min-width: 0;
+  }
+
+  .cca-collection.cca-collection .hdt-popover__sorting hdt-richlist button {
+    padding-block: 1.2rem;
+    font-size: 1.4rem;
+  }
+}
+
+/* -- cca-collection: mobile + tablet filter & sort bar (Figma 1:1139) --
+   Below 1150px the sidebar is the native drawer. The bar holds: sort (row 1), quick
+   filters that open the drawer (row 2), active-filter pills (row 3). It sticks under the
+   header like the theme's own sticky product media (top 0 while the header is hidden). */
+@media (max-width: 1149px) {
+  .cca-collection.cca-collection .cca-collection__bar {
+    position: sticky;
+    top: var(--header-height, 0px);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-block-end: 1.6rem;
+    margin-inline: -1.5rem; /* full width: the container's own 1.5rem side padding */
+    padding: 1.6rem 1.5rem;
+    border-block-end: 1px solid rgb(var(--color-line-border));
+    background-color: rgb(var(--color-background));
+    transition: top 0.3s ease-out;
+  }
+
+  body:has(.shopify-section-header-hidden) .cca-collection.cca-collection .cca-collection__bar {
+    top: 0;
+  }
+
+  .cca-collection.cca-collection .cca-collection__bar .hdt-shop-control,
+  .cca-collection.cca-collection .cca-collection__bar .hdt-active-filters {
+    margin: 0;
+  }
+
+  /* The quick filters replace the count + filter button row (the header shows the count) */
+  .cca-collection.cca-collection .hdt-shop-control .hdt-control-filter {
+    display: contents;
+  }
+
+  .cca-collection.cca-collection .hdt-shop-control .cca-collection__count,
+  .cca-collection.cca-collection .hdt-shop-control .hdt-filter_btn {
+    display: none;
+  }
+
+  /* Row 2: one scrolling row; the scroll box spans the gutter so chips are never cut early */
+  .cca-collection .cca-collection__quick-filters {
+    display: flex;
+    gap: 0.8rem;
+    margin-inline: -1.5rem;
+    padding-inline: 1.5rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    direction: rtl;
+    unicode-bidi: isolate;
+  }
+
+  .cca-collection .cca-collection__quick-filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .cca-collection.cca-collection .cca-collection__quick-filter {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.9rem 1.4rem;
+    border: 1px solid rgb(var(--color-line-border));
+    border-radius: 2rem;
+    background-color: rgb(var(--color-background));
+    color: rgb(var(--color-foreground));
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .cca-collection.cca-collection .cca-collection__quick-filter[data-cca-filter-group]::after {
+    content: "▾";
+    color: rgb(var(--hdt-btn-outline-color));
+    font-size: 1rem;
+    font-weight: 800;
+  }
+
+  .cca-collection.cca-collection .cca-collection__quick-filter--all {
+    background-color: rgb(var(--color-background2));
+    font-weight: 800;
+  }
+
+  .cca-collection.cca-collection .cca-collection__quick-filter--active {
+    border-color: rgb(var(--hdt-btn-bg));
+    background-color: rgb(var(--hdt-btn-bg));
+    color: rgb(var(--hdt-btn-color));
+  }
+
+  .cca-collection.cca-collection .cca-collection__quick-filter--active[data-cca-filter-group]::after {
+    color: inherit;
+  }
+
+  .cca-collection.cca-collection .cca-collection__quick-filter:focus-visible {
+    outline: 2px solid rgb(var(--hdt-btn-bg));
+    outline-offset: -2px;
   }
 }

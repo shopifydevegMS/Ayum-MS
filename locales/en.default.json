@@ -433,6 +433,7 @@
       },
       "cca_chip_all": "All",
       "cca_filter_title": "Filter results",
+      "cca_all_filters": "All filters",
       "filter_button_price": "Filter",
       "switch_view": "Switch to grid view {{ number }}",
       "switch_view_list": "Switch to list view",

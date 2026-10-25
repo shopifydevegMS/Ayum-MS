@@ -4888,3 +4888,27 @@ if (!window.ccaVideoCardsReady) {
       .catch(() => {});
   });
 })();
+
+/* ==== cca-collection — mobile quick filters (main-collection, Product design "11 - cca") ==== */
+/* The chips open the native sidebar drawer through their aria-controls (theme handler).
+   A group chip also brings its group into view in the drawer and makes sure it is open. */
+(() => {
+  if (window.ccaQuickFiltersBound) return;
+  window.ccaQuickFiltersBound = true;
+
+  document.addEventListener('click', (event) => {
+    const chip = event.target.closest('.cca-collection [data-cca-filter-group]');
+    if (!chip) return;
+    const param = chip.getAttribute('data-cca-filter-group');
+    const drawer = document.getElementById(chip.getAttribute('aria-controls'));
+    if (!drawer || !param) return;
+    const focusGroup = () => {
+      const input = [...drawer.querySelectorAll('input[name]')].find((el) => el.name === param || el.name.startsWith(param + '.'));
+      const group = input?.closest('details');
+      if (!group) return;
+      if (!group.open) group.querySelector('summary')?.click();
+      group.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    };
+    setTimeout(focusGroup, 350); // after the native drawer opening animation starts
+  });
+})();
