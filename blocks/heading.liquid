@@ -4,7 +4,7 @@
     assign effect = 'reval'
   endif   
 %}
-<div {{ effect }} id="block-{{ block.id }}" class="hdt-text-warry hdt-rte {{ block.settings.text_color }}{% if block.settings.hidden_br_mobile %} hdt-br-hidden{% endif %}{% if block.settings.hidden_on_mobile %} hdt-hide-mobile{% endif %} hdt-{{ block.settings.heading_size }} {{ block.settings.line_height }} hdt-font-{{ block.settings.font_weight }}{% case block.settings.cca_design %}{% when 'seo_heading' %} cca-collection-seo__heading{% when 'hero_heading' %} cca-hero-heading{% endcase %}" {{ block.shopify_attributes }}>{{ block.settings.heading }}</div>
+<div {{ effect }} id="block-{{ block.id }}" class="hdt-text-warry hdt-rte {{ block.settings.text_color }}{% if block.settings.hidden_br_mobile %} hdt-br-hidden{% endif %}{% if block.settings.hidden_on_mobile %} hdt-hide-mobile{% endif %} hdt-{{ block.settings.heading_size }} {{ block.settings.line_height }} hdt-font-{{ block.settings.font_weight }}{% if block.settings.cca_design == 'hero_heading' %} cca-hero-heading{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.heading }}</div>
 {%- if block.settings.heading_size == "h_custom" -%}
   {%- style -%}
     #block-{{ block.id }} {
@@ -82,6 +82,10 @@
         {
           "value": "bold",
           "label": "t:settings_schema.typography.settings.font_weight.bold"
+        },
+        {
+          "value": "extrabold",
+          "label": "Extra bold"
         },
       ],
       "default": "normal",
@@ -201,7 +205,6 @@
       "default": "default",
       "options": [
         { "value": "default", "label": "Default" },
-        { "value": "seo_heading", "label": "SEO heading - cca" },
         { "value": "hero_heading", "label": "Hero heading - cca" }
       ]
     }

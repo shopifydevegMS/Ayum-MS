@@ -358,16 +358,12 @@
           "type": "heading",
           "settings": {
             "heading": "<p>عن الحلويات المجففة بالتجميد</p>",
-            "hidden_br_mobile": false,
-            "hidden_on_mobile": false,
+            "heading_size": "h_custom",
+            "font_size_heading_lg": 23,
+            "font_size_heading": 17,
+            "font_weight": "extrabold",
             "line_height": "",
-            "font_weight": "normal",
-            "heading_size": "h2",
-            "text_color": "hdt-s-text",
-            "font_size_heading_lg": 50,
-            "font_size_heading": 24,
-            "letter_spacing_heading": 0,
-            "cca_design": "seo_heading"
+            "text_color": "hdt-s-text"
           },
           "blocks": {}
         },
@@ -375,19 +371,12 @@
           "type": "text",
           "settings": {
             "text": "<p>كل منتجاتنا تُصنّع في مصنعنا داخل الكويت — إحنا المصنع الوحيد اللي ينتج منتجات التجفيف بالتجميد محلياً بدل الاستيراد، وكل باكت يتعبأ ويتفحص عندنا.</p>",
-            "hidden_br_mobile": false,
-            "hidden_on_mobile": false,
-            "ffamily": "",
-            "text_size": "base",
-            "line_height": "",
-            "font_weight": "normal",
-            "text_color": "hdt-s-text",
-            "countdown": "2025-12-30 15:00:00",
-            "txt_day": "days",
-            "font_size_text_lg": 16,
+            "text_size": "custom",
+            "font_size_text_lg": 15,
             "font_size_text": 14,
-            "letter_spacing_text": 0,
-            "cca_design": "default"
+            "line_height": "cca-lh-1-9",
+            "text_color": "hdt-text-secondary",
+            "font_weight": "normal"
           },
           "blocks": {}
         }
