@@ -416,6 +416,7 @@
         "slide_item_JmED9Q"
       ],
       "settings": {
+        "design": "design_1",
         "image_height": "adapt_image",
         "fixed_height": 860,
         "image_height_mb": "adapt_image",
@@ -436,6 +437,7 @@
         "pag_rounded": true,
         "pag_space": 9,
         "pag_mgt": 35,
+        "pag_mgt_mb": 22,
         "pag_hide_mobile": false,
         "colors_by_section": true,
         "color_scheme": "scheme-hero",
@@ -444,9 +446,7 @@
         "mg": "",
         "mg_mb": ",,30px,",
         "pd": "",
-        "pd_mb": "",
-        "pag_mgt_mb": 22,
-        "design": "design_1"
+        "pd_mb": ""
       }
     },
     "collections_list_ayum_categories": {
@@ -1005,6 +1005,7 @@
         "bundles_carousel"
       ],
       "settings": {
+        "design": "design_1",
         "colors_by_section": true,
         "color_scheme": "scheme-surface",
         "background_opacity": 0.6,
@@ -1013,8 +1014,7 @@
         "mg": ",,0,",
         "mg_mb": ",,0,",
         "pd": "48px,,48px,",
-        "pd_mb": "24px,,24px,",
-        "design": "design_1"
+        "pd_mb": "24px,,24px,"
       }
     },
     "image_text_about_brand": {
@@ -1073,7 +1073,8 @@
                 "txt_day": "days",
                 "font_size_text_lg": 17,
                 "font_size_text": 12,
-                "letter_spacing_text": 0
+                "letter_spacing_text": 0,
+                "cca_design": "default"
               },
               "blocks": {}
             },
@@ -1089,7 +1090,8 @@
                 "text_color": "hdt-s-text",
                 "font_size_heading_lg": 34,
                 "font_size_heading": 24,
-                "letter_spacing_heading": 0
+                "letter_spacing_heading": 0,
+                "cca_design": "default"
               },
               "blocks": {}
             },
@@ -1108,7 +1110,8 @@
                 "txt_day": "days",
                 "font_size_text_lg": 18,
                 "font_size_text": 14,
-                "letter_spacing_text": 0
+                "letter_spacing_text": 0,
+                "cca_design": "default"
               },
               "blocks": {}
             },
@@ -1172,7 +1175,8 @@
                         "text_color": "hdt-text-primary",
                         "font_size_heading_lg": 26,
                         "font_size_heading": 23,
-                        "letter_spacing_heading": 0
+                        "letter_spacing_heading": 0,
+                        "cca_design": "default"
                       },
                       "blocks": {}
                     },
@@ -1191,7 +1195,8 @@
                         "txt_day": "days",
                         "font_size_text_lg": 18,
                         "font_size_text": 12,
-                        "letter_spacing_text": 0
+                        "letter_spacing_text": 0,
+                        "cca_design": "default"
                       },
                       "blocks": {}
                     }
@@ -1237,7 +1242,8 @@
                         "text_color": "hdt-text-primary",
                         "font_size_heading_lg": 26,
                         "font_size_heading": 23,
-                        "letter_spacing_heading": 0
+                        "letter_spacing_heading": 0,
+                        "cca_design": "default"
                       },
                       "blocks": {}
                     },
@@ -1256,7 +1262,8 @@
                         "txt_day": "days",
                         "font_size_text_lg": 18,
                         "font_size_text": 12,
-                        "letter_spacing_text": 0
+                        "letter_spacing_text": 0,
+                        "cca_design": "default"
                       },
                       "blocks": {}
                     }
@@ -1302,7 +1309,8 @@
                         "text_color": "hdt-text-primary",
                         "font_size_heading_lg": 26,
                         "font_size_heading": 23,
-                        "letter_spacing_heading": 0
+                        "letter_spacing_heading": 0,
+                        "cca_design": "default"
                       },
                       "blocks": {}
                     },
@@ -1321,7 +1329,8 @@
                         "txt_day": "days",
                         "font_size_text_lg": 18,
                         "font_size_text": 12,
-                        "letter_spacing_text": 0
+                        "letter_spacing_text": 0,
+                        "cca_design": "default"
                       },
                       "blocks": {}
                     }
@@ -1392,7 +1401,8 @@
             "svg_width": 30,
             "svg_width_mb": 22,
             "heading": "1 · تجميد سريع",
-            "description": "تجميد عند −40° يقفل الطعم واللون داخل المنتج."
+            "description": "تجميد عند −40° يقفل الطعم واللون داخل المنتج.",
+            "description_mb": ""
           },
           "blocks": {}
         },
@@ -1408,7 +1418,8 @@
             "svg_width": 30,
             "svg_width_mb": 22,
             "heading": "2 · سحب الماء",
-            "description": "التفريغ يحوّل الثلج لبخار مباشرة — بدون حرارة تحرق النكهة."
+            "description": "التفريغ يحوّل الثلج لبخار مباشرة — بدون حرارة تحرق النكهة.",
+            "description_mb": ""
           },
           "blocks": {}
         },
@@ -1424,7 +1435,8 @@
             "svg_width": 30,
             "svg_width_mb": 22,
             "heading": "3 · تعبئة محكمة",
-            "description": "عبوة مفرّغة من الهواء تحفظ القرمشة لشهور بدون مواد حافظة."
+            "description": "عبوة مفرّغة من الهواء تحفظ القرمشة لشهور بدون مواد حافظة.",
+            "description_mb": ""
           },
           "blocks": {}
         },
@@ -1529,7 +1541,8 @@
                         "txt_day": "days",
                         "font_size_text_lg": 13,
                         "font_size_text": 12,
-                        "letter_spacing_text": 0
+                        "letter_spacing_text": 0,
+                        "cca_design": "default"
                       },
                       "blocks": {}
                     }
@@ -1577,7 +1590,8 @@
                         "txt_day": "days",
                         "font_size_text_lg": 13,
                         "font_size_text": 12,
-                        "letter_spacing_text": 0
+                        "letter_spacing_text": 0,
+                        "cca_design": "default"
                       },
                       "blocks": {}
                     }
@@ -1625,7 +1639,8 @@
                         "txt_day": "days",
                         "font_size_text_lg": 13,
                         "font_size_text": 12,
-                        "letter_spacing_text": 0
+                        "letter_spacing_text": 0,
+                        "cca_design": "default"
                       },
                       "blocks": {}
                     }
@@ -1673,7 +1688,8 @@
                         "txt_day": "days",
                         "font_size_text_lg": 13,
                         "font_size_text": 12,
-                        "letter_spacing_text": 0
+                        "letter_spacing_text": 0,
+                        "cca_design": "default"
                       },
                       "blocks": {}
                     }

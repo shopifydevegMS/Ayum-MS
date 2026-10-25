@@ -329,8 +329,7 @@
         "mg_mb": "",
         "pd": "48px,,48px,",
         "pd_mb": "24px,,24px,"
-      },
-      "disabled": true
+      }
     },
     "product_details_cca": {
       "type": "icon-box",
@@ -347,7 +346,8 @@
             "svg_width": 24,
             "svg_width_mb": 20,
             "heading": "بعد الفتح",
-            "description": "يُفضّل استهلاكه فوراً"
+            "description": "يُفضّل استهلاكه فوراً",
+            "description_mb": ""
           },
           "blocks": {}
         },
@@ -363,7 +363,8 @@
             "svg_width": 24,
             "svg_width_mb": 20,
             "heading": "التخزين",
-            "description": "مكان جاف بعيد عن الرطوبة"
+            "description": "مكان جاف بعيد عن الرطوبة",
+            "description_mb": ""
           },
           "blocks": {}
         },
@@ -379,7 +380,8 @@
             "svg_width": 24,
             "svg_width_mb": 20,
             "heading": "المكونات",
-            "description": "أناناس طبيعي 100%"
+            "description": "أناناس طبيعي 100%",
+            "description_mb": ""
           },
           "blocks": {}
         },
@@ -523,14 +525,6 @@
         "mg_mb": "",
         "pd": "60px,,60px,",
         "pd_mb": "30px,,30px,"
-      }
-    },
-    "sidebar": {
-      "type": "sidebar-product",
-      "disabled": true,
-      "settings": {
-        "color_scheme": "",
-        "space": 50
       }
     },
     "cca_product_reviews": {
@@ -794,6 +788,14 @@
         "mg_mb": "",
         "pd": "48px,,48px,",
         "pd_mb": "24px,,24px,"
+      }
+    },
+    "sidebar": {
+      "type": "sidebar-product",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "space": 50
       }
     },
     "related-products": {
