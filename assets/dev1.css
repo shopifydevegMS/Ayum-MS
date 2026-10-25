@@ -660,7 +660,8 @@
 /* ==== cca-best-sellers — homepage "Best sellers" (tabs-collection, design "Design 1 - cca") ==== */
 /* Figma: desktop 2001:80, mobile 2001:647. Colors: "scheme-products" color scheme.
    Native tabs + product carousel (card design 7). Card / progress rules marked
-   :is(.cca-best-sellers, .cca-bundles) are shared with the Bundles section. Section stylesheets load after this
+   :is(.cca-best-sellers, .cca-bundles) are shared with the Bundles section; card rules
+   (.hdt-pr-style7, type + rating row) also cover the collection grid (.cca-collection). Section stylesheets load after this
    file, so every override here is more specific than the native rule it replaces. */
 
 :is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles) {
@@ -710,14 +711,14 @@
 }
 
 /* Product card (design 7) */
-:is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles) .hdt-pr-style7 {
+:is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles, .cca-collection.cca-collection) .hdt-pr-style7 {
   --atc-cl: rgb(var(--hdt-btn-color));
   --atc-bg-cl: rgb(var(--hdt-btn-bg));
   --atc-cl-hover: rgb(var(--hdt-btn-hover-color));
   --atc-bg-cl-hover: rgb(var(--hdt-btn-hover-bg));
 }
 
-:is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles) .hdt-pr-style7 .hdt-card-product__wrapper {
+:is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles, .cca-collection.cca-collection) .hdt-pr-style7 .hdt-card-product__wrapper {
   gap: 0.6rem;
   padding: 1rem;
   border: 1px solid rgb(var(--color-line-border));
@@ -725,11 +726,11 @@
   background-color: rgb(var(--color-background));
 }
 
-:is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles) .hdt-pr-style7 :is(.hdt-card-product__media, .hdt-card-product__media-wrapp) {
+:is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles, .cca-collection.cca-collection) .hdt-pr-style7 :is(.hdt-card-product__media, .hdt-card-product__media-wrapp) {
   border-radius: 1rem;
 }
 
-:is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles) .hdt-pr-style7 .hdt-card-product__info {
+:is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles, .cca-collection.cca-collection) .hdt-pr-style7 .hdt-card-product__info {
   align-items: center;
   gap: 0.6rem;
   margin: 0;
@@ -737,12 +738,12 @@
   text-align: center;
 }
 
-:is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles) .hdt-pr-style7 .hdt-card-product__info > * {
+:is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles, .cca-collection.cca-collection) .hdt-pr-style7 .hdt-card-product__info > * {
   margin: 0;
 }
 
 /* Badges: white pill, pink text, top inline-start corner of the image */
-:is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles) .hdt-pr-style7 .hdt-badge__wrapp {
+:is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles, .cca-collection.cca-collection) .hdt-pr-style7 .hdt-badge__wrapp {
   top: 0.7rem;
   left: auto;
   right: auto;
@@ -750,7 +751,7 @@
   align-items: flex-start;
 }
 
-:is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles) .hdt-pr-style7 .hdt-badge {
+:is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles, .cca-collection.cca-collection) .hdt-pr-style7 .hdt-badge {
   min-width: 0;
   min-height: 0;
   padding: 0.4rem 1rem;
@@ -765,7 +766,7 @@
 }
 
 /* Meta row: product type (start) + rating (end) */
-.cca-best-sellers.cca-best-sellers .cca-card-meta.cca-card-meta {
+:is(.cca-best-sellers.cca-best-sellers, .cca-collection.cca-collection) .cca-card-meta.cca-card-meta {
   display: flex;
   align-self: stretch;
   align-items: center;
@@ -776,29 +777,29 @@
   unicode-bidi: isolate;
 }
 
-.cca-best-sellers.cca-best-sellers .cca-card-meta.cca-card-meta:empty {
+:is(.cca-best-sellers.cca-best-sellers, .cca-collection.cca-collection) .cca-card-meta.cca-card-meta:empty {
   display: none;
 }
 
-.cca-best-sellers.cca-best-sellers .cca-card-meta.cca-card-meta .cca-card-type.cca-card-type {
+:is(.cca-best-sellers.cca-best-sellers, .cca-collection.cca-collection) .cca-card-meta.cca-card-meta .cca-card-type.cca-card-type {
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.cca-best-sellers.cca-best-sellers .cca-card-meta.cca-card-meta .cca-rating.cca-rating {
+:is(.cca-best-sellers.cca-best-sellers, .cca-collection.cca-collection) .cca-card-meta.cca-card-meta .cca-rating.cca-rating {
   flex-shrink: 0;
 }
 
 @media (max-width: 767px) {
-  .cca-best-sellers.cca-best-sellers .cca-rating__stars.cca-rating__stars {
+  :is(.cca-best-sellers.cca-best-sellers, .cca-collection.cca-collection) .cca-rating__stars.cca-rating__stars {
     font-size: 1.1rem;
     letter-spacing: 0.1rem;
   }
 }
 
-.cca-best-sellers.cca-best-sellers .cca-card-type.cca-card-type {
+:is(.cca-best-sellers.cca-best-sellers, .cca-collection.cca-collection) .cca-card-type.cca-card-type {
   color: rgb(var(--color-foreground2));
   font-size: 1.1rem;
   font-weight: 400;
@@ -809,7 +810,7 @@
 }
 
 /* Title: always reserves 2 lines (clamped at 2) so prices and buttons line up */
-:is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles) .hdt-pr-style7 .hdt-card-product__title {
+:is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles, .cca-collection.cca-collection) .hdt-pr-style7 .hdt-card-product__title {
   --line-clamp-count: 2;
   min-height: 2.6em; /* 2 lines x 1.3 line-height */
   font-size: 1.3rem;
@@ -819,7 +820,7 @@
   unicode-bidi: isolate;
 }
 
-:is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles) .hdt-pr-style7 .hdt-price-wrapp {
+:is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles, .cca-collection.cca-collection) .hdt-pr-style7 .hdt-price-wrapp {
   justify-content: center;
   font-size: 1.5rem;
   font-weight: 800;
@@ -827,11 +828,11 @@
 }
 
 /* Native add to cart, restyled: full-width pill, label only */
-:is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles) .hdt-pr-style7 .hdt-pr-btns-group1 {
+:is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles, .cca-collection.cca-collection) .hdt-pr-style7 .hdt-pr-btns-group1 {
   margin-block-start: 0;
 }
 
-:is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles) .hdt-pr-style7 .hdt-pr-btns-group1 .hdt-card-product__btn-ultra {
+:is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles, .cca-collection.cca-collection) .hdt-pr-style7 .hdt-pr-btns-group1 .hdt-card-product__btn-ultra {
   justify-content: center;
   width: 100%;
   height: auto;
@@ -843,7 +844,7 @@
   line-height: normal;
 }
 
-:is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles) .hdt-pr-style7 .hdt-pr-btns-group1 .hdt-card-product__btn-ultra .hdt-pr-card-icon {
+:is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles, .cca-collection.cca-collection) .hdt-pr-style7 .hdt-pr-btns-group1 .hdt-card-product__btn-ultra .hdt-pr-card-icon {
   display: none;
 }
 
@@ -894,41 +895,41 @@
     font-size: 1.4rem;
   }
 
-  :is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles) .hdt-pr-style7 .hdt-card-product__wrapper {
+  :is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles, .cca-collection.cca-collection) .hdt-pr-style7 .hdt-card-product__wrapper {
     gap: 1rem;
     padding: 1.4rem;
   }
 
-  :is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles) .hdt-pr-style7 .hdt-card-product__info {
+  :is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles, .cca-collection.cca-collection) .hdt-pr-style7 .hdt-card-product__info {
     gap: 1rem;
   }
 
-  :is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles) .hdt-pr-style7 .hdt-badge__wrapp {
+  :is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles, .cca-collection.cca-collection) .hdt-pr-style7 .hdt-badge__wrapp {
     top: 1.1rem;
     inset-inline-start: 1.1rem;
   }
 
-  :is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles) .hdt-pr-style7 .hdt-badge {
+  :is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles, .cca-collection.cca-collection) .hdt-pr-style7 .hdt-badge {
     padding: 0.5rem 1.2rem;
     border-radius: 1.2rem;
     font-size: 1.1rem;
   }
 
-  .cca-best-sellers.cca-best-sellers .cca-card-type.cca-card-type,
-  .cca-best-sellers.cca-best-sellers .cca-rating.cca-rating {
+  :is(.cca-best-sellers.cca-best-sellers, .cca-collection.cca-collection) .cca-card-type.cca-card-type,
+  :is(.cca-best-sellers.cca-best-sellers, .cca-collection.cca-collection) .cca-rating.cca-rating {
     font-size: 1.3rem;
     font-weight: 700;
   }
 
-  :is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles) .hdt-pr-style7 .hdt-card-product__title {
+  :is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles, .cca-collection.cca-collection) .hdt-pr-style7 .hdt-card-product__title {
     font-size: clamp(1.6rem, 1.53vw, 2.2rem);
   }
 
-  :is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles) .hdt-pr-style7 .hdt-price-wrapp {
+  :is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles, .cca-collection.cca-collection) .hdt-pr-style7 .hdt-price-wrapp {
     font-size: clamp(1.6rem, 1.39vw, 2rem);
   }
 
-  :is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles) .hdt-pr-style7 .hdt-pr-btns-group1 .hdt-card-product__btn-ultra {
+  :is(.cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles, .cca-collection.cca-collection) .hdt-pr-style7 .hdt-pr-btns-group1 .hdt-card-product__btn-ultra {
     padding-block: 1.2rem;
     font-size: clamp(1.4rem, 1.18vw, 1.7rem);
   }
@@ -2724,5 +2725,325 @@ html:not(.shopify-design-mode) .cca-product-details.cca-product-details:not(:has
 
   .cca-collection-strips .cca-collection-strips__arrow {
     font-size: 25px;
+  }
+}
+
+/* ==== cca-collection-header — collection page (Page heading, Design: "Design 1 - cca") ==== */
+/* Figma: desktop 1:838, mobile header 1:1121, mobile chips 1:1128. Colors: "scheme-products"
+   (ink title, #4E6E70 muted = secondary button label, #E4EDF0 surface = background2,
+   #26B3D0 active chip = button, #D3E3E8 strip borders = line border).
+   Chips are the values of one Search & Discovery filter (section setting "Chips filter"),
+   so they are real filter links. Phones: a tinted full-width strip that scrolls sideways;
+   tablet and desktop: a centered row that wraps when it runs out of space.
+   Title, count and chips are Arabic content: direction is pinned RTL on each of them. */
+
+.cca-collection-header .cca-collection-header__head {
+  direction: rtl;
+  unicode-bidi: isolate;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 10px;
+  text-align: center;
+}
+
+.cca-collection-header .cca-collection-header__title {
+  min-inline-size: 0;
+  margin: 0;
+  font-size: 23px;
+  font-weight: 800;
+  line-height: 1.3;
+  color: rgb(var(--color-foreground));
+}
+
+.cca-collection-header .cca-collection-header__count {
+  flex: 0 0 auto;
+  padding-block: 4px;
+  padding-inline: 10px;
+  border-radius: 10px;
+  background-color: rgb(var(--color-background2));
+  color: rgb(var(--hdt-btn-outline-color));
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* Phones: full-width tinted strip that scrolls sideways */
+.cca-collection-header .cca-collection-header__chips {
+  margin-block-start: 16px;
+  background-color: rgb(var(--color-background2) / 0.16);
+  border-block: 1px solid rgb(var(--color-line-border));
+}
+
+.cca-collection-header .cca-collection-header__chip-list {
+  direction: rtl;
+  unicode-bidi: isolate;
+  display: flex;
+  gap: 8px;
+  margin: 0;
+  padding-block: 10px 12px;
+  padding-inline: 16px;
+  list-style: none;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.cca-collection-header .cca-collection-header__chip-list::-webkit-scrollbar {
+  display: none;
+}
+
+.cca-collection-header .cca-collection-header__chip-list > li {
+  flex: 0 0 auto;
+}
+
+.cca-collection-header.cca-collection-header .cca-collection-header__chip {
+  display: inline-flex;
+  align-items: center;
+  padding-block: 7px;
+  padding-inline: 14px;
+  border-radius: 18px;
+  background-color: rgb(var(--color-background2));
+  color: rgb(var(--hdt-btn-outline-color));
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.cca-collection-header.cca-collection-header .cca-collection-header__chip:hover {
+  color: rgb(var(--color-foreground));
+}
+
+.cca-collection-header.cca-collection-header .cca-collection-header__chip--active,
+.cca-collection-header.cca-collection-header .cca-collection-header__chip--active:hover {
+  background-color: rgb(var(--hdt-btn-bg));
+  color: rgb(var(--hdt-btn-color));
+}
+
+.cca-collection-header.cca-collection-header .cca-collection-header__chip:focus-visible {
+  outline: 2px solid rgb(var(--hdt-btn-bg));
+  outline-offset: 2px;
+}
+
+/* Tablet + desktop: centered row inside the page width, no strip */
+@media (min-width: 768px) {
+  .cca-collection-header .cca-collection-header__head {
+    gap: 8px 12px;
+  }
+
+  .cca-collection-header .cca-collection-header__title {
+    font-size: 30px;
+  }
+
+  .cca-collection-header .cca-collection-header__count {
+    padding-block: 5px;
+    padding-inline: 12px;
+    border-radius: 12px;
+    font-size: 12px;
+  }
+
+  .cca-collection-header .cca-collection-header__chips {
+    margin-block-start: 24px;
+    background-color: transparent;
+    border-block: 0;
+  }
+
+  .cca-collection-header .cca-collection-header__chip-list {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    max-inline-size: var(--container-max-width);
+    margin-inline: auto;
+    padding-block: 0;
+    padding-inline: 1.5rem;
+    overflow: visible;
+  }
+
+  .cca-collection-header.cca-collection-header .cca-collection-header__chip {
+    padding-block: 8px;
+    padding-inline: 16px;
+    border-radius: 20px;
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 1150px) {
+  .cca-collection-header .cca-collection-header__title {
+    font-size: 36px;
+  }
+}
+
+/* ==== cca-collection — collection page grid + filter sidebar (main-collection, Product design "11 - cca") ==== */
+/* Figma: desktop 1:857 (results + sort 1:859, card 1:865, sidebar 1:942). Colors: "scheme-products".
+   Cards are card design 7 with the homepage card rules (see cca-best-sellers above).
+   The sidebar is the native filter block with "sidebar drawer" off: always open beside the
+   grid from 1150px, the native drawer below that. The toolbar sits above the grid column. */
+
+/* Toolbar: results count (start) + sort (end) */
+.cca-collection.cca-collection .hdt-shop-control {
+  margin-block: 0 2rem;
+}
+
+.cca-collection.cca-collection .hdt-shop-control .hdt-control-filter {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.cca-collection .cca-collection__count {
+  color: rgb(var(--color-foreground2));
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 1.2;
+  white-space: nowrap;
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.cca-collection.cca-collection .hdt-popover__sorting > button {
+  gap: 1.2rem;
+  min-width: 0;
+  min-height: 0;
+  padding: 0.9rem 1.4rem;
+  border: 1px solid rgb(var(--color-line-border));
+  border-radius: 1rem;
+  background-color: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.cca-collection.cca-collection .hdt-popover__sorting > button > svg {
+  color: rgb(var(--hdt-btn-outline-color));
+}
+
+/* Below 1150px the toolbar's filter button opens the drawer, so the native floating
+   "open sidebar" tab on the screen edge is a duplicate. */
+.cca-collection.cca-collection .hdt-main-sidebar .hdt-sidebar-btn {
+  display: none;
+}
+
+/* Sidebar title (desktop only; the drawer keeps its own header) */
+.cca-collection .cca-collection__filter-title {
+  display: none;
+  margin: 0;
+  color: rgb(var(--color-foreground));
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+/* Filter groups: title row + checkbox rows, hairline under each group.
+   Spacing sits on the summary and the content, never on the animated <details>. */
+.cca-collection.cca-collection .hdt-main-sidebar .hdt-filter-group-summary {
+  padding-block: 2rem 1.2rem;
+  line-height: 1.2;
+}
+
+.cca-collection.cca-collection .hdt-main-sidebar .hdt-filter .hdt-facet-title {
+  color: rgb(var(--color-foreground));
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+/* Native draws a short underline under each group title (#id rule in hdt-widget.css). */
+.cca-collection #hdt-shop-sidebar-drawer .hdt-facet-title_group::after {
+  display: none;
+}
+
+.cca-collection.cca-collection .hdt-main-sidebar .hdt-filter .hdt-facet-title_icon {
+  color: rgb(var(--color-foreground2));
+}
+
+.cca-collection.cca-collection .hdt-main-sidebar .hdt-filter-group__display {
+  padding-block-end: 1.8rem;
+  border-block-end: 1px solid rgb(var(--color-line-border));
+}
+
+.cca-collection.cca-collection .hdt-main-sidebar .hdt-filter .hdt-filter-group__list {
+  margin-inline-end: 0;
+}
+
+.cca-collection.cca-collection .hdt-main-sidebar .hdt-filter ul:not(.hdt-filter-group__list--color) .hdt-filter-group__list-item + .hdt-filter-group__list-item {
+  margin-block-start: 1.2rem;
+}
+
+.cca-collection.cca-collection .hdt-main-sidebar .hdt-filter .hdt-filter-group__list-item label {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+  color: rgb(var(--hdt-btn-outline-color));
+}
+
+.cca-collection.cca-collection .hdt-main-sidebar .hdt-filter .hdt-filter-group__list-item .hdt-facets-label {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 1.4rem;
+  font-weight: 400;
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.cca-collection .cca-facet-count {
+  flex: 0 0 auto;
+  color: rgb(var(--color-foreground2));
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.cca-collection.cca-collection .hdt-main-sidebar .hdt-filter .hdt-facets-checkbox,
+.cca-collection.cca-collection .hdt-main-sidebar .hdt-filter .hdt-filter-group__list-item :checked + label .hdt-facets-checkbox {
+  width: 1.8rem;
+  height: 1.8rem;
+  min-width: 1.8rem;
+  border: 1px solid rgb(var(--color-line-border));
+  border-radius: 0.4rem;
+  background-color: rgb(var(--color-background));
+}
+
+.cca-collection.cca-collection .hdt-main-sidebar .hdt-filter .hdt-filter-group__list-item svg {
+  color: rgb(var(--color-accent));
+}
+
+.cca-collection.cca-collection .hdt-main-sidebar .hdt-filter .hdt-filter-group__list-item input:focus-visible + label .hdt-facets-checkbox {
+  outline: 2px solid rgb(var(--color-accent));
+  outline-offset: 2px;
+}
+
+/* Desktop: sidebar 280 / 1280 beside the grid, 32px apart, sticky while scrolling */
+@media (min-width: 1150px) {
+  .cca-collection .cca-collection__filter-title {
+    display: block;
+  }
+
+  .cca-collection.cca-collection .hdt-sidebar_drawer_false {
+    column-gap: 3.2rem;
+  }
+
+  .cca-collection.cca-collection .hdt-sidebar_drawer_false .hdt-shop-content {
+    width: calc(78.125% - 3.2rem);
+  }
+
+  .cca-collection.cca-collection .hdt-sidebar_drawer_false .hdt-main-sidebar {
+    width: 21.875%;
+  }
+
+  .cca-collection.cca-collection .hdt-sidebar_drawer_false .hdt-main-sidebar > .hdt-main-sidebar-inner {
+    position: sticky;
+    top: calc(var(--header-height, 0px) + 2rem);
+  }
+
+  .cca-collection .cca-collection__count {
+    font-size: 1.8rem;
   }
 }

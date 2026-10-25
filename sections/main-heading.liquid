@@ -12,6 +12,21 @@
   else
     assign image = section.settings.image 
   endif
+
+  # AYUM collection header (Design 1 - cca): visible title, live product count and
+  # chips built from one Search & Discovery filter of the current collection.
+  if section.settings.design == 'design_1'
+    assign cca_header = true
+    assign cca_chip_param = section.settings.cca_chip_filter | strip | default: 'filter.p.product_type'
+    if request.page_type == 'collection'
+      for cca_f in collection.filters
+        if cca_f.param_name == cca_chip_param and cca_f.type == 'list'
+          assign cca_chip_filter = cca_f
+          break
+        endif
+      endfor
+    endif
+  endif
 -%}
 {% style %}
   {% render 'spacing-vars', box: section %}
@@ -46,18 +61,56 @@
     }
   }
 {% endstyle %}
-<div class="hdt-section-spacing hdt-section-spacing-{{ section.id }} hdt-relative hdt-oh" color-scheme="{{ section.settings.color_scheme }}">
+<div class="hdt-section-spacing hdt-section-spacing-{{ section.id }} hdt-relative hdt-oh{% if cca_header %} cca-collection-header{% endif %}" color-scheme="{{ section.settings.color_scheme }}">
+  {%- unless cca_header %}
   <h1 class="sr-only hdt-pe-none">{{ page_title }}</h1>
+  {%- endunless %}
   <div class="hdt-heading-image hdt-h-overlay hdt-pe-none" style="--bg-overlay:{{ section.settings.bg_overlay | divided_by: 100.00 }};">
     {%- if image != blank -%}
       {{ image | image_url: width: image.width | image_tag: loading: 'lazy', width: image.width, height: image.height, sizes: "100vw", widths: '375,550,750,1100,1500,1780,1920,2000,3000,3840', alt: image.alt, class:'hdt-w-full hdt-h-full hdt-object-cover' }}
     {%- endif -%}
   </div>
   <div class="hdt-container">
+    {%- if cca_header %}
+    <div class="cca-collection-header__head">
+      <h1 class="cca-collection-header__title">{{ collection.title | default: page_title | escape }}</h1>
+      {%- if request.page_type == 'collection' %}
+      <span class="cca-collection-header__count" data-cca-count>{{ 'products.facets.product_count_simple' | t: count: collection.products_count }}</span>
+      {%- endif %}
+    </div>
+    {%- endif %}
     <div class="hdt-row-grid hdt-grid-cols-1 hdt-text-center">
       {% content_for 'blocks' %}
     </div>
   </div>
+  {%- if cca_chip_filter.values.size > 0 -%}
+    {%- liquid
+      assign cca_base = cca_chip_filter.url_to_remove
+      assign cca_join = '?'
+      if cca_base contains '?'
+        assign cca_join = '&'
+      endif
+    -%}
+    <nav class="cca-collection-header__chips" aria-label="{{ cca_chip_filter.label | escape }}" data-cca-chips>
+      <ul class="cca-collection-header__chip-list" role="list">
+        <li>
+          <a href="{{ cca_base }}" class="cca-collection-header__chip{% if cca_chip_filter.active_values.size == 0 %} cca-collection-header__chip--active{% endif %}"{% if cca_chip_filter.active_values.size == 0 %} aria-current="true"{% endif %}>
+            {{- 'products.facets.cca_chip_all' | t -}}
+          </a>
+        </li>
+        {%- for cca_value in cca_chip_filter.values -%}
+          {%- if cca_value.count == 0 and cca_value.active == false -%}
+            {%- continue -%}
+          {%- endif -%}
+          <li>
+            <a href="{{ cca_base }}{{ cca_join }}{{ cca_value.param_name }}={{ cca_value.value | url_encode }}" class="cca-collection-header__chip{% if cca_value.active %} cca-collection-header__chip--active{% endif %}"{% if cca_value.active %} aria-current="true"{% endif %}>
+              {{- cca_value.label | escape -}}
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+  {%- endif -%}
 </div>
 {% schema %}
 {
@@ -73,6 +126,25 @@
     ]
   },
   "settings": [
+    {
+      "type": "select",
+      "id": "design",
+      "label": "Design",
+      "default": "default",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "design_1", "label": "Design 1 - cca" }
+      ],
+      "info": "Design 1 shows the collection title, product count and filter chips."
+    },
+    {
+      "type": "text",
+      "id": "cca_chip_filter",
+      "label": "Chips filter",
+      "default": "filter.p.product_type",
+      "info": "Search & Discovery filter used for the chips, e.g. filter.p.product_type, filter.p.tag or filter.p.m.custom.subcategory. It must be enabled in the Search & Discovery app.",
+      "visible_if": "{{ section.settings.design == 'design_1' }}"
+    },
     {
       "type": "header",
       "content": "t:sections.heading-page.settings.header_options"

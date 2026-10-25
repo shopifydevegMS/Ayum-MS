@@ -433,6 +433,8 @@
                 "one": "{{ count }} منتج",
                 "other": "{{ count }} منتج"
             },
+            "cca_chip_all": "الكل",
+            "cca_filter_title": "تصفية النتائج",
             "filter_button_price": "تصفية",
             "switch_view": "التبديل إلى عرض الشبكة {{ number }}",
             "switch_view_list": "التبديل إلى عرض القائمة",

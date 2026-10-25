@@ -431,6 +431,8 @@
         "one": "{{ count }} product",
         "other": "{{ count }} products"
       },
+      "cca_chip_all": "All",
+      "cca_filter_title": "Filter results",
       "filter_button_price": "Filter",
       "switch_view": "Switch to grid view {{ number }}",
       "switch_view_list": "Switch to list view",

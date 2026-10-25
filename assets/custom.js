@@ -4831,3 +4831,60 @@ if (!window.ccaVideoCardsReady) {
     });
   });
 }
+
+/* ==== cca-collection-header — collection title count + filter chips (main-heading "Design 1 - cca") ==== */
+/* The native facets (facets.min.js) re-render only the product grid. This keeps the header's
+   product count and chips in step with every native render (filters, sorting, back/forward),
+   and lets a chip click use that same native render instead of a full page load.
+   Chips stay plain links, so they still work without JavaScript. */
+(() => {
+  if (window.ccaCollectionHeaderBound) return;
+  window.ccaCollectionHeaderBound = true;
+
+  let ccaHeaderController = null;
+  const sectionIdOf = (element) => element?.closest('.shopify-section')?.id.replace('shopify-section-', '');
+
+  document.addEventListener('click', (event) => {
+    const chip = event.target.closest('.cca-collection-header .cca-collection-header__chip');
+    if (!chip || event.defaultPrevented || event.button !== 0) return;
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const mainId = sectionIdOf(document.querySelector('.shopify-section [main-content]'));
+    if (!mainId || !customElements.get('wrapp-hdt-facet-url')) return;
+    event.preventDefault();
+    const url = new URL(chip.href, window.location.origin);
+    url.searchParams.set('section_id', mainId);
+    chip.dispatchEvent(new CustomEvent('facet:render', { bubbles: true, detail: { url } }));
+  });
+
+  document.addEventListener('facet:render', (event) => {
+    const header = document.querySelector('.cca-collection-header');
+    const headerId = sectionIdOf(header);
+    if (!headerId || !event.detail?.url) return;
+    const url = new URL(event.detail.url, window.location.origin);
+    url.searchParams.set('section_id', headerId);
+    ccaHeaderController?.abort();
+    ccaHeaderController = new AbortController();
+    fetch(url.toString(), { signal: ccaHeaderController.signal })
+      .then((response) => (response.ok ? response.text() : Promise.reject(response.status)))
+      .then((html) => {
+        const fresh = new DOMParser().parseFromString(html, 'text/html').querySelector('.cca-collection-header');
+        const current = document.querySelector('.cca-collection-header');
+        if (!fresh || !current) return;
+        const freshCount = fresh.querySelector('[data-cca-count]');
+        const currentCount = current.querySelector('[data-cca-count]');
+        if (freshCount && currentCount) currentCount.textContent = freshCount.textContent;
+        const freshChips = fresh.querySelector('[data-cca-chips]');
+        const currentChips = current.querySelector('[data-cca-chips]');
+        const freshList = freshChips?.querySelector('.cca-collection-header__chip-list');
+        const currentList = currentChips?.querySelector('.cca-collection-header__chip-list');
+        if (freshList && currentList) {
+          currentList.replaceChildren(...freshList.children); // keeps the strip's scroll position
+        } else if (freshChips && !currentChips) {
+          current.append(freshChips);
+        } else if (!freshChips && currentChips) {
+          currentChips.remove();
+        }
+      })
+      .catch(() => {});
+  });
+})();

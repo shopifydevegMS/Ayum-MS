@@ -30,6 +30,10 @@
     assign has_sidebar = false
   endif
   assign blocks_type = section.blocks | map: "type"
+  # AYUM collection grid (Product design "11 - cca" = card 7 + AYUM layout)
+  if section.settings.product_des == '11'
+    assign cca_grid = true
+  endif
 -%}
 {%- liquid
   assign current_width = settings.page_width | append: 'px'
@@ -143,7 +147,7 @@
     </div>
   {%- endcapture -%}
 {%- endif -%}
-<div id="{{ section.id }}" main-content class="hdt-main-collection-content hdt-section-spacing hdt-section-spacing-{{ section.id }}">
+<div id="{{ section.id }}" main-content class="hdt-main-collection-content hdt-section-spacing hdt-section-spacing-{{ section.id }}{% if cca_grid %} cca-collection{% endif %}">
   {%- if section.settings.description_position == 'before' -%}
     {{ collection_description }}
   {%- endif -%}
@@ -155,10 +159,14 @@
         %}
           {{ image | image_url: width: image.width | image_tag: width: image.width, height: image.height, sizes: sizes, widths: '200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800,1900,2000', loading: 'lazy', class: 'hdt-section-background hdt-absolute hdt-top-0 hdt-left-0 hdt-w-full hdt-h-full hdt-pe-none hdt-object-cover hdt-object-center' }}
       {%- endif -%}
+      {%- capture shop_control -%}
       {%- if collection.all_products_count > 0 -%}
       <div class="hdt-shop-control hdt-justify-between hdt-align-center hdt-row-flex hdt-flex-cols-3">
         {%- comment -%} Filter {%- endcomment -%}
           <div class="hdt-col hdt-control-filter">
+            {%- if cca_grid %}
+            <span class="cca-collection__count">{{ 'products.facets.product_count_simple' | t: count: collection.products_count }}</span>
+            {%- endif %}
             
             {%- if section.settings.enable_filtering -%}
               <button class="hdt-filter_btn hdt-inline-flex hdt-align-center {% if section.settings.sidebar_drawer == false and blocks_type contains 'filter' -%}lg:hdt-hidden{%- endif -%}" aria-controls="{% if has_sidebar and blocks_type contains 'filter' -%}hdt-shop-sidebar-drawer{% else %}hdt-filter_form{%- endif -%}">
@@ -188,8 +196,11 @@
       </div>
       {%- endif -%}
       {%- render 'active-filters', results: collection, results_count: collection.products_count -%}
+      {%- endcapture -%}
+      {%- unless cca_grid -%}{{ shop_control }}{%- endunless -%}
       <div class="{% if has_sidebar and section.settings.sidebar_drawer == false %} hdt-row-flex hdt-sidebar_drawer_{{ section.settings.sidebar_drawer }} hdt-flex-cols-1 lg:hdt-flex-cols-2{% else %} hdt-flex-cols-1{% endif %} ">
         <div class="hdt-shop-content hdt-col">
+          {%- if cca_grid -%}{{ shop_control }}{%- endif -%}
           {%- if collection.all_products_count == 0 -%}
             <div class="hdt-template hdt-template--empty hdt-text-center hdt-flex hdt-flex-col hdt-align-center hdt-justify-center">
               <p class="hdt-h5 hdt-s-text">{{ 'sections.collection_template.empty' | t -}}</p>
@@ -295,7 +306,7 @@
                             endunless
                             render 'card-product6', card_product: product, section_id: section.id, class: "hdt-pr-style6", sizes: sizes, image_ratio: section.settings.image_ratio, color_list: color_list, size_list: size_list, product_url: product_url, btn_wishlist_code: btn_wishlist_code, show_vendor: section.settings.show_vendor
                           endfor
-                        when '7'
+                        when '7', '11'
                           capture btn_wishlist_code
                             if settings.wishlist_mode != '0'
                               render 'btn-wishlist', class: 'hdt-card-product__btn-wishlist hdt-pr_btn', placement: 'left'
@@ -305,7 +316,7 @@
                             unless settings.remove_collection_url
                               assign product_url = product.url | within: collection
                             endunless
-                            render 'card-product7', card_product: product, section_id: section.id, class: "hdt-pr-style7", sizes: sizes, image_ratio: section.settings.image_ratio, color_list: color_list, size_list: size_list, product_url: product_url, btn_wishlist_code: btn_wishlist_code, show_vendor: section.settings.show_vendor
+                            render 'card-product7', card_product: product, section_id: section.id, class: "hdt-pr-style7", sizes: sizes, image_ratio: section.settings.image_ratio, color_list: color_list, size_list: size_list, product_url: product_url, btn_wishlist_code: btn_wishlist_code, show_vendor: section.settings.show_vendor, show_type: cca_grid
                           endfor
                         when '8'
                           capture btn_wishlist_code
@@ -373,6 +384,9 @@
                     <button ref="closeButton" class="hdt-s-text hdt-dialog-btn__close" aria-controls="hdt-shop-sidebar-drawer" aria-label="{{ 'accessibility.close' | t | escape }}">{%- render 'icon' with 'close' -%}</button>
                   </div>
                   <div class="hdt-dialog-drawer__inner hdt-current-scrollbar">
+                    {%- if cca_grid %}
+                    <p class="cca-collection__filter-title">{{ 'products.facets.cca_filter_title' | t }}</p>
+                    {%- endif %}
                     <div class="hdt-main-sidebar-inner">
                       {% render 'sidebar-collection' %}
                     </div>
@@ -483,6 +497,10 @@
         {
           "value": "10",
           "label": "10"
+        },
+        {
+          "value": "11",
+          "label": "11 - cca"
         }
       ],
       "default": "1"

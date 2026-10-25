@@ -83,6 +83,7 @@
       "blocks": {
         "heading_liquid_wcaa7G": {
           "type": "_heading_liquid",
+          "disabled": true,
           "settings": {
             "text": "{{ collection.title }}",
             "line_height": "",
@@ -99,6 +100,7 @@
         },
         "heading_brc_pYUK78": {
           "type": "_heading_brc",
+          "disabled": true,
           "settings": {},
           "blocks": {}
         }
@@ -108,14 +110,16 @@
         "heading_brc_pYUK78"
       ],
       "settings": {
+        "design": "design_1",
+        "cca_chip_filter": "filter.p.product_type",
         "use_dynamic_source": false,
-        "color_scheme": "scheme-77e4ef58-56a9-4631-876a-12098ba7d57d",
-        "bg_overlay": 54,
+        "color_scheme": "scheme-products",
+        "bg_overlay": 0,
         "space_item": 0,
         "mg": "",
         "mg_mb": "",
-        "pd": "55px,,55px,",
-        "pd_mb": "34px,,34px,"
+        "pd": "48px,,24px,",
+        "pd_mb": "16px,,0px,"
       }
     },
     "main-collection": {
@@ -123,7 +127,6 @@
       "blocks": {
         "filter_KX6bJW": {
           "type": "filter",
-          "disabled": true,
           "settings": {}
         }
       },
@@ -135,13 +138,13 @@
         "use_read_more": false,
         "read_more_height": 300,
         "description_position": "before",
-        "product_des": "1",
-        "image_ratio": "custom-pr",
+        "product_des": "11",
+        "image_ratio": "square",
         "image_size": true,
         "show_vendor": false,
         "pr_border": "none",
         "products_count": 12,
-        "col_dk": "4",
+        "col_dk": "3",
         "col_tb": "3",
         "col_mb": "2",
         "space_items": "x",
@@ -155,25 +158,25 @@
         "btn_fw": "medium",
         "enable_sorting": true,
         "enable_filtering": true,
-        "enable_num_cols_selector": true,
+        "enable_num_cols_selector": false,
         "widget_heading": "Product categories",
         "cat_source": "1",
         "cat_link_list": "",
         "count": false,
-        "colors_by_section": false,
-        "color_scheme": "scheme-1",
+        "colors_by_section": true,
+        "color_scheme": "scheme-products",
         "background_opacity": 0,
         "section_layout": "container",
         "hdt_background_parallax": false,
         "mg": "",
         "mg_mb": "",
-        "pd": ",,30px,",
+        "pd": "24px,,30px,",
         "pd_mb": ",,22px,",
         "sidebar_drawer": false,
         "sidebar_position": "left",
         "sidebar_size": "small",
         "colors_by_section_sb": true,
-        "color_scheme_sb": "",
+        "color_scheme_sb": "scheme-products",
         "background_opacity_sb": 1
       }
     }
