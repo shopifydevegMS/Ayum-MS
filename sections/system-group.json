@@ -86,47 +86,57 @@
     "toolbar-mobile": {
       "type": "toolbar-mobile",
       "blocks": {
+        "home_cca": {
+          "type": "home",
+          "settings": {
+            "title": "الرئيسية"
+          }
+        },
         "shop_jQccrN": {
           "type": "shop",
           "settings": {
-            "title": "Shop",
+            "title": "التصنيفات",
             "link": ""
+          }
+        },
+        "cart_qEaYLM": {
+          "type": "cart",
+          "settings": {
+            "title": "السلة"
+          }
+        },
+        "account_KBmadz": {
+          "type": "account",
+          "settings": {
+            "title": "حسابي"
           }
         },
         "wishlist_FLDXnV": {
           "type": "wishlist",
           "settings": {
             "title": "Wishlist"
-          }
-        },
-        "cart_qEaYLM": {
-          "type": "cart",
-          "settings": {
-            "title": "Cart"
-          }
-        },
-        "account_KBmadz": {
-          "type": "account",
-          "settings": {
-            "title": "Account"
-          }
+          },
+          "disabled": true
         },
         "search_wxK4Le": {
           "type": "search",
           "settings": {
             "title": "Search"
-          }
+          },
+          "disabled": true
         }
       },
       "block_order": [
+        "home_cca",
         "shop_jQccrN",
-        "wishlist_FLDXnV",
         "cart_qEaYLM",
         "account_KBmadz",
+        "wishlist_FLDXnV",
         "search_wxK4Le"
       ],
       "settings": {
-        "color_scheme": "",
+        "design": "design_1",
+        "color_scheme": "scheme-hero",
         "background_opacity": 1,
         "show_txt": true
       }

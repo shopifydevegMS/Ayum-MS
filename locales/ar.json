@@ -9,6 +9,7 @@
  */
 {
     "general": {
+        "cca_mobile_nav": "التنقل السريع",
         "meta": {
             "tag": "موسوم",
             "page": "صفحة"

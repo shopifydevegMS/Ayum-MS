@@ -9,6 +9,7 @@
  */
 {
   "general": {
+    "cca_mobile_nav": "Quick navigation",
     "meta": {
       "tag": "Tagged",
       "page": "Page"

@@ -1,16 +1,23 @@
 <!-- sections/toolbar-mobile.liquid -->
+{%- liquid
+  # AYUM bottom nav (Design 1 - cca): Figma icons, current-page state, nav landmark
+  if section.settings.design == 'design_1'
+    assign cca_nav = true
+  endif
+-%}
 {%- if section.blocks.size > 0 -%}
   {%- style -%}
     @media(max-width:1024px){.hdt-toolbar-mobile{height:5.5rem}.hdt-sticky-btn-atc{bottom:5.5rem;border-bottom:.1rem solid rgb(var(--color-line-border));-webkit-transform:translate3d(0,calc(105% + 5.5rem),0)!important;transform:translate3d(0,calc(105% + 5.5rem),0)!important}.sticky-shown back-to-top.hdt-back-to-top{bottom:calc(6rem + var(--hdt-sticky-atc-height,0))}}.hdt-toolbar{z-index:24;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;height:5.5rem;padding:.5rem;box-shadow:0 0 .9rem #0000001f;transform:none;transition:transform .25s}.hdt-toolbar .hdt-toolbar-item{-ms-flex:1 0 20%;flex:1 0 20%}.hdt-toolbar-item>.hdt-contents>a,.hdt-toolbar-item>a{padding:0 1rem;line-height:1;height:4.5rem;flex-direction:row}.hdt-toolbar-label-true .hdt-toolbar-item>.hdt-contents>a,.hdt-toolbar-label-true .hdt-toolbar-item>a{position:relative;padding-bottom:1.5rem}.hdt-toolbar-label{overflow:hidden;text-align:center;text-overflow:ellipsis;white-space:nowrap;line-height:1;left:1rem;right:1rem;bottom:.5rem;font-size:1.1rem}.hdt-toolbar-icon svg{width:2rem;height:2rem}.hdt-toolbar__count-box{width:1.5rem;height:1.5rem;line-height:1.5rem;box-shadow:.1rem .1rem .3rem #0000004d;color:rgb(var(--hdt-btn-color));background-color:rgb(var(--hdt-btn-bg));top:-.5rem;right:-.9rem}.hdt-toolbar-item img{max-height:2.2rem;width:auto}#hdt-shop-toolbar-mb::part(body){padding-top:0;padding-bottom:0}.hdt-back-to-top{--backtop-bottom:90px}
   {%- endstyle -%}
-  <div class="hdt-toolbar lg:hdt-hidden hdt-s-gradient hdt-toolbar-label-{{ section.settings.show_txt }} hdt-fixed hdt-right-0 hdt-left-0 hdt-bottom-0 hdt-flex hdt-align-center hdt-justify-between hdt-text-sm hdt-font-semibold hdt-s-text" color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};backdrop-filter: blur(8px);">
+  <div class="hdt-toolbar{% if cca_nav %} cca-bottom-nav{% endif %} lg:hdt-hidden hdt-s-gradient hdt-toolbar-label-{{ section.settings.show_txt }} hdt-fixed hdt-right-0 hdt-left-0 hdt-bottom-0 hdt-flex hdt-align-center hdt-justify-between hdt-text-sm hdt-font-semibold hdt-s-text" color-scheme="{{ section.settings.color_scheme }}" style="--background-opacity: {{ section.settings.background_opacity }};backdrop-filter: blur(8px);"{% if cca_nav %} role="navigation" aria-label="{{ 'general.cca_mobile_nav' | t | escape }}"{% endif %}>
     {%- for block in section.blocks -%}
       {%- case block.type -%}
         {%- when 'shop' -%}
           <div class="hdt-toolbart-{{ block.type }} hdt-toolbar-item hdt-relative">
-            <a href="{{ collections[block.settings.link].url | default: routes.all_products_collection_url }}" class="hdt-flex hdt-align-center hdt-justify-center">
+            {%- assign cca_shop_url = collections[block.settings.link].url | default: routes.all_products_collection_url -%}
+            <a href="{{ cca_shop_url }}" class="hdt-flex hdt-align-center hdt-justify-center"{% if cca_nav and request.path == cca_shop_url %} aria-current="page"{% endif %}>
               <span class="hdt-toolbar-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                {%- if cca_nav %}<svg class="cca-bottom-nav__icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5.13333 3.3H8.25C9.26252 3.3 10.0833 4.12081 10.0833 5.13333V8.25C10.0833 9.26252 9.26252 10.0833 8.25 10.0833H5.13333C4.12081 10.0833 3.3 9.26252 3.3 8.25V5.13333C3.3 4.12081 4.12081 3.3 5.13333 3.3Z"/><path d="M13.75 3.3H16.8667C17.8792 3.3 18.7 4.12081 18.7 5.13333V8.25C18.7 9.26252 17.8792 10.0833 16.8667 10.0833H13.75C12.7375 10.0833 11.9167 9.26252 11.9167 8.25V5.13333C11.9167 4.12081 12.7375 3.3 13.75 3.3Z"/><path d="M5.13333 11.9167H8.25C9.26252 11.9167 10.0833 12.7375 10.0833 13.75V16.8667C10.0833 17.8792 9.26252 18.7 8.25 18.7H5.13333C4.12081 18.7 3.3 17.8792 3.3 16.8667V13.75C3.3 12.7375 4.12081 11.9167 5.13333 11.9167Z"/><path d="M13.75 11.9167H16.8667C17.8792 11.9167 18.7 12.7375 18.7 13.75V16.8667C18.7 17.8792 17.8792 18.7 16.8667 18.7H13.75C12.7375 18.7 11.9167 17.8792 11.9167 16.8667V13.75C11.9167 12.7375 12.7375 11.9167 13.75 11.9167Z"/></svg>{% else %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>{% endif %}
               </span>
               {%- if section.settings.show_txt -%}<span class="hdt-toolbar-label hdt-absolute hdt-font-semibold">{{ block.settings.title }}</span>{%- endif -%}
             </a>
@@ -26,9 +33,9 @@
           </div>
         {%- when 'account' -%}
           <div class="hdt-toolbart-{{ block.type }} hdt-toolbar-item hdt-relative">
-            <a href="{{ routes.account_url }}" data-no-instant class="hdt-flex hdt-align-center hdt-justify-center" {% unless customer or request.page_type contains 'customers' or settings.login_sidebar == false %} aria-controls="login-form-sidebar"{% endunless %}>
+            <a href="{{ routes.account_url }}" data-no-instant class="hdt-flex hdt-align-center hdt-justify-center" {% unless customer or request.page_type contains 'customers' or settings.login_sidebar == false %} aria-controls="login-form-sidebar"{% endunless %}{% if cca_nav and request.page_type contains 'customers' %} aria-current="page"{% endif %}>
               <span class="hdt-toolbar-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                {%- if cca_nav %}<svg class="cca-bottom-nav__icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14.3917 7.79167C14.3917 9.66483 12.8732 11.1833 11 11.1833C9.12683 11.1833 7.60833 9.66483 7.60833 7.79167C7.60833 5.9185 9.12683 4.4 11 4.4C12.8732 4.4 14.3917 5.9185 14.3917 7.79167Z"/><path d="M4.49167 18.7917C4.49167 17.0655 5.17736 15.4101 6.39791 14.1896C7.61846 12.969 9.27388 12.2833 11 12.2833C12.7261 12.2833 14.3815 12.969 15.6021 14.1896C16.8226 15.4101 17.5083 17.0655 17.5083 18.7917"/></svg>{% else %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>{% endif %}
               </span>
               {%- if section.settings.show_txt -%}<span class="hdt-toolbar-label hdt-absolute hdt-font-semibold">{{ block.settings.title }}</span>{%- endif -%}
             </a>
@@ -56,9 +63,9 @@
             endif
           %}
           <div class="hdt-toolbart-{{ block.type }} hdt-toolbar-item hdt-relative">
-            <a href="{{ routes.cart_url }}" class="hdt-flex hdt-align-center hdt-justify-center"{% if request.page_type != 'cart' %} aria-controls="CartDrawer"{% endif %}>
+            <a href="{{ routes.cart_url }}" class="hdt-flex hdt-align-center hdt-justify-center"{% if request.page_type != 'cart' %} aria-controls="CartDrawer"{% endif %}{% if cca_nav and request.page_type == 'cart' %} aria-current="page"{% endif %}>
               <span class="hdt-toolbar-icon hdt-relative">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                {%- if cca_nav %}<svg class="cca-bottom-nav__icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5.04167 7.15H16.9583L16.0417 18.0583C15.9966 18.4391 15.8127 18.7899 15.5252 19.0435C15.2377 19.2972 14.8667 19.436 14.4833 19.4333H7.51667C7.13326 19.436 6.76232 19.2972 6.47482 19.0435C6.18732 18.7899 6.00343 18.4391 5.95833 18.0583L5.04167 7.15Z"/><path d="M8.15833 8.43333V5.95833C8.15833 5.20468 8.45772 4.48189 8.99064 3.94897C9.52355 3.41606 10.2463 3.11667 11 3.11667C11.7537 3.11667 12.4764 3.41606 13.0094 3.94897C13.5423 4.48189 13.8417 5.20468 13.8417 5.95833V8.43333"/></svg>{% else %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>{% endif %}
                 <hdt-cart-count class="hdt-toolbar__count-box hdt-absolute hdt-absolute hdt-radius-full hdt-text-center hdt-text-xs hdt-font-medium">{{ cart.item_count | minus: has_protect_product }}</hdt-cart-count>
               </span>
               {%- if section.settings.show_txt -%}<span class="hdt-toolbar-label hdt-absolute hdt-font-semibold">{{ block.settings.title }}</span>{%- endif -%}
@@ -87,9 +94,9 @@
           </div>
         {%- when 'home' -%}
           <div class="hdt-toolbart-{{ block.type }} hdt-toolbar-item hdt-relative">
-            <a href="{{ routes.root_url }}" class="hdt-flex hdt-align-center hdt-justify-center">
+            <a href="{{ routes.root_url }}" class="hdt-flex hdt-align-center hdt-justify-center"{% if cca_nav and request.page_type == 'index' %} aria-current="page"{% endif %}>
               <span class="hdt-toolbar-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                {%- if cca_nav %}<svg class="cca-bottom-nav__icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3.3 9.44167L11 3.20833L18.7 9.44167V17.325C18.7 17.7383 18.5358 18.1347 18.2436 18.4269C17.9513 18.7192 17.555 18.8833 17.1417 18.8833H4.85833C4.44504 18.8833 4.04867 18.7192 3.75643 18.4269C3.46418 18.1347 3.3 17.7383 3.3 17.325V9.44167Z"/><path d="M8.70833 18.8833V13.2917H13.2917V18.8833"/></svg>{% else %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>{% endif %}
               </span>
               {%- if section.settings.show_txt -%}<span class="hdt-toolbar-label hdt-absolute hdt-font-semibold">{{ block.settings.title }}</span>{%- endif -%}
             </a>
@@ -148,6 +155,17 @@
       ]
     },
     "settings": [
+      {
+        "type": "select",
+        "id": "design",
+        "label": "Design",
+        "default": "default",
+        "options": [
+          { "value": "default", "label": "Default" },
+          { "value": "design_1", "label": "Design 1 - cca" }
+        ],
+        "info": "Design 1 - cca: AYUM icons (home, grid, bag, user) and layout."
+      },
       {
         "type": "color_scheme",
         "id": "color_scheme",

@@ -3472,3 +3472,82 @@ html:not(.shopify-design-mode) .cca-product-details.cca-product-details:not(:has
 .cca-lh-1-9 > * {
   line-height: 1.9;
 }
+
+/* ==== cca-bottom-nav — global mobile bottom navigation (toolbar-mobile, Design: "Design 1 - cca") ==== */
+/* Figma: 50:647. The native Kalles mobile toolbar (system group) with its home, shop
+   (categories), cart (native cart drawer + count) and account blocks; Figma icons are
+   rendered by the design option. Colors: the toolbar scheme (scheme-hero: white,
+   #D3E3E8 line, #4E6E70 Text 2). Native behavior kept: visible below 1150px, the
+   section reserves its height at the page bottom, and the product page's sticky
+   add-to-cart sits above it. Added here: the iPhone home-indicator safe area. */
+
+.cca-bottom-nav.cca-bottom-nav {
+  height: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+  padding: 0.8rem 1.6rem calc(0.8rem + env(safe-area-inset-bottom, 0px));
+  border-block-start: 1px solid rgb(var(--color-line-border));
+  box-shadow: none;
+  color: rgb(var(--color-foreground2));
+}
+
+.cca-bottom-nav.cca-bottom-nav .hdt-toolbar-item {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.cca-bottom-nav.cca-bottom-nav .hdt-toolbar-item > a,
+.cca-bottom-nav.cca-bottom-nav .hdt-toolbar-item > .hdt-contents > a {
+  flex-direction: column;
+  gap: 0.4rem;
+  height: 100%;
+  padding: 0;
+  color: inherit;
+}
+
+.cca-bottom-nav.cca-bottom-nav .hdt-toolbar-item a:focus-visible {
+  outline: 2px solid rgb(var(--color-accent));
+  outline-offset: -2px;
+  border-radius: 0.8rem;
+}
+
+.cca-bottom-nav.cca-bottom-nav .hdt-toolbar-icon {
+  display: flex;
+}
+
+.cca-bottom-nav .cca-bottom-nav__icon {
+  display: block;
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+.cca-bottom-nav.cca-bottom-nav .hdt-toolbar-label {
+  position: static;
+  max-width: 100%;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* Native cart count, kept (live), sized to the smaller icon */
+.cca-bottom-nav.cca-bottom-nav .hdt-toolbar__count-box {
+  top: -0.4rem;
+  right: -0.8rem;
+  width: 1.6rem;
+  height: 1.6rem;
+  font-size: 1rem;
+  line-height: 1.6rem;
+  box-shadow: none;
+}
+
+/* Reserved space at the page bottom (native: 5.5rem up to 1024px; the bar shows up to 1149px) */
+@media (max-width: 1149px) {
+  .hdt-toolbar-mobile:has(> .cca-bottom-nav) {
+    height: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* Product page sticky add to cart: native sits it at 5.5rem; add the same safe area */
+@media (max-width: 1024px) {
+  body:has(.cca-bottom-nav) .hdt-sticky-btn-atc {
+    bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+  }
+}
