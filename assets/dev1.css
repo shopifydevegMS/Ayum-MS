@@ -3442,3 +3442,84 @@ html:not(.shopify-design-mode) .cca-product-details.cca-product-details:not(:has
     outline-offset: -2px;
   }
 }
+
+/* ==== cca-collection-seo — collection page "Collection copy (SEO)" (main-collection description, Product design "11 - cca") ==== */
+/* Figma: desktop 1:1027, mobile 1:1225. The native collection description (setting
+   "Show description", position "after") with an AYUM heading. Colors: the
+   "Description colors - cca" scheme (scheme-reviews): background at 30%, accent border.
+   Direction follows the page (Arabic: border on the right; English: on the left),
+   because the description is translated per locale. */
+
+.cca-collection.cca-collection .cca-collection-seo {
+  margin: 4.8rem 0 0;
+  padding-block: 2.8rem;
+  background-color: rgb(var(--color-background) / 0.3);
+}
+
+/* The yellow block ends the section, so the section's own bottom padding goes */
+.cca-collection.cca-collection:has(> .cca-collection-seo:last-child) {
+  padding-block-end: 0;
+}
+
+.cca-collection.cca-collection .cca-collection-seo readmore-less-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding-inline-start: 1.6rem;
+  border-inline-start: 3px solid rgb(var(--color-accent));
+  text-align: start;
+}
+
+.cca-collection.cca-collection .cca-collection-seo .cca-collection-seo__heading {
+  margin: 0;
+  color: rgb(var(--color-foreground));
+  font-size: 1.7rem;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.cca-collection.cca-collection .cca-collection-seo readmore-less {
+  padding-block-end: 0;
+}
+
+/* Description text = Figma Neutral/Text #4E6E70: the section scheme's secondary button
+   label (scheme-products), captured on the container before the block's own scheme
+   (scheme-reviews, which has no such color) takes over. */
+.cca-collection.cca-collection .cca-collection-seo > [color-scheme] {
+  --cca-seo-text: var(--hdt-btn-outline-color);
+}
+
+.cca-collection.cca-collection .cca-collection-seo .hdt-rte {
+  color: rgb(var(--cca-seo-text, var(--color-foreground2)));
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.9;
+}
+
+.cca-collection.cca-collection .cca-collection-seo .hdt-rte > * {
+  margin-block: 0;
+}
+
+.cca-collection.cca-collection .cca-collection-seo .hdt-rte > * + * {
+  margin-block-start: 0.8em;
+}
+
+@media (min-width: 768px) {
+  .cca-collection.cca-collection .cca-collection-seo {
+    padding-block: 4.8rem;
+  }
+
+  .cca-collection.cca-collection .cca-collection-seo readmore-less-wrap {
+    gap: 1.2rem;
+    padding-inline-start: 2.4rem;
+    border-inline-start-width: 4px;
+  }
+
+  .cca-collection.cca-collection .cca-collection-seo .cca-collection-seo__heading {
+    font-size: 2.3rem;
+  }
+
+  .cca-collection.cca-collection .cca-collection-seo .hdt-rte {
+    font-size: 1.5rem;
+  }
+}

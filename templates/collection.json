@@ -135,9 +135,12 @@
       ],
       "settings": {
         "show_description": true,
+        "cca_seo_color_scheme": "scheme-reviews",
+        "cca_seo_heading": "عن الحلويات المجففة بالتجميد",
+        "cca_seo_text": "<p>كل منتجاتنا تُصنّع في مصنعنا داخل الكويت — إحنا المصنع الوحيد اللي ينتج منتجات التجفيف بالتجميد محلياً بدل الاستيراد، وكل باكت يتعبأ ويتفحص عندنا.</p>",
         "use_read_more": false,
         "read_more_height": 300,
-        "description_position": "before",
+        "description_position": "after",
         "product_des": "11",
         "image_ratio": "square",
         "image_size": true,

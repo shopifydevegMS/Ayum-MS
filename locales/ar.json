@@ -694,6 +694,7 @@
             "view_all": "عرض الكل"
         },
         "collection_template": {
+            "cca_seo_heading": "عن {{ title }}",
             "title": "المجموعة",
             "short_by_txt": "ترتيب",
             "empty": "هذه المجموعة فارغة",
