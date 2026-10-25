@@ -122,45 +122,6 @@
         "pd_mb": "16px,,0px,"
       }
     },
-    "cca_collection_seo": {
-      "type": "custom-section",
-      "blocks": {
-        "cca_seo_heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "<p>عن الحلويات المجففة بالتجميد</p>",
-            "cca_design": "seo_heading",
-            "text_color": "hdt-s-text"
-          }
-        },
-        "cca_seo_text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>كل منتجاتنا تُصنّع في مصنعنا داخل الكويت — إحنا المصنع الوحيد اللي ينتج منتجات التجفيف بالتجميد محلياً بدل الاستيراد، وكل باكت يتعبأ ويتفحص عندنا.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "cca_seo_heading",
-        "cca_seo_text"
-      ],
-      "settings": {
-        "design": "design_2",
-        "layout": "10",
-        "item_spacing": 12,
-        "item_spacing_tb": 12,
-        "item_spacing_mb": 8,
-        "colors_by_section": true,
-        "color_scheme": "scheme-collection-seo",
-        "background_opacity": 0.3,
-        "section_layout": "wrapper_container",
-        "hdt_background_parallax": false,
-        "mg": "",
-        "mg_mb": "",
-        "pd": "48px,,48px,",
-        "pd_mb": "28px,,28px,"
-      }
-    },
     "main-collection": {
       "type": "main-collection",
       "blocks": {
@@ -218,12 +179,246 @@
         "color_scheme_sb": "scheme-products",
         "background_opacity_sb": 1
       }
+    },
+    "icon_box_4TGKXQ": {
+      "type": "icon-box",
+      "blocks": {
+        "icon_box_aPkfTR": {
+          "type": "_icon_box",
+          "settings": {
+            "url": "",
+            "open_in_new_tab": false,
+            "icon_position": "left",
+            "icon_color_scheme": "scheme-brand-orange",
+            "image_width": 50,
+            "svg_upload": "<img src=\"{{ 'ayum-icon-truck.svg' | asset_url }}\" alt=\"\" width=\"26\" height=\"26\" loading=\"lazy\">",
+            "svg_width": 26,
+            "svg_width_mb": 20,
+            "heading": "شحن خلال 24 ساعة",
+            "description": "داخل الكويت، مع إرجاع خلال 7 أيام بشرط ارجاع المنتج في حالة سليمة",
+            "description_mb": "وإرجاع خلال 7 أيام."
+          },
+          "blocks": {}
+        },
+        "icon_box_Kd9iQc": {
+          "type": "_icon_box",
+          "settings": {
+            "url": "",
+            "open_in_new_tab": false,
+            "icon_position": "left",
+            "icon_color_scheme": "scheme-brand-green",
+            "image_width": 50,
+            "svg_upload": "<img src=\"{{ 'ayum-icon-shield.svg' | asset_url }}\" alt=\"\" width=\"26\" height=\"26\" loading=\"lazy\">",
+            "svg_width": 26,
+            "svg_width_mb": 20,
+            "heading": "قرمشة تدوم",
+            "description": "عبوة مفرّغة من الهواء تحفظ المنتج لشهور بدون مواد حافظة.",
+            "description_mb": "عبوة دون مواد حافظة."
+          },
+          "blocks": {}
+        },
+        "icon_box_jC9Gfb": {
+          "type": "_icon_box",
+          "settings": {
+            "url": "",
+            "open_in_new_tab": false,
+            "icon_position": "left",
+            "icon_color_scheme": "scheme-brand-pink",
+            "image_width": 50,
+            "svg_upload": "<img src=\"{{ 'ayum-icon-noheat.svg' | asset_url }}\" alt=\"\" width=\"26\" height=\"26\" loading=\"lazy\">",
+            "svg_width": 26,
+            "svg_width_mb": 20,
+            "heading": "تجفيف بدون حرارة",
+            "description": "التفريغ يسحب الماء ويحوّل الثلج لبخار، فالنكهة والقوام ما يتأثرون.",
+            "description_mb": "النكهة والقوام ما يتأثرون."
+          },
+          "blocks": {}
+        },
+        "icon_box_tDdpnm": {
+          "type": "_icon_box",
+          "settings": {
+            "url": "",
+            "open_in_new_tab": false,
+            "icon_position": "left",
+            "icon_color_scheme": "scheme-brand-cyan",
+            "image_width": 50,
+            "svg_upload": "<img src=\"{{ 'ayum-icon-factory.svg' | asset_url }}\" alt=\"\" width=\"26\" height=\"26\" loading=\"lazy\">",
+            "svg_width": 26,
+            "svg_width_mb": 20,
+            "heading": "المصنع الأكبر في الكويت",
+            "description": "ننتج منتجات التجفيف بالتجميد محلياً — معظم المنافسين يستوردون.",
+            "description_mb": "إنتاج محلي مش مستورد."
+          },
+          "blocks": {}
+        },
+        "icon-box": {
+          "type": "section-heading",
+          "static": true,
+          "settings": {
+            "design_heading": "1",
+            "horizontal": false,
+            "alignment": "center",
+            "heading_gap": 16,
+            "margin_bottom": 32
+          },
+          "blocks": {
+            "heading_section_aAHELC": {
+              "type": "_heading_section",
+              "settings": {
+                "heading": "ليش تختار أيم",
+                "line_height": "",
+                "heading_size": "h_custom",
+                "text_color": "hdt-s-text",
+                "font_size_heading_lg": 34,
+                "font_size_heading": 23,
+                "letter_spacing_heading": 0
+              },
+              "blocks": {}
+            },
+            "sub_heading_section_4hGJkC": {
+              "type": "_sub_heading_section",
+              "settings": {
+                "text": "<p>مو بس منتج مختلف — طريقة تصنيع مختلفة من الأساس</p>",
+                "hidden_br_mobile": false,
+                "hidden_on_mobile": true,
+                "text_size": "custom",
+                "text_color": "hdt-s-text",
+                "font_size_text_lg": 16,
+                "font_size_text": 14,
+                "letter_spacing_text": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "heading_section_aAHELC",
+            "sub_heading_section_4hGJkC"
+          ]
+        }
+      },
+      "block_order": [
+        "icon_box_aPkfTR",
+        "icon_box_Kd9iQc",
+        "icon_box_jC9Gfb",
+        "icon_box_tDdpnm"
+      ],
+      "settings": {
+        "design": "design_3",
+        "enable_border": false,
+        "enable_box_shadow": false,
+        "border_color": "#f6f6f8",
+        "heading_color": "#222222",
+        "icon_color": "#222222",
+        "description_color": "#878787",
+        "color_box": "#ffffff",
+        "color_box_hover": "#eb4c4e",
+        "color_content_hover": "#ffffff",
+        "source": "svg",
+        "padding": "24px,24px,24px,24px",
+        "col_dk": "4",
+        "col_tb": "2",
+        "col_mb": "2",
+        "space_horizontal": "20",
+        "space_vertical": "20",
+        "space_horizontal_mb": "10",
+        "space_vertical_mb": "10",
+        "layout": "grid",
+        "loop": false,
+        "autoplay": 0,
+        "pauseOnHover": false,
+        "navUI": false,
+        "nav_position": "default",
+        "nav_visible": "always",
+        "nav_style": "default",
+        "nav_shape": "default",
+        "nav_size": "small",
+        "nav_hide_mobile": false,
+        "dotUI": false,
+        "pag_style": "default",
+        "pag_rounded": false,
+        "pag_space": 10,
+        "pag_mgt": 10,
+        "only_show_mobile": false,
+        "pag_hide_mobile": false,
+        "colors_by_section": true,
+        "color_scheme": "scheme-why-ayum",
+        "background_opacity": 0.4,
+        "section_layout": "wrapper_container",
+        "hdt_background_parallax": false,
+        "mg": "",
+        "mg_mb": "",
+        "pd": "48px,,48px,",
+        "pd_mb": "24px,,24px,"
+      }
+    },
+    "cca_collection_seo": {
+      "type": "custom-section",
+      "blocks": {
+        "cca_seo_heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>عن الحلويات المجففة بالتجميد</p>",
+            "hidden_br_mobile": false,
+            "hidden_on_mobile": false,
+            "line_height": "",
+            "font_weight": "normal",
+            "heading_size": "h2",
+            "text_color": "hdt-s-text",
+            "font_size_heading_lg": 50,
+            "font_size_heading": 24,
+            "letter_spacing_heading": 0,
+            "cca_design": "seo_heading"
+          },
+          "blocks": {}
+        },
+        "cca_seo_text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>كل منتجاتنا تُصنّع في مصنعنا داخل الكويت — إحنا المصنع الوحيد اللي ينتج منتجات التجفيف بالتجميد محلياً بدل الاستيراد، وكل باكت يتعبأ ويتفحص عندنا.</p>",
+            "hidden_br_mobile": false,
+            "hidden_on_mobile": false,
+            "ffamily": "",
+            "text_size": "base",
+            "line_height": "",
+            "font_weight": "normal",
+            "text_color": "hdt-s-text",
+            "countdown": "2025-12-30 15:00:00",
+            "txt_day": "days",
+            "font_size_text_lg": 16,
+            "font_size_text": 14,
+            "letter_spacing_text": 0,
+            "cca_design": "default"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "cca_seo_heading",
+        "cca_seo_text"
+      ],
+      "settings": {
+        "design": "design_2",
+        "layout": "10",
+        "item_spacing": 12,
+        "item_spacing_tb": 12,
+        "item_spacing_mb": 8,
+        "colors_by_section": true,
+        "color_scheme": "scheme-collection-seo",
+        "background_opacity": 0.3,
+        "section_layout": "wrapper_container",
+        "hdt_background_parallax": false,
+        "mg": "",
+        "mg_mb": "",
+        "pd": "48px,,48px,",
+        "pd_mb": "28px,,28px,"
+      }
     }
   },
   "order": [
     "collections_list_simple_4yRUED",
     "main_heading_PHNGje",
     "main-collection",
+    "icon_box_4TGKXQ",
     "cca_collection_seo"
   ]
 }
