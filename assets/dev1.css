@@ -3083,8 +3083,9 @@ html:not(.shopify-design-mode) .cca-product-details.cca-product-details:not(:has
   content: "+";
 }
 
-/* Card hover icons (wishlist / compare / quick view) are not in the design */
-.cca-collection.cca-collection .hdt-pr-style7 .hdt-pr-btns-group2 {
+/* Card hover icons (wishlist / compare / quick view) are not in the design:
+   collection grid + homepage Best sellers and Bundles cards */
+:is(.cca-collection.cca-collection, .cca-best-sellers.cca-best-sellers, .cca-bundles.cca-bundles) .hdt-pr-style7 .hdt-pr-btns-group2 {
   display: none;
 }
 
